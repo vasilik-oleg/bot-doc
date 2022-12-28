@@ -1,0 +1,23 @@
+{
+  "name": "bot-doc",
+  "version": "0.0.1",
+  "description": "Documentation for Viking&#39;s trading bots",
+  "main": "index.js",
+  "authors": {
+    "name": "Anton",
+    "email": "fkviking.wiki@gmail.com"
+  },
+  "repository": "bot-doc/bot-doc",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.5.3"
+  },
+  "dependencies": {
+    "markdown-it-attrs": "^4.1.6",
+    "markdown-it-katex": "^2.0.3"
+  }
+}
