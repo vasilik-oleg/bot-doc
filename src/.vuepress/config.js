@@ -37,7 +37,7 @@ module.exports = {
     lastUpdated: false,
     algolia: {
       apiKey: '7d6295408b07d0fac47f9f4f4082d107',
-      indexName: 'test_viking',
+      indexName: 'test_viking2',
       // If Algolia did not provided you any `appId`, use `BH4D9OD16A` or remove this option
       appId: 'GRBQWTRZK3',
     },

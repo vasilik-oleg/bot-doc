@@ -15,7 +15,9 @@
        "data": {
            "topic": "robots"
        }
-   }```
+   }
+```
+
 ```
 {
        "type": "subscribe",
