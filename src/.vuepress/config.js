@@ -5,6 +5,7 @@ module.exports = {
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
   title: 'Документация торговых роботов компании "Викинг"',
+  base: 'bot-doc',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
