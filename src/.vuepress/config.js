@@ -57,7 +57,7 @@ module.exports = {
             'getting-started',
             'creating-connection',
             {
-              title: '4. Описание параметров',
+              title: '5. Описание параметров',
               children: [
                 'params/connections.md',
                 'params/portfolios.md',
