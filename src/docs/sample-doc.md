@@ -54,12 +54,11 @@ sss
 
 [ссылка на сайт MOEX](https://www.moex.com/)
 
-добавление картинки 
+добавление картинки
 
 ![Doc](./img/6009268363.jpg)
 
 Test_1
-
 
 ![Doc](./Picture_Doc.jpg)
 
