@@ -54,6 +54,10 @@ sss
 
 [ссылка на сайт MOEX](https://www.moex.com/)
 
+добавление картинки 
+
+![Doc](./img/6009268363.jpg)
+
 Test_1
 
 
