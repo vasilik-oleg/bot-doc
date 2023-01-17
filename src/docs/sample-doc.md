@@ -41,7 +41,7 @@ Example:
 }
 ```
 
-$\sqr{3x-1}+(1+x)^2$
+$\sqrt{3x-1}+(1+x)^2$
 
 $$
 \iint xy^2\,dx\,dy = \frac{1}{6}x^2y^3
