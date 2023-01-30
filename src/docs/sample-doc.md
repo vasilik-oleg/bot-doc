@@ -75,3 +75,5 @@ Hello World
 
 ## При выполнении Commit & Create Pull Request постоянно выдаёт ошибку (на компе и буке):
 ![Doc](GraphQL_error.png)
+
+В 00:25 выполнил Commit & Push
