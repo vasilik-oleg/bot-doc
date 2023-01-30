@@ -74,4 +74,4 @@ Hello World
 Получилось смержить комп с буком! Контроль с бука 18:54 (формула норм)
 
 ## При выполнении Commit & Create Pull Request постоянно выдаёт ошибку (на компе и буке):
-![Doc](GraphQL%20error.png)
+![Doc](GraphQL_error.png)
