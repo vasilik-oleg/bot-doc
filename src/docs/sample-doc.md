@@ -77,3 +77,6 @@ Hello World
 ![Doc](GraphQL_error.png)
 
 В 00:25 выполнил Commit & Push
+
+
+Какие-то изменения
