@@ -44,7 +44,7 @@ Example:
 }
 ```
 
-$\sqr{3x-1}+(1+x)^2$
+$\sqrt{3x-1}+(1+x)^2$
 
 $$
 \iint xy^2\,dx\,dy = \frac{1}{6}x^2y^3
@@ -70,3 +70,13 @@ Test_1
 ![Doc](./Picture_Doc.jpg)
 
 Hello World
+
+Получилось смержить комп с буком! Контроль с бука 18:54 (формула норм)
+
+## При выполнении Commit & Create Pull Request постоянно выдаёт ошибку (на компе и буке):
+![Doc](GraphQL_error.png)
+
+В 00:25 выполнил Commit & Push
+
+
+Какие-то изменения
