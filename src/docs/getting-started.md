@@ -38,7 +38,7 @@
 
 Идите на [https://bot.fkviking.com/#p=telegram](https://bot.fkviking.com/#p=telegram). Впишите ваш Telegram ID и нажмите Apply.
 
-После подождите около минуты.
+После этого подождите несколько минут.
 
 Телеграм-бот подключен к вашему роботу.
 
