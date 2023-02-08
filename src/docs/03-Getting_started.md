@@ -44,7 +44,7 @@ ___
 
 Видео, наглядно объясняющее процесс создания торгового портфеля:
 
-<iframe width="1519" height="505" src="https://www.youtube.com/embed/m6tkfY9KQ_g" title="Создание портфеля" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/m6tkfY9KQ_g" title="Создание портфеля" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
 Для того, чтобы добавить портфель в древовидной структуре слева выбираем нужного робота, далее переходим во вкладку Portfolios - Portfolios.
