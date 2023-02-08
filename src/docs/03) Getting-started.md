@@ -11,9 +11,9 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/s412pbSalGo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
-Для настройки подключений в древовидной структуре слева выбираем нужного робота, далее заходим во вкладку Connections - Connections:
+Для настройки подключений в древовидной структуре слева выбираем нужного робота, далее заходим во вкладку Connections -> Connections:
 
-![](./img/C1.jpeg)
+![](./00_Img/3_1.jpeg)
 
 В открытом окне видим две таблицы Data connections и Trade connections.
 Первая таблица отвечает за получение рыночных данных с бирж, вторая отвечает за транзакционные подключения.
