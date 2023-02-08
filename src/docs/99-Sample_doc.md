@@ -63,11 +63,11 @@ sss
 
 добавление картинки
 
-![Doc](./img/6009268363.jpg)
+![Doc](./00-Img/6009268363.jpg)
 
 Test_1
 
-![Doc](./Picture_Doc.jpg)
+![Doc](./00-Img/Picture_Doc.jpg)
 
 Hello World
 
