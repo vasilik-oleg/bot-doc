@@ -13,16 +13,19 @@
 
 Для настройки подключений в древовидной структуре слева выбираем нужного робота, далее заходим во вкладку Connections -> Connections:
 
-![](./00_Img/3_1.jpeg)
+![](./00%20Img/3_1_1.jpeg)
+
 
 В открытом окне видим две таблицы Data connections и Trade connections.
 Первая таблица отвечает за получение рыночных данных с бирж, вторая отвечает за транзакционные подключения.
 В Data connections выбираем необходимые вам биржи, поставив галки напротив них. Затем в Action выбираем пункт Disable / Enable - Enable:
 
-![](./img/C2.jpeg)
+![](./00%20Img/3_1_2.jpeg)
+
 
 В Trade connections выбираем пункт Add, откроется окно создания нового транзакционного подключения Add connection. В поле Exchange выбираете необходимую вам биржу и заполняете параметры транзакционного подключения.
 
+![](./00%20Img/3_1_3.jpg)
 
 
 Когда параметры заполнены, нужно нажать Add connection.Теперь транзакционное подключение создано.
@@ -50,12 +53,7 @@
 
 Видео, наглядно объясняющее процесс создания торгового портфеля:
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=m6tkfY9KQ_g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<a href="https://www.youtube.com/watch?v=m6tkfY9KQ_g" target="_blank"><img src="https://www.youtube.com/watch?v=m6tkfY9KQ_g" 
-alt="Создание торгового портфеля" width="240" height="180" border="10" /></a>
-
-[![Создание торгового портфеля](https://www.youtube.com/watch?v=m6tkfY9KQ_g/0.jpg)](https://www.youtube.com/watch?v=m6tkfY9KQ_g)
+<iframe width="1519" height="505" src="https://www.youtube.com/embed/m6tkfY9KQ_g" title="Создание портфеля" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
 Для того, чтобы добавить портфель в древовидной структуре слева выбираем нужного робота, далее переходим во вкладку Portfolios - Portfolios.
