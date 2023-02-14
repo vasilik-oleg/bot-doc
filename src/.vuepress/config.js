@@ -52,33 +52,33 @@ module.exports = {
         {
           collapsable: false,
           children: [
-            '01-change_history',
+            '01-change-history',
             '02-introduction',
-            '03-getting_started',
-            '04-creating_connection',
+            '03-getting-started',
+            '04-creating-connection',
             {
               title: '5. Описание параметров',
               children: [
-                '05-params/5_1-connections.md',
-                '05-params/5_2-portfolios.md',
-                '05-params/5_3-securities.md',
-                '05-params/5_4-notifications.md',
-                '05-params/5_5-positions.md',
+                '05-params/5-1-connections.md',
+                '05-params/5-2-portfolios.md',
+                '05-params/5-3-securities.md',
+                '05-params/5-4-notifications.md',
+                '05-params/5-5-positions.md',
               ]
             },
-            '06-algorithm_comments',
-            '07-order_error',
-            '08-c_api',
-            '09-api_v1',
-            '10-api_v2',
+            '06-algorithm-comments',
+            '07-order-error',
+            '08-c-api',
+            '09-api-v1',
+            '10-api-v2',
             '11-faq',
             {
               title: '12. API Фронта 2.0',
               children: [
-                '12-api_v3/authorization_firebase.md'
+                '12-api-v3/authorization-firebase.md'
               ]
             },
-            '99-sample_doc'
+            '99-sample-doc'
           ]
         }
       ],
