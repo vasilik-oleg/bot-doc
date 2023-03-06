@@ -1,4 +1,4 @@
-# **1 История изменений**
+# **1. История изменений**
 
 ## 2022-06-22:
 
@@ -7,6 +7,7 @@
 
 ## 2022-06-15:
 
+`Везде старые ссылки:`
 - В C++ интерфейс добавлены методы [min_step()](https://bot.fkviking.com/v2/ru/doc/ru#ref4) и [lot_round()](https://bot.fkviking.com/v2/ru/doc/ru#ref5) для объекта финансового инструмента;
 - В C++ интерфейс добавлены методы [funding_rate()](https://bot.fkviking.com/v2/ru/doc/ru#ref6) и [funding_time()](https://bot.fkviking.com/v2/ru/doc/ru#ref7) для объекта финансового инструмента (для некоторых бирж).
 
