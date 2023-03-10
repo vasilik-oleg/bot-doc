@@ -6,7 +6,7 @@
 
 Видео, наглядно объясняющее процесс настройки подключений:
 
-<iframe width="920" height="516" src="https://www.youtube.com/embed/s412pbSalGo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="735" height="415" src="https://www.youtube.com/embed/s412pbSalGo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Для настройки подключений в древовидной структуре слева выбираем нужного робота, далее заходим во вкладку `Connections -> Connections`:
 
@@ -42,7 +42,7 @@
 
 Видео, наглядно объясняющее процесс создания торгового портфеля:
 
-<iframe width="920" height="516" src="https://www.youtube.com/embed/m6tkfY9KQ_g" title="Создание портфеля" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="735" height="415" src="https://www.youtube.com/embed/m6tkfY9KQ_g" title="Создание портфеля" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 Для того, чтобы добавить портфель в древовидной структуре слева выбираем нужного робота, далее переходим во вкладку `Portfolios -> Portfolios`.
 В открывшемся окне нажимаем на кнопку создания нового портфеля `Add`:
