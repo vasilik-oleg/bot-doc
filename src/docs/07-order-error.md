@@ -700,3 +700,676 @@
 11824 Client code type must a legal entity<br>
 11826 Matchref must not be specified for this type of counter party<br>
 11827 Allowed only trades with the same bank account for this period<br>
+
+### **7.2.2. MOEX spot and currencies**
+
+**MOEX ASTS ERRORS**
+
+(001) Message #%d sent<br>
+(065) Invalid market: %s<br>
+(071) Invalid board: %s<br>
+(076) Invalid security: %s<br>
+(090) Invalid firm: %s<br>
+(098) Invalid limit2: %s<br>
+(101) Invalid user: %s<br>
+(107) Invalid depository account: %s<br>
+(110) Invalid trading account: %s<br>
+(123) Deal #%ld accepted<br>
+(124) Deal #%ld accepted and matched<br>
+(125) Deal #%ld accepted (unvalidated)<br>
+(128) Order table is full<br>
+(129) Invalid security id<br>
+(130) Negotiated deals not accepted for indices<br>
+(131) Security is not trading yet<br>
+(132) Security is in break period<br>
+(133) Security is not currently trading<br>
+(134) Trading in security is finished<br>
+(135) Security is not trading today<br>
+(136) Security is suspended<br>
+(137) Market is suspended<br>
+(138) Instrument is suspended<br>
+(139) Board is suspended<br>
+(140) Invalid buy or sell indicator<br>
+(141) Invalid counterparty firm<br>
+(142) Invalid custodian firm<br>
+(143) Invalid price<br>
+(144) Invalid quantity<br>
+(145) Invalid trading account<br>
+(146) Trading account is suspended<br>
+(147) Trading account's depository account is suspended<br>
+(148) Holdings table is full<br>
+(149) Account has insufficient balance to sell<br>
+(150) Foreign ownership limit will be breached<br>
+(151) Buy limit for account will be breached<br>
+(152) Sell limit for account will be breached<br>
+(153) Holdings limit for security will be breached<br>
+(154) Invalid user id<br>
+(155) Invalid deal number<br>
+(156) Deal is currently unmatched<br>
+(157) Deal is already validated<br>
+(158) Deal is currently in an unknown state<br>
+(159) Invalid order method for this security and board<br>
+(160) Buy order #%ld accepted<br>
+(161) Sell order #%ld accepted<br>
+(162) Buy order #%ld accepted (%ld matched)<br>
+(163) Sell order #%ld accepted (%ld matched)<br>
+(164) Order quantity must not be more than %ld<br>
+(165) Buy order #%ld accepted (open period)<br>
+(166) Sell order #%ld accepted (open period)<br>
+(167) Minimum price step: %.*f<br>
+(168) Lot size is %d<br>
+(169) Buy order #%ld accepted (unvalidated)<br>
+(170) Sell order #%ld accepted (unvalidated)<br>
+(171) Invalid market order value: %.0f<br>
+(172) Orders not accepted for indices<br>
+(173) Invalid order type<br>
+(174) Invalid price split flag<br>
+(175) Invalid fill flag<br>
+(176) A market order must allow price splits<br>
+(177) Market orders not accepted during this trading period<br>
+(178) Single price orders not accepted during this trading period<br>
+(179) Immediate orders not accepted during this trading period<br>
+(180) Price may not be 0 for a limit order<br>
+(181) Immediate option not allowed for a market order that will stay in order book<br>
+(182) Price is out of range<br>
+(183) Invalid hidden quantity<br>
+(184) Hidden quantity not accepted during this trading period<br>
+(185) Market orders may not have a hidden quantity<br>
+(186) Trades table is full<br>
+(187) Unable to fill the 'Fill or Kill' order. Order rejected.<br>
+(188) System error in Buy<br>
+(189) System error in Sell<br>
+(190) Invalid user code<br>
+(193) Invalid order number<br>
+(194) You may not specify an order number and a user<br>
+(195) Your user id is suspended<br>
+(196) Your firm is suspended<br>
+(197) You do not have access to this function<br>
+(198) Trading System unavailable<br>
+(199) Trading System is suspended<br>
+(200) Invalid request<br>
+(201) Unable to service request<br>
+(202) You do not have access to the Trading System<br>
+(203) User id cannot be used from this network address<br>
+(204) User id is already in use<br>
+(205) IP address in use by %.12s<br>
+(206) Logon OK (firm: %.12s). %s<br>
+(207) Invalid password. %s<br>
+(208) Current password incorrectly entered<br>
+(209) Password successfully changed<br>
+(210) %d order(s) with total balance %ld withdrawn<br>
+(211) %d deal(s) withdrawn<br>
+(212) Invalid withdraw operation<br>
+(213) Invalid price operator<br>
+(214) Invalid account code<br>
+(215) Invalid security code<br>
+(216) Only a firm manager or trading supervisor may specify a user<br>
+(217) Only a trading supervisor may specify a firm<br>
+(218) Invalid firm code<br>
+(219) No orders withdrawn<br>
+(220) You may not specify a user and a deal number<br>
+(221) You may not specify a firm and user<br>
+(222) No negotiated deals to withdraw<br>
+(227) An instrument or a board must be specified<br>
+(228) Invalid expiry date<br>
+(229) Order may not expire before today<br>
+(230) Order value must not be more than %.0f<br>
+(231) Only main board orders may be entered during primary auction<br>
+(232) Hidden quantity not allowed in primary auction<br>
+(233) Order must expire today in primary auction<br>
+(234) Order may not have immediate flag in primary auction<br>
+(235) Only issuer agent may enter primary auction sell order<br>
+(236) Sell order may only be entered when security is closed<br>
+(237) Sell order already entered for primary auction<br>
+(238) Sell order must be a limit order in primary auction<br>
+(239) Sell order may not be a single price order in primary auction<br>
+(240) Sell order should have zero quantity in primary auction<br>
+(241) Auction bidding period is finished for security<br>
+(242) Price must be 0 for market orders in primary auction<br>
+(243) Market orders percentage limit will be breached<br>
+(244) Firm cash limit will be breached for this instrument<br>
+(245) Firm total cash limit will be breached<br>
+(246) Buy order #%ld accepted (%ld matched<br>
+(247) Sell order #%ld accepted (%ld matched<br>
+(250) %d order(s) validated<br>
+(251) Invalid order entry date<br>
+(252) Security is in primary distribution<br>
+(253) Invalid currency: %s<br>
+(254) Invalid allow breach flag<br>
+(255) Existing limit not found<br>
+(256) First limit will be breached<br>
+(257) Second limit will be breached<br>
+(258) Order is not able to be amended<br>
+(259) Unable to reduce order quantity<br>
+(260) Invalid language code<br>
+(261) Language is not available<br>
+(262) Language successfully changed<br>
+(263) Trading account limit will be exceeded<br>
+(269) Trading Engine temporarily unavailable<br>
+(271) Negotiated deals are not allowed during this period<br>
+(272) Only closing period orders are accepted during security's closing period<br>
+(273) Only an issuer agent may enter orders in security's final close period<br>
+(274) Invalid account for closing period order<br>
+(275) Order may only be from an investor account during security's closing period<br>
+(276) Buy order #%ld accepted (close period)<br>
+(277) Sell order #%ld accepted (close period)<br>
+(281) No permission for this operation<br>
+(282) User %s is not from your firm<br>
+(283) User %s is not from your exchange<br>
+(284) Invalid position tag %.4s<br>
+(285) User cash limit exceeded<br>
+(286) User cash limit(s) would be breached<br>
+(287) User cash limit(s) has updated OK<br>
+(296) Invalid F&O security type %s<br>
+(345) Price not allowed on market order in open period<br>
+(350) Firm %s does not have a position for tag %s<br>
+(351) Invalid trade<br>
+(352) Invalid order<br>
+(360) No sell order for security in Primary Auction<br>
+(361) Invalid order method for firm<br>
+(363) Only negotiated deal orders are accepted for this trading account<br>
+(364) Buy orders are not accepted for this trading account<br>
+(365) Sell orders are not accepted for this trading account<br>
+(367) Order method Force Partial Withdraw is not valid for a REPO firm<br>
+(368) Unable to match Force Partial Withdraw Order<br>
+(369) Invalid to exchange id: %s<br>
+(370) Only one address type must be specified<br>
+(371) Broadcast messages not allowed<br>
+(372) Firm %s is not on users exchange<br>
+(373) Exchange %s is not valid for this user<br>
+(374) Firm %s is not users firm<br>
+(375) Your client<br>
+(376) Orders canceled successfully<br>
+(377) Trading Account specified is not a valid for currency trading<br>
+(378) Trading Account specified is not the same currency as the security been traded<br>
+(379) Trading Account specified is not a depository<br>
+(388) No Firm permission record exists<br>
+(394) Yield Order not valid for this type of Trading Account<br>
+(401) is in breach of MGF for buy<br>
+(402) is in breach of MGF for sell<br>
+(403) is no longer in breach of MGF for buy<br>
+(404) is no longer in breach of MGF for sell<br>
+(407) Invalid order method for trdacc<br>
+(408) Fill Withdraw option not allowed for a market order<br>
+(409) No weighted average price exists<br>
+(412) Only weighted average price orders are accepted for this trading account<br>
+(413) Firm and Counterparty must be the same for deals on this board<br>
+(414) Price is outside of allowed range<br>
+(415) One side of the deal must have a client account<br>
+(416) One side of the deal must have a members own account<br>
+(424) No Second Part Price exists for REPO<br>
+(425) No Rate Of Interest exists for REPO<br>
+(429) REPO Upper limit breached<br>
+(438) REPO rate out of range:  %.2f (%.2f - %.2f)<br>
+(439) REPO second part period is not closed<br>
+(443) Yield is outside of allowed range<br>
+(445) Cross trades not allowed for this instrument<br>
+(446) Firm cash limit for the Second Part of REPO will be breached<br>
+(448) Invalid settle code specified<br>
+(449) Number of trades for single report can not exceed %d<br>
+(450) Invalid trade number - %.12s %c<br>
+(451) You can not validate this trade - %ld<br>
+(452) These trades can not be validated"<br>
+(453) Trade is already validated - %ld<br>
+(454) There is a report for buy trade %ld"<br>
+(455) Report table is full<br>
+(456) Report #%ld accepted<br>
+(457) Report #%ld accepted and matched<br>
+(458) Invalid report number specified<br>
+(459) %d report(s) withdrawn<br>
+(460) No reports to withdraw<br>
+(461) There already exists a buy quote for specified security and settlement code"<br>
+(462) There already exists a sell quote for specified security and settlement code"<br>
+(463) %d quote(s) withdrawn<br>
+(464) No quotes to withdraw<br>
+(465) Reports are not allowed during this period<br>
+(485) Your client<br>
+(486) Order value must not be less than %.2f<br>
+(489) Invalid TEClient: %s<br>
+(492) Transfer is not allowed<br>
+(497) Invalid character in brokerref - '%c'<br>
+(498) Invalid character in matchref - '%c'<br>
+(499) Invalid character in extref - '%c'<br>
+(507) Order quantity doesn't match security's granularity (%d lots)<br>
+(508) Account has insufficient convsecurity balance to sell<br>
+(509) Immediate WAPrice orders not accepted during security's open period<br>
+(510) Immediate WAPrice orders not accepted during primary auction<br>
+(511) Immediate WAPrice orders could not be queued<br>
+(512) Buy order #%ld accepted (%ld matched<br>
+(513) Sell order #%ld accepted (%ld matched<br>
+(515) Refund rate is not allowed for the settle code specified<br>
+(516) Incomplete REPO order<br>
+(517) Invalid refund rate<br>
+(518) Invalid REPO rate<br>
+(519) Invalid price2<br>
+(520) Negative or zero price2 resulted<br>
+(521) Can't send report to trade %ld due to invalid price<br>
+(522) Invalid combination of market<br>
+(523) REPO rate must not exceed %.2f%%<br>
+(529) Close Price is not defined<br>
+(533) Invalid client code<br>
+(536) Order must be a limit order"<br>
+(537) Order may not be a single price order"<br>
+(538) Order should have zero quantity"<br>
+(539) Buy order already entered<br>
+(540) Price must be 0 for market orders in auction<br>
+(543) Auction price can not be calculated<br>
+(547) Invalid price<br>
+(548) REPO rate must not be less than %.*f%%<br>
+(549) REPO rate must be equal to %.*f%%<br>
+(550) %.12s limit will be breached for '%.4s' position<br>
+(551) Invalid client Bank Account ID %s<br>
+(554) Invalid discount specified<br>
+(555) Invalid lower discount specified<br>
+(556) Invalid upper discount specified<br>
+(557) Invalid block collateral flag<br>
+(558) Invalid REPO value specified<br>
+(559) Invalid price resulted<br>
+(560) Invalid quantity resulted<br>
+(561) Invalid REPO value resulted<br>
+(562) Invalid REPO repurchase value resulted<br>
+(563) Main board is not defined for the security<br>
+(564) Security is not defined on the main board<br>
+(565) Market price is not defined for the security<br>
+(566) Starting discount (%.*f%%) can not be less than lower discount limit (%.*f%%)<br>
+(567) Starting discount (%.*f%%) can not be greater than upper discount limit (%.*f%%)<br>
+(568) This report can not be cleanly accepted<br>
+(569) There is a report for sell trade %ld"<br>
+(570) There is an unsettled margin call for trade #%ld<br>
+(573) Invalid settlement code or REPO term specified<br>
+(574) Invalid trading account selected for the specified block_collateral option<br>
+(575) Buy Order #%ld accepted. %ld matched. Balance withdrawn to avoid a cross trade<br>
+(576) Sell Order #%ld accepted. %ld matched. Balance withdrawn to avoid a cross trade<br>
+(577) This order causes a cross trade<br>
+(578) Total order value at single REPO rate can not exceed %.2f limit.<br>
+(579) For this instrument price can not be less than %.*f<br>
+(580) For this instrument price can not be greater than %.*f<br>
+(581) Starting discount can not be less than %.*f%%<br>
+(582) Starting discount can not be greater than %.*f%%<br>
+(583) Lower discount limit must be %.*f%%<br>
+(584) Upper discount limit must be %.*f%%<br>
+(585) Lower discount limit must not be specified<br>
+(586) Upper discount limit must not be specified<br>
+(587) Block collateral option must be set<br>
+(588) REPO rate must not be greater than %.*f%%<br>
+(589) Invalid order activation time<br>
+(590) Invalid activation time order type<br>
+(591) Cannot set lifetime for activation time orders<br>
+(592) Buy order #%ld accepted. Activation time - %d:%.2d:%.2d<br>
+(593) Sell order #%ld accepted. Activation time - %d:%.2d:%.2d<br>
+(595) Total buy orders value can not exceed %.2f limit<br>
+(596) Total sell orders value can not exceed %.2f limit<br>
+(599) Invalid price2 resulted<br>
+(600) Minimum rate step: %.*f<br>
+(601) Minimum discount step: %.*f<br>
+(602) REPO value for this instrument can not exceed %.0f<br>
+(603) REPO repurchase value for this instrument can not exceed %.0f<br>
+(608) Only the following client code types are valid for this trading account: %s<br>
+(609) Invalid client code type for this type of trading account<br>
+(612) Order value can not be larger than %.2f<br>
+(613) Order value can not be less than %.2f<br>
+(615) Invalid deal number<br>
+(616) Unable to accept deal - deal is not active<br>
+(617) Unable to accept deal<br>
+(618) Unable to accept deal. Invalid security specified<br>
+(619) Unable to accept deal. Invalid price specified<br>
+(620) Unable to accept deal. Invalid quantity specified<br>
+(621) Unable to accept deal. Invalid settlecode specified<br>
+(622) Unable to accept deal. Invalid refundrate specified<br>
+(623) Unable to accept deal. Invalid matchref specified<br>
+(624) Unable to accept deal. Invalid buy/sell specified<br>
+(625) Warning: this will breach REPO limit. If sure<br>
+(626) Invalid trading account for marketmaker order<br>
+(627) Marketmaker orders accepted only in normal trading period<br>
+(628) Invalid order type for marketmaker order<br>
+(629) Buy Order #%ld accepted. %ld matched. Balance withdrawn to avoid a trade between marketmakers<br>
+(630) Sell Order #%ld accepted. %ld matched. Balance withdrawn to avoid a trade between marketmakers<br>
+(631) This order causes a trade between marketmakers<br>
+(632) is in breach of MGF<br>
+(633) is in breach of MGF<br>
+(634) Invalid TC<br>
+(635) Discount limits can not be set<br>
+(636) Margin call does not need any counterpart's acceptance<br>
+(646) Issuer of a security can not sell it on this board<br>
+(647) Total sell quantity of a security for a firm can not exceed %.2f%% of its issue size on this board<br>
+(648) Clearing session is in progress<br>
+(649) Trade is already canceled - %ld<br>
+(650) There is a cancel report for buy trade %ld<br>
+(651) There is a cancel report for sell trade %ld<br>
+(652) Trade %ld can not be canceled<br>
+(653) Cancel report #%ld accepted and matched<br>
+(654) Cancel report #%ld accepted<br>
+(655) Boards: %d selected<br>
+(656) Invalid number of boards<br>
+(657) REPOORDER table is full<br>
+(658) Invalid client code specified for this security<br>
+(659) ExtTrades table is full<br>
+(660) External trade registered: %ld<br>
+(661) Invalid settle date specified<br>
+(662) %d external trades withdrawn<br>
+(663) Invalid external trade number - %.12s<br>
+(664) Invalid large trade flag<br>
+(665) No external trades to withdraw<br>
+(666) This trade have to be large<br>
+(667) Invalid large flag specified<br>
+(668) Invalid clearing type specified<br>
+(669) Only one trade can be included in simple clearing report<br>
+(670) Simple clearing is not currently available<br>
+(671) Specified trade(s) successfully settled<br>
+(672) Invalid trade number specified: '%s'<br>
+(673) Trade #%s already settled<br>
+(674) Trade #%s unvalidated<br>
+(675) Trade #%s is not in simple clearing mode<br>
+(676) REPO first part trade is not validated yet for trade #%ld<br>
+(677) REPO first part trade is not settled yet for trade #%ld<br>
+(678) Simple clearing is not allowed for %.4s position<br>
+(679) Margin calls can not be included in simple clearing<br>
+(680) Trade value must be not less than %.2f for simple clearing<br>
+(694) Simple clearing is not allowed for this security and board<br>
+(695) Simple clearing is not allowed for the same trading accounts<br>
+(699) Counter price is not defined<br>
+(700) Order must be entered with counter price flag<br>
+(701) Order price must be equal to %.*f<br>
+(702) Settlement date of the REPO second part trade - %02d.%02d.%4d - is not a working day<br>
+(704) Only BUY orders are allowed at this moment<br>
+(705) Only SELL orders are allowed at this moment<br>
+(706) You are not an underwriter. Only security underwriters are allowed to enter order at this moment<br>
+(707) Invalid transaction reference<br>
+(709) You can not have more than %d active orders for this instrument<br>
+(715) You can not have more than %d active market orders for this instrument<br>
+(718) There is a confirm report for trade %ld<br>
+(719) Trade %ld is not included into clearing<br>
+(720) Special reports are not available now<br>
+(721) ClientCode is not allowed for this trading account<br>
+(730) The price of the buy order should be less then the best offer price for this type of order<br>
+(731) The price of the sell order should be greater then the best bid price for this type of order<br>
+(732) Minimum available value of the quantity is: %d of lots<br>
+(733) Maximum available value of the quantity is: %ld of lots<br>
+(734) Minimum available volume of the order is: %f<br>
+(735) Maximum available volume of the order is: %f<br>
+(736) Signature validation error: %s<br>
+(737) Used wrong signature or EXKEYUSAGEOID<br>
+(740) Clients without signature are not supported<br>
+(741) The trading account and the security belong to different depositories<br>
+(742) Only NegDeals addressed to everyone available in that trading period<br>
+(743) This settle code is unavailable after %d:%.2d:%.2d<br>
+(744) The second part of REPO trade cannot be canceled. Trade № %ld<br>
+(745) The transfer cannot be canceled. Trade № %ld<br>
+(746) Specified trade(s) successfully canceled<br>
+(747) Unable to determine price move limit for this security<br>
+(748) The price for this security should be in range from %.*f to %.*f<br>
+(749) Only one of RepoValue or Quantity can be specified<br>
+(750) REPO price is not defined<br>
+(751) Starting discount must not be specified.<br>
+(752) Discount limits must not be specified.<br>
+(754) You have got a deferred money debt on the board '%s' for the position: %s. This debt should be settled by the end of this day or tomorrow during the settlement with the Central counterparty.<br>
+(755) You have got %d deferred security debts on the board '%s' for the position: %s. These debts should be settled by the end of this day or tomorrow during the settlement with the Central counterparty.<br>
+(756) You have got a default on collateral for position %s. All the defaults on collateral must be settled by 15:00 today.<br>
+(757) You have got an unsettled deferred money debt on the board '%s' for the position %s. The default settlement procedure will be enforced.<br>
+(758) You have got an unsettled collateral default for the position %s. The default settlement procedure will be enforced.<br>
+(759) You have got a deferred money claim on the board '%s' for the position %s. This claim will be satisfied by the Central counterparty either by the end of this day or tomorrow during the settlement with CC.<br>
+(760) You have got %d deferred security claims on the board '%s' for the position %s. Claims will be satisfied by the Central counterparty either by the end of this day or tomorrow during the settlement with CC.<br>
+(761) The firm's limit on liabilities to the Central counterparty has been exceeded.<br>
+(782) Simple report can not be complex<br>
+(783) Client code is suspended<br>
+(786) Operations suspended by Firm Manager or Trading System Superviser"<br>
+(787) User successfully suspended<br>
+(788) User successfully suspended. Orders withdrawn<br>
+(789) User successfully Unsuspended<br>
+(790) The total amount of deferred debts of the unconscionable clearing participants (%.2f rub.) exceeds the limit set for the settlement with the Central counterparty (%.2f rub.). CC's own assets will not be used during the settlement.<br>
+(792) You have got %d deferred security claims on the board '%s' for the position %s caused by the default on this position. Claims will be settled by the Central counterparty after the default settlement.<br>
+(793) You have got a deferred money claim on the board '%s' for the position %s caused by the default on this position. Claim will be settled by the Central counterparty after the default settlement.<br>
+(794) The total amount of deferred debts of the unconscionable clearing participants (%.2f rub.) does not exceed the limit set for the settlement with the Central counterparty (%.2f rub.). CC's own assets will be used during the settlement.<br>
+(795) Single Limit for Bank Account %12.12s breached: %.2f<br>
+(796) Trading limit for Bank Account %12.12s breached: %.2f.<br>
+(797) Limit for currency %.4s breached: %.2f<br>
+(807) Bank Account is in default mode<br>
+(808) Bank Account is not in default mode<br>
+(809) Bank Account is in early settle mode<br>
+(810) Bank Account is in trading closed mode<br>
+(812) Limits will be breached for position %.30s<br>
+(813) Cannot cancel trade <%ld>. Parent trade <%ld> should be canceled<br>
+(814) Maximum order hidden quantity ratio is %d<br>
+(815) Minimum order visible quantity value is %.2f<br>
+(816) Hidden quantity can not be specified for market maker order<br>
+(817) Minimum order visible quantity is %d<br>
+(819) Buy order #%ld accepted (closing auction)<br>
+(820) Sell order #%ld accepted (closing auction)<br>
+(822) Buy order #%ld accepted (dark pool)<br>
+(823) Sell order #%ld accepted (dark pool)<br>
+(824) Client code type must a legal entity<br>
+(826) Matchref must not be specified for this type of counter party<br>
+(827) Allowed only trades with the same bank account for this period<br>
+(828) Trading Account has not enough permissions for that type of reports<br>
+(829) Either price or volume must be specified in the order<br>
+(830) Counterparty should be specified for orders by value<br>
+(831) Invalid price resulted<br>
+(832) Buy order #%ld accepted (discrete auction)<br>
+(833) Sell order #%ld accepted (discrete auction)<br>
+(834) Начался дискретный аукцион по финансовому инструменту %16.16s."<br>
+(835) Закончился дискретный аукцион по финансовому инструменту %16.16s. Торги будут продолжены в режиме Normal Trading.<br>
+(836) Закончился дискретный аукцион по финансовому инструменту %16.16s<br>
+(837) Закончился дискретный аукцион по финансовому инструменту %16.16s.<br>
+(839) Either quantity or volume must be specified in the order<br>
+(840) Collateral position has been breached: %.2f<br>
+(841) Transfer #%ld accepted<br>
+(843) Offering qty updated<br>
+(844) Delivery obligations on buy are not specified. Order rejected.<br>
+(845) Delivery obligations on sell are not specified. Order rejected.<br>
+(846) Delivery obligations exceeded on %ld securities. Order rejected.<br>
+(847) For specific trading account could not found CCP trading account<br>
+(848) CCP trading account is suspending<br>
+(849) Trading in securities not allowed for the trading account<br>
+(850) Sell Market orders specified by value are not allowed<br>
+(851) For Market orders on buy allowed specification by value only in current trade period."<br>
+(852) Close Auction Price is not defined. Order rejected.<br>
+(853) Only orders with Close Auction Price are available. Close Auction Price is %.*f.<br>
+(854) Activation time orders cannot have other type event activation<br>
+(855) Buy order #%ld accepted (Activation at the closing auction)<br>
+(856) Sell order #%ld accepted (Activation at the closing auction)<br>
+(857) For the odd lots board the order balance can not exceed the security's lot size on main board<br>
+(858) Unable to accept deal. Invalid baseprice specified<br>
+(859) Baseprice can not be specified for this sec<br>
+(862) Trading with TODAY settlement is over<br>
+(863) Limit order specified by value is not allowed<br>
+(864) Fill Withdraw option of order is not allowed for selected Trading Period<br>
+(865) For this instrument BasePrice can not be less than %.*f<br>
+(866) For this instrument BasePrice can not be more than %.*f<br>
+(867) For this instrument Price can not be less than %.*f<br>
+(868) For this instrument Price can not be more than %.*f<br>
+(869) Firm limits successfully updated [Planned #%.2f]<br>
+(870) Too many boundary securities specified<br>
+(871) At least one boundary security should be specified<br>
+(872) Order-list request is available for linked-list type securities only"<br>
+(873) The security is not in the list"<br>
+(874) Only linked-list orders available for this type of security"<br>
+(875) Order for CCP REPO available only T+ trading account<br>
+(876) First limit will be breached<br>
+(877) Second limit will be breached [planned %.2f]<br>
+(878) Invalid allow breach flag<br>
+(879) Uncovered flag successfully updated in Trading account<br>
+(880) Uncovered flag successfully updated in Bank account<br>
+(881) Holdings full covered limit for security will be breached for this firm<br>
+(882) Position full covered limit will be breached for firm %12.12s. Asset %12.12s (%.2f < 0)<br>
+(883) The security %10.10s already in the list of boundaries<br>
+(884) The boundary of the %10.10s is bigger then overall REPO value. Calculated REPO value %.2f<br>
+(885) Linked order reference table full. The new Order-list type order can't be entered.<br>
+(886) Holdings full covered limit for security will be breached for this security holdings<br>
+(887) Holdings full covered limit for security will be breached for this trading account<br>
+(888) Holdings full covered limit for security will be breached for this security<br>
+(889) Position full covered limit will be breached for bankacc %12.12s. Asset %12.12s (%.2f < 0)<br>
+(890) Trading account has no cash account for this security and board<br>
+(891) Buy linked-list order #%ld accepted<br>
+(892) Sell linked-list order #%ld accepted<br>
+(893) Amend orders available only in the normal trading period<br>
+(894) Amend not allowed for REPO orders<br>
+(895) Amend not allowed for Orders to close auction<br>
+(896) Amend not allowed for Olinked-list orders<br>
+(897) Only limit orders can be amended<br>
+(898) Amend not allowed for orders specified by value<br>
+(899) Amend not allowed for iceberg-orders<br>
+(900) Amend not allowed for partial matched orders<br>
+(901) Amend not allowed for time activated orders<br>
+(903) Order quantity must not be less than %d<br>
+(904) Game ASTS is offline<br>
+(905) Invalid asset: %s<br>
+(906) Market orders by value not allowed<br>
+(907) Operations in this securities is not allowed for the trading account %12.12s.<br>
+(908) Invalid extended security id<br>
+(909) Too many securities specified in the list-order. Available not more then %d securities<br>
+(911) Unable to accept deal. Invalid Trade No specified<br>
+(912) Counterparty already sent new modification order for this trade. OrderNo #%ld<br>
+(913) There is the modification order for that trade. OrderNo #%ld<br>
+(914) The key parameters specified is not correspond to parameters of the modified trade<br>
+(915) Can't withdraw order. The order already matched.<br>
+(916) Can't withdraw order. The specified order is not active. Current status is '%c'<br>
+(918) FullCovered for asset successfully set<br>
+(919) Market order is not allowed for specified trading period.<br>
+(920) Full covered limit will be breached (deficit %.2f) for asset %12.12s<br>
+(921) Full covered limit1 will be breached for bankacc %12.12s. Asset %12.12s (deficit %.2f)<br>
+(922) Cancel on disconnect mode ON<br>
+(923) User HEARTBEAT OK<br>
+(924) You are sending HEARTBEATs too often<br>
+(925) %d orders canceled for inactive or disconnected user<br>
+(926) Full covered limit2 will be breached for bankacc %12.12s. Asset %12.12s (deficit %.2f)<br>
+(927) Price stabilization orders cannot be entered using the trust management account.<br>
+(928) Incorrect compensation for trade cancellation<br>
+(932) Price stabilization orders cannot be entered using Force Partial Withdraw Order<br>
+(933) Amount of compensation may not exceed the amount of the trade<br>
+(934) Trade cancellation reports are not allowed on this trading board<br>
+(935) Settlement report cannot include both T0 trades and trades with CCP at the same time<br>
+(936) Cancel on disconnect mode OFF"<br>
+(937) Client code %12.12s must be used with this bank account<br>
+(938) Transfer between bank accounts of different clearing members is not allowed<br>
+(939) Clearing Member %12.12s is suspended<br>
+(941) Clearing Bank Account suspended<br>
+(943) Client specified in Client Code must be a bank<br>
+(944) Client specified in Client Code must have the currency license<br>
+(945) Subdetails value is required for the specified client code type<br>
+(946) Invalid client code. Clientcode should have the following details for this bankacc: '%.20s'%s'%.20s'.<br>
+(947) This bankacc linked to the client of the client of Clearing Member and can be used only when Clearing and Trading firms are the same firm"<br>
+(948) Buy order #%ld accepted (open auction)<br>
+(949) Sell order #%ld accepted (open auction)<br>
+(950) Transaction rejected by trading system. Price move limits are not defined for that security<br>
+(955) %12.12s trading is not allowed for the depacc %12.12s<br>
+(956) Cash transfer #%ld accepted<br>
+(957) Specified instrument is not cash<br>
+(958) Asset is not accepted as collateral<br>
+(959) Auction Price is not defined. Order rejected."<br>
+(960) REPO rate for calculated REPO value %f can not be less than %.*f<br>
+(961) REPO rate for calculated REPO value %f can not be more than %.*f<br>
+(962) This function is available only for own trading accounts of authorized banks<br>
+(963) Report for trades with different currencies denied<br>
+(964) Risk Management rates are invalid for asset %12.12s<br>
+(966) There are no active SMA Master Users. %d orders were canceled by Cancel-On-Drop-Copy-Disconnect.<br>
+(967) There are no active SMA Master Users. Order rejected.<br>
+(972) This security is not allowed to be traded by clients of the given type.<br>
+(973) Fullcovered flag cannot be reset for this trading account.<br>
+(974) Transfer of asset %12.12s for GC Pool %12.12s is not allowed.<br>
+(975) Transfers that affect GC Pool trading accounts are only allowed between linked trading accounts.<br>
+(976) Fullcovered limit for GC Pool trading account cannot be negative.<br>
+(977) Orders with GC Pool cannot be entered using trdacc that is not linked to a pool trdacc.<br>
+(978) Trades with GC Pool cannot be included in simple clearing report.<br>
+(979) The transfer allowed only for linked accounts inside of one clearing bankacc.<br>
+(980) Fullcovered flag cannot be reset for this bankacc.<br>
+(982) Trading account at the stage of closing. Orders cannot be entered.<br>
+(983) Transfer from bank account of a segregated protected client is not allowed<br>
+(984) Price move limits are not set for security %12.12s. Market orders not allowed.<br>
+(993) Invalid character in systemref - '%c'<br>
+(996) Entering<br>
+(997) Sell orders cannot be addressed to this counterparty.<br>
+(998) Orders with this settlement code cannot be addressed to this counterparty.<br>
+(999) Время для ввода заявок окончилось.<br>
+(1000) The withdraw orders is prohibited in that stage.<br>
+(1007) The maximum amount of funds available is %f<br>
+(1008) The maximum quantity of securities available is %ld<br>
+(1009) Invalid TranType Id<br>
+(1010) User order limits table full<br>
+(1011) User holding limits table full"<br>
+(1012) User position limits table full<br>
+(1013) User limit set successfully<br>
+(1014) User limit updated successfully<br>
+(1015) User security access table full<br>
+(1016) User secuniq access table full<br>
+(1017) User board access table full<br>
+(1018) User access updated successfully. %d records updated.<br>
+(1019) User access white list set successfully. Items in the list: %d.<br>
+(1020) User access black list set successfully. Items in the list: %d.<br>
+(1021) List too long. Max size is %d items.<br>
+(1022) Exceeded the maximum order price limit. Maximum available price is %.2f.<br>
+(1023) Exceeded the minimum order price limit. Minimum available price is %.2f.<br>
+(1024) Exceeded the maximum order quantity limit. Maximum available quantity for order is %ld securities.<br>
+(1025) Exceeded the maximum order value limit. Maximum available volume %.2f.<br>
+(1026) Exceeded the maximum market order quantity limit. Maximum available quantity for order is %ld securities.<br>
+(1027) Exceeded the maximum market order value limit. Maximum available volume %.2f.<br>
+(1028) Exceeded the maximum day value limit. Maximum available volume %.2f.<br>
+(1029) Exceeded the maximum planned position value limit for account. Maximum available volume %.2f.<br>
+(1030) Exceeded the minimum planned position value limit for account. Maximum available volume %.2f.<br>
+(1031) Exceeded the maximum planned long position limit for account. Maximum available quantity for order is %ld securities.<br>
+(1032) Exceeded the maximum planned short position limit for account. Maximum available quantity for order is %ld securities"<br>
+(1033) User clientcode table full<br>
+(1034) User limit record not found"<br>
+(1035) Maximum transaction rate exceeded"<br>
+(1036) Security is not allowed<br>
+(1037) Board is not allowed<br>
+(1038) Security on the selected board is not allowed<br>
+(1039) Transfer type is not allowed for settle code '%.12s'<br>
+(1041) Position not found<br>
+(1042) This option can be applied to SMA users only<br>
+(1043) The field value must be greater than %f<br>
+(1044) The field value must be greater than or equal to %f<br>
+(1045) The field value must be less than %f<br>
+(1046) The field value must be less than or equal to %f<br>
+(1047) Exceeded the maximum/minimum order price limit. Reason: The legal current price undefined.<br>
+(1048) User has open orders<br>
+(1049) Orders with REPO value and discount are not allowed in this mode.<br>
+(1050) Orders with quantity and discount are not allowed in this mode.<br>
+(1052) Orders with quantity and REPO value are not allowed in this mode.<br>
+(1053) Amount step for this order is %.2f<br>
+(1059) Total Single Limit for Bank Account %12.12s breached: %.2f<br>
+(1061) Only Fill Withdraw orders are allowed<br>
+(1068) Transactions disabled. TradeEngine in synchronize state.<br>
+(1069) Clearing system timeout.<br>
+(1070) Clearing system not available.<br>
+(1071) Clearing system connection already established<br>
+(1072) Clearing system connection established<br>
+(1076) Clearing System is suspended<br>
+(1078) Clearing System Order table is full<br>
+(1085) Minimum base price step: %.*f<br>
+(1086) Market order is rejected by Risk Management System<br>
+(1087) Order rejected. No connection to liquidity provider.<br>
+(1090) The broker license of firm %12.12s was suspended<br>
+(1091) The trust management license of firm %12.12s was suspended<br>
+(1092) The dealer license of firm %12.12s was suspended<br>
+(1093) For the selected trading mode you can only accept already submitted counter orders<br>
+(1103) Password too short. Minimum length is %d characters.<br>
+(1104) Password must contain at least three of: lower case<br>
+(1105) Password mustn't contain %d or more repeating characters.<br>
+(1106) Using one of old passwords is not allowed."<br>
+(1107) Check executed successfully. Single Limit is not negative.<br>
+(1108) Check executed successfully. All orders withdrawn. Single Limit is not negative.<br>
+(1109) Password expires in %d day(s). Please change password!!!<br>
+(1110) Password expired. Only password change available. Please change password and log in again!!!<br>
+(1113) User blocked till %d:%.2d:%.2d.<br>
+(1116) Request for trade conclusion is prohibited for settlement acccounts of the 'On behalf of clearing member' type<br>
+(1117) All orders withdrawn. Single Limit is negative.<br>
+(1118) Transaction is allowed only for the clearing model 'Clearing Broker'.<br>
+(1119) The Clearing Member is not allowed to manage Level 3.<br>
+(1120) Baseprice can not be specified for counterparty 'Any'<br>
+(1122) Invalid client code of a clearing broker<br>
+(1123) Invalid client code of a clearing member<br>
+(1124) The client was found in a clearing firm's stop-list<br>
+(1125) The specified participant is managed by another clearing member<br>
+(1126) Transaction is allowed only for the clearing member<br>
+(1127) Only Clearing Member for trade %ld may include the trade in report<br>
+(1128) Transaction is not allowed with 1st level bank account<br>
+(1129) Unable to accept deal. Invalid REPO value specified<br>
+(1138) Second part of REPO may be early settled the next day after settle of the first part REPO<br>
+(1139) Early settlement is allowed only for the second parts of addressed CCP REPO"<br>
+(1143) Only orders with activation time are allowed on this board<br>
+(1151) Only T+ settlement codes are allowed for requests for trade<br>
+(1158) Only requests for trade are allowed for trading account without trading access<br>
+(1159) Early settlement is not allowed for REPO<br>
+(1161) Offers for the conclusion of OTC trades are available only for the Clearing Member<br>
+(1162) OfferringQty cannot be set to a value<br>
+(1163) Offers for the conclusion of OTC trades are not available for the Clearing Member with this clearing mode<br>
