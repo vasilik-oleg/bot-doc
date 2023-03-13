@@ -42,7 +42,6 @@
 **MOEX SPECTRA ERRORS**<br>
 -1 Error performing operation.<br>
 0 Operation successful.<br>
-0 Operation successful.<br>
 1 User not found.<br>
 2 Brokerage Firm code not found.<br>
 3 Session inactive.<br>
