@@ -171,8 +171,8 @@ $$
 $$
 \sin^2x+cos^2x=1
 $$
-<br/>
-<br/>
+
+Нижний индекс: <sub>i</sub>
 
 > **ШПАРГАЛКИ ПО СИНТАКСИСУ MARKDOWN:**
 1) https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
