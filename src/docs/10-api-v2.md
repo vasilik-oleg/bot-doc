@@ -362,5 +362,348 @@ _Ответ:_
 
 ```C
 {"type": "last_callback", "ts":1646305072249112064, "clOrdId": "2"}
-type - всегда last_callback`
 ```
+
+`type` - всегда last_callback`.
+
+## **10.2. Запросы**
+
+### **10.2.1. Операции над всеми портфелями робота**
+
+_Запрос:_
+обнулить позиции всех активных портфелей: `{"type": "action", "data": {"action":"reset_poses", "robot_id":"1"},"clOrdId":"1"}`;  
+сбросить статусы всех заявок всех портфелей: `{"type": "action", "data": {"action":"reset_orders", "robot_id":"1"},"clOrdId":"1"}`;  
+попытаться выравнять позиции всех активных портфелей: `{"type": "action", "data": {"action":"to_market_all", "robot_id":"1"},"clOrdId":"1"}`;  
+выключить торговлю всех портфелей в базе данных: `{"type": "action", "data": {"action":"stop_trading_db", "robot_id":"1"},"clOrdId":"1"}`;  
+включить торговлю всех портфелей в базе данных: `{"type": "action", "data": {"action":"start_trading_db", "robot_id":"1"},"clOrdId":"1"}`
+
+_Ответ:_
+
+```C
+{"type": "callback", "data": {"text":""},"clOrdId":"1", "ts":1646305072249112064, "result": "ok"}
+{"type": "callback", "data": {"text":""},"clOrdId":"1", "ts":1646305072249112064, "result": "error"}
+```
+
+### **10.2.2. Переподключить все маркет-дата/транзакционные подключения робота**
+
+_Запрос:_
+
+```C
+{"type": "action", "data": {"action":"reconnect_d", "robot_id":"1"},"clOrdId":"1"}
+{"type": "action", "data": {"action":"reconnect_t", "robot_id":"1"},"clOrdId":"1"}
+```
+
+Ответ не предусмотрен.
+
+### **10.2.3. Получить список торговых инструментов доступных в роботе**
+
+_Запрос:_
+
+```C
+{"type": "action", "data": {"action":"get_contracts", "robot_id":"1"},"clOrdId":"1"}
+```
+
+_Ответ:_
+
+```C
+{"type": "callback", "data": {"contracts": {"VT_BTC": {"sec_key": "VT_BTC"}}},"clOrdId":"1", "ts":1646305072249112064, "result": "ok"}
+{"type": "callback", "data": {"text":""},"clOrdId":"1", "ts":1646305072249112064, "result": "error"}
+```
+
+`put` - пут/кол/другой (CALL = 0, PUT = 1, OTHER = -1);  
+`step` -;  
+`sec_key` -;  
+`sec_key_subscr` -;  
+`base_sec_key` -;  
+`sec_board` -;  
+`sec_code` -;  
+`description` -;  
+`sec_type` -;  
+`d_pg` -;  
+`isinid_fast` -;  
+`isinid_p2` -;  
+`state` -;  
+`exec_end` -;  
+`strike` -;  
+`lot_size` -.
+
+### **10.2.4. Операции над подключениями**
+
+_Запрос:_
+
+отключить маркет-дата подключение: `{"type": "action", "data": {"action":"disable_conn", "robot_id":"1", "name":"binancefut_listen", "sec_type":34359738368},"clOrdId":"1"}`  
+включить маркет-дата подключение: `{"type": "action", "data": {"action":"enable_conn", "robot_id":"1", "name":"binancefut_listen", "sec_type":34359738368},"clOrdId":"1"}`  
+отключить транзакционное подключение: `{"type": "action", "data": {"action":"disable_trans_conn", "robot_id":"1", "name":"trade", "sec_type":34359738368},"clOrdId":"1"}`  
+включить транзакционное подключение: `{"type": "action", "data": {"action":"enable_trans_conn", "robot_id":"1", "name":"trade", "sec_type":34359738368},"clOrdId":"1"}`  
+переподключить маркет-дата подключение: `{"type": "action", "data": {"action":"reconnect_data", "robot_id":"1", "name":"binancefut_listen", "sec_type":34359738368},"clOrdId":"1"}`  
+переподключить транзакционное подключение: `{"type": "action", "data": {"action":"reconnect_trans", "robot_id":"1", "name":"trade", "sec_type":34359738368},"clOrdId":"1"}`  
+удалить транзакционное подключение: `{"type": "action", "data": {"action":"del_trans", "robot_id":"1", "name":"trade", "sec_type":34359738368}, "clOrdId":"1"}`  
+проверить используется ли в роботе транзакционное подключение: `{"type": "action", "data": {"action":"is_used_trans", "robot_id":"1", "name":"trade", "sec_type":34359738368}, "clOrdId":"1"}`  
+удалить транзакционное подключение из базы данных: `{"type": "del_conn_db", "data": {"robot_id":"1", "name":"trade", "sec_type":34359738368}, "clOrdId":"1"}`  
+добавить транзакционное подключение (можно только с сайта): `{"type": "action", "data":{"robot_id":1, "action": "add_trans", "sec_type":34359738368, "name": "test", "ckey": "", "orig": "encoded_params_string","settings":{},"defaults":{}}, "clOrdId": "1"}`  
+редактировать транзакционное подключение (можно только с сайта): `{"type": "action", "data":{"robot_id":1, "action": "edit_trans", "sec_type":34359738368, "name": "test", "ckey": "", "orig": "encoded_params_string","settings":{},"defaults":{}}, "clOrdId": "1"}`
+
+`robot_id` - id-робота;  
+`sec_type` - тип подключения;  
+`name` - имя подключения;  
+`c_key` - закодированная часть ключа подключения;  
+`orig` - переведенный в строку и сжатый словарь изначально настроенных пользователем параметров (нужен для редактирования подключения);  
+`settings` - словарь настраиваемых пользователем параметров подключения;  
+`defaults` - словарь неизменяемых параметров подключения;  
+
+_Ответ:_
+
+```C
+{"type": "callback", "data": {},"clOrdId":"1", "ts":1646305072249112064, "result": "ok"}
+{"type": "callback", "data": {"used": false},"clOrdId":"1", "ts":1646305072249112064, "result": "ok"}
+{"type": "callback", "data": {"text":""},"clOrdId":"1", "ts":1646305072249112064, "result": "error"}
+```
+
+### **10.2.5. Редактирование/использование подключений**
+
+_Запрос:_
+
+задать позицию по бумаге: `{"type": "set_sec_pos", "data": {"robot_id":"1", "name":"trade", "sec_type":34359738368, "key_subscr":"BTCUSD", "f_name":"pos", "f_value":0},"clOrdId":"1"}`;  
+задать позицию по валюте: `{"type": "set_coin_pos", "data": {"robot_id":"1", "name":"trade", "sec_type":34359738368, "coin":"BTC", "f_name":"pos", "f_value":0},"clOrdId":"1"}`;  
+выставить заявку: `{"type": "place_order", "data": {"robot_id":"1", "name":"trade", "sec_type":34359738368, "key_subscr":"BTCUSD", "dir": 1, "amount": 1, "price": 100, "oc": 1, "cc": "client_code"},"clOrdId":"1"}`;  
+снять заявку: `{"type": "cancel_order", "data": {"robot_id":"1", "name":"trade", "sec_type":34359738368, "key_subscr":"BTCUSD", "d": 1, "cc": "client_code", "ono": "1", "cl_ord_id": "2"},"clOrdId":"1"}`.
+
+_Ответ:_
+
+```C
+{"type": "callback", "data": {},"clOrdId":"1", "ts":1646305072249112064, "result": "ok"}
+{"type": "callback", "data": {"text":""},"clOrdId":"1", "ts":1646305072249112064, "result": "error"}
+```
+
+### **10.2.6. Операции над портфелями**
+
+_Запрос:_
+
+попытаться выравнять позицию: `{"type": "action", "data": {"action":"market", "robot_id":"1", "params":{"name": "test"}}, "clOrdId":"1"}`;  
+выключить всю торговлю и снять заявки: `{"type": "action", "data": {"action":"hard_stop", "robot_id":"1", "params":{"name": "test"}}, "clOrdId":"1"}`;  
+в режим "к нулю": `{"type": "action", "data": {"action":"to0", "robot_id":"1", "params":{"name": "test"}}, "clOrdId":"1"}`;  
+сбросить статусы заявок: `{"type": "action", "data": {"action":"reset_statuses", "robot_id":"1", "params":{"name": "test"}}, "clOrdId":"1"}`;  
+выключить все формулы: `{"type": "action", "data": {"action":"formulas_stop", "robot_id":"1", "params":{"name": "test"}}, "clOrdId":"1"}`;  
+включить все формулы: `{"type": "action", "data": {"action":"formulas_start", "robot_id":"1", "params":{"name": "test"}}, "clOrdId":"1"}`;  
+удалить портфель: `{"type": "action", "data": {"action":"del_portfolio", "robot_id":"1", "params":{"name": "test"}}, "clOrdId":"1"}`;  
+отключить портфель: `{"type": "action", "data": {"action":"enable", "robot_id":"1", "params":{"name": "test"}}, "clOrdId":"1"}`;  
+включить портфель: `{"type": "action", "data": {"action":"disable", "robot_id":"1", "params":{"name": "test"}}, "clOrdId":"1"}`;  
+включить торговлю: `{"type": "action", "data": {"action":"start", "robot_id":"1", "params":{"name": "test"}}, "clOrdId":"1"}`;  
+выключить торговлю: `{"type": "action", "data": {"action":"stop", "robot_id":"1", "params":{"name": "test"}}, "clOrdId":"1"}`;  
+удалить бумагу: `{"type": "action", "data": {"action":"del_sec", "robot_id":"1", "params":{"name": "test"}}, "clOrdId":"1"}`;  
+купить портфель: `{"type": "action", "data": {"action":"buy", "robot_id":"1", "params":{"name": "test", "amount": 1}}, "clOrdId":"1"}`;  
+продать портфель: `{"type": "action", "data": {"action":"sell", "robot_id":"1", "params":{"name": "test", "amount": 1}}, "clOrdId":"1"}`;  
+выставить заявку: `{"type": "action", "data": {"action":"order", "robot_id":"1", "params":{"name": "test", "amount": 1, "price": 10, "dir":1, "key": "VT_BTCUSD"}}, "clOrdId":"1"}`;  
+отключить портфель в базе данных: `{"type": "disable_portf_db", "data": {"robot_id":"1", "name":"trade"}, "clOrdId":"1"}`
+
+_Ответ:_
+
+```C
+{"type": "callback", "data": {},"clOrdId":"1", "ts":1646305072249112064, "result": "ok"}
+{"type": "callback", "data": {"text":""},"clOrdId":"1", "ts":1646305072249112064, "result": "error"}
+```
+
+### **10.2.7. Запрос истории**
+
+_Запрос:_
+
+запрос истории логов (хранится не более 5000 записей для каждого робота): `{"type":"g_log", "data":{"msg":"*Comp*", "levels":[1,2], "r_ids":[1,123,"132"], "lim":100, "mt":2000000000000000000}, "clOrdId": "1"}`;  
+запрос истории сделок: `("виртуальных" сделок хранится не более 5000 для каждого робота): {"type":"g_deal", "data":{"r_ids":[1,123,"132"], "names":["test"], "cns":["virtual"], "dir":1, "lim":100, "mt":2000000000000000000}, "clOrdId": "1"}`;  
+запрос истории "раздвижек" ("виртуальных" "раздвижек" хранится не более 5000 для каждого робота): `{"type":"g_trade", "data":{"r_ids":[1,123,"132"], "names":["test"], "virt":false, "dir":1, "lim":100, "mt":2000000000000000000}, "clOrdId": "1"}`.
+
+`lim` - максимальное количество записей в ответе (для минимального знаения времени может прийти несколько записей и в итоге записей будет больше, чем lim);  
+`mt` - макисимально время, которое включать в результирующий список;  
+`r_ids` - id роботов для фильтра;  
+`levels` - уровни логирования для фильтра;  
+`msg` - маска сообщения для фильтра;  
+`names` - имена потрфелей для фильтра;  
+`cns` - имена подключений для фильтра;  
+`dir` - направление сделок/"раздвижек" для фильтра (SELL = 1, BUY = 2);  
+`virt` - витруальные раздвижки для фильтра.
+
+_Ответ:_
+
+```C
+{"type": "callback", "data":{"logs":[{"r_id":1, "dt":1649926714000983040, "t":1649926714000027079, "level":1, "msg": "Compilation on \"test\" is OK"},{"r_id":123, "dt":1649849875001278720, "t":1649849875000057069, "level":1, "msg": "Compilation on \"test\" is OK"}]}, "ts":1650358372950324480, "clOrdId": "1", "result": "ok"}
+{"type": "callback", "data":{"deals":[{"r_id":1, "dt":1649849982000027125, "t":0, "name": "test", "cn": "virtual", "sec": "BTC", "buy_sell":1, "decimals":4, "ono":0, "quantity":1, "price":1.0, "id":-1996989120021058289},{"r_id":1, "dt":1649849981000033594, "t":0, "name": "test", "cn": "virtual", "sec": "BTC", "buy_sell":1, "decimals":4, "ono":0, "quantity":1, "price":1.0, "id":-5354657311403049795}]}, "ts":1650373191833740032, "clOrdId": "1", "result": "ok"}
+{"type": "callback", "data":{"trades":[{"r_id":1, "dt":1649849982000023566, "t":0, "name": "test", "virt":false, "tt": "", "buy_sell":1, "decimals":4, "is_sl":false, "quantity":2, "price":0.0, "id":-8613579682376322901},{"r_id":1, "dt":1649849981000029925, "t":0, "name": "test", "virt":false, "tt": "", "buy_sell":1, "decimals":4, "is_sl":false, "quantity":2, "price":0.0, "id":217072095785717187}]}, "ts":1650373410468841728, "clOrdId": "1", "result": "ok"}
+```
+
+`r_id` - id робота;  
+`dt` - время сделки/"раздвижки" для сравнения с mt (время бекенда);  
+`t` - время получения сделки/"раздвижки" роботом;  
+`level` - уровень логирования;  
+`msg` - сообщение;  
+`name` - имя портфеля;  
+`cn` - имя подключения;  
+`sec` - имя бумаги;  
+`buy_sell` - направление (SELL = 1, BUY = 2);  
+`decimals` - знаков после запятой в цене;  
+`ono` - уникальный для робота внутренний идентификатор заявки;  
+`quantity` - количество;  
+`price` - цена;  
+`id` - уникальный дял робота внутренний идентификатор записи;  
+`virt` - витруальная "раздвижка";  
+`tt` - сделки раздвижки в текстовом формате;  
+`is_sl` - переставлена по stop loss.
+
+### **10.2.8. Вычислить формулу**
+
+_Запрос:_
+
+```C
+{"type":"formula_test", "data":{"robot_id":1, "name":"test", "f_title":"Test f", "f_name":"trade_formula", "code":"return 2;", "sname": null}, "clOrdId": "1"}
+```
+
+_Ответ:_
+
+```C
+{"type": "callback", "data": {"val": 2, "warn": ""},"clOrdId":"1", "ts":1646305072249112064, "result": "ok"}
+{"type": "callback", "data": {"text":""},"clOrdId":"1", "ts":1646305072249112064, "result": "error"}
+```
+
+### **10.2.9. Вычислить среднюю "раздвижку"**
+
+_Запрос:_
+
+```C
+{"type":"calc_avg", "data":{"robot_id":1, "name":"test", "min_dt":1, "max_dt":2000000000}, "clOrdId": "1"}
+```
+
+_Ответ:_
+
+```C
+{"type":"callback","result":"ok","data":{"text":"HTML_TEXT"},"ts":1651230829184219136,"clOrdId":"1"}
+{"type":"callback","result":"error","data":{"text":"Can not calculate values"},"ts":1651230829184219136,"clOrdId":"1"}
+```
+
+### **10.2.10. Получить текущие цены используемых бумаг на маркет-дата подключении**
+
+_Запрос:_
+
+```C
+{"type": "get_subscribed_secs", "data": {"robot_id":"1", "name":"binancefut_listen", "sec_type":34359738368}, "clOrdId":"1"}
+```
+
+_Ответ:_
+
+```C
+{"type": "callback", "data": {"contracts": {"VT_BTC": {"sec_key": "VT_BTC"}}},"clOrdId":"1", "ts":1646305072249112064, "result": "ok"}
+{"type": "callback", "data": {"text":""},"clOrdId":"1", "ts":1646305072249112064, "result": "error"}
+```
+
+`step` -;  
+`sec_key` -;  
+`sec_key_subscr` -;  
+`sec_code` -;  
+`coin` -;  
+`bid` -;  
+`offer` -;  
+`decimals` -;  
+
+### **10.2.11. Операции администратора**
+
+_Запрос:_
+
+получить "следующий" id робота: `{"type": "next_robot_id", "clOrdId": "1"}`;  
+получить список пользователей: `{"type": "g_usr", "data": {"lim": 100, "of": 0, "email":"xxx", "pmss":[1], "srts": [ ["field1", "asc"], ["field2", "desc"], ["field3", "desc"] ]}, "clOrdId": "1"}`;  
+задать параметр робота: `{"type": "set_robot_field", "data": {"robot_id": "1", "k": "label", "v": "robot"}, "clOrdId": "1"}`;  
+задать параметр пользователя: `{"type": "e_usr", "data": {"email": "test@gmail.com", "k": "pms", "v": 9}, "clOrdId": "1"}`;  
+отправить письмо пользователям: `{"type": "send_mail", "data": {"robot_id": "1", "subj": "Subject", "text": "Text"}, "clOrdId": "1"}`  
+`{"type": "send_mail", "data": {"robot_id":["1", "2"], "subj": "Subject", "text": "Text"}, "clOrdId": "1"}`;  
+отправить письмо "ответственным": `{"type": "mail_to", "data": {"robot_id": "1", "subj": "Subject", "text": "Text"}, "clOrdId": "1"}`  
+`{"type": "mail_to", "data": {"robot_id":["1", "2"], "subj": "Subject", "text": "Text"}, "clOrdId": "1"}`
+
+_Ответ:_
+
+```C
+{"type": "callback", "data": {"robot_id":12},"clOrdId":"1", "ts":1646305072249112064, "result": "ok"}
+{"type": "callback", "data":{"usrs":[{"email": "admin@gmail.com", "ct":0, "pms":10, "tgr": "", "robots":[1]}]}, "ts":1650028809813630464, "clOrdId": "1", "result": "ok"}
+{"type": "callback", "data": {"email": "test@gmail.com", "pms": 9},"clOrdId":"1", "ts":1646305072249112064, "result": "ok"}
+{"type": "callback", "data": {},"clOrdId":"1", "ts":1646305072249112064, "result": "ok"}
+{"type": "callback", "data": {"text":""},"clOrdId":"1", "ts":1646305072249112064, "result": "error"}
+```
+
+`email` - имя пользователя (для g_usr маска имени);  
+`pmss` - список прав;  
+`srts` - список столбцов для сортировки, с указанием имени столбца и порядка сортировки;  
+`lim` - limit;  
+`of` - offset;  
+`ct` - дата регистрации пользователя;  
+`pms` - права;  
+`tgr` - телеграм id;  
+`robots` - список роботов;  
+`k` - имя ключа;  
+`v` - значение ключа.
+
+### **10.2.12. Операции над роботами**
+
+_Запрос:_
+
+добавить робота (только админ): `{"type": "add_robot", "data": {"robot_id":2, "robot_comment":"", "robot_name":"qwe", "expiration":2100000000, "max_trans_count":4, "log_days":3, "cpu":0, "cmd_params":"", "robot_type":"vikingrobot.centos8streamARM.vrb_crpt", "srv":"aws_tokyo_d_4", "ip":"172.18.29.253", "mail_to":"", "users":"r.liverovskiy@gmail.com", "shared":false, "for_all":false, "start":true, "save_hist":true}, "clOrdId": "1"}`;  
+удалить робота (только админ): `{"type": "del_robot", "data": {"robot_id":2}, "clOrdId": "1"}`;  
+выключить робота: `{"type": "stop_robot", "data": {"robot_id":2}, "clOrdId": "1"}`;  
+включить робота: `{"type": "start_robot", "data": {"robot_id":2}, "clOrdId": "1"}`;  
+перезапустить робота: `{"type": "restart_robot", "data": {"robot_id":2}, "clOrdId": "1"}`
+
+_Ответ:_
+
+```C
+{"type": "callback", "data": {},"clOrdId":"1", "ts":1646305072249112064, "result": "ok"}
+```
+
+`robot_id` - id робота;  
+`robot_comment` - комментарий;  
+`robot_name` - имя (может менять не только админ);  
+`expiration` - дата окончания лицензии;  
+`max_trans_count` - лимит транзакционных подключений;  
+`log_days` - сколько дней хранить логи;  
+`cpu` - ядро;  
+`cmd_params` - параметры командной строки для запуска;  
+`robot_type` - сборка;  
+`srv` - сервер;  
+`ip` - ip-адреса (строка через запятую);  
+`mail_to` - кому слать письма;  
+`users` - пользователи (строка через запятую);  
+`shared` - "шареный" робот;  
+`for_all` - робот доступен всем;  
+`start` - сразу включить робота;  
+`save_hist` - сохранять историю сделок в базу данных.
+
+### **10.2.13. Служебные операции**
+
+_Запрос:_
+
+получить настройки: `{"type": "g_str", "data": {"key":"auth"}, "clOrdId": "1"}`;  
+сохранить настройки: `{"type": "s_str", "data": {"key":"auth", "val":"123"}, "clOrdId": "1"}`;  
+разрешить доступ по API: `{"type": "enable_api", "data": {"api": true}, "clOrdId": "1"}`;  
+создать API ключ: `{"type": "api_key_create", "data": {}, "clOrdId": "1"}`.
+
+_Ответ:_
+
+```C
+{"type": "callback", "data": {"key":"auth", "val":"123"},"clOrdId":"1", "ts":1646305072249112064, "result": "ok"}
+{"type": "callback", "data": {},"clOrdId":"1", "ts":1646305072249112064, "result": "ok"}
+{"type": "callback", "data": {"key":"API_KEY"},"clOrdId":"1", "ts":1646305072249112064, "result": "ok"}
+{"type": "callback", "data": {"text":""},"clOrdId":"1", "ts":1646305072249112064, "result": "error"}
+```
+
+### **10.2.14. Статистика обработки тикетов**
+
+_Запрос:_
+
+запрос истории новых/открытых тикетов (только админ): `{"type": "g_tickets", "data":{"min_d": "2022-03-28", "max_d": "2022-04-27", "group":7}, "clOrdId": "1"}`;
+
+`min_d` - минимальная дата (включительно) для получения статистики, далее от это даты будут группироваться "пачки" по group дней (для group=7, min_d рекомендуется всегда задавать понедельником);  
+`max_d` - максимальная дата (НЕ включая) для получения статистики;  
+`group` - количество дней для группировки статистики.
+
+_Ответ:_
+
+```C
+{"type": "callback", "data":{"tickets":{"test@test.com":{"2022-03-28":{"not_solved":4, "created":3}, "2022-04-04":{"not_solved":3}}, "__summary__":{"2022-03-28":{"not_solved":4, "created":3}, "2022-04-04":{"not_solved":3}}}}, "ts":1651059246006788352, "clOrdId": "q0b", "result": "ok"}
+```
+
+`not_solved` - не решенных на конец периода группировки;  
+`created` - новых за данный период группировки;  
+`__summary__` - суммарные значения.
