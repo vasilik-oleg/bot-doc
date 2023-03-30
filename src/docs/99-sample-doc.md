@@ -141,8 +141,6 @@ ___
 	"eid": "qwerty"
 }
 ```
-<br/>
-<br/>
 
 <!-- Таблицы -->
 
@@ -153,9 +151,8 @@ ___
 | zebra stripes | are neat      |    $1 |
 
 > **ВНИМАНИЕ!!! Для построения таблиц лучше использвать сторонний ресурс: https://www.tablesgenerator.com/markdown_tables
-<br/>
-<br/>
 
+<br>
 <!-- Формулы -->
 $\sqrt{3x-1}+(1+x)^2$
 

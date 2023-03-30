@@ -703,7 +703,6 @@
 ### **7.2.2. MOEX spot and currencies**
 
 **MOEX ASTS ERRORS**
-
 (001) Message #%d sent  
 (065) Invalid market: %s  
 (071) Invalid board: %s  

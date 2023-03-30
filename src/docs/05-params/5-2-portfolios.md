@@ -54,7 +54,7 @@
 
 Видео объясняющее работу данного параметра:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/CfY5ZeS8aJM" title="Описание параметра Quote" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="735" height="415" src="https://www.youtube.com/embed/CfY5ZeS8aJM" title="Описание параметра Quote" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## **5.2.7. Order ID**
 
@@ -174,7 +174,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 Работа данных параметров наглядно продемонстрирована в этом видео:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/DxLdFeUU_bM" title="Описание параметра Lim-sell и Lim-buy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="735" height="415" src="https://www.youtube.com/embed/DxLdFeUU_bM" title="Описание параметра Lim-sell и Lim-buy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## **5.2.19. Trading signal shift**
 
@@ -187,7 +187,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 Видео объясняющее работу параметра `К`:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/2qUPvspTQq4" title="Описание параметра K" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="735" height="415" src="https://www.youtube.com/embed/2qUPvspTQq4" title="Описание параметра K" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### **5.2.19.2. ТР**
 
@@ -196,7 +196,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 Видео объясняющее работу параметра `ТР`:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/R2nuoUpGq9c" title="Описание параметра TP" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="735" height="415" src="https://www.youtube.com/embed/R2nuoUpGq9c" title="Описание параметра TP" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### **5.2.19.3. K1**
 
@@ -205,7 +205,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 Видео объясняющее работу параметра `К1`:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/nYSPQR2LFhE" title="Описание параметра K1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="735" height="415" src="https://www.youtube.com/embed/nYSPQR2LFhE" title="Описание параметра K1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### **5.2.19.4. K2**
 
@@ -215,7 +215,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 Видео объясняющее работу параметра К2:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/9RbN893_eD0" title="Описание параметра K2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="735" height="415" src="https://www.youtube.com/embed/9RbN893_eD0" title="Описание параметра K2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## **5.2.20. Limits timer**
 
@@ -330,7 +330,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 Наглядно продемонстрирована работа данных параметров в этом видео:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/p69X-3l-VLc" title="Описание параметра Sell Buy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="735" height="415" src="https://www.youtube.com/embed/p69X-3l-VLc" title="Описание параметра Sell Buy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## **5.2.40. Price_s/Price_b**
 
@@ -347,7 +347,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 Видео, наглядно объясняющее работу параметров `Price_s/Price_b`:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PKGbweKJbNE" title="Описание параметра Prices" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="735" height="415" src="https://www.youtube.com/embed/PKGbweKJbNE" title="Описание параметра Prices" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## **5.2.41. Sell/Buy status**
 
