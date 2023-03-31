@@ -1,14 +1,8 @@
-name: Sync Algolia
-
-on:
-  push:
-    branches:
-      - 'main'
-
+name: Build and Deploy
+on: [push]
 jobs:
-  algolia:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    name: Algolia Sync
     steps:
       - uses: actions/checkout@v2
 
@@ -16,4 +10,4 @@ jobs:
         with:
           algoliaId: 'GRBQWTRZK3'
           algoliaKey: '7d6295408b07d0fac47f9f4f4082d107'
-          algoliaIndex: 'test_viking'
+          algoliaIndex: 'test_viking2'
