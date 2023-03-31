@@ -1,15 +1,19 @@
-name: Build and Deploy
-on: [push]
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@master
+name: Sync Algolia
 
-    - name: vuepress-deploy
-      uses: jenkey2011/vuepress-deploy@master
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BUILD_SCRIPT: yarn && yarn build
-        BUILD_DIR: src/.vuepress/dist/
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  algolia:
+    runs-on: ubuntu-latest
+    name: Algolia Sync
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: opstrace/algolia-docs-sync@v1.0.2
+        with:
+          algoliaId: 'GRBQWTRZK3'
+          algoliaKey: '7d6295408b07d0fac47f9f4f4082d107'
+          algoliaIndex: 'test_viking'
