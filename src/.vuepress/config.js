@@ -43,7 +43,8 @@ module.exports = {
       searchParameters: {
         queryLanguages: ['en', 'ru'],
         ignorePlurals: true,
-        advancedSyntax: true
+        advancedSyntax: true,
+        hitsPerPage: 10
       }
     },
     nav: [
