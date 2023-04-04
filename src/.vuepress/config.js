@@ -40,6 +40,12 @@ module.exports = {
       indexName: 'test_viking2',
       // If Algolia did not provided you any `appId`, use `BH4D9OD16A` or remove this option
       appId: 'GRBQWTRZK3',
+      searchParameters: {
+        queryLanguages: ['en', 'ru'],
+        ignorePlurals: true,
+        advancedSyntax: true,
+        hitsPerPage: 10
+      }
     },
     nav: [
       {
