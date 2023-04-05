@@ -364,7 +364,7 @@ _Ответ:_
 {"type": "last_callback", "ts":1646305072249112064, "clOrdId": "2"}
 ```
 
-`type` - всегда last_callback`.
+`type` - всегда `last_callback`.
 
 ## **10.2. Запросы**
 
