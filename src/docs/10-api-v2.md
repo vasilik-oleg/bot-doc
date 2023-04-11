@@ -54,7 +54,7 @@ _Ответ (снапшот):_
 `for_all` - робот доступный всем (только для админа);  
 `cmd_params` - параметры запуска (только для админа);  
 `mail_to` - отправлить сообщение на почты(только для админа);  
-`users` - пользователи робота (только для админа);  
+`users` - пользователи робота (только для админа).  
 
 _Обновления (приходит только id робота, имя портфеля и бумаги или ключ подключения, и то что обновилось):_
 
@@ -431,17 +431,17 @@ _Ответ:_
 
 _Запрос:_
 
-отключить маркет-дата подключение: `{"type": "action", "data": {"action":"disable_conn", "robot_id":"1", "name":"binancefut_listen", "sec_type":34359738368},"clOrdId":"1"}`  
-включить маркет-дата подключение: `{"type": "action", "data": {"action":"enable_conn", "robot_id":"1", "name":"binancefut_listen", "sec_type":34359738368},"clOrdId":"1"}`  
-отключить транзакционное подключение: `{"type": "action", "data": {"action":"disable_trans_conn", "robot_id":"1", "name":"trade", "sec_type":34359738368},"clOrdId":"1"}`  
-включить транзакционное подключение: `{"type": "action", "data": {"action":"enable_trans_conn", "robot_id":"1", "name":"trade", "sec_type":34359738368},"clOrdId":"1"}`  
-переподключить маркет-дата подключение: `{"type": "action", "data": {"action":"reconnect_data", "robot_id":"1", "name":"binancefut_listen", "sec_type":34359738368},"clOrdId":"1"}`  
-переподключить транзакционное подключение: `{"type": "action", "data": {"action":"reconnect_trans", "robot_id":"1", "name":"trade", "sec_type":34359738368},"clOrdId":"1"}`  
-удалить транзакционное подключение: `{"type": "action", "data": {"action":"del_trans", "robot_id":"1", "name":"trade", "sec_type":34359738368}, "clOrdId":"1"}`  
-проверить используется ли в роботе транзакционное подключение: `{"type": "action", "data": {"action":"is_used_trans", "robot_id":"1", "name":"trade", "sec_type":34359738368}, "clOrdId":"1"}`  
-удалить транзакционное подключение из базы данных: `{"type": "del_conn_db", "data": {"robot_id":"1", "name":"trade", "sec_type":34359738368}, "clOrdId":"1"}`  
-добавить транзакционное подключение (можно только с сайта): `{"type": "action", "data":{"robot_id":1, "action": "add_trans", "sec_type":34359738368, "name": "test", "ckey": "", "orig": "encoded_params_string","settings":{},"defaults":{}}, "clOrdId": "1"}`  
-редактировать транзакционное подключение (можно только с сайта): `{"type": "action", "data":{"robot_id":1, "action": "edit_trans", "sec_type":34359738368, "name": "test", "ckey": "", "orig": "encoded_params_string","settings":{},"defaults":{}}, "clOrdId": "1"}`
+отключить маркет-дата подключение: `{"type": "action", "data": {"action":"disable_conn", "robot_id":"1", "name":"binancefut_listen", "sec_type":34359738368},"clOrdId":"1"}`;  
+включить маркет-дата подключение: `{"type": "action", "data": {"action":"enable_conn", "robot_id":"1", "name":"binancefut_listen", "sec_type":34359738368},"clOrdId":"1"}`;  
+отключить транзакционное подключение: `{"type": "action", "data": {"action":"disable_trans_conn", "robot_id":"1", "name":"trade", "sec_type":34359738368},"clOrdId":"1"}`;  
+включить транзакционное подключение: `{"type": "action", "data": {"action":"enable_trans_conn", "robot_id":"1", "name":"trade", "sec_type":34359738368},"clOrdId":"1"}`;  
+переподключить маркет-дата подключение: `{"type": "action", "data": {"action":"reconnect_data", "robot_id":"1", "name":"binancefut_listen", "sec_type":34359738368},"clOrdId":"1"}`;  
+переподключить транзакционное подключение: `{"type": "action", "data": {"action":"reconnect_trans", "robot_id":"1", "name":"trade", "sec_type":34359738368},"clOrdId":"1"}`;  
+удалить транзакционное подключение: `{"type": "action", "data": {"action":"del_trans", "robot_id":"1", "name":"trade", "sec_type":34359738368}, "clOrdId":"1"}`;  
+проверить используется ли в роботе транзакционное подключение: `{"type": "action", "data": {"action":"is_used_trans", "robot_id":"1", "name":"trade", "sec_type":34359738368}, "clOrdId":"1"}`;  
+удалить транзакционное подключение из базы данных: `{"type": "del_conn_db", "data": {"robot_id":"1", "name":"trade", "sec_type":34359738368}, "clOrdId":"1"}`;  
+добавить транзакционное подключение (можно только с сайта): `{"type": "action", "data":{"robot_id":1, "action": "add_trans", "sec_type":34359738368, "name": "test", "ckey": "", "orig": "encoded_params_string","settings":{},"defaults":{}}, "clOrdId": "1"}`;  
+редактировать транзакционное подключение (можно только с сайта): `{"type": "action", "data":{"robot_id":1, "action": "edit_trans", "sec_type":34359738368, "name": "test", "ckey": "", "orig": "encoded_params_string","settings":{},"defaults":{}}, "clOrdId": "1"}`.
 
 `robot_id` - id-робота;  
 `sec_type` - тип подключения;  
@@ -449,7 +449,7 @@ _Запрос:_
 `c_key` - закодированная часть ключа подключения;  
 `orig` - переведенный в строку и сжатый словарь изначально настроенных пользователем параметров (нужен для редактирования подключения);  
 `settings` - словарь настраиваемых пользователем параметров подключения;  
-`defaults` - словарь неизменяемых параметров подключения;  
+`defaults` - словарь неизменяемых параметров подключения.  
 
 _Ответ:_
 
@@ -494,7 +494,7 @@ _Запрос:_
 купить портфель: `{"type": "action", "data": {"action":"buy", "robot_id":"1", "params":{"name": "test", "amount": 1}}, "clOrdId":"1"}`;  
 продать портфель: `{"type": "action", "data": {"action":"sell", "robot_id":"1", "params":{"name": "test", "amount": 1}}, "clOrdId":"1"}`;  
 выставить заявку: `{"type": "action", "data": {"action":"order", "robot_id":"1", "params":{"name": "test", "amount": 1, "price": 10, "dir":1, "key": "VT_BTCUSD"}}, "clOrdId":"1"}`;  
-отключить портфель в базе данных: `{"type": "disable_portf_db", "data": {"robot_id":"1", "name":"trade"}, "clOrdId":"1"}`
+отключить портфель в базе данных: `{"type": "disable_portf_db", "data": {"robot_id":"1", "name":"trade"}, "clOrdId":"1"}`.
 
 _Ответ:_
 
@@ -609,10 +609,10 @@ _Запрос:_
 получить список пользователей: `{"type": "g_usr", "data": {"lim": 100, "of": 0, "email":"xxx", "pmss":[1], "srts": [ ["field1", "asc"], ["field2", "desc"], ["field3", "desc"] ]}, "clOrdId": "1"}`;  
 задать параметр робота: `{"type": "set_robot_field", "data": {"robot_id": "1", "k": "label", "v": "robot"}, "clOrdId": "1"}`;  
 задать параметр пользователя: `{"type": "e_usr", "data": {"email": "test@gmail.com", "k": "pms", "v": 9}, "clOrdId": "1"}`;  
-отправить письмо пользователям: `{"type": "send_mail", "data": {"robot_id": "1", "subj": "Subject", "text": "Text"}, "clOrdId": "1"}`  
+отправить письмо пользователям: `{"type": "send_mail", "data": {"robot_id": "1", "subj": "Subject", "text": "Text"}, "clOrdId": "1"}`;  
 `{"type": "send_mail", "data": {"robot_id":["1", "2"], "subj": "Subject", "text": "Text"}, "clOrdId": "1"}`;  
 отправить письмо "ответственным": `{"type": "mail_to", "data": {"robot_id": "1", "subj": "Subject", "text": "Text"}, "clOrdId": "1"}`  
-`{"type": "mail_to", "data": {"robot_id":["1", "2"], "subj": "Subject", "text": "Text"}, "clOrdId": "1"}`
+`{"type": "mail_to", "data": {"robot_id":["1", "2"], "subj": "Subject", "text": "Text"}, "clOrdId": "1"}`.
 
 _Ответ:_
 
@@ -644,7 +644,7 @@ _Запрос:_
 удалить робота (только админ): `{"type": "del_robot", "data": {"robot_id":2}, "clOrdId": "1"}`;  
 выключить робота: `{"type": "stop_robot", "data": {"robot_id":2}, "clOrdId": "1"}`;  
 включить робота: `{"type": "start_robot", "data": {"robot_id":2}, "clOrdId": "1"}`;  
-перезапустить робота: `{"type": "restart_robot", "data": {"robot_id":2}, "clOrdId": "1"}`
+перезапустить робота: `{"type": "restart_robot", "data": {"robot_id":2}, "clOrdId": "1"}`.
 
 _Ответ:_
 
@@ -692,7 +692,7 @@ _Ответ:_
 
 _Запрос:_
 
-запрос истории новых/открытых тикетов (только админ): `{"type": "g_tickets", "data":{"min_d": "2022-03-28", "max_d": "2022-04-27", "group":7}, "clOrdId": "1"}`;
+запрос истории новых/открытых тикетов (только админ): `{"type": "g_tickets", "data":{"min_d": "2022-03-28", "max_d": "2022-04-27", "group":7}, "clOrdId": "1"}`.
 
 `min_d` - минимальная дата (включительно) для получения статистики, далее от это даты будут группироваться "пачки" по group дней (для group=7, min_d рекомендуется всегда задавать понедельником);  
 `max_d` - максимальная дата (НЕ включая) для получения статистики;  
