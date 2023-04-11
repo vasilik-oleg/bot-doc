@@ -8,7 +8,7 @@
 
 Уникальный идентификатор инструмента. Соответствует параметру инструментов портфеля [SecKey](https://milman-by.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-1-seckey). Нередактируемый параметр.
 
-#### 5.5.1.2. SecCode
+### 5.5.1.2. SecCode
 
 Код инструмента. Соответствует параметру инструментов портфеля [SecCode](https://milman-by.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-3-seccode). Нередактируемый параметр.
 
