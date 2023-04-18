@@ -81,6 +81,7 @@ _Ответ (снапшот):_
 `snapshot` - означает снапшот это или обновление.
 
 _Обновления (приходит только ключ и то что обновилось):_
+
 ```C
 
 {"type": "callback", "clOrdId": "2", "data": {"trans_conns": [{"sec_type": 268435456, "name": "1", "full_name": "cryptofacilities_send_1", "coin_pos": {"f-xbt:usd": {"pos": 4.8869037444}}}], "snapshot": false},"ts":1624516437000000123}
