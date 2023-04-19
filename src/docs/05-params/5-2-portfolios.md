@@ -46,6 +46,8 @@
 
 ![Alt text](../00-img/5-2-5.jpg)
 
+$Count \times Percent \; of \; quantity \times 0.01 \times \begin{cases} v\_in\_left, & \mbox{if } open \; pos \\ v\_out\_left, & \mbox{if } close \; pos \end{cases}$,
+
 - `Orderbook+filter` - аналогично Orderbook, но вычитать из набираемого объема цены своих заявок (если на соответствующих ценах присутствуют свои заявки).
 
 ## **5.2.6. Quote**
@@ -334,8 +336,8 @@ Mult<sub>i</sub> - Fin res multiplier инструмента портфеля.
 
 ## **5.2.40. Price_s/Price_b**
 
-`Price_s` – цена выставления заявки на продажу по [Is first 5.3.11]() бумаге, вычисляется как обратная функция для [Sell 5.2.39](), где цена [Sell 5.2.39]() заменяется на [Lim_Sell 5.2.18](). Нередактируемый параметр.  
-`Price_b` – цена выставления заявки на покупку по [Is first 5.3.11]() бумаге, вычисляется как обратная функция для [Buy 5.2.39](), где цена [Buy 5.2.39]() заменяется на [Lim_Buy 5.2.18](). Нередактируемый параметр.
+`Price_s` – цена выставления заявки на продажу по [Is first 5.3.11](https://milman-by.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-11-is-first) бумаге, вычисляется как обратная функция для [Sell 5.2.39](https://milman-by.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-39-sell-buy), где цена [Sell 5.2.39](https://milman-by.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-39-sell-buy) заменяется на [Lim_Sell 5.2.18](https://milman-by.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-18-lim-sell-lim-buy). Нередактируемый параметр.  
+`Price_b` – цена выставления заявки на покупку по [Is first 5.3.11](https://milman-by.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-11-is-first) бумаге, вычисляется как обратная функция для [Buy 5.2.39](https://milman-by.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-39-sell-buy), где цена [Buy 5.2.39](https://milman-by.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-39-sell-buy) заменяется на [Lim_Buy 5.2.18](https://milman-by.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-18-lim-sell-lim-buy). Нередактируемый параметр.
 
 Формулы расчета `Price_s` и `Price_b` для двух бумаг:
 
