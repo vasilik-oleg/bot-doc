@@ -46,7 +46,9 @@
 
 ![Alt text](../00-img/5-2-5.jpg)
 
-$Count \times Percent \; of \; quantity \times 0.01 \times \begin{cases} v\_in\_left, & \mbox{if } open \; pos \\ v\_out\_left, & \mbox{if } close \; pos \end{cases}$,
+$$
+Count \times Percent \; of \; quantity \times 0.01 \times \begin{cases} v\_in\_left, & \mbox{if } open \; pos \\ v\_out\_left, & \mbox{if } close \; pos \end{cases}
+$$
 
 - `Orderbook+filter` - аналогично Orderbook, но вычитать из набираемого объема цены своих заявок (если на соответствующих ценах присутствуют свои заявки).
 
