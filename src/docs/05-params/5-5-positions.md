@@ -6,11 +6,11 @@
 
 ### **5.5.1.1. SecKey**
 
-Уникальный идентификатор инструмента. Соответствует параметру инструментов портфеля [SecKey](https://milman-by.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-1-seckey). Нередактируемый параметр.
+Уникальный идентификатор инструмента. Соответствует параметру инструментов портфеля [SecKey](https://fkviking.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-1-seckey). Нередактируемый параметр.
 
 ### 5.5.1.2. SecCode
 
-Код инструмента. Соответствует параметру инструментов портфеля [SecCode](https://milman-by.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-3-seccode). Нередактируемый параметр.
+Код инструмента. Соответствует параметру инструментов портфеля [SecCode](https://fkviking.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-3-seccode). Нередактируемый параметр.
 
 ### **5.5.1.3. Pos**
 
