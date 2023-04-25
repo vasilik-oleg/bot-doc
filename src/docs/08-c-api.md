@@ -7,8 +7,8 @@
 1. Portfolios -> "Название портфеля" -> Formulas;
 2. Portfolios -> "Название портфеля" -> "Название инструмента" -> Formulas;
 
-В первом случае будут отображены поля Trade formula](https://milman-by.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-32-trade-formula), [Extra field#1](https://milman-by.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2) и [Extra field#2](https://milman-by.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2).
-Во втором [Count formula](https://milman-by.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-9-count-formula), [Ratio buy formula](https://milman-by.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-28-ratio-buy-formula), [Ratio sell formula](https://milman-by.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-29-ratio-sell-formula).
+В первом случае будут отображены поля Trade formula](https://fkviking.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-32-trade-formula), [Extra field#1](https://fkviking.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2) и [Extra field#2](https://fkviking.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2).
+Во втором [Count formula](https://fkviking.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-9-count-formula), [Ratio buy formula](https://fkviking.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-28-ratio-buy-formula), [Ratio sell formula](https://fkviking.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-29-ratio-sell-formula).
 
 В редакторе формул существует возможность тестового выполнения выбранной формулы (кнопка `Test`), при этом на момент вычисления формулы создаётся временная копия портфеля, НО если вы в формуле изменяете значения полей портфеля, и у вас существует портфель с тем же именем, то изменения применятся к этому порфтелю.
 
@@ -30,8 +30,8 @@
 
 | Функция                                                 | Описание                                                                                                                    |
 |---------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| struct security get_security(const std::string& s)      | получить инструмент по его [SecKey](https://milman-by.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-1-seckey) s |
-| struct security get_security(const char* s)             | получить инструмент по его [SecKey](https://milman-by.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-1-seckey) s |
+| struct security get_security(const std::string& s)      | получить инструмент по его [SecKey](https://fkviking.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-1-seckey) s |
+| struct security get_security(const char* s)             | получить инструмент по его [SecKey](https://fkviking.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-1-seckey) s |
 | struct security get_security()                          | получить инструмент, соответствующий главной бумаге текущего портфеля                                                       |
 | struct security get_security(const security_fields& sf) | получить инструмент, соответствующий заданной бумаге портфеля                                                               |
 
@@ -99,9 +99,9 @@
 
 | Функция                                                                                | Описание                                                  |
 |----------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| struct security_fields get_security_fields(const std::string& p, const std::string& s) | получить бумагу портфеля с именем p с [SecKey 5.3.1.]() s |
+| struct security_fields get_security_fields(const std::string& p, const std::string& s) | получить бумагу портфеля с именем p с [SecKey 5.3.1.](https://fkviking.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-1-seckey) s |
 | struct security_fields get_security_fields()                                           | получить главную бумагу текущего портфеля                 |
-| struct security_fields get_security_fields(const std::string& s)                       | получить бумагу текущего портфеля с [SecKey 5.3.1.]() s   |
+| struct security_fields get_security_fields(const std::string& s)                       | получить бумагу текущего портфеля с [SecKey 5.3.1.](https://fkviking.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-1-seckey) s   |
 
 Методы `security_fields`:
 
@@ -711,40 +711,40 @@ return -s.bid() + price;
 теперь значения переменной `price` при расчете каждого из параметров будут новыми значениями для `Buy` и `Sell`. Хочется отметить, что без использования `Ratio formula` такое "хитрое" значение получить бы не удалось.
 ___
 
-Рассмотрим еще один пример. Пусть имеется портфель с именем "test" и в этом портфеле есть два инструмента: фьючерс на доллар "SiH6", направление торговли этого инструмента `On buy = Buy` и он является [Is first]() и фьючерс на индекс РТС "RIH6", направление торговли этого инструмента тоже `On buy = Buy` (для примера направление не [Is first]() инструмента значения не имеет). Для того чтобы использовать эти два инструмента в одном портфеле нужно привести их цены в пунктах к одной размерности, как известно, доллар торгуется в рублях (1 : pt = 1 rub), а вот индекс торгуется не в рублях, для него 1 pt = 0.02 * `$`<sub>price</sub> rub (где `$`<sub>price</sub> - это курс доллара в рублях, но это не константа, а динамически изменяющаяся величина). Есть два варианта решения поставленной задачи, оба реализуемы только с использованием `Ratio formula` и оба приводят к абсолютно одинаковому результату. Вот они:
+Рассмотрим еще один пример. Пусть имеется портфель с именем "test" и в этом портфеле есть два инструмента: фьючерс на доллар "SiH6", направление торговли этого инструмента `On buy = Buy` и он является [Is first](https://fkviking.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-11-is-first) и фьючерс на индекс РТС "RIH6", направление торговли этого инструмента тоже `On buy = Buy` (для примера направление не [Is first](https://fkviking.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-11-is-first) инструмента значения не имеет). Для того чтобы использовать эти два инструмента в одном портфеле нужно привести их цены в пунктах к одной размерности, как известно, доллар торгуется в рублях (1 : pt = 1 rub), а вот индекс торгуется не в рублях, для него 1 pt = 0.02 * `$`<sub>price</sub> rub (где `$`<sub>price</sub> - это курс доллара в рублях, но это не константа, а динамически изменяющаяся величина). Есть два варианта решения поставленной задачи, оба реализуемы только с использованием `Ratio formula` и оба приводят к абсолютно одинаковому результату. Вот они:
 
 1. Для доллара просто зададим `Ratio` = 1, а вот для индекса РТС выберем `Ratio sign = "×"`, а в Ratio buy formula напишем следующее:
 
-```C
-security s = get_security("SiH6");
-return (0.02 * s.offer() * 0.001);
-```
+    ```C
+    security s = get_security("SiH6");
+    return (0.02 * s.offer() * 0.001);
+    ```
 
-в `Ratio sell formula` напишем следующее:
+    в `Ratio sell formula` напишем следующее:
 
-```C
-security s = get_security("SiH6");
-return (0.02 * s.bid() * 0.001);
-```
+    ```C
+    security s = get_security("SiH6");
+    return (0.02 * s.bid() * 0.001);
+    ```
 
-таким образом при расчете `Buy` мы будем использовать бид доллара, а при расчете `Sell` - его оффер, и величину получим в рублях.
+    таким образом при расчете `Buy` мы будем использовать бид доллара, а при расчете `Sell` - его оффер, и величину получим в рублях.
 
 2. Для доллара просто зададим `Ratio` = 1, а вот для индекса РТС выберем `Ratio sign = "+"`, а в `Ratio buy formula` напишем следующее (вначале обнулим значение, как в предыдущем примере, а затем зададим новое):
 
-```C
-security s1 = get_security("SiH6");
-security s2 = get_security("RIH6");
-double price = s2.offer() * 0.02 * s1.offer() * 0.001;
-return -s2.offer() + price;
-```
+    ```C
+    security s1 = get_security("SiH6");
+    security s2 = get_security("RIH6");
+    double price = s2.offer() * 0.02 * s1.offer() * 0.001;
+    return -s2.offer() + price;
+    ```
 
-в `Ratio sell formula` напишем следующее:
+    в `Ratio sell formula` напишем следующее:
 
-```C
-security s1 = get_security("SiH6");
-security s2 = get_security("RIH6");
-double price = s2.bid() * 0.02 * s1.bid() * 0.001;
-return -s2.bid() + price;
-```
+    ```C
+    security s1 = get_security("SiH6");
+    security s2 = get_security("RIH6");
+    double price = s2.bid() * 0.02 * s1.bid() * 0.001;
+    return -s2.bid() + price;
+    ```
 
-теперь значения переменной price и будут новыми значениями (так сказать, со стороны индекса РТС), используемыми для расчета `Buy` и `Sell`, соответственно.
+    теперь значения переменной price и будут новыми значениями (так сказать, со стороны индекса РТС), используемыми для расчета `Buy` и `Sell`, соответственно.

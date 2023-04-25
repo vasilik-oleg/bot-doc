@@ -1,6 +1,6 @@
 # **5.4. Параметры уведомлений**
 
-Робот умеет уведомлять пользователя о наступлении определенных условий. Например, при резком падении финансового результата. Так как понятие "резкое падение" сильно зависит от выбранной стратегии и настроек портфеля, то для каждого портфеля настройки уведомлений задаются отдельно. Кроме чисто сигнальной функции некоторые уведомления могут выключать торговлю по соответствующему портфелю. При наступлении соответствующего условия, уведомление появляется в браузере, а так же в telegram-боте, если он подключен и настроен. Также существуют уведомления, которые настраиваются для конкретного транзакционного подключения к бирже, они описаны в разделе [Параметры позиций](https://milman-by.github.io/bot-doc/docs/05-params/5-5-positions.html#_5-5-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D1%8B-%D0%BF%D0%BE%D0%B7%D0%B8%D1%86%D0%B8%D0%B8).
+Робот умеет уведомлять пользователя о наступлении определенных условий. Например, при резком падении финансового результата. Так как понятие "резкое падение" сильно зависит от выбранной стратегии и настроек портфеля, то для каждого портфеля настройки уведомлений задаются отдельно. Кроме чисто сигнальной функции некоторые уведомления могут выключать торговлю по соответствующему портфелю. При наступлении соответствующего условия, уведомление появляется в браузере, а так же в telegram-боте, если он подключен и настроен. Также существуют уведомления, которые настраиваются для конкретного транзакционного подключения к бирже, они описаны в разделе [Параметры позиций](https://fkviking.github.io/bot-doc/docs/05-params/5-5-positions.html#_5-5-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D1%8B-%D0%BF%D0%BE%D0%B7%D0%B8%D1%86%D0%B8%D0%B8).
 
 ## **5.4.1. FinRes fall**
 
@@ -20,29 +20,29 @@
 
 ## **5.4.2. Lim_Sell change и Lim_Buy change**
 
-Уведомлять об изменении [Lim_Sell/Lim_Buy](https://milman-by.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-18-lim-sell-lim-buy) портфеля за `Time` секунд больше, чем на `Value`:
+Уведомлять об изменении [Lim_Sell/Lim_Buy](https://fkviking.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-18-lim-sell-lim-buy) портфеля за `Time` секунд больше, чем на `Value`:
 
-- `Time (sec)` - период времени в секундах, не чаще, чем с указанной периодичностью, будет обновляться "эталонный" [Lim_Sell/Lim_Buy](https://milman-by.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-18-lim-sell-lim-buy);
-- `Value` - сигнальное значение изменения [Lim_Sell/Lim_Buy](https://milman-by.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-18-lim-sell-lim-buy);
+- `Time (sec)` - период времени в секундах, не чаще, чем с указанной периодичностью, будет обновляться "эталонный" [Lim_Sell/Lim_Buy](https://fkviking.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-18-lim-sell-lim-buy);
+- `Value` - сигнальное значение изменения [Lim_Sell/Lim_Buy](https://fkviking.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-18-lim-sell-lim-buy);
 - `Stop trading` - вместе с уведомлением выключить торговлю по портфелю (расписание также будет выключено).
 
 ## **5.4.3. Severe sell change и Severe buy change**
 
-Уведомлять о "резком" изменении [Sell/Buy](https://milman-by.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-39-sell-buy) портфеля (`≥Value`) за `Time` секунд (только когда портфель включен):
+Уведомлять о "резком" изменении [Sell/Buy](https://fkviking.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-39-sell-buy) портфеля (`≥Value`) за `Time` секунд (только когда портфель включен):
 
-- `Time (sec)` - период времени, за который считать изменение [Sell/Buy](https://milman-by.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-39-sell-buy) (откладывается назад от текущего времени) как разницу между текущим `Sell/Buy` и `Sell/Buy Time` секунд назад;
-- `Value` - сигнальное значение изменения [Sell/Buy](https://milman-by.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-39-sell-buy).
+- `Time (sec)` - период времени, за который считать изменение [Sell/Buy](https://fkviking.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-39-sell-buy) (откладывается назад от текущего времени) как разницу между текущим `Sell/Buy` и `Sell/Buy Time` секунд назад;
+- `Value` - сигнальное значение изменения [Sell/Buy](https://fkviking.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-39-sell-buy).
 
 ## **5.4.4. Too much running orders**
 
-Уведомлять о слишком большом количестве активных заявок по не [Is first](https://milman-by.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-11-is-first) инструментам портфеля
+Уведомлять о слишком большом количестве активных заявок по не [Is first](https://fkviking.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-11-is-first) инструментам портфеля
 `(max (число активных заявок по каждому из не Is first инструментов портфеля) ≥ Percent * Max not hedged * 0.01, где Max not hedged по умолчанию равен 30)`:  
 
 - `Percent (%)` - сигнальный процент.
 
 ## **5.4.5. Too much not hedged**
 
-Уведомлять о слишком большой не захеджированной позиции по [Is first](https://milman-by.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-11-is-first) инструменту портфеля:
+Уведомлять о слишком большой не захеджированной позиции по [Is first](https://fkviking.github.io/bot-doc/docs/05-params/5-3-securities.html#_5-3-11-is-first) инструменту портфеля:
 
 - `Limit portfolios` - сигнальное значение не захеджированной позиции (вычисляется в штуках портфелей).
 
