@@ -31,10 +31,10 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
-    logo: '/vkg_logo.svg',
+    logo: '/images/vkg_logo.svg',
     repo: '',
     head: [
-      ['link', { rel: 'icon', href: '/favicon.ico' }]
+      ['link', { rel: 'icon', href: '/bot-doc/favicon.ico' }]
     ],
     editLinks: false,
     docsDir: 'docs',

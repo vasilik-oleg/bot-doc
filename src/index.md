@@ -1,15 +1,18 @@
 ---
+
 home: true
-#heroImage: https://v1.vuepress.vuejs.org/hero.png
-heroText: Hero Title
+
+heroText: Арбитражный робот ФК "Викинг"
 actionText: Введение →
 actionLink: /docs/02-introduction.html
+heroImage: /images/chart-main.svg
 features:
-- title: Simplicity First
-  details: Minimal setup with markdown-centered project structure helps you focus on writing.
-- title: Vue-Powered
-  details: Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.
-- title: Performant
-  details: VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.
-footer: MIT Licensed | Copyright © 2018-present Evan You
+- title: Торговый алгоритм
+  details: Логика работы, описание параметров портфеля и инструмента
+- title: Формулы на C++
+  details: Виды формул, доступ к биржевым данным, к данным порфеля, доступ к изменению параметров портфеля и бумаг
+- title: WebSocket API
+  details: Описание методов API для управления портфелями и роботами
+
+footer: ФК Викинг | Copyright © 2010-2023
 ---
