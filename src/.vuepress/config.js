@@ -1,4 +1,5 @@
 const { description } = require('../../package')
+const path = require('path');
 
 module.exports = {
   /**
@@ -9,7 +10,7 @@ module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
-  description: description,
+  description: "Руководство пользователя, описание алгоритма и API",
 
   /**
    * Extra tags to be injected to the page HTML `<head>`
@@ -21,7 +22,8 @@ module.exports = {
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css' }],
-    ['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/github-markdown-css/2.2.1/github-markdown.css' }]
+    ['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/github-markdown-css/2.2.1/github-markdown.css' }],
+    ['link', { rel: 'icon', href: '/favicon.ico' }]
   ],
 
   /**
@@ -30,6 +32,7 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
+    logo: '/images/vkg_logo.svg',
     repo: '',
     editLinks: false,
     docsDir: 'docs',
@@ -62,29 +65,13 @@ module.exports = {
             '02-introduction',
             '03-getting-started',
             '04-creating-connection',
-            {
-              title: '5. Описание параметров',
-              children: [
-                '05-params/5-1-connections.md',
-                '05-params/5-2-portfolios.md',
-                '05-params/5-3-securities.md',
-                '05-params/5-4-notifications.md',
-                '05-params/5-5-positions.md',
-              ]
-            },
+            '05-params-description',
             '06-algorithm-comments',
             '07-order-error',
             '08-c-api',
             '09-api-v1',
             '10-api-v2',
-            '11-faq',
-            {
-              title: '12. API Фронта 2.0',
-              children: [
-                '12-api-v3/authorization-firebase.md'
-              ]
-            },
-            '99-sample-doc'
+            '11-faq'
           ]
         }
       ],
@@ -104,5 +91,12 @@ module.exports = {
   plugins: [
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
-  ]
+  ],
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@images': path.resolve(__dirname, '../00-img'),
+      }
+    }
+  }
 }
