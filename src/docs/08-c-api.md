@@ -5,7 +5,7 @@
 Редактировать формулы на C++ вы можете во вкладке `Formulas`, которая находится в дереве по пути:
 
 1. Portfolios -> "Название портфеля" -> Formulas;
-2. Portfolios -> "Название портфеля" -> "Название инструмента" -> Formulas;
+2. Portfolios -> "Название портфеля" -> "Название инструмента" -> Formulas.
 
 <<<<<<< HEAD
 В первом случае будут отображены поля [Trade formula](https://fkviking.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-32-trade-formula), [Extra field#1](https://fkviking.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2) и [Extra field#2](https://fkviking.github.io/bot-doc/docs/05-params/5-2-portfolios.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2).
