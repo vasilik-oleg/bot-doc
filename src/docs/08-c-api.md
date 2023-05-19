@@ -7,7 +7,7 @@
 1. Portfolios -> "Название портфеля" -> Formulas;
 2. Portfolios -> "Название портфеля" -> "Название инструмента" -> Formulas.
 
-В первом случае будут отображены поля {Trade formula](/docs/05-params-description.html#_5-2-32-trade-formula), [Extra field#1](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2) и [Extra field#2](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2).
+В первом случае будут отображены поля [Trade formula](/docs/05-params-description.html#_5-2-32-trade-formula), [Extra field#1](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2) и [Extra field#2](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2).
 Во втором [Count formula](/docs/05-params-description.html#_5-3-9-count-formula), [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula), [Ratio sell formula](/docs/05-params-description.html#_5-3-29-ratio-sell-formula).
 
 В редакторе формул существует возможность тестового выполнения выбранной формулы (кнопка `Test`), при этом на момент вычисления формулы создаётся временная копия портфеля, НО если вы в формуле изменяете значения полей портфеля, и у вас существует портфель с тем же именем, то изменения применятся к этому порфтелю.
