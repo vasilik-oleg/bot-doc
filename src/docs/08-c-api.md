@@ -47,12 +47,12 @@
 | double exp_date()               | дата экспирации, в формате epoch                 |
 | double strike()                 | цена страйк, есть только у опционов              |
 | ~~long long offer_depth()~~     | объем оффера в лотах (устарел, используйте [amount_offer](#__amount_offer__))|
-| ~~long long bid_depth()~~       | объем бида в лотах (устарел, используйте amount_bid)|
-| <a name="__amount_offer__"/>long long amount_offer()        | объем оффера в лотах                             |
-| long long amount_bid()          | объем бида в лотах                               |
+| ~~long long bid_depth()~~       | объем бида в лотах (устарел, используйте [amount_bid](#__amount_bid__))|
+| <a name="__amount_offer__">long long amount_offer()</a>        | объем оффера в лотах                             |
+| <a name="__amount_bid__">long long amount_bid()</a>          | объем бида в лотах                               |
 | double limit_up()               | разрешенный верхний лимит цены                   |
 | double limit_down()             | разрешенный нижний лимит цены                    |
-| int trading_status()            | статус торгуемости бумаги на бирже (битовая маска, возможные взведенные биты TRADING_CAN_PLACE и TRADING_CAN_CANCEL) |
+| int trading_status()            | статус торгуемости бумаги на бирже (битовая маска, возможные взведенные биты [TRADING_CAN_PLACE](#__TRADING_CAN_PLACE__) и [TRADING_CAN_CANCEL](#__TRADING_CAN_CANCEL__)) |
 | int conn_online()               | стауст активности маркет-дата подключения в роботе (битовая маска, возможные взведенные биты MARKET_DATA_BESTS_ONLINE и MARKET_DATA_OB_ONLINE) |
 | double min_step()               | минимальный шаг цены                             |
 | double lot_round()              | количество ценных бумаг в одном стандартном лоте |
@@ -395,8 +395,8 @@ Meтоды `coin_item`:
 | MOVING         | int         | 7, запрос на изменение заявки отправлен на биржу |
 | ADD_ERROR      | int         | 99, ошибка выставления заявки                    |
 | TRADING_HALT   | int         | 0, выставления и снятие заявок запрещены         |
-| TRADING_CAN_PLACE | int         | 1, разрешено выставления заявок               |
-| TRADING_CAN_CANCEL | int         | 2, разрешено снятие заявок                   |
+| <a name="__TRADING_CAN_PLACE__">TRADING_CAN_PLACE</a> | int         | 1, разрешено выставления заявок               |
+| <a name="__TRADING_CAN_CANCEL__">TRADING_CAN_CANCEL</a> | int         | 2, разрешено снятие заявок                   |
 | MARKET_DATA_OFFLINE   | int         | 0, маркет-дата подключение для данной бумаги оффлайн |
 | MARKET_DATA_BESTS_ONLINE | int         | 1, для данной бумаги маркет-дата подключение с лучшими ценами на покупку/продажу онлайн|
 | MARKET_DATA_OB_ONLINE | int         | 2, для данной бумаги маркет-дата подключение со стаканами онлайн |
