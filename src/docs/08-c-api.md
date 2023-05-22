@@ -46,10 +46,14 @@
 | double offer()                  | лучшая цена на продажу                           |
 | double exp_date()               | дата экспирации, в формате epoch                 |
 | double strike()                 | цена страйк, есть только у опционов              |
-| long long offer_depth()         | объем оффера в лотах                             |
-| long long bid_depth()           | объем бида в лотах                               |
+| ~~long long offer_depth()~~     | объем оффера в лотах (устарел, используйте [amount_offer](#__amount_offer__))|
+| ~~long long bid_depth()~~       | объем бида в лотах (устарел, используйте amount_bid)|
+| <a name="__amount_offer__"/>long long amount_offer()        | объем оффера в лотах                             |
+| long long amount_bid()          | объем бида в лотах                               |
 | double limit_up()               | разрешенный верхний лимит цены                   |
 | double limit_down()             | разрешенный нижний лимит цены                    |
+| int trading_status()            | статус торгуемости бумаги на бирже (битовая маска, возможные взведенные биты TRADING_CAN_PLACE и TRADING_CAN_CANCEL) |
+| int conn_online()               | стауст активности маркет-дата подключения в роботе (битовая маска, возможные взведенные биты MARKET_DATA_BESTS_ONLINE и MARKET_DATA_OB_ONLINE) |
 | double min_step()               | минимальный шаг цены                             |
 | double lot_round()              | количество ценных бумаг в одном стандартном лоте |
 | double funding_rate()           | ставка фондирования                              |
@@ -390,6 +394,12 @@ Meтоды `coin_item`:
 | SL_DELETING    | int         | 6, снятие заявки по стопу отправлено на биржу    |
 | MOVING         | int         | 7, запрос на изменение заявки отправлен на биржу |
 | ADD_ERROR      | int         | 99, ошибка выставления заявки                    |
+| TRADING_HALT   | int         | 0, выставления и снятие заявок запрещены         |
+| TRADING_CAN_PLACE | int         | 1, разрешено выставления заявок               |
+| TRADING_CAN_CANCEL | int         | 2, разрешено снятие заявок                   |
+| MARKET_DATA_OFFLINE   | int         | 0, маркет-дата подключение для данной бумаги оффлайн |
+| MARKET_DATA_BESTS_ONLINE | int         | 1, для данной бумаги маркет-дата подключение с лучшими ценами на покупку/продажу онлайн|
+| MARKET_DATA_OB_ONLINE | int         | 2, для данной бумаги маркет-дата подключение со стаканами онлайн |
 | NAME           | std::string | имя текущего портфеля                            |
 
 ### **8.7.2. Функции**
@@ -495,7 +505,7 @@ Meтоды `coin_item`:
 ```C
 security s = get_security();
 double bid = s.bid();
-long long amount_bid = s.bid_depth();
+long long amount_bid = s.amount_bid();
 ```
 
 ___
@@ -506,6 +516,18 @@ ___
 portfolio p = get_portfolio();
 double lim_buy = p.lim_b();
 long long pos = p.pos();
+```
+
+___
+
+Чтобы проверить, например, что в данный момент по инструменту можно выставлять заявки и в роботе есть активное подключение, получающее стаканы:
+
+```C
+security s = get_security();
+if ((s.trading_status() & TRADING_CAN_PLACE) && (s.conn_online() & MARKET_DATA_OB_ONLINE))
+{
+    // TODO place your code here
+}
 ```
 
 ___
