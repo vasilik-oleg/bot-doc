@@ -237,7 +237,7 @@ Cancel on disconnect - включить механизм снятия заяво
 
 ### **5.2.4. Type trade**
 
-`Type trade` - тип торговли, используется при расчете цен [Sell/Buy](/docs/05-params-description.html#_5-2-39-sell-buy), [Price_s/Price_b](/docs/05-params-description.html#_5-2-40-price-s-price-b):
+Тип торговли, используется при расчете цен [Sell/Buy](/docs/05-params-description.html#_5-2-39-sell-buy), [Price_s/Price_b](/docs/05-params-description.html#_5-2-40-price-s-price-b):
 
 - `Price` - режим торговли с расчетом вышеперечисленных цен по ценам инструментов на покупку и продажу.
 
