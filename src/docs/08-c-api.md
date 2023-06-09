@@ -7,7 +7,7 @@
 1. Portfolios -> "Название портфеля" -> Formulas;
 2. Portfolios -> "Название портфеля" -> "Название инструмента" -> Formulas.
 
-В первом случае будут отображены поля Trade formula](/docs/05-params-description.html#_5-2-32-trade-formula), [Extra field#1](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2) и [Extra field#2](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2).
+В первом случае будут отображены поля [Trade formula](/docs/05-params-description.html#_5-2-32-trade-formula), [Extra field#1](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2) и [Extra field#2](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2).
 Во втором [Count formula](/docs/05-params-description.html#_5-3-9-count-formula), [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula), [Ratio sell formula](/docs/05-params-description.html#_5-3-29-ratio-sell-formula).
 
 В редакторе формул существует возможность тестового выполнения выбранной формулы (кнопка `Test`), при этом на момент вычисления формулы создаётся временная копия портфеля, НО если вы в формуле изменяете значения полей портфеля, и у вас существует портфель с тем же именем, то изменения применятся к этому порфтелю.
@@ -83,7 +83,7 @@
 | time_last                | long long | время последней сделки                                |
 | price_prev_period_close  | double    | цена последней сделки предыдущего дня                 |
 
-[_Пример:_ НЕОБХОДИМА ЯКОРНАЯ ССЫЛКА!]() доступа к полям структуры `spb_commons`.
+[_Пример 1:_](#__Example1__) Пример доступа к полям структуры `spb_commons`.
 
 Методы `order_book`:
 
@@ -97,7 +97,7 @@
 
 По своей сути `order_book` является итератором сразу для двух списков: бидов и офферов, оба списка проходятся в порядке от лучшей цены в сторону худших. Вы можете получить только следующую цену в списке, если нужно вернуться к предыдущей - сохраняйте ее или получите `order_book` заново.
 
-[_Пример:_ НЕОБХОДИМА ЯКОРНАЯ ССЫЛКА!]() использования методов структуры `order_book`.
+[_Пример:_](https://fkviking.github.io/bot-doc/docs/08-c-api.html#_8-8-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%B0-%D0%BA-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%B0%D0%BC-%D0%BF%D0%BE%D1%80%D1%82%D1%84%D0%B5%D0%BB%D1%8F-%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0-%D1%81%D0%B4%D0%B5%D0%BB%D0%BA%D0%B8-%D0%BF%D0%BE%D0%B7%D0%B8%D1%86%D0%B8%D0%B8) использования методов структуры `order_book`.
 
 ## **8.4. Доступ и изменение полей инструмента портфеля**
 
@@ -208,7 +208,7 @@
 
 `order_item` является заявкой робота, возможные значения полей `dir` и `status` описаны в константах.
 
-[_Пример:_ НЕОБХОДИМА ЯКОРНАЯ ССЫЛКА!]() использования структур `order_pool` и `order_item`
+[_Пример:_](https://fkviking.github.io/bot-doc/docs/08-c-api.html#_8-8-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%B0-%D0%BA-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%B0%D0%BC-%D0%BF%D0%BE%D1%80%D1%82%D1%84%D0%B5%D0%BB%D1%8F-%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0-%D1%81%D0%B4%D0%B5%D0%BB%D0%BA%D0%B8-%D0%BF%D0%BE%D0%B7%D0%B8%D1%86%D0%B8%D0%B8) использования структур `order_pool` и `order_item`
 
 ## **8.5. Доступ и изменение полей портфеля**
 
@@ -570,7 +570,7 @@ double p = p.extra()[0];
 
 ___
 
-Чтобы получить, например, цену последней сделки для бумаги с СПб биржи (получение цены последней сделки по ключу возможно только для СПБ биржи):
+<a name="__Example1__"/> Чтобы получить, например, цену последней сделки для бумаги с СПб биржи (получение цены последней сделки по ключу возможно только для СПБ биржи):
 
 ```C
 security s = get_security("SPB_AGGR_AAPL");
