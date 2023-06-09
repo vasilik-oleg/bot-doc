@@ -365,7 +365,7 @@ IP-адрес, с которого будет происходить подкл�
 
 ### **4.6.9. Market-data key**
 
-Параметр появлется после высавления галочки [Add market-data connection](/docs/04-creating-connection.html#_4-6-8-Add_market-data_connection)
+Параметр появлется после высавления галочки [Add market-data connection](/docs/04-creating-connection.html#_4-6-8-Add-market-data-connection)
 
 ### **4.6.10. Bind IP**
 
