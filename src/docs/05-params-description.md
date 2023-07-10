@@ -545,8 +545,8 @@ Mult<sub>i</sub> - Fin res multiplier инструмента портфеля.
 
 ### **5.2.40. Price_s/Price_b**
 
-`Price_s` – цена выставления заявки на продажу по [Is first 5.3.11](/docs/05-params-description.html#_5-3-11-is-first) бумаге, вычисляется как обратная функция для [Sell 5.2.39](/docs/05-params-description.html#_5-2-39-sell-buy), где цена [Sell 5.2.39](/docs/05-params-description.html#_5-2-39-sell-buy) заменяется на [Lim_Sell 5.2.18](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy). Нередактируемый параметр.  
-`Price_b` – цена выставления заявки на покупку по [Is first 5.3.11](/docs/05-params-description.html#_5-3-11-is-first) бумаге, вычисляется как обратная функция для [Buy 5.2.39](/docs/05-params-description.html#_5-2-39-sell-buy), где цена [Buy 5.2.39](/docs/05-params-description.html#_5-2-39-sell-buy) заменяется на [Lim_Buy 5.2.18](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy). Нередактируемый параметр.
+`Price_s` – цена выставления заявки на продажу по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге, вычисляется как обратная функция для [Sell](/docs/05-params-description.html#_5-2-39-sell-buy), где цена [Sell](/docs/05-params-description.html#_5-2-39-sell-buy) заменяется на [Lim_Sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy). Нередактируемый параметр.  
+`Price_b` – цена выставления заявки на покупку по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге, вычисляется как обратная функция для [Buy](/docs/05-params-description.html#_5-2-39-sell-buy), где цена [Buy](/docs/05-params-description.html#_5-2-39-sell-buy) заменяется на [Lim_Buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy). Нередактируемый параметр.
 
 Формулы расчета `Price_s` и `Price_b` для двух бумаг:
 
