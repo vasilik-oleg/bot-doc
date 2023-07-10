@@ -434,7 +434,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 ### **5.2.21. Percent**
 
-`Percent` – процент от `Limits timer` после которого происходит сдвиг. Если сигнал на торговлю продержался указанный процент времени от значения [Limits timer](/docs/05-params-description.html#_5-2-20-limits-timer), то [Lim_sell/Lim_buy]([Lim_sell/Lim_buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy)) передвигаются на [K](/docs/05-params-description.html#_5-2-19-1-k), не смотря на отсутствие сделок по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге.
+`Percent` – процент от `Limits timer` после которого происходит сдвиг. Если сигнал на торговлю продержался указанный процент времени от значения [Limits timer](/docs/05-params-description.html#_5-2-20-limits-timer), то [Lim_sell/Lim_buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy)) передвигаются на [K](/docs/05-params-description.html#_5-2-19-1-k), не смотря на отсутствие сделок по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге.
 
 ### **5.2.22. Always timer**
 
