@@ -103,9 +103,9 @@
 
 | Функция                                                                                | Описание                                                  |
 |----------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| struct security_fields get_security_fields(const std::string& p, const std::string& s) | получить бумагу портфеля с именем p с [SecKey 5.3.1.](/docs/05-params-description.html#_5-3-1-seckey) s |
+| struct security_fields get_security_fields(const std::string& p, const std::string& s) | получить бумагу портфеля с именем p с [SecKey](/docs/05-params-description.html#_5-3-1-seckey) s |
 | struct security_fields get_security_fields()                                           | получить главную бумагу текущего портфеля                 |
-| struct security_fields get_security_fields(const std::string& s)                       | получить бумагу текущего портфеля с [SecKey 5.3.1.](/docs/05-params-description.html#_5-3-1-seckey) s   |
+| struct security_fields get_security_fields(const std::string& s)                       | получить бумагу текущего портфеля с [SecKey](/docs/05-params-description.html#_5-3-1-seckey) s   |
 
 Методы `security_fields`:
 
@@ -346,7 +346,7 @@
 
 | Метод                               | Описание                                                                                                                               |
 |-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| sec_item sec(const std::string& s)  | получить информацию о позиции инструмена на бирже (в качестве s необходимо использовать SecBoard из Параметры позиций по инструментам) |
+| sec_item sec(const std::string& s)  | получить информацию о позиции инструмена на бирже (в качестве s необходимо использовать SecBoard из пп 5.5.1.Параметры позиций по инструментам) |
 | coin_item sec(const std::string& s) | получить информацию о балансе валюты на бирже (в качестве s необходимо использовать Currency из Параметры позиций по валютам)          |
 | bool is_active()                    | получить информацию о том подключено ли подключение к бирже                                                                            |
 
