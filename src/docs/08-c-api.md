@@ -677,7 +677,7 @@ ___
 
 Для того, чтобы использовать поле [Ratio sell/buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula) необходимо для выбранного инструмента портфеля выбрать [Ratio type](/docs/05-params-description.html#_5-3-27-ratio-type) = `Ratio formula`. После этого двойным кликом войти в редактор и написать необходимое значение.
 
-Пусть имеется портфель с именем "si" и в этом портфеле есть один инструмент - фьючерс на доллар "SiH6", направление торговли этого инструмента [On_by](/docs/05-params-description.html#_5-3-10-on-buy) = [Buy](/docs/05-params-description.html#_5-2-39-sell-buy).
+Пусть имеется портфель с именем "si" и в этом портфеле есть один инструмент - фьючерс на доллар "SiH6", направление торговли этого инструмента [On by](/docs/05-params-description.html#_5-3-10-on-buy) = [Buy](/docs/05-params-description.html#_5-2-39-sell-buy).
 
 Если [Ratio sign](/docs/05-params-description.html#_5-3-19-ratio-sign) = "×", то ничего особо интересного с формулами не придумаешь, разве что какой-то хитрый множитель (и для покупки и для продажи), например, такой:
 
