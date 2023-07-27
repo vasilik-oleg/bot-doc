@@ -23,7 +23,7 @@
 
 ## **6.3. Правила перемещения Lim_Sell и Lim_Buy**
 
-Сигнальные цены [Lim_Sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy)) и [Lim_buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) перемещаются только при прохождении сделок по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту портфеля.
+Сигнальные цены [Lim_Sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) и [Lim_buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) перемещаются только при прохождении сделок по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту портфеля.
 
 Правила перемещения сигнальных цен можно разделить на две части: произошла продажа по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге и произошла покупка по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге. Внутри каждой из этих частей алгоритм делится еще на две части: позиция портфеля до прохождения данной сделки была равна нулю и была не равна нулю.
 
