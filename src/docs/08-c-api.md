@@ -751,7 +751,7 @@ ___
 
     таким образом при расчете [Buy](/docs/05-params-description.html#_5-2-39-sell-buy) мы будем использовать бид доллара, а при расчете [Sell](/docs/05-params-description.html#_5-2-39-sell-buy) - его оффер, и величину получим в рублях.
 
-2. Для доллара просто зададим `Ratio` = 1, а вот для индекса РТС выберем `Ratio sign = "+"`, а в `Ratio buy formula` напишем следующее (вначале обнулим значение, как в предыдущем примере, а затем зададим новое):
+2. Для доллара просто зададим [Ratio](/docs/05-params-description.html#_5-3-20-ratio) = 1, а вот для индекса РТС выберем [Ratio sign](/docs/05-params-description.html#_5-3-19-ratio-sign) = "+", а в [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula) напишем следующее (вначале обнулим значение, как в предыдущем примере, а затем зададим новое):
 
     ```C
     security s1 = get_security("SiH6");
@@ -760,7 +760,7 @@ ___
     return -s2.offer() + price;
     ```
 
-    в `Ratio sell formula` напишем следующее:
+    в [Ratio sell formula](/docs/05-params-description.html#_5-3-29-ratio-buy-formula) напишем следующее:
 
     ```C
     security s1 = get_security("SiH6");
@@ -769,4 +769,4 @@ ___
     return -s2.bid() + price;
     ```
 
-    теперь значения переменной price и будут новыми значениями (так сказать, со стороны индекса РТС), используемыми для расчета `Buy` и `Sell`, соответственно.
+    теперь значения переменной price и будут новыми значениями (так сказать, со стороны индекса РТС), используемыми для расчета [Buy](/docs/05-params-description.html#_5-2-39-sell-buy) и [Sell](/docs/05-params-description.html#_5-2-39-sell-buy), соответственно.
