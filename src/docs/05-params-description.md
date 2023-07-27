@@ -643,7 +643,7 @@ secs - список инструментов портфеля.
 
 ### **5.3.11. Is first**
 
-Определяет, является ли бумага главным инструментом портфеля. Позиция портфеля считается по главному инструменту. [On buy](/docs/05-params-description.html#_5-3-10-on-buy) такого инструмента всегда указывается как `Buy`.
+Определяет, является ли бумага главным инструментом портфеля. Позиция портфеля считается по главному инструменту. [On buy](/docs/05-params-description.html#_5-3-10-on-buy) такого инструмента всегда указывается как [Buy](/docs/05-params-description.html#_5-2-39-sell-buy).
 
 ### **5.3.12. k**
 
@@ -675,11 +675,11 @@ secs - список инструментов портфеля.
 
 ### **5.3.19. Ratio sign**
 
-Знак используемый перед коэффициентом [Ratio](/docs/05-params-description.html#_5-3-20-ratio) при расчете цен `Sell` и `Buy`, ”+” или ”×”.
+Знак используемый перед коэффициентом [Ratio](/docs/05-params-description.html#_5-3-20-ratio) при расчете цен [Sell](/docs/05-params-description.html#_5-2-39-sell-buy) и [Buy](/docs/05-params-description.html#_5-2-39-sell-buy), ”+” или ”×”.
 
 ### **5.3.20. Ratio**
 
-Коэффициент, используемый при расчете цен `Sell` и `Buy`.
+Коэффициент, используемый при расчете цен [Sell](/docs/05-params-description.html#_5-2-39-sell-buy) и [Buy](/docs/05-params-description.html#_5-2-39-sell-buy).
 
 ### **5.3.21. Fin res multiplier**
 
@@ -707,19 +707,19 @@ secs - список инструментов портфеля.
 
 ### **5.3.26. TP**
 
-`TP` - величина тейк-профит, используется при `Type` равном `TP algo` или `TP algo 2`, откладывается от цены сделки по заявке [Is first](/docs/05-params-description.html#_5-3-11-is-first) иструмента.
+`TP` - величина тейк-профит, используется при [Type](/docs/05-params-description.html#_5-2-3-type) равном `TP algo` или `TP algo 2`, откладывается от цены сделки по заявке [Is first](/docs/05-params-description.html#_5-3-11-is-first) иструмента.
 
 ### **5.3.27. Ratio type**
 
-`Ratio type` - использовать значение [Ratio](/docs/05-params-description.html#_5-3-20-ratio) или результат вычисления `Ratio formula` при расчёте значений `Sell` и `Buy`.
+`Ratio type` - использовать значение [Ratio](/docs/05-params-description.html#_5-3-20-ratio) или результат вычисления `Ratio formula` при расчёте значений [Sell](/docs/05-params-description.html#_5-2-39-sell-buy) и [Buy](/docs/05-params-description.html#_5-2-39-sell-buy).
 
 ### **5.3.28. Ratio buy formula**
 
-Параметр, используемый при расчете цены `Buy`, задается как код на языке программирования [C++](/docs/08-c-api.html#_8-c). Вы пишете только тело функции и должны вернуть значение типа `double`.
+Параметр, используемый при расчете цены [Buy](/docs/05-params-description.html#_5-2-39-sell-buy), задается как код на языке программирования [C++](/docs/08-c-api.html#_8-c). Вы пишете только тело функции и должны вернуть значение типа `double`.
 
 ### **5.3.29. Ratio sell formula**
 
-Параметр, используемый при расчете цены `Sell`, задается как код на языке программирования [C++](/docs/08-c-api.html#_8-c). Вы пишете только тело функции и должны вернуть значение типа `double`.
+Параметр, используемый при расчете цены [Sell](/docs/05-params-description.html#_5-2-39-sell-buy), задается как код на языке программирования [C++](/docs/08-c-api.html#_8-c). Вы пишете только тело функции и должны вернуть значение типа `double`.
 
 ### **5.3.30. FUT move limits**
 
