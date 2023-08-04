@@ -278,10 +278,9 @@ _Пример_:
 
 Если параметр включен, то когда цены [Price_s/Price_b](/docs/05-params-description.html#_5-2-40-price-s-price-b) попадают в спред или на противоположную сторону стакана, то они всегда будут выставляться не глубже, чем на один шаг цены в спред:
 
-\begin{align*}
-			Price\_s_1 = \max(Price\_s_0, offer - step), \\
-			Price\_b_1 = \min(Price\_b_0, bid + step), 
-		\end{align*}
+$$
+\sin^2x+cos^2x=1
+$$
 
 ![Alt text](./00-img/5-2-9.jpg)
 
