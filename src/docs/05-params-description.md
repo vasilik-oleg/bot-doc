@@ -439,7 +439,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 Текущая позиция портфеля (в штуках портфелей), вычисляется по формуле:
 
-$$Pos = [Curpos_first/Count_first],$$
+$$Pos = [Curpos_f_i_r_s_t/Count_f_i_r_s_t],$$
 
 ![Alt text](./00-img/5-2-23.jpg)
 
