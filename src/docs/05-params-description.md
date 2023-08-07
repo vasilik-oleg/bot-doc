@@ -299,7 +299,7 @@ _Пример_: в первой ноге стоит цена 100, в второ�
 
 Формула для цены второй ноги для покупки и продажи:
 
-$$Price = {+}{-}\left(Lim_sell - Prise_sRatio_sign_1\ratio_1\right)$$
+$$Price = {+}{-}\left(Lim\\_sell - Prise\\_sRatio\\_sign_1ratio\\_1\right)$$
 $$Price\\_b_1 = \min \left(Price\\_b_0, bid + step\right).$$
 
 ![Alt text](./00-img/5-2-10.jpg)
