@@ -441,8 +441,6 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 $$Pos=[Curpos_{first} / Count_{first}],$$
 
-![Alt text](./00-img/5-2-23.jpg)
-
 где Curpos<sub>first</sub> и Count<sub>first</sub> - это параметры [Curpos](/docs/05-params-description.html#_5-3-6-curpos) и [Count](/docs/05-params-description.html#_5-3-8-count) для инструмента портфеля с взведенным флагом [Is first](/docs/05-params-description.html#_5-3-11-is-first), и округляется вверх или вниз в зависимости от значения параметра [n_perc_fill](/docs/05-params-description.html#_5-2-11-5-n-perc-fill). Изменяется роботом, но может быть отредактирована пользователем вручную.
 
 ### **5.2.24. Use timetable**
