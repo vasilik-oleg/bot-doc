@@ -471,8 +471,6 @@ $$Pos=[Curpos_{first} / Count_{first}],$$
 
 $$Opened = -\left( \sum_{i \in bought} tradePrice_i \times tradeAmount_i \times Mult_i \right) + \\ \left( \sum_{i \in sold} tradePrice_i \times tradeAmount_i \times Mult_i \right),$$
 
-![Alt text](./00-img/5-2-27.jpg)
-
 где tradePrice<sub>i</sub> - цена сделки;  
 tradeAmount<sub>i</sub> - количество лотов в сделке;  
 bought - список сделок на покупку;  
