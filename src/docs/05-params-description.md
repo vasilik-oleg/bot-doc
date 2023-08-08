@@ -530,6 +530,8 @@ Mult<sub>i</sub> - Fin res multiplier инструмента портфеля.
 
 $${Is \ first: On \ buy = Buy, Second \ leg : On \ buy = Sell}$$
 
+$${Buy = offer_1Ratio\\_sign_1ratio_1 - bid_2Ratio\\_sign_2ratio_2}$$
+
 ![Alt text](./00-img/5-2-39-1.jpg)
 
 Формулы расчета `Sell` и `Buy` для любого количества ног:
