@@ -534,7 +534,7 @@ $${Buy = offer_1Ratio\\_sign_1ratio_1 - bid_2Ratio\\_sign_2ratio_2}$$
 
 $${Sell = bid_1Ratio\\_sign_1ratio_1 - offer_2Ratio\\_sign_2ratio_2}$$
 
-$${Ratio\\_sign = + or -}$$
+$${Ratio\\_sign = + \ or \times}$$
 
 ![Alt text](./00-img/5-2-39-1.jpg)
 
