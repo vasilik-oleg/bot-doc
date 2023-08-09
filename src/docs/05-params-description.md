@@ -538,8 +538,6 @@ $${Ratio\\_sign = + \ or \ \times}$$
 
 Формулы расчета `Sell` и `Buy` для любого количества ног:
 
-$$\begin{matrix} a& \\ d \end{matrix}\$$
-
 ![Alt text](./00-img/5-2-39-2.jpg)
 
 Наглядно продемонстрирована работа данных параметров в этом видео:
@@ -552,6 +550,8 @@ $$\begin{matrix} a& \\ d \end{matrix}\$$
 `Price_b` – цена выставления заявки на покупку по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге, вычисляется как обратная функция для [Buy](/docs/05-params-description.html#_5-2-39-sell-buy), где цена [Buy](/docs/05-params-description.html#_5-2-39-sell-buy) заменяется на [Lim_Buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy). Нередактируемый параметр.
 
 Формулы расчета `Price_s` и `Price_b` для двух бумаг:
+
+$$Price\\_s = \left(Lim\\_sell + offer_2Ratio\\_sign_2ratio_2 \right)\binom{-,Ratio\\_sign_1=+}{/,Ratio\\sign_1=\times}ratio_1$$
 
 ![Alt text](./00-img/5-2-40-1.jpg)
 
