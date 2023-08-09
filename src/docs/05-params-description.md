@@ -538,7 +538,7 @@ $${Ratio\\_sign = + \ or \ \times}$$
 
 Формулы расчета `Sell` и `Buy` для любого количества ног:
 
-\[\begin{matrix} a  \\ d \end{matrix}\]
+$$\[\begin{matrix} a  \\ d \end{matrix}\]$$
 
 ![Alt text](./00-img/5-2-39-2.jpg)
 
