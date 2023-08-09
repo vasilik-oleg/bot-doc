@@ -551,9 +551,9 @@ $${Ratio\\_sign = + \ or \ \times}$$
 
 Формулы расчета `Price_s` и `Price_b` для двух бумаг:
 
-$$Price\\_s = \left(Lim\\_sell + offer_2Ratio\\_sign_2ratio_2 \right)\binom{-,Ratio\\_sign_1=+}{/,Ratio\\sign_1=\times}ratio_1$$
+$$Price\\_s = \left(Lim\\_sell + offer_2Ratio\\_sign_2ratio_2 \right)\binom{-,Ratio\\_sign_1=+}{/,Ratio\\_sign_1=\times}ratio_1$$
 
-![Alt text](./00-img/5-2-40-1.jpg)
+$$Price\\_b = \left(Lim\\_buy + bid_2Ratio\\_sign_2ratio_2 \right)\binom{-,Ratio\\_sign_1=+}{/,Ratio\\_sign_1=\times}ratio_1$$
 
 Формулы расчета `Price_s` и `Price_b` для любого количества ног:
 
