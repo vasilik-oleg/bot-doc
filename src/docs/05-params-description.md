@@ -593,7 +593,7 @@ secs - список инструментов портфеля.
 
 `Fin res` без учета комиссии. Вычисляется по формуле:
 
-$$Fin \; res = Opened + \sum_{i \in secs}Curpos_i \times Mult_i \times \begin{cases} secBid_i, & \mbox{if } Curpos_i > 0 \\ 
+$$Fin \ res = Opened + \sum_{i \in secs}Curpos_i \times Mult_i \times \begin{cases} secBid_i, & \mbox{if } Curpos_i > 0 \\ 
 secOffer_i, & \mbox{if } Curpos_i < 0 \end{cases},$$
 
 где secBid<sub>i</sub> - лучшая цена на покупку инструмента портфеля;  
