@@ -583,8 +583,6 @@ $$Price\\_b = \left(Lim\\_buy + bid_2Ratio\\_sign_2ratio_2 \right)\binom{-,Ratio
 $$Fin \ res = Opened + Commission \ sum + \sum_{i \in secs}Curpos_i \times Mult_i \times \begin{cases} secBid_i, & \mbox{if } Curpos_i > 0 \\ 
 secOffer_i, & \mbox{if } Curpos_i < 0 \end{cases},$$
 
-![Alt text](./00-img/5-2-43.jpg)
-
 где secBid<sub>i</sub> - лучшая цена на покупку инструмента портфеля;  
 secOffer<sub>i</sub> - лучшая цена на продажу инструмента портфеля;  
 Curpos<sub>i</sub> - текущая позиция инструмента портфеля;  
@@ -595,7 +593,8 @@ secs - список инструментов портфеля.
 
 `Fin res` без учета комиссии. Вычисляется по формуле:
 
-![Alt text](./00-img/5-2-44.jpg)
+$$Fin \; res = Opened + \sum_{i \in secs}Curpos_i \times Mult_i \times \begin{cases} secBid_i, & \mbox{if } Curpos_i > 0 \\ 
+secOffer_i, & \mbox{if } Curpos_i < 0 \end{cases},$$
 
 где secBid<sub>i</sub> - лучшая цена на покупку инструмента портфеля;  
 secOffer<sub>i</sub> - лучшая цена на продажу инструмента портфеля;  
