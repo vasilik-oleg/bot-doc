@@ -580,7 +580,8 @@ $$Price\\_b = \left(Lim\\_buy + bid_2Ratio\\_sign_2ratio_2 \right)\binom{-,Ratio
 
 Предполагаемый финансовый результат портфеля, вычисляется по формуле:
 
-$$Fin \ res = Opened + Commission \ sum + \sum_{i \in secs}Curpos_i \times Mult_i \times \begin{cases} secBid_i, & \mbox{if } Curpos_i > 0 \\ secOffer_i, & \mbox{if } Curpos_i < 0 \end{cases},$$
+$$Fin \ res = Opened + Commission \ sum + \sum_{i \in secs}Curpos_i \times Mult_i \times \begin{cases} secBid_i, & \mbox{if } Curpos_i > 0 \\ 
+secOffer_i, & \mbox{if } Curpos_i < 0 \end{cases},$$
 
 ![Alt text](./00-img/5-2-43.jpg)
 
