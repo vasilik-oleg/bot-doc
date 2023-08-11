@@ -544,9 +544,8 @@ $${Ratio\\_sign = + \ or \ \times}$$
 
 $$Buy = \sum_{i} \begin{cases}-bid_i,& On \ by_i=Sell \\
 offer_i,& On \ buy_i=buy \end{cases} \begin{cases}+,& Ratio\\_sign_i=+ \\
-\times,& Ratio\\_sign_i=\times \end{cases}$$
-
-$$price\\_b _{isfirst}$$
+\times,& Ratio\\_sign_i=\times \end{cases}$$ \begin{cases}ratio\\_b _{isfirst} \\
+ratio\\_s _{isfirst} \end{cases}$$
 
 ![Alt text](./00-img/5-2-39-2.jpg)
 
