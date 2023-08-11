@@ -304,8 +304,6 @@ $$Price = \pm\left(Lim\\_sell - Price\\_sRatio\\_sign_1ratio_1 \right)\binom{Rat
 
 $$Price = \pm\left(Lim\\_buy - Price\\_bRatio\\_sign_1ratio_1 \right)\binom{Ratio\\_sign_2=-}{Ratio\\_sign_2=/}ratio_2$$
 
-![Alt text](./00-img/5-2-10.jpg)
-
 Знак ± - зависит от того, какое выставлено значение параметра  [On_buy](/docs/05-params-description.html#_5-3-10-On-buy) на 2-й ноге. Если  Buy, тогда "+",если  Sell, то "-".
 
 ### **5.2.11. Volumes**
