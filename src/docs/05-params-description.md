@@ -552,8 +552,6 @@ $$Sell = \sum_{i} \begin{cases}bid_i,& On \ by_i=Buy \\
 \times,& Ratio\\_sign_i=\times \end{cases} \begin{cases}ratio\\_b _{isfirst} \\
 ratio\\_s _{isfirst} \end{cases}$$
 
-![Alt text](./00-img/5-2-39-2.jpg)
-
 Наглядно продемонстрирована работа данных параметров в этом видео:
 
 <iframe width="735" height="415" src="https://www.youtube.com/embed/p69X-3l-VLc" title="Описание параметра Sell Buy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
