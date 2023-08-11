@@ -247,10 +247,8 @@ Cancel on disconnect - включить механизм снятия заяво
 
 - `Orderbook` - параметр позволяет искать цену в стакане, таким образом, чтобы набрать необходимый объем. Цены на покупку и продажу набираются среди цен в стакане, начиная от лучшей цены в нужном направлении и далее вглубь стакана. Поиск необходимого объема происходит с помощью данной формулы:
 
-$$Count \times Percent \ of \ quantity \times 0.01 \times \begin{cases} v\\_\\_in\\_left, & \mbox{if} open \ pose \\
-v\\_out\\_left, & \mbox{if} close \ pose \end{cases},$$
-
-![Alt text](./00-img/5-2-5.jpg)
+$$Count \times Percent \ of \ quantity \times 0.01 \times \begin{cases} v\\_\\_in\\_left, & \mbox{if } open \ pose \\
+v\\_out\\_left, & \mbox{if } close \ pose \end{cases},$$
 
 - `Orderbook+filter` - аналогично Orderbook, но вычитать из набираемого объема цены своих заявок (если на соответствующих ценах присутствуют свои заявки).
 
