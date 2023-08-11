@@ -754,6 +754,11 @@ secs - список инструментов портфеля.
 
 Флаг, если взведен, то при каждой смене дня будет осуществляться автоматическая подвижка лимитов по формулам:
 
+$$\begin{align*}
+			Lim\_Sell_1 = Lim\_Sell_0 - \frac{\left( Lim\_Sell_0 + Lim\_Buy_0 \right) \times days\_to\_expiry_{SPOT}}{2 \times days\_to\_expiry},\\
+			Lim\_Buy_1 = Lim\_Buy_0 - \frac{\left( Lim\_Sell_0 + Lim\_Buy_0 \right) \times days\_to\_expiry_{SPOT}}{2 \times days\_to\_expiry},
+		\end{align*}$$
+
 ![Alt text](./00-img/5-3-30.jpg)
 
 где days_to_expiry - целое количество дней до экспирации данной бумаги;  
