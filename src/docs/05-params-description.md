@@ -547,6 +547,11 @@ offer_i,& On \ buy_i=Buy \end{cases} \begin{cases}+,& Ratio\\_sign_i=+ \\
 \times,& Ratio\\_sign_i=\times \end{cases} \begin{cases}ratio\\_b _{isfirst} \\
 ratio\\_s _{isfirst} \end{cases}$$
 
+$$Sell = \sum_{i} \begin{cases}bid_i,& On \ by_i=Buy \\
+-offer_i,& On \ buy_i=Sell \end{cases} \begin{cases}+,& Ratio\\_sign_i=+ \\
+\times,& Ratio\\_sign_i=\times \end{cases} \begin{cases}ratio\\_b _{isfirst} \\
+ratio\\_s _{isfirst} \end{cases}$$
+
 ![Alt text](./00-img/5-2-39-2.jpg)
 
 Наглядно продемонстрирована работа данных параметров в этом видео:
