@@ -543,7 +543,8 @@ $${Ratio\\_sign = + \ or \ \times}$$
 Формулы расчета `Sell` и `Buy` для любого количества ног:
 
 $$Buy = \sum_{i} \begin{cases}-bid_i,& On \ by_i=Sell \\
-offer_i,& On \ buy_i=buy \end{cases}$$
+offer_i,& On \ buy_i=buy \end{cases} \begin{cases}+,& Ratio\\_sign_i=+ \\
+\times, Ratio\\_sign_i=\times \end{cases}$$
 
 ![Alt text](./00-img/5-2-39-2.jpg)
 
