@@ -572,7 +572,9 @@ $$Price\\_s = \left(Lim\\_sell_i - \sum _{i \neq isfirst} Sell _i\right) \begin{
 /,& Ratio\\_sign=\times \end{cases} \begin{cases}ratio\\_b _{isfirst} \\
 ratio\\_s _{isfirst} \end{cases}$$
 
-![Alt text](./00-img/5-2-40-2.jpg)
+$$Price\\_b = \left(Lim\\_buy_i - \sum _{i \neq isfirst} Buy _i\right) \begin{cases}-,& Ratio\\_sign=+ \\
+/,& Ratio\\_sign=\times \end{cases} \begin{cases}ratio\\_b _{isfirst} \\
+ratio\\_s _{isfirst} \end{cases}$$
 
 Видео, наглядно объясняющее работу параметров `Price_s/Price_b`:
 
