@@ -568,7 +568,9 @@ $$Price\\_b = \left(Lim\\_buy + bid_2Ratio\\_sign_2ratio_2 \right)\binom{-,Ratio
 
 Формулы расчета `Price_s` и `Price_b` для любого количества ног:
 
-$$Price\\_s = \left(
+$$Price\\_s = \left(Lim\\_sell_i - \sum _{i \neq isfirst} Sell _i\right) \begin{cases}-,& Ratio\\_sign=+ \\
+/,& Ratio\\_sign=\times \end{cases} \begin{cases}ratio\\_b _{isfirst} \\
+ratio\\_s _{isfirst} \end{cases}$$
 
 ![Alt text](./00-img/5-2-40-2.jpg)
 
