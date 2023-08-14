@@ -36,6 +36,9 @@ $$k3 = \left(\mid{Lim\\_Sell_0 - Lim\\_Buy_0}\mid - TP - K \right) \times \frac{
 $$k4 = \begin{cases} k3 + K2, & \mbox{if } Lim\\_Sell_0 - Lim\\_Buy_0 \geq 0 \\
 -k3 + K2, & \mbox{if } Lim\\_Sell_0 - Lim\\_Buy_0 < 0 \end{cases} ,$$ 
 
+$$Lim\\_Buy_1 = Lim\\_Buy_0 + \frac{\abs{diffpos}}{V} \times \begin{cases} k4, & \mbox{if } curpos > 0 \\ 
+K1, & \mbox{if } curpos < 0 \end{cases} ,$$
+
   ![Alt text](./00-img/6-3-1.jpg)
 
 - прошла покупка (соответственно в количестве diffpos):
