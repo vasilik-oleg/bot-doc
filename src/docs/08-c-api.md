@@ -656,7 +656,7 @@ return P_delta("test");
 
 здесь test - имя портфеля (для портфелей с другими именами нужно писать их имена). Дельта всего портфеля будет равна сумме дельт его инструментов с учетом позиции и направления торговли:
 
-$$\Delta_{portfolio} = \sum_{i \in portfolio} \Delta_i \times\pos_i \time \begin{cases}1,& \mbox{if }On \ buy_i = Buy \\
+$$\Delta_{portfolio} = \sum_{i \in portfolio} \Delta_i \times pos_i \time \begin{cases}1,& \mbox{if }On \ buy_i = Buy \\
 -1,& \mbox{if }On \ buy = Sell \end{cases}$$  
 
 ![Alt text](./00-img/8-9.jpg)
