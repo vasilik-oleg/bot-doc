@@ -42,6 +42,12 @@ K1, & \mbox{if } curpos < 0 \end{cases} ,$$
 $$Lim\\_Sell_1 = Lim\\_Sell_0 + \frac{| {diffpos} |}{V} \times \begin{cases} K2, & \mbox{if } curpos > 0 \\ 
 K, & \mbox{if } curpos < 0 \end{cases} ,$$
 
+$$curpos = 0$$
+
+$$Lim\\_Sell_1 = Lim\\_Sell_0 + \frac{| {diffpos} |}{V} \times K ,$$ 
+
+$$Lim\\_Buy_1 = Lim\\_Sell_0 - TP, $$
+
   ![Alt text](./00-img/6-3-1.jpg)
 
 - прошла покупка (соответственно в количестве diffpos):
