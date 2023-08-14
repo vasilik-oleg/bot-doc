@@ -31,6 +31,8 @@
 
 - прошла продажа(соответственно в количестве `diffpos`):
 
+  $$k3 = \left(\abs{Lim\_Sell_0 - Lim\_Buy_0} - TP - K \right) \times \frac{V}{curpos}$$
+
 ![Alt text](./00-img/6-3-1.jpg)
 
 - прошла покупка (соответственно в количестве diffpos):
