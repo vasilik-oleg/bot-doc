@@ -31,9 +31,9 @@
 
 - прошла продажа(соответственно в количестве `diffpos`):
 
-$$k3 = \left(\mid{Lim\\_Sell_0 - Lim\\_Buy_0}\mid - TP - K \right) \times \frac{V}{curpos}$$ ,
+$$k3 = \left(\mid{Lim\\_Sell_0 - Lim\\_Buy_0}\mid - TP - K \right) \times \frac{V}{curpos} ,$$ 
 
-$$k4 = \begin{cases} k3 + K2, & \mbox{if } Lim\_Sell_0 - Lim\_Buy_0 \geq 0 \\ -k3 + K2, & \mbox{if } Lim\_Sell_0 - Lim\_Buy_0 < 0 \end{cases}$$ ,
+$$k4 = \begin{cases} k3 + K2, & \mbox{if } Lim\_Sell_0 - Lim\_Buy_0 \geq 0 \\ -k3 + K2, & \mbox{if } Lim\_Sell_0 - Lim\_Buy_0 < 0 \end{cases} ,$$ 
 
   ![Alt text](./00-img/6-3-1.jpg)
 
