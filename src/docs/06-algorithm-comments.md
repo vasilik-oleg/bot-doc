@@ -52,6 +52,23 @@ $$Lim\\_Buy_1 = Lim\\_Sell_0 - TP, $$
 
 - прошла покупка (соответственно в количестве diffpos):
 
+  $$k3 = \left(| {Lim\\_Sell_0 - Lim\\_Buy_0} - TP - K \right) \times \frac{V}{curpos} ,$$ 
+	
+	$$k4 = \begin{cases} -k3 + K2, & \mbox{if } Lim\\_Sell_0 - Lim\\_Buy_0 \geq 0 \\
+                        k3 + K2, & \mbox{if } Lim\\_Sell_0 - Lim\\_Buy_0 < 0 \end{cases} ,$$ 
+	
+	$$Lim\\_Sell_1 = Lim\\_Sell_0 - \frac{| {diffpos} |}{V} \times \begin{cases} k4, & \mbox{if } curpos < 0 \\
+                                                                               K1, & \mbox{if } curpos > 0 \end{cases} ,$$
+	
+	$$Lim\\_Buy_1 = Lim\\_Buy_0 - \frac{| {diffpos} |}{V} \times \begin{cases} K2, & \mbox{if } curpos < 0 \\
+                                                                             K, & \mbox{if } curpos > 0 \end{cases} ,$$ 
+	
+  $$curpos = 0$$
+	
+	$$Lim\\_Sell_1 = Lim\\_Buy_0 + TP ,$$ 
+	
+	$$Lim\\_Buy_1 = Lim\\_Buy_0 - \frac{| {diffpos} |}{V} \times K .$$
+
 ![Alt text](./00-img/6-3-2.jpg)
 
 Также перемещение сигнальных цен происходит когда заявка не может быть выставлена из-за ограничений по [v_min](/docs/05-params-description.html#_5-2-11-1-v-min-v-max), [v_max](/docs/05-params-description.html#_5-2-11-1-v-min-v-max), [To0](/docs/05-params-description.html#_5-2-26-to0). Если робот не может купить из-за ограничений по [v_max](/docs/05-params-description.html#_5-2-11-1-v-min-v-max), то в соответствии с параметрами портфеля [Limits timer](/docs/05-params-description.html#_5-2-20-limits-timer) и [Percent](/docs/05-params-description.html#_5-2-21-percent) цены [Lim_Sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) и [Lim_Buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) уменьшаются на величину параметра портфеля [K](/docs/05-params-description.html#_5-2-19-1-k), если же робот не может продать из-за ограничений по [v_min](/docs/05-params-description.html#_5-2-11-1-v-min-v-max), то в соответствии с параметрами портфеля [Limits timer](/docs/05-params-description.html#_5-2-20-limits-timer) и [Percent](/docs/05-params-description.html#_5-2-21-percent) цены [Lim_Sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) и [Lim_Buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) увеличиваются на величину параметра портфеля [K](/docs/05-params-description.html#_5-2-19-1-k).
