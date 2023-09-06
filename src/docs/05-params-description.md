@@ -301,9 +301,17 @@ _Пример_: в первой ноге стоит цена 100, в второ�
 
 Формула для цены второй ноги для покупки и продажи:
 
-$$Price = \pm\left(Lim\\_sell - Price\\_sRatio\\_sign_1ratio_1 \right)\binom{Ratio\\_sign_2=-}{Ratio\\_sign_2=/}ratio_2$$
+$$Price=\pm\left(Lim\_sell-Price\_sRatio\_sign_1ratio_1\right)
+ \binom
+ {Ratio\_sign_2=-}
+ {Ratio\_sign_2=/}
+ ratio_2$$
 
-$$Price = \pm\left(Lim\\_buy - Price\\_bRatio\\_sign_1ratio_1 \right)\binom{Ratio\\_sign_2=-}{Ratio\\_sign_2=/}ratio_2$$
+$$Price=\pm\left(Lim\_buy-Price\_bRatio\_sign_1ratio_1\right)
+\binom
+{Ratio\_sign_2=-}
+{Ratio\_sign_2=/}
+ratio_2$$
 
 Знак ± - зависит от того, какое выставлено значение параметра  [On_buy](/docs/05-params-description.html#_5-3-10-On-buy) на 2-й ноге. Если  Buy, тогда "+",если  Sell, то "-".
 
