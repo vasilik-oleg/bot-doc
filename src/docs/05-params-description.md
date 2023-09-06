@@ -245,8 +245,11 @@ Cancel on disconnect - включить механизм снятия заяво
 
 - `Orderbook` - параметр позволяет искать цену в стакане, таким образом, чтобы набрать необходимый объем. Цены на покупку и продажу набираются среди цен в стакане, начиная от лучшей цены в нужном направлении и далее вглубь стакана. Поиск необходимого объема происходит с помощью данной формулы:
 
-$Count\times Percent\of\quantity\times 0.01\times\begin{cases}v\_\_in\_left,&\mbox{if }open\ pose\
-v\_out\_left,&\mbox{if }close\pose\end{cases},$
+$$Count \times Percent\enspace of\enspace quantity \times 0.01 \times 
+\begin{cases} 
+v\_in\_left, &\text{if } \enspace open\enspace pose\\
+v\_out\_left, &\text{if } \enspace close\enspace pose 
+\end{cases},$$
 
 - `Orderbook+filter` - аналогично Orderbook, но вычитать из набираемого объема цены своих заявок (если на соответствующих ценах присутствуют свои заявки).
 
@@ -277,9 +280,9 @@ _Пример_:
 
 Если параметр включен, то когда цены [Price_s/Price_b](/docs/05-params-description.html#_5-2-40-price-s-price-b) попадают в спред или на противоположную сторону стакана, то они всегда будут выставляться не глубже, чем на один шаг цены в спред:
 
-$$Price\\_s_1 = \max \left(Price\\_s_0, offer - step\right),$$
+$Price\_s_1=\max\left(Price\_s_0,offer-step\right),$
 
-$$Price\\_b_1 = \min \left(Price\\_b_0, bid + step\right),$$
+$Price\_b_1=\min\left(Price\_b_0,bid+step\right),$
 
 где `bid`, `offer`, `step` - это бид, оффер и шаг цены по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге, нижний индекс "0" означает текущее значение параметра, нижний индекс "1" означает новое значение параметра.  
 Если у [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаги взведен флаг `Maker` и текущий спред в стакане равен одному шагу цены, то заявка на продажу будет выставлена по цене `offer`, а на покупку по цене `bid` (в противном случае заявка просто не смогла бы выставиться и "спамила" бы биржу).
