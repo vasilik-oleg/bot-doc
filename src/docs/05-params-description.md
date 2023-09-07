@@ -456,7 +456,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 Текущая позиция портфеля (в штуках портфелей), вычисляется по формуле:
 
-$$Pos=[Curpos_{first} / Count_{first}],$$
+$Pos=[Curpos_{first}/Count_{first}],$
 
 где Curpos<sub>first</sub> и Count<sub>first</sub> - это параметры [Curpos](/docs/05-params-description.html#_5-3-6-curpos) и [Count](/docs/05-params-description.html#_5-3-8-count) для инструмента портфеля с взведенным флагом [Is first](/docs/05-params-description.html#_5-3-11-is-first), и округляется вверх или вниз в зависимости от значения параметра [n_perc_fill](/docs/05-params-description.html#_5-2-11-5-n-perc-fill). Изменяется роботом, но может быть отредактирована пользователем вручную.
 
@@ -486,7 +486,8 @@ $$Pos=[Curpos_{first} / Count_{first}],$$
 
 Параметр, используемый для подсчета финансового результата, вычисляется по формуле:
 
-$$Opened = -\left( \sum_{i \in bought} tradePrice_i \times tradeAmount_i \times Mult_i \right) + \\ \left( \sum_{i \in sold} tradePrice_i \times tradeAmount_i \times Mult_i \right),$$
+$$Opened = -\left(\sum_{i\in bought}tradePrice_i\times tradeAmount_i\times Mult_i\right)+
+            \left(\sum_{i\in sold}tradePrice_i\times tradeAmount_i\times Mult_i\right),$$
 
 где tradePrice<sub>i</sub> - цена сделки;  
 tradeAmount<sub>i</sub> - количество лотов в сделке;  
@@ -545,17 +546,18 @@ Mult<sub>i</sub> - Fin res multiplier инструмента портфеля.
 `Buy` – расчетная цена на покупку. Нередактируемый параметр.  
 Упрощенная формула для двух бумаг:
 
-$${Is \ first: On \ buy = Buy, Second \ leg : On \ buy = Sell}$$
+${Is\enspase first: On\enspace buy = Buy, Second\enspace leg: On\enspace buy=Sell}$
 
-$${Buy = offer_1Ratio\\_sign_1ratio_1 - bid_2Ratio\\_sign_2ratio_2}$$
+${Buy=offer_1Ratio\_sign_1ratio_1-bid_2Ratio\_sign_2ratio_2}$
 
-$${Sell = bid_1Ratio\\_sign_1ratio_1 - offer_2Ratio\\_sign_2ratio_2}$$
+${Sell=bid_1Ratio\_sign_1ratio_1-offer_2Ratio\_sign_2ratio_2}$
 
-$${Ratio\\_sign = + \ or \ \times}$$
+${Ratio\_sign =+\enspace or\enspace \times}$
 
 Формулы расчета `Sell` и `Buy` для любого количества ног:
 
-$$Buy = \sum_{i} \begin{cases}-bid_i,& On \ by_i=Sell \\
+$$Buy = \sum_{i} 
+        \begin{cases}-bid_i,& On \ by_i=Sell \\
 offer_i,& On \ buy_i=Buy \end{cases} \begin{cases}+,& Ratio\\_sign_i=+ \\
 \times,& Ratio\\_sign_i=\times \end{cases} \begin{cases}ratio\\_b _{isfirst} \\
 ratio\\_s _{isfirst} \end{cases}$$
