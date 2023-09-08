@@ -556,16 +556,21 @@ ${Ratio\_sign =+\enspace or\enspace \times}$
 
 Формулы расчета `Sell` и `Buy` для любого количества ног:
 
-$$Buy = \sum_{i} 
-        \begin{cases}-bid_i,& On \ by_i=Sell \\
-offer_i,& On \ buy_i=Buy \end{cases} \begin{cases}+,& Ratio\\_sign_i=+ \\
-\times,& Ratio\\_sign_i=\times \end{cases} \begin{cases}ratio\\_b _{isfirst} \\
-ratio\\_s _{isfirst} \end{cases}$$
+$$Buy=\sum_{i} 
+        \begin{cases}-bid_i,& On\enspace by_i=Sell\\
+                     offer_i,& On\enspace buy_i=Buy\end{cases} 
+        \begin{cases}+,& Ratio\_sign_i=+\\
+                \times,& Ratio\\_sign_i=\times\end{cases} 
+        \begin{cases}ratio\_b_{isfirst}\\
+                     ratio\_s_{isfirst}\end{cases}$$
 
-$$Sell = \sum_{i} \begin{cases}bid_i,& On \ by_i=Buy \\
--offer_i,& On \ buy_i=Sell \end{cases} \begin{cases}+,& Ratio\\_sign_i=+ \\
-\times,& Ratio\\_sign_i=\times \end{cases} \begin{cases}ratio\\_b _{isfirst} \\
-ratio\\_s _{isfirst} \end{cases}$$
+$$Sell=\sum_{i} 
+        \begin{cases}bid_i,& On\enspace by_i=Buy\\
+                  -offer_i,& On\enspace buy_i=Sell\end{cases} 
+        \begin{cases}+,& Ratio\_sign_i=+\\
+                \times,& Ratio\_sign_i=\times\end{cases} 
+	\begin{cases}ratio\_b_{isfirst}\\
+                     ratio\_s_{isfirst}\end{cases}$$
 
 Наглядно продемонстрирована работа данных параметров в этом видео:
 
@@ -578,19 +583,39 @@ ratio\\_s _{isfirst} \end{cases}$$
 
 Формулы расчета `Price_s` и `Price_b` для двух бумаг:
 
-$$Price\\_s = \left(Lim\\_sell + offer_2Ratio\\_sign_2ratio_2 \right)\binom{-,Ratio\\_sign_1=+}{/,Ratio\\_sign_1=\times}ratio_1$$
+$$Price\_s=\left(Lim\_sell+offer_2Ratio\_sign_2ratio_2\right)
+               \binom
+	        {-,Ratio\_sign_1=+}
+	        {/,Ratio\_sign_1=\times}
+	          ratio_1$$
 
-$$Price\\_b = \left(Lim\\_buy + bid_2Ratio\\_sign_2ratio_2 \right)\binom{-,Ratio\\_sign_1=+}{/,Ratio\\_sign_1=\times}ratio_1$$
+$$Price\_b=\left(Lim\_buy+bid_2Ratio\_sign_2ratio_2\right)
+               \binom
+	        {-,Ratio\_sign_1=+}
+	        {/,Ratio\_sign_1=\times}
+	          ratio_1$$
 
 Формулы расчета `Price_s` и `Price_b` для любого количества ног:
+   
+$$Price\_s=\left(Lim\_sell_i-\sum_{i \neq isfirst}Sell_i\right) 
+               \begin{cases}
+	          -,& Ratio\_sign=+\\
+                  /,& Ratio\_sign=\times 
+	       \end{cases} 
+	       \begin{cases}
+	         ratio\_b_{isfirst}\\
+                 ratio\_s_{isfirst} 
+		\end{cases}$$
 
-$$Price\\_s = \left(Lim\\_sell_i - \sum _{i \neq isfirst} Sell _i\right) \begin{cases}-,& Ratio\\_sign=+ \\
-/,& Ratio\\_sign=\times \end{cases} \begin{cases}ratio\\_b _{isfirst} \\
-ratio\\_s _{isfirst} \end{cases}$$
-
-$$Price\\_b = \left(Lim\\_buy_i - \sum _{i \neq isfirst} Buy _i\right) \begin{cases}-,& Ratio\\_sign=+ \\
-/,& Ratio\\_sign=\times \end{cases} \begin{cases}ratio\\_b _{isfirst} \\
-ratio\\_s _{isfirst} \end{cases}$$
+$$Price\_b=\left(Lim\_buy_i-\sum_{i \neq isfirst}Buy_i\right) 
+             \begin{cases}
+	       -,& Ratio\_sign=+\\
+               /,& Ratio\_sign=\times 
+	     \end{cases} 
+             \begin{cases}
+	        ratio\_b_{isfirst}\\
+                ratio\_s_{isfirst}
+	     \end{cases}$$
 
 Видео, наглядно объясняющее работу параметров `Price_s/Price_b`:
 
@@ -609,8 +634,11 @@ ratio\\_s _{isfirst} \end{cases}$$
 
 Предполагаемый финансовый результат портфеля, вычисляется по формуле:
 
-$$Fin \ res = Opened + Commission \ sum + \sum_{i \in secs}Curpos_i \times Mult_i \times \begin{cases} secBid_i, & \mbox{if } Curpos_i > 0 \\ 
-secOffer_i, & \mbox{if } Curpos_i < 0 \end{cases},$$
+$$Fin \enspace res= Opened+Commission \enspace sum+\sum_{i \in secs}Curpos_i \times Mult_i \times
+   \begin{cases} 
+     secBid_i,&\mbox{if }Curpos_i>0\\ 
+     secOffer_i,&\mbox{if }Curpos_i<0 
+   \end{cases},$$
 
 где secBid<sub>i</sub> - лучшая цена на покупку инструмента портфеля;  
 secOffer<sub>i</sub> - лучшая цена на продажу инструмента портфеля;  
@@ -622,8 +650,11 @@ secs - список инструментов портфеля.
 
 `Fin res` без учета комиссии. Вычисляется по формуле:
 
-$$Fin \ res = Opened + \sum_{i \in secs}Curpos_i \times Mult_i \times \begin{cases} secBid_i, & \mbox{if } Curpos_i > 0 \\ 
-secOffer_i, & \mbox{if } Curpos_i < 0 \end{cases},$$
+$$Fin \enspace res = Opened+\sum_{i \in secs}Curpos_i\times Mult_i\times 
+   \begin{cases} 
+     secBid_i,&\mbox{if }Curpos_i> 0\\ 
+     secOffer_i,&\mbox{if }Curpos_i< 0 
+   \end{cases},$$
 
 где secBid<sub>i</sub> - лучшая цена на покупку инструмента портфеля;  
 secOffer<sub>i</sub> - лучшая цена на продажу инструмента портфеля;  
