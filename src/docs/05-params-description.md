@@ -634,10 +634,10 @@ $$Price\_b=\left(Lim\_buy_i-\sum_{i \neq isfirst}Buy_i\right)
 
 Предполагаемый финансовый результат портфеля, вычисляется по формуле:
 
-$$Fin\enspace res=Opened+Commission\enspace sum+\sum_{i\in secs}Curpos_i\times Mult_i\times
+$$Fin\enspace res=Opened+Commission\enspace sum+\sum_{i\in secs}Curpos_i \times Mult_i \times
    \begin{cases} 
-     secBid_i,&\mbox{if }Curpos_i>0\\ 
-   secOffer_i,&\mbox{if }Curpos_i<0 
+     secBid_i, &\text{if } Curpos_i>0\\ 
+   secOffer_i, &\text{if } Curpos_i<0 
    \end{cases},$$
 
 где secBid<sub>i</sub> - лучшая цена на покупку инструмента портфеля;  
@@ -650,10 +650,10 @@ secs - список инструментов портфеля.
 
 `Fin res` без учета комиссии. Вычисляется по формуле:
 
-$$Fin\enspace res=Opened+\sum_{i\in secs}Curpos_i\times Mult_i\times 
+$$Fin\enspace res=Opened+\sum_{i\in secs}Curpos_i \times Mult_i \times 
    \begin{cases} 
-     secBid_i,&\mbox{if }Curpos_i> 0\\ 
-   secOffer_i,&\mbox{if }Curpos_i< 0 
+     secBid_i, &\text{if } Curpos_i> 0\\ 
+   secOffer_i, &\text{if } Curpos_i< 0 
    \end{cases},$$
 
 где secBid<sub>i</sub> - лучшая цена на покупку инструмента портфеля;  
