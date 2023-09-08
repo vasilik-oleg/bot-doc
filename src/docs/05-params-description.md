@@ -557,15 +557,15 @@ ${Ratio\_sign =+\enspace or\enspace \times}$
 Формулы расчета `Sell` и `Buy` для любого количества ног:
 
 $$Buy=\sum_{i} 
-        \begin{cases}-bid_i,& On\enspace by_i=Sell\\
+        \begin{cases}-bid_i,& On\enspace buy_i=Sell\\
                      offer_i,& On\enspace buy_i=Buy\end{cases} 
         \begin{cases}+,& Ratio\_sign_i=+\\
-                \times,& Ratio\\_sign_i=\times\end{cases} 
+                \times,& Ratio\_sign_i=\times\end{cases} 
         \begin{cases}ratio\_b_{isfirst}\\
                      ratio\_s_{isfirst}\end{cases}$$
 
 $$Sell=\sum_{i} 
-        \begin{cases}bid_i,& On\enspace by_i=Buy\\
+        \begin{cases}bid_i,& On\enspace buy_i=Buy\\
                   -offer_i,& On\enspace buy_i=Sell\end{cases} 
         \begin{cases}+,& Ratio\_sign_i=+\\
                 \times,& Ratio\_sign_i=\times\end{cases} 
@@ -634,10 +634,10 @@ $$Price\_b=\left(Lim\_buy_i-\sum_{i \neq isfirst}Buy_i\right)
 
 Предполагаемый финансовый результат портфеля, вычисляется по формуле:
 
-$$Fin \enspace res= Opened+Commission \enspace sum+\sum_{i \in secs}Curpos_i \times Mult_i \times
+$$Fin\enspace res= Opened+Commission\enspace sum+\sum_{i \in secs}Curpos_i\times Mult_i\times
    \begin{cases} 
      secBid_i,&\mbox{if }Curpos_i>0\\ 
-     secOffer_i,&\mbox{if }Curpos_i<0 
+    secOffer_i,&\mbox{if }Curpos_i<0 
    \end{cases},$$
 
 где secBid<sub>i</sub> - лучшая цена на покупку инструмента портфеля;  
@@ -650,10 +650,10 @@ secs - список инструментов портфеля.
 
 `Fin res` без учета комиссии. Вычисляется по формуле:
 
-$$Fin \enspace res = Opened+\sum_{i \in secs}Curpos_i\times Mult_i\times 
+$$Fin\enspace res = Opened+\sum_{i\in secs}Curpos_i\times Mult_i\times 
    \begin{cases} 
      secBid_i,&\mbox{if }Curpos_i> 0\\ 
-     secOffer_i,&\mbox{if }Curpos_i< 0 
+   secOffer_i,&\mbox{if }Curpos_i< 0 
    \end{cases},$$
 
 где secBid<sub>i</sub> - лучшая цена на покупку инструмента портфеля;  
@@ -802,8 +802,12 @@ secs - список инструментов портфеля.
 Флаг, если взведен, то при каждой смене дня будет осуществляться автоматическая подвижка лимитов по формулам:
 
 $$\begin{align*}
-			Lim\\_Sell _1 = Lim\\_Sell_0 - \frac{\left( Lim\\_Sell_0 + Lim\\_Buy_0 \right) \times days\\_to\\_expiry\_{SPOT}}{2 \times days\\_to\\_expiry},\\
-			Lim\\_Buy _1 = Lim\\_Buy _0 - \frac{\left( Lim\\_Sell _0 + Lim\\_Buy _0 \right) \times days\\_to\\_expiry\_{SPOT}}{2 \times days\\_to\\_expiry},
+	Lim\_Sell_1=Lim\_Sell_0-
+                \frac{\left(Lim\_Sell_0+Lim\_Buy_0 \right)\times days\_to\_expiry\_{SPOT}}
+                     {2\times days\_to\_expiry},\\
+        Lim\_Buy_1=Lim\_Buy_0-
+	        \frac{\left(Lim\_Sell_0+Lim\_Buy_0 \right)\times days\_to\_expiry\_{SPOT}}
+	             {2\times days\_to\_expiry},
 		\end{align*}$$
 
 где days_to_expiry - целое количество дней до экспирации данной бумаги;  
@@ -967,13 +971,13 @@ _Пример:_
 
 Если флаг взведен, то в случае, если произойдет следующая ситуация:
 
-$$pos - robot\\_pos \neq pos\\_lag$$
+$pos-robot\_pos\neq pos\_lag$
 
 в логе вам будут приходить оповещения о том, что позиция на бирже и позиция в роботе не совпадают.
 (`pos` - позиция на бирже, а `robot_pos` - позиция в роботе по портфелям, торгующим данной бумагой на данном подключении)
 Если флаг не взведен, то оповещения будут приходить только в случае, если:
 
-$$| pos - robot\\_pos | > pos\\_lag$$
+$|pos-robot\_pos|>pos\_lag$$
 
 #### **5.5.1.9. Tgr notify**
 
