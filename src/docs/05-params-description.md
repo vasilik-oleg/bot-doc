@@ -995,3 +995,81 @@ $|pos-robot\_pos|>pos\_lag$$
 #### **5.5.2.2. Limit**
 
 Лимит по валюте.
+
+
+## **5.6. Список проверок в алгоритме при создании/редактировании портфеля/бумаги**
+
+Если условие в списке ниже ИСТИННО, то такие настройки НЕ валидны:
+
+### **5.6.1. Для портфеля**
+
+1) Quote выключен, а Simply first включен;
+
+2) Робот без поддержки стаканов и включен Simply_first;
+
+3) Робот без поддержки стаканов и Type price = bid/offer;
+
+4) Выключен Quote и включен параметр инструмента Only maker;
+
+5) Значение Max not hedged > 1 и позиция по бумаге на бирже стоит отдельно на покупку и на продажу;
+
+6) v_min и v_max имеют разные знаки (или одно из них = 0) и позиция по бумаге на бирже стоит отдельно на покупку и на продажу;
+
+### **5.6.2. Для инструмента**
+
+1) Для бумаг OKEX-SPOT: Сlient code не оканчивается на "/cash", "/cross_base", "/cross_quote", "/isolated" и не должен быть “virtual”;
+
+2) Для бумаг OKEX-FUT: Сlient code не оканчивается на "/cross" или "/isolated" и не должен быть “virtual”;
+
+3) Для первой ноги Count type = constant и Count = 0;
+
+4) Для первой ноги On buy = Sell;
+
+5) Выбрано пустое значение для Сlient code и Count не 0;
+
+6) На второй, третьей и т.д. ноге включен Only maker;
+
+### **5.6.3. Запрещается менять следующие параметры портфеля, когда он торгует или есть активные заявки**
+
+1) Is first;
+
+2) Client code;
+
+3) On buy;
+
+4) Leverage;
+
+5) Curpos;
+
+6) Count;
+
+7) Count formula;
+
+8) TP;
+
+9) Ratio;
+
+10) Ratio type;
+
+11) Ratio sign;
+
+12) Ratio buy formula;
+
+13) Ratio sell formula;
+
+14) Custom trade;
+
+15) Extra formulas;
+
+16) Trade formula;
+
+17) Extra field #1;
+
+18) Extra field #2;
+
+19) Type trade;
+
+20) Price type;
+
+21) Type;
+
