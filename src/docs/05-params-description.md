@@ -1003,17 +1003,17 @@ $|pos-robot\_pos|>pos\_lag$$
 
 ### **5.6.1. Для портфеля**
 
-1) Quote выключен, а Simply first включен;
+1) Параметр [Quote](/docs/05-params-description.html#_5-2-6-quote) выключен, а [Simply first](/docs/05-params-description.html#_5-2-9-simply-first) включен;
 
-2) Робот без поддержки стаканов и включен Simply_first;
+2) Сборка робота без поддержки стаканов и включен параметр [Simply first](/docs/05-params-description.html#_5-2-9-simply-first);
 
-3) Робот без поддержки стаканов и Type price = bid/offer;
+3) Сбрка робота без поддержки стаканов и значение параметра [Type price](/docs/05-params-description.html#_5-2-5-type-price) = bid/offer;
 
-4) Выключен Quote и включен параметр инструмента Only maker;
+4) Выключен параметр [Quote](/docs/05-params-description.html#_5-2-6-quote) и включен параметр инструмента [Only maker](/docs/05-params-description.html#_5-3-37-only-maker);
 
-5) Значение Max not hedged > 1 и позиция по бумаге на бирже стоит отдельно на покупку и на продажу;
+5) Значение параметра [Max not hedget](/docs/05-params-description.html#_5-2-16-max-not-hadget) > 1 и позиция по бумаге на бирже стоит отдельно на покупку и на продажу;
 
-6) v_min и v_max имеют разные знаки (или одно из них = 0) и позиция по бумаге на бирже стоит отдельно на покупку и на продажу;
+6) Значени я параметров [v_min/v_max](/docs/05-params-description.html#_5-2-11-1-v-min-v-max) имеют разные знаки (или одно из них = 0) и позиция по бумаге на бирже стоит отдельно на покупку и на продажу;
 
 ### **5.6.2. Для инструмента**
 
@@ -1021,13 +1021,13 @@ $|pos-robot\_pos|>pos\_lag$$
 
 2) Для бумаг OKEX-FUT: Сlient code не оканчивается на "/cross" или "/isolated" и не должен быть “virtual”;
 
-3) Для первой ноги Count type = constant и Count = 0;
+3) Для первой ноги  [Count type](/docs/05-params-description.html#_5-3-7-count-type) = constant и  [Count](/docs/05-params-description.html#_5-3-8-count) = 0;
 
-4) Для первой ноги On buy = Sell;
+4) Для первой ноги [On_by](/docs/05-params-description.html#_5-3-10-on-buy) = Sell;
 
-5) Выбрано пустое значение для Сlient code и Count не 0;
+5) Выбрано пустое значение для [Сlient code](/docs/05-params-description.html#_5-3-24-client-code) и [Count](/docs/05-params-description.html#_5-3-8-count) не 0;
 
-6) На второй, третьей и т.д. ноге включен Only maker;
+6) На второй, третьей и т.д. ноге включен [Only maker](/docs/05-params-description.html#_5-3-37-only-maker);
 
 ### **5.6.3. Запрещается менять следующие параметры портфеля, когда он торгует или есть активные заявки**
 
