@@ -34,8 +34,8 @@
 $k3=\left(\|{Lim\_Sell_0- Lim\_Buy_0}|-TP-K\right)\times\frac{V}{curpos},$ 
 
 $$k4= 
-  \begin{cases}k3 + K2,&\mbox{if }Lim\_Sell_0-Lim\_Buy_0\geq 0\\
-              -k3 + K2,&\mbox{if }Lim\_Sell_0-Lim\_Buy_0<0 
+  \begin{cases}k3+K2, &\text{if }Lim\_Sell_0-Lim\_Buy_0\geq 0\\
+              -k3+K2, &\text{if }Lim\_Sell_0-Lim\_Buy_0<0 
   \end{cases},$$ 
 
 $$Lim\_Buy_1= Lim\_Buy_0+\frac{|{diffpos}|}{V}\times 
@@ -60,18 +60,18 @@ $Lim\_Buy_1=Lim\_Sell_0-TP,$
 
 $curpos\neq 0$
 
-$k3=\left(|{Lim\_Sell_0-Lim\_Buy_0}-TP-K\right)\times\frac{V}{curpos},$
+$k3=\left(|Lim\_Sell_0-Lim\_Buy_0|-TP-K\right)\times\frac{V}{curpos},$
 
 $$k4=
   \begin{cases} 
-    -k3+K2,&\mbox{if }Lim\_Sell_0-Lim\_Buy_0\geq 0\\
-     k3+K2,&\mbox{if }Lim\_Sell_0-Lim\_Buy_0<0
+    -k3+K2, &\text{if }Lim\_Sell_0-Lim\_Buy_0\geq 0\\
+     k3+K2, &\text{if }Lim\_Sell_0-Lim\_Buy_0<0
   \end{cases},$$ 
 	
 $$Lim\_Sell_1=Lim\_Sell_0-\frac{|{diffpos}|}{V}\times 
    \begin{cases} 
-     k4,&\mbox{if }curpos<0\\
-     K1,&\mbox{if }curpos>0 
+     k4, &\text{if }curpos<0\\
+     K1, &\text{if }curpos>0 
    \end{cases},$$
    	
 $$Lim\_Buy_1=Lim\_Buy_0-\frac{|{diffpos}|}{V}\times 
