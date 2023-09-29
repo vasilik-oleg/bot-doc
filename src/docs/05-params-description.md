@@ -555,7 +555,7 @@ Mult<sub>i</sub> - Fin res multiplier инструмента портфеля.
 `Buy` – расчетная цена на покупку. Нередактируемый параметр.  
 Упрощенная формула для двух бумаг:
 
-${Is\enspase first: On\enspace buy = Buy, Second\enspace leg: On\enspace buy=Sell}$
+${Is\enspase first: On\enspace buy=Buy, Second\enspace leg: On\enspace buy=Sell}$
 
 ${Buy=offer_1Ratio\_sign_1ratio_1-bid_2Ratio\_sign_2ratio_2}$
 
@@ -697,7 +697,9 @@ secs - список инструментов портфеля.
 
 ### **5.3.6. Curpos**
 
-Текущая позиция робота по данной бумаге в лотах.
+Текущая позиция робота по данной бумаге в лотах.  
+
+Если сделка по инструменту портфеля меняет позицию клиента по другим инструментам портфеля, то изменена будет позиция только по инструменту-инициатору сделки.
 
 ### **5.3.7. Count type**
 
@@ -734,11 +736,11 @@ secs - список инструментов портфеля.
 
 ### **5.3.12. k**
 
-Задает размер искусственного проскальзывания (отступ от рыночной цены (в пунктах), т.е. при покупке цена выставления `offer` + `k`, при продаже цена выставления `bid`−`k`, где `bid` и `offer` – лучшие цены на продажу и покупку, соответственно).
+Задает размер искусственного проскальзывания (отступ от рыночной цены, т.е. при покупке цена выставления `offer` + `k`, при продаже цена выставления `bid`−`k`, где `bid` и `offer` – лучшие цены на продажу и покупку, соответственно).
 
 ### **5.3.13. k_sl**
 
-Аналог параметра `k`, используется во время перестановок по стоп-лоссу и по таймеру. Задает размер искусственного проскальзывания (отступ от рыночной цены (в пунктах), т.е. для заявки на покупку цена выставления `offer` + `k_sl`, для заявки на продажу цена выставления `bid`−`k_sl`, где `bid` и `offer` – лучшие цены на продажу и покупку, соответственно).
+Аналог параметра `k`, используется во время перестановок по стоп-лоссу и по таймеру. Задает размер искусственного проскальзывания (отступ от рыночной цены, т.е. для заявки на покупку цена выставления `offer` + `k_sl`, для заявки на продажу цена выставления `bid`−`k_sl`, где `bid` и `offer` – лучшие цены на продажу и покупку, соответственно).
 
 ### **5.3.14. SLE**
 
@@ -746,7 +748,7 @@ secs - список инструментов портфеля.
 
 ### **5.3.15. SL**
 
-Значение стоп-лосса (в пунктах), при достижении которого необходимо снимать заявку, если она не прошла до этого момента и бросать снова по новой рыночной цене (стоп-лосс откладывается от первоначальной цены выставления заявки).
+Значение стоп-лосса, при достижении которого необходимо снимать заявку, если она не прошла до этого момента и бросать снова по новой рыночной цене (стоп-лосс откладывается от первоначальной цены выставления заявки).
 
 ### **5.3.16. TE**
 
@@ -1042,45 +1044,45 @@ $|pos-robot\_pos|>pos\_lag$$
 
 ### **5.6.3. Запрещается менять следующие параметры портфеля, когда он торгует или есть активные заявки**
 
-1) [Is first](/docs/05-params-description.html#_5-3-11-is-first);
+1) [Is first](/docs/05-params-description.html#_5-3-11-is-first)
 
-2) [Client code](/docs/05-params-description.html#_5-1-2-8-client-code);
+2) [Client code](/docs/05-params-description.html#_5-1-2-8-client-code)
 
-3) [On_by](/docs/05-params-description.html#_5-3-10-on-buy);
+3) [On_by](/docs/05-params-description.html#_5-3-10-on-buy)
 
-4) [Leverage](/docs/05-params-description.html#_5-3-38-leverage);
+4) [Leverage](/docs/05-params-description.html#_5-3-38-leverage)
 
-5) [Curpos](/docs/05-params-description.html#_5-3-6-curpos);
+5) [Curpos](/docs/05-params-description.html#_5-3-6-curpos)
 
-6) [Count](/docs/05-params-description.html#_5-3-8-count);
+6) [Count](/docs/05-params-description.html#_5-3-8-count)
 
-7)  [Count formula](/docs/05-params-description.html#_5-3-9-count-formula);
+7)  [Count formula](/docs/05-params-description.html#_5-3-9-count-formula)
 
-8) [TP](/docs/05-params-description.html#_5-3-26-tp);
+8) [TP](/docs/05-params-description.html#_5-3-26-tp)
 
-9) [Ratio](/docs/05-params-description.html#_5-3-20-ratio);
+9) [Ratio](/docs/05-params-description.html#_5-3-20-ratio)
 
-10) [Ratio type](/docs/05-params-description.html#_5-3-27-ratio-type);
+10) [Ratio type](/docs/05-params-description.html#_5-3-27-ratio-type)
 
-11) [Ratio sign](/docs/05-params-description.html#_5-3-19-ratio-sign);
+11) [Ratio sign](/docs/05-params-description.html#_5-3-19-ratio-sign)
 
-12) [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula);
+12) [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula)
 
-13) [Ratio sell formula](/docs/05-params-description.html#_5-3-29-ratio-buy-formula);
+13) [Ratio sell formula](/docs/05-params-description.html#_5-3-29-ratio-buy-formula)
 
-14) [Custom trade](/docs/05-params-description.html#_5-2-31-custom-trade);
+14) [Custom trade](/docs/05-params-description.html#_5-2-31-custom-trade)
 
-15) [Extra formulas](/docs/05-params-description.html#_5-2-33-extra-formulas);
+15) [Extra formulas](/docs/05-params-description.html#_5-2-33-extra-formulas)
 
-16) [Trade formula](/docs/05-params-description.html#_5-2-32-trade-formula);
+16) [Trade formula](/docs/05-params-description.html#_5-2-32-trade-formula)
 
-17) [Extra field#1](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2);
+17) [Extra field#1](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2)
 
-18) [Extra field#2](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2);
+18) [Extra field#2](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2)
 
-19) [Type trade](/docs/05-params-description.html#_5-2-4-type-trade);
+19) [Type trade](/docs/05-params-description.html#_5-2-4-type-trade)
 
-20) [Type price](/docs/05-params-description.html#_5-2-5-type-price);
+20) [Type price](/docs/05-params-description.html#_5-2-5-type-price)
 
-21) [Type](/docs/05-params-description.html#_5-2-3-type);
+21) [Type](/docs/05-params-description.html#_5-2-3-type)
 
