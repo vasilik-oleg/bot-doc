@@ -555,7 +555,7 @@ Mult<sub>i</sub> - Fin res multiplier инструмента портфеля.
 `Buy` – расчетная цена на покупку. Нередактируемый параметр.  
 Упрощенная формула для двух бумаг:
 
-${Is\enspsce first: On\enspace buy=Buy, Second\enspace leg: On\enspace buy=Sell}$
+${Is\enspace first: On\enspace buy=Buy, Second\enspace leg: On\enspace buy=Sell}$
 
 ${Buy=offer_1Ratio\_sign_1ratio_1-bid_2Ratio\_sign_2ratio_2}$
 
