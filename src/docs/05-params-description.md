@@ -1042,45 +1042,45 @@ $|pos-robot\_pos|>pos\_lag$$
 
 ### **5.6.3. Запрещается менять следующие параметры портфеля, когда он торгует или есть активные заявки**
 
-1) [Is first](/docs/05-params-description.html#_5-3-11-is-first);
+1) [Is first](/docs/05-params-description.html#_5-3-11-is-first)
 
-2) [Client code](/docs/05-params-description.html#_5-1-2-8-client-code);
+2) [Client code](/docs/05-params-description.html#_5-1-2-8-client-code)
 
-3) [On_by](/docs/05-params-description.html#_5-3-10-on-buy);
+3) [On_by](/docs/05-params-description.html#_5-3-10-on-buy)
 
-4) [Leverage](/docs/05-params-description.html#_5-3-38-leverage);
+4) [Leverage](/docs/05-params-description.html#_5-3-38-leverage)
 
-5) [Curpos](/docs/05-params-description.html#_5-3-6-curpos);
+5) [Curpos](/docs/05-params-description.html#_5-3-6-curpos)
 
-6) [Count](/docs/05-params-description.html#_5-3-8-count);
+6) [Count](/docs/05-params-description.html#_5-3-8-count)
 
-7)  [Count formula](/docs/05-params-description.html#_5-3-9-count-formula);
+7)  [Count formula](/docs/05-params-description.html#_5-3-9-count-formula)
 
-8) [TP](/docs/05-params-description.html#_5-3-26-tp);
+8) [TP](/docs/05-params-description.html#_5-3-26-tp)
 
-9) [Ratio](/docs/05-params-description.html#_5-3-20-ratio);
+9) [Ratio](/docs/05-params-description.html#_5-3-20-ratio)
 
-10) [Ratio type](/docs/05-params-description.html#_5-3-27-ratio-type);
+10) [Ratio type](/docs/05-params-description.html#_5-3-27-ratio-type)
 
-11) [Ratio sign](/docs/05-params-description.html#_5-3-19-ratio-sign);
+11) [Ratio sign](/docs/05-params-description.html#_5-3-19-ratio-sign)
 
-12) [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula);
+12) [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula)
 
-13) [Ratio sell formula](/docs/05-params-description.html#_5-3-29-ratio-buy-formula);
+13) [Ratio sell formula](/docs/05-params-description.html#_5-3-29-ratio-buy-formula)
 
-14) [Custom trade](/docs/05-params-description.html#_5-2-31-custom-trade);
+14) [Custom trade](/docs/05-params-description.html#_5-2-31-custom-trade)
 
-15) [Extra formulas](/docs/05-params-description.html#_5-2-33-extra-formulas);
+15) [Extra formulas](/docs/05-params-description.html#_5-2-33-extra-formulas)
 
-16) [Trade formula](/docs/05-params-description.html#_5-2-32-trade-formula);
+16) [Trade formula](/docs/05-params-description.html#_5-2-32-trade-formula)
 
-17) [Extra field#1](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2);
+17) [Extra field#1](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2)
 
-18) [Extra field#2](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2);
+18) [Extra field#2](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2)
 
-19) [Type trade](/docs/05-params-description.html#_5-2-4-type-trade);
+19) [Type trade](/docs/05-params-description.html#_5-2-4-type-trade)
 
-20) [Type price](/docs/05-params-description.html#_5-2-5-type-price);
+20) [Type price](/docs/05-params-description.html#_5-2-5-type-price)
 
-21) [Type](/docs/05-params-description.html#_5-2-3-type);
+21) [Type](/docs/05-params-description.html#_5-2-3-type)
 
