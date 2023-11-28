@@ -184,7 +184,7 @@ Payload:
 | type = available_portfolio_list.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -754,7 +754,7 @@ Payload:
 | type = portfolio.remove | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 | data | y | object |  |  |
 | > r_id | y | string |  | Robot ID |
 | > p_id | y | string |  | Portfolio name |
@@ -1191,7 +1191,7 @@ Payload:
 | type = portfolio.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -2304,7 +2304,7 @@ Payload:
 | type = robot.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -2726,7 +2726,7 @@ Payload:
 | type = adm_robot.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -2942,7 +2942,7 @@ Payload:
 | type = available_robot_list.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -3398,7 +3398,7 @@ Payload:
 | type = orders.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -3678,7 +3678,7 @@ Payload:
 | type = portfolio_fin_res.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -4497,7 +4497,7 @@ Payload:
 | type = portfolio_deals.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -5222,7 +5222,7 @@ Payload:
 | type = portfolio_logs.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -5555,7 +5555,7 @@ Payload:
 | type = robot_logs.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -6307,6 +6307,10 @@ Payload:
 | >>> use_in_mc | n | boolean |  | Always true, it is not used and will be removed |
 | >>> disabled | y | boolean |  | Disabled connection |
 | >>> stream_state | y | object |  | Dictionary of data-stream states with stream name as a key and value of type stream_status |
+| >>> has_sec_man | y | boolean |  | Has security manager |
+| >>> sec_manager | y | object |  | Dictionary of symbols to find |
+| >>>> SYMBOL | y | string:object |  | Unique symbol to find |
+| >>>>> state | y | number | symbol_find_state | State |
 
 Example:
 
@@ -6322,7 +6326,9 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
-                "stream_state": {}
+                "stream_state": {},
+		"has_sec_man": false,
+		"sec_manager": {}
             },
             "8_FAST CURR BestPrices": {
                 "sec_type": 8,
@@ -6330,7 +6336,9 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
-                "stream_state": {}
+                "stream_state": {},
+		"has_sec_man": false,
+		"sec_manager": {}
             },
             "8_FAST CURR Definitions": {
                 "sec_type": 8,
@@ -6338,7 +6346,9 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
-                "stream_state": {}
+                "stream_state": {},
+		"has_sec_man": false,
+		"sec_manager": {}
             },
             "8_FAST CURR Orderlog": {
                 "sec_type": 8,
@@ -6346,7 +6356,9 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
-                "stream_state": {}
+                "stream_state": {},
+		"has_sec_man": false,
+		"sec_manager": {}
             },
             "4_FAST FOND BestPrices": {
                 "sec_type": 4,
@@ -6354,7 +6366,9 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
-                "stream_state": {}
+                "stream_state": {},
+		"has_sec_man": false,
+		"sec_manager": {}
             },
             "4_FAST FOND Definitions": {
                 "sec_type": 4,
@@ -6362,7 +6376,9 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
-                "stream_state": {}
+                "stream_state": {},
+		"has_sec_man": false,
+		"sec_manager": {}
             },
             "4_FAST FOND Orderlog": {
                 "sec_type": 4,
@@ -6370,7 +6386,9 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
-                "stream_state": {}
+                "stream_state": {},
+		"has_sec_man": false,
+		"sec_manager": {}
             },
             "3_FAST Futures Definitions": {
                 "sec_type": 3,
@@ -6378,7 +6396,9 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
-                "stream_state": {}
+                "stream_state": {},
+		"has_sec_man": false,
+		"sec_manager": {}
             },
             "17592186044416_FAST INDEXES": {
                 "sec_type": 17592186044416,
@@ -6386,7 +6406,9 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
-                "stream_state": {}
+                "stream_state": {},
+		"has_sec_man": false,
+		"sec_manager": {}
             },
             "3_FAST Options Definitions": {
                 "sec_type": 3,
@@ -6394,7 +6416,9 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
-                "stream_state": {}
+                "stream_state": {},
+		"has_sec_man": false,
+		"sec_manager": {}
             },
             "3_FAST Orderlog": {
                 "sec_type": 3,
@@ -6402,7 +6426,9 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
-                "stream_state": {}
+                "stream_state": {},
+		"has_sec_man": false,
+		"sec_manager": {}
             },
             "34359738368_binancefut_listen": {
                 "sec_type": 34359738368,
@@ -6410,7 +6436,9 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
-                "stream_state": {}
+                "stream_state": {},
+		"has_sec_man": false,
+		"sec_manager": {}
             },
             "67108864_okex_listen": {
                 "sec_type": 67108864,
@@ -6418,7 +6446,9 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
-                "stream_state": {}
+                "stream_state": {},
+		"has_sec_man": true,
+                "stream_state": {"qwe":{"state":4}}
             },
             "67108864_okex_listen_aws": {
                 "sec_type": 67108864,
@@ -6432,7 +6462,9 @@ Example:
                     "Funding": 0,
                     "OB": 0,
                     "Socket": 1
-                }
+                },
+		"has_sec_man": false,
+		"sec_manager": {}
             }
         }
     },
@@ -6463,6 +6495,10 @@ Payload:
 | >>> use_in_mc | n | boolean |  | It is not used and will be removed |
 | >>> disabled | n | boolean |  | Disabled connection |
 | >>> stream_state | n | object |  | Dictionary of data-stream states with stream name as a key and value of type stream_status |
+| >>> has_sec_man | n | boolean |  | Has security manager |
+| >>> sec_manager | n | object |  | Dictionary of symbols to find |
+| >>>> SYMBOL | y | string:object |  | Unique symbol to find |
+| >>>>> state | n | number | symbol_find_state | State |
 
 Example:
 
@@ -6481,7 +6517,8 @@ Example:
                     "Funding": 1,
                     "OB": 1,
                     "Socket": 2
-                }
+                },
+		"sec_manager":{"test":1}
             }
         }
     },
@@ -6573,6 +6610,10 @@ Payload:
 | >>> use_in_mc | n | boolean |  | Always true, it is not used and will be removed |
 | >>> disabled | y | boolean |  | Disabled connection |
 | >>> stream_state | n | object |  | Dictionary of data-stream states with stream name as a key and value of type stream_status |
+| >>> has_sec_man | y | boolean |  | Has security manager |
+| >>> sec_manager | n | object |  | Dictionary of symbols to find |
+| >>>> SYMBOL | y | string:object |  | Unique symbol to find |
+| >>>>> state | n | number | symbol_find_state | State |
 
 Example:
 
@@ -6588,6 +6629,7 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
+		"has_sec_man": false,
                 "stream_state": {}
             },
             "8_FAST CURR BestPrices": {
@@ -6596,6 +6638,7 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
+		"has_sec_man": false,
                 "stream_state": {}
             },
             "8_FAST CURR Definitions": {
@@ -6604,6 +6647,7 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
+		"has_sec_man": false,
                 "stream_state": {}
             },
             "8_FAST CURR Orderlog": {
@@ -6612,6 +6656,7 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
+		"has_sec_man": false,
                 "stream_state": {}
             },
             "4_FAST FOND BestPrices": {
@@ -6620,6 +6665,7 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
+		"has_sec_man": false,
                 "stream_state": {}
             },
             "4_FAST FOND Definitions": {
@@ -6628,6 +6674,7 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
+		"has_sec_man": false,
                 "stream_state": {}
             },
             "4_FAST FOND Orderlog": {
@@ -6636,6 +6683,7 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
+		"has_sec_man": false,
                 "stream_state": {}
             },
             "3_FAST Futures Definitions": {
@@ -6644,6 +6692,7 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
+		"has_sec_man": false,
                 "stream_state": {}
             },
             "17592186044416_FAST INDEXES": {
@@ -6652,6 +6701,7 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
+		"has_sec_man": false,
                 "stream_state": {}
             },
             "3_FAST Options Definitions": {
@@ -6660,6 +6710,7 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
+		"has_sec_man": false,
                 "stream_state": {}
             },
             "3_FAST Orderlog": {
@@ -6668,6 +6719,7 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
+		"has_sec_man": false,
                 "stream_state": {}
             },
             "34359738368_binancefut_listen": {
@@ -6676,6 +6728,7 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
+		"has_sec_man": false,
                 "stream_state": {}
             },
             "67108864_okex_listen": {
@@ -6684,6 +6737,7 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": true,
+		"has_sec_man": false,
                 "stream_state": {}
             },
             "67108864_okex_listen_aws": {
@@ -6692,6 +6746,7 @@ Example:
                 "bind_ip": "",
                 "use_in_mc": true,
                 "disabled": false,
+		"has_sec_man": false,
                 "stream_state": {
                     "Definitions": 0,
                     "Extra": 0,
@@ -6779,7 +6834,7 @@ Payload:
 | type = data_conn.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -6934,7 +6989,192 @@ Example:
 	"r":"e"
 }
 ```
-</details>   
+</details>
+
+### 12.7.5. Добавить/удалить бумагу в менеджер бумаг
+
+Добавить/удалить бумагу в менеджер бумаг
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = data_conn.add_symbol/del_symbol | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > conn | y | object |  | Connection object |
+| >> name | y | string |  | Connection name |
+| >> sec_type | y | number | sec_type | Security type |
+| >> symbol | y | string |  | Symbol to add/del |
+
+Example:
+
+```json
+{
+	"type":"data_conn.add_symbol",
+	"data":
+	{
+		"sec_type":2048,
+		"name":"cqg_listen_roma",
+		"symbol":"F.US.EPZ2"
+	},
+	"eid":"q"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = data_conn.add_symbol/del_symbol | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+
+Example:
+
+```json
+{
+	"type":"data_conn.del_symbol",
+	"data":{},
+	"r":"p",
+	"eid":"q",
+	"ts":1669810178671387651
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = data_conn.add_symbol/del_symbol | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"data_conn.add_symbol",
+	"data":
+	{
+		"msg":"Operation timeout",
+		"code":666
+	},
+	"ts":1657693572940145200,
+	"eid":"q",
+	"r":"e"
+}
+```
+</details>  
+
+### 12.7.6. Найти бумагу для менеджера бумаг
+
+Найти бумагу для менеджера бумаг
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = data_conn.find_symbol | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > conn | y | object |  | Connection object |
+| >> name | y | string |  | Connection name |
+| >> sec_type | y | number | sec_type | Security type |
+| >> symbol | y | string |  | Symbol to add/del |
+
+Example:
+
+```json
+{
+	"type":"data_conn.find_symbol",
+	"data":
+	{
+		"sec_type":2048,
+		"name":"cqg_listen_roma",
+		"symbol":"F.US.EPZ2"
+	},
+	"eid":"q"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = data_conn.find_symbol | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > found | y | string |  | Found symbol |
+| > warn | y | string |  | Warning (empty string if no warning) |
+
+Example:
+
+```json
+{
+	"type":"data_conn.find_symbol",
+	"data":{"found":"F.US.EPU23","warn":"Security expired"},
+	"r":"p",
+	"eid":"q",
+	"ts":1669810178671387651
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = data_conn.find_symbol | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"find_symbol",
+	"data":
+	{
+		"msg":"Requested symbol .US.EPU23 was not found",
+		"code":777
+	},
+	"ts":1657693572940145200,
+	"eid":"q",
+	"r":"e"
+}
+```
+</details>
 
 ## 12.8. Транзакционные подключения
 
@@ -7887,7 +8127,7 @@ Payload:
 | type = trans_conn.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -8181,7 +8421,7 @@ Payload:
 | type = trans_conn_orders.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -8628,7 +8868,7 @@ Payload:
 | type = trans_conn_poses.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -10340,7 +10580,7 @@ Payload:
 | type = adm_servers.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -10534,7 +10774,7 @@ Payload:
 | type = adm_state.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -10937,7 +11177,7 @@ Payload:
 | type = companies.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -12054,7 +12294,7 @@ Payload:
 | type = user.unsubscribe | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| e = p | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 
 Example:
 
@@ -12407,11 +12647,12 @@ Example:
 | language | string | Enum: “en” — English, “ru” — Russian |
 | portfolio_id | [string, string] | Pair of strings, first element is a robot ID, second element is a portfolio name |
 | sec_type | number | Integer value, security exchange/connection type. Value should be received in template |
-| stream_status | number | Integer value, enum: 0 — disconnected, 1 — connecting, 2 —connected, 3— unknown |
-| trading_status | number | Integer value, enum: 0 — not trading, 2 —trading, 3— unknown |
-| process_status | number | Integer value, enum: 0 — not running, 2 —running, 3— unknown |
+| stream_status | number | Integer value, enum: 0 — disconnected, 1 — connecting, 2 — connected, 3 — unknown |
+| trading_status | number | Integer value, enum: 0 — not trading, 2 —trading, 3 — unknown |
+| process_status | number | Integer value, enum: 0 — not running, 2 —running, 3 — unknown |
 | direction | number | Integer value, enum: 1 — buy, 2 — sell |
 | order_status | number | Integer value, enum: 1 — adding, 2 — running, 4 — deleting, 5 — first_deleting, 6 — sl_deleting, 7 — moving, 99 — add_error |
+| symbol_find_state | number | Integer value, enum: 0 — unknown, 1 — searching, 2 — found, 3 — expired, 4 — error |
 | log_level | number | 0 — LEVEL_DEBUG, зеленый (обычно, запись пользовательских редактирований робота) <br> 1 — LEVEL_INFO, синий <br> 2 — LEVEL_WARNING, желтый <br> 3 — LEVEL_ERROR, красный (это ошибка выставления/снятия заявки, всегда пишется из алгоритма) <br> 4 — LEVEL_CRITICAL, красный (в робота пришли "кривые" JSON данные или операция недоступна или закончился ключ) <br> 5 — LEVEL_ORDER, красный (это ошибка выставления заявки с выключением торговли, ходит в телеграм) <br> 7 — LEVEL_NOTIFICATION, салатовый (уведомления из алгоритма, ходит в телеграм) <br> 10 — LEVEL_SHOW_OK, зеленый (всегда всплывает сообщение) <br> 11 — LEVEL_SHOW_ERR, красный (всегда всплывает сообщение) <br> 12 — LEVEL_SHOW_WARN, желтый (всегда всплывает сообщение) |
 | err_code | number | Integer value, enum: <br> 1 — Already authorized, <br> 2 — Authorization error or email not verified, <br> 3 — Not authorized, <br> 4 — Wrong message parameters, <br> 5 — There is no "{role}" in user roles, <br> 6 — Unexpected message type or bad message format, <br> 7 — Duplicate subscription eid, <br> 8 — User not found, <br> 9 — Robot "{r_id}" was not found, <br> 10 — Portfolio "{p_id}" was not found in robot "{r_id}", <br> 11 — Can not connect to robot "{r_id}", <br> 12 — Can not add portfolio, "{p_id}" already exists in robot "{r_id}", <br> 13 — Can not perform operation on disabled portfolio "{p_id}”, <br> 14 — Quantity should be positive, <br> 15 — Wrong command, <br> 16 — Not provided, <br> 17 — Service is overloaded, <br> 18 — Internal error, <br> 19 — Can not restart robot while it is disconnected or if it is trading <br> 20 — Robot "{r_id}" is not exist, <br> 21 — Wrong connection parameters, <br> 22 — Robot "{r_id}" already exists, <br> 23 — Robot "{r_id}" is locked, try again later, <br> 24 — Company "{c_id}" was not found, <br> 25 — Can not delete non empty company "{c_id}”, <br> 26 — Can not perform operation on connected robot "{r_id}”, <br> 555 — Permission denied, <br> 666 — Operation timeout, <br> 777 — Other error from robot | 
 
