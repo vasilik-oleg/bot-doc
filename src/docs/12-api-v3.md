@@ -2015,7 +2015,7 @@ Example:
 
 При удалении робота вы будете от него отписаны
 
-md_st, tr_st, re всегда ходят целиком
+md_st, tr_st, re, trans_cnt всегда ходят целиком
 
 <details>
 <summary>Request</summary>
@@ -2073,9 +2073,9 @@ Payload:
 | >> svd | y | number | epoch_sec | Server build robot version date (-1 means unknown) |
 | >> start | y | boolean |  | Robot should be started |
 | >> md_st | y | array |  |  |
-| >>> [] | y |  |  | Aray of dictionaries of data-stream states with stream name as a key and value of type stream_status |
+| >>> [] | y |  |  | Array of dictionaries of data-stream states with stream name as a key and value of type stream_status |
 | >> tr_st | y | array |  |  |
-| >>> [] | y |  |  | Aray of dictionaries of data-stream states with stream name as a key and value of type stream_status |
+| >>> [] | y |  |  | Array of dictionaries of data-stream states with stream name as a key and value of type stream_status |
 | >> re | y | array |  |  |
 | >>> [] | y |  |  |  |
 | >>>> n | y | string |  | Portfolio name |
@@ -2083,6 +2083,17 @@ Payload:
 | >>>> re | y | boolean |  | Is re_sell or re_buy |
 | >> c_id | y | string |  | Company unique ID |
 | >> comp | y | string |  | Company name |
+| >> p_cnt | n | number |  | "Production" transactions count |
+| >> v_cnt | n | number |  | "Virtual" transactions count |
+| >> trans_cnt | n | array |  |  |
+| >>> [] | n |  |  | Array of objects |
+| >>>> n | y | string |  | Name |
+| >>>> s | y | number |  | Transaction count |
+| >>>> a | y | number |  | Adds count |
+| >>>> d | y | number |  | Deletes count |
+| >>>> m | y | number |  | Moves count |
+| >>>> ra | y | number |  | Add rejects count |
+
 
 Example:
 
@@ -2226,6 +2237,16 @@ Payload:
 | >>>> re | n | boolean |  | Is resell or re_buy |
 | >> c_id | y | string |  | Company unique ID |
 | >> comp | y | string |  | Company name |
+| >> p_cnt | n | number |  | "Production" transactions count |
+| >> v_cnt | n | number |  | "Virtual" transactions count |
+| >> trans_cnt | n | array |  |  |
+| >>> [] | n |  |  | Array of objects |
+| >>>> n | y | string |  | Name |
+| >>>> s | y | number |  | Transaction count |
+| >>>> a | y | number |  | Adds count |
+| >>>> d | y | number |  | Deletes count |
+| >>>> m | y | number |  | Moves count |
+| >>>> ra | y | number |  | Add rejects count |
 
 Example:
 
@@ -2358,7 +2379,7 @@ Example:
 
 При удалении робота вы будете от него отписаны
 
-md_st, tr_st, re всегда ходят целиком
+md_st, tr_st, re, trans_cnt всегда ходят целиком
 
 <details>
 <summary>Request</summary>
@@ -2435,6 +2456,16 @@ Payload:
 | >>>> n | y | string |  | Portfolio name |
 | >>>> f | y | boolean |  | Is free or has active orders |
 | >>>> re | y | boolean |  | Is resell or re_buy |
+| >> p_cnt | n | number |  | "Production" transactions count |
+| >> v_cnt | n | number |  | "Virtual" transactions count |
+| >> trans_cnt | n | array |  |  |
+| >>> [] | n |  |  | Array of objects |
+| >>>> n | y | string |  | Name |
+| >>>> s | y | number |  | Transaction count |
+| >>>> a | y | number |  | Adds count |
+| >>>> d | y | number |  | Deletes count |
+| >>>> m | y | number |  | Moves count |
+| >>>> ra | y | number |  | Add rejects count |
 
 Example:
 
@@ -2636,6 +2667,16 @@ Payload:
 | >>>> n | n | string |  | Portfolio name |
 | >>>> f | n | boolean |  | Is free or has active orders |
 | >>>> re | n | boolean |  | Is resell or re_buy |
+| >> p_cnt | n | number |  | "Production" transactions count |
+| >> v_cnt | n | number |  | "Virtual" transactions count |
+| >> trans_cnt | n | array |  |  |
+| >>> [] | n |  |  | Array of objects |
+| >>>> n | y | string |  | Name |
+| >>>> s | y | number |  | Transaction count |
+| >>>> a | y | number |  | Adds count |
+| >>>> d | y | number |  | Deletes count |
+| >>>> m | y | number |  | Moves count |
+| >>>> ra | y | number |  | Add rejects count |
 
 Example:
 
