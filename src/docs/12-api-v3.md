@@ -12471,7 +12471,178 @@ Example:
 	"r":"e"
 }
 ```
+</details>
+
+### 12.11.15. Получить отключенные настройки telegram уведомлений пользователя
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = user.get_tgr_notifications | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+
+Example:
+
+```json
+{
+	"type": "user.get_tgr_notifications",
+	"eid": "qwerty"
+}
+```
 </details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = user.get_tgr_notifications | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > values | y | object |  |  |
+| >> ROBOT_ID:VALUE | y | string:number | string:tgr_notification | Robot ID and bitmask of turned off telegram noitification levels |
+
+Example:
+
+```json
+{
+    "type": "user.get_tgr_notifications",
+    "data": {
+        "values": {
+            "1": 7,
+            "2": 1
+        }
+    },
+    "r": "p",
+    "eid": "q0",
+    "ts": 1694072105972483566
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = user.get_tgr_notifications | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"user.get_tgr_notifications",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
+
+### 12.11.16.Отключить настройки telegram уведомлений пользователя
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = user.set_tgr_notifications | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > values | y | object |  |  |
+| >> ROBOT_ID:VALUE | y | string:number | string:tgr_notification | Robot ID and bitmask of turned off telegram noitification levels |
+
+
+Example:
+
+```json
+{
+    "type": "user.set_tgr_notifications",
+    "eid": "qwerty"
+    "data": {
+        "values": {
+            "1": 7,
+            "2": 1
+        }
+    },
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = user.set_tgr_notifications | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+
+Example:
+
+```json
+{
+    "type": "user.set_tgr_notifications",
+    "r": "p",
+    "eid": "q0",
+    "ts": 1694072105972483566
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = user.set_tgr_notifications | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"user.set_tgr_notifications",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details> 
 
 
 ## 12.12. Операции админа
@@ -12694,6 +12865,7 @@ Example:
 | direction | number | Integer value, enum: 1 — buy, 2 — sell |
 | order_status | number | Integer value, enum: 1 — adding, 2 — running, 4 — deleting, 5 — first_deleting, 6 — sl_deleting, 7 — moving, 99 — add_error |
 | symbol_find_state | number | Integer value, enum: 0 — unknown, 1 — searching, 2 — found, 3 — expired, 4 — error |
+| tgr_notification | number | 1 — TGR_ORDER (ошибки выставления заявки с выключением торговли),<br> 2 — TGR_ERROR (это ошибки из логирования в формулах), <br> 4 — TGR_NOTIFICATION (уведомления из алгоритма) |
 | log_level | number | 0 — LEVEL_DEBUG, зеленый (обычно, запись пользовательских редактирований робота) <br> 1 — LEVEL_INFO, синий <br> 2 — LEVEL_WARNING, желтый <br> 3 — LEVEL_ERROR, красный (это ошибка выставления/снятия заявки, всегда пишется из алгоритма) <br> 4 — LEVEL_CRITICAL, красный (в робота пришли "кривые" JSON данные или операция недоступна или закончился ключ) <br> 5 — LEVEL_ORDER, красный (это ошибка выставления заявки с выключением торговли, ходит в телеграм) <br> 7 — LEVEL_NOTIFICATION, салатовый (уведомления из алгоритма, ходит в телеграм) <br> 10 — LEVEL_SHOW_OK, зеленый (всегда всплывает сообщение) <br> 11 — LEVEL_SHOW_ERR, красный (всегда всплывает сообщение) <br> 12 — LEVEL_SHOW_WARN, желтый (всегда всплывает сообщение) |
 | err_code | number | Integer value, enum: <br> 1 — Already authorized, <br> 2 — Authorization error or email not verified, <br> 3 — Not authorized, <br> 4 — Wrong message parameters, <br> 5 — There is no "{role}" in user roles, <br> 6 — Unexpected message type or bad message format, <br> 7 — Duplicate subscription eid, <br> 8 — User not found, <br> 9 — Robot "{r_id}" was not found, <br> 10 — Portfolio "{p_id}" was not found in robot "{r_id}", <br> 11 — Can not connect to robot "{r_id}", <br> 12 — Can not add portfolio, "{p_id}" already exists in robot "{r_id}", <br> 13 — Can not perform operation on disabled portfolio "{p_id}”, <br> 14 — Quantity should be positive, <br> 15 — Wrong command, <br> 16 — Not provided, <br> 17 — Service is overloaded, <br> 18 — Internal error, <br> 19 — Can not restart robot while it is disconnected or if it is trading <br> 20 — Robot "{r_id}" is not exist, <br> 21 — Wrong connection parameters, <br> 22 — Robot "{r_id}" already exists, <br> 23 — Robot "{r_id}" is locked, try again later, <br> 24 — Company "{c_id}" was not found, <br> 25 — Can not delete non empty company "{c_id}”, <br> 26 — Can not perform operation on connected robot "{r_id}”, <br> 555 — Permission denied, <br> 666 — Operation timeout, <br> 777 — Other error from robot | 
 
