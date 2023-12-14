@@ -598,7 +598,7 @@ ___
 ```C
 portfolio p = get_portfolio();
 p.set_uf0(user_value(123));
-user_value v = p.uf0();
+const user_value& v = p.uf0();
 return v.value();
 ```
 
