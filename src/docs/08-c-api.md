@@ -221,6 +221,9 @@
 
 | Метод                                                       | Описание                                                                                                 |
 |-------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| void restart_sec_iter()                                     | инциализировать итератор (для одного портфеля НЕЛЬЗЯ использовать один итератор вложенный в другой)      |
+| bool has_next_sec()                                         | есть ли еще бумаги в списке бумаг портфеля                                                               |
+| security_fields next_sec()                                  | получить следующую бумагу портфеля ([ пример итерации ](#__Example3__))                                  |
 | deal_item deal(const std::string& s)                        | получить сделку по бумаге c SecKey s (доступно только в Trade formula, т.е. на момент совершения сделки) |
 | struct security_fields security_field(const std::string& s) | получить бумагу данного портфеля с SecKey s                                                              |
 | struct security_fields security_field()                     | получить главную бумагу текущего портфеля                                                                |
@@ -631,6 +634,20 @@ if (ob.is_available())
     }
 }
 avg_bid = (sum2 != 0) ? (sum1 / sum2) : 0;
+```
+
+___
+
+<a name="__Example3__"/> Чтобы пройти в цикле по всем бумагам портфеля и вывести имена бумаг в лог:
+
+```C
+portfolio p = get_portfolio();
+p.restart_sec_iter();
+while (p.has_next_sec())
+{
+  security_fields sf = p.next_sec();
+  log_info(sf.sec_key());
+}
 ```
 
 ___
