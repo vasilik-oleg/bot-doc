@@ -612,16 +612,13 @@ security s = get_security("SPB_AGGR_AAPL");
 order_book ob = s.orderbook();
 if (ob.is_available())
 {
-    
     int i = 0;
     while (i <= 10 && ob.has_next_bid())
     {
-
         i++;
         std::pair<double, long long> b = ob.next_bid();
         sum1 += b.first * b.second;
         sum2 += b.second;
-
     }
 }
 avg_bid = (sum2 != 0) ? (sum1 / sum2) : 0;
@@ -636,8 +633,8 @@ portfolio p = get_portfolio();
 p.restart_sec_iter();
 while (p.has_next_sec())
 {
-  security_fields sf = p.next_sec();
-  log_info(sf.sec_key());
+    security_fields sf = p.next_sec();
+    log_info(sf.sec_key());
 }
 ```
 
@@ -651,14 +648,11 @@ order_pool p = sf.orders();
 long long amount = 0;
 while (p.has_next())
 {
-
     order_item o = p.next();
     if (o.status == RUNNING && fabs(o.price - 100) < 1e-9)
-        {
-
+    {
         amount += o.amount_rest;
-
-        }
+    }
 }
 ```
 
