@@ -1001,7 +1001,10 @@ Example:
             "price_s": 0,
             "sell": 0.31532,
             "tp": 1,
-            "__extra": {},
+            "uf0": {},
+            "uf1": {"c":"asd", "v":1},
+            "uf2": {"c":"qwe"},
+            "uf3": {"v":666},
             "_buy_en": false,
             "_fin_res_en": false,
             "_fin_res_stop": false,
@@ -1094,6 +1097,9 @@ Example:
             "owner": "test@gmail.com",
             "sell": 0.31526,
             "buy": 0.31527
+            "uf2": {"c":"qwert"},
+            "uf1": {"v":5},
+            "uf0": {"v":6, "c":"zxc"},
         }
     },
     "r": "u",
