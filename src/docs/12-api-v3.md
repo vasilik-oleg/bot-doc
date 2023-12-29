@@ -8,6 +8,155 @@ padding:5px 0px 5px 0px;
 }
 </style>
 
+## Общие положения
+
+### Куда подключаться
+
+Адрес подключения к API `wss://alfabot.fkviking.com/ws`
+
+### Механизм поддержания связи с сервером
+
+Если клиент не отправляет сообщения в течение 5-ти секунд, соединение будет закрыто сервером
+
+Для поддержания связи с сервером и для определения статуса соеденения с сервером в случае отсутствия исходящих сообщений от клиента в течение 5-ти секунд предполагается отправлять служебное сообщение в виде строки, состоящей из
+одного символа `7`, в ответ сервер пришлет ту же строку. Если сервер не пришлет данную строку в течение 3-ех секунд, клиент должен переподключиться. Вместо строки с символом `7` клиент может отпрвлять ping фрейм, тогда в ответ
+сервер ответит pong фреймом
+
+### Размер входящих и исходящих сообщений, группировка и сжатие сообщений
+
+Максимальный размер сообщения, отправляемого клиентом, должен быть меньше 262144 байт
+
+Размер сообщений, отправляемых сервером, до их сжатия не превосходит 200 КБ. Если размер сообщения, отправлемого сервером, до его сжатия превышает 100 КБ, сообщение будет заархивировано и отправлено не как текстовое, а
+уже как бинарное сообщение. Сжатие сообщений производится при помощи библиотеки `zlib` c параметром `wbits = 15`
+
+Клиент, так же как и сервер, может сжимать свои исходящие сообщения тем же методом, что и сервер
+
+Для уменьшения числа отправляемых сервером отдельных сообщений предусмотрен механизм группировки сообщений. В данном случае все отдельные JSON сообщения, представляющие собой словари (т.е. все сообщения кроме pong фреймов и `7`),
+будут сложены в список и отправлены одним большим JSON сообщением. Клиент, получивший список от сервера, должен обработать каждое сообщение списка в отдельности. Возможность получения групп сообщений задается клиентом на
+этапе авторизации. Если сервер отправляет сообщения группой большого размера, то сервер сожмет всю группу, а не каждое отдельное сообщение в группе
+
+Клиент, так же как и сервер, может группировать свои исходящие сообщения в списки (кроме ping фрейма и `7`), список это всего лишь обертка, сервер обработает каждое сообщение из списка в отдельности. Группировка сообщение помогает
+увеличить число отправлемых клиентом сообщений, чтобы не попасть на rate limit. Максимальный размер группы, которую может отправить клиент, состоит из 50-ти сообщений, при превышении данного значения соединение с клиентом будет закрыто.
+Если клиент отправляет сообщения группой большого размера, то рекомендуется эту группу сжать, сжимать нужно именно группу, а не каждое отдельное сообщение в группе
+
+### Rate limits
+
+Rate limit считается для каждой вебсокет сессии в отдельности. Каждое сообщение имеет свой вес, вы можете отправить сообщения суммарным весом не более 10000 за последние 10 секунд. Суммарный доступный вес сообщений пересчитывается каждую
+секунду (отбрасывается суммарный набранный вес за самую старую секунду из десяти). Сообщения имеют разный вес, ping фрейм и `7` имеют вес 1, все остальные сообщения имеют вес 49, группа сообщений (т.е. сообщения упакованные в один список)
+имеет вес 49. Т.о. за 10 секунд клиент может отправить примерно $10000 \div 49 = 204$ сообщений, можно все сообщения отправить и за одну секунду, но тогда в следующие 9 секунд слать будет нечего и связь будет закрыта либо по таймауту (он был
+описан выше и равен 5 секунд), либо, если клиент таки отправит сообщение, то по rate limit-у. При превышении rate limit-а связь закрывается автоматически
+
+### Прочее
+
+Во всех подписках в рамках одной вебсокет сессии в рамках одного и того же `type` требуется уникальный `eid` для текущих подписок (можно отписаться и снова подписаться с тем же `eid`, но одновременно нельзя иметь две и более подписок
+на одни и те же `type` и `eid`)
+
+Порядок ответа на входящие сообщения сервером не определен. Чтобы быть уверенным, что сообщения будут обработаны в заданном порядке, необходимо слать следующее сообщение только после получения ответа на предыдущее. В связи с этим
+рекомендуется вначале дождаться ответа на запрос авторизации и только потом слать серверу какие-либо другие команды (иначе получите ошибку `Not authorized`)
+
+## Авторизация
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = authorization_key | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > email | y | string |  | User email |
+| > key | y | string |  | User API key (API usage should be enabled) |
+| > role | n | string |  | User role, default value is demo |
+| > group | n | boolean |  | Receive messages from server in groups, default value is false |
+
+Example:
+
+```json
+{
+	"type":"authorization_key",
+	"data":
+	{
+		"email":"qwd@gmail.com",
+		"key":"asdcccccccccccccccc",
+		"role":"demo",
+		"group":false
+	},
+	"eid":"qwe"
+}
+```
+</details>    
+<details>
+
+<summary>Response on success</summary> 
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = authorization_key | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = r | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > e | y | string |  | User email |
+| > lang | y | string |  | User lang, always `en` |
+| > active_role | y | string |  | current user role |
+| > roles | y | array |  | Array of available user roles |
+| >> [] | y | string |  | Available user role |
+
+Example:
+
+```json
+{
+	"type":"authorization_key",
+	"data":
+	{
+		"e":"test@test.com",
+		"lang":"en",
+		"active_role":"trader",
+		"roles":["demo", "trader"]
+	},
+	"r":"r",
+	"eid":"qwerty",
+	"ts":1669793958010491759
+}
+```
+</details>    
+   
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = authorization_key | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"authorization_key",
+	"data":
+	{
+		"msg":"User not found",
+		"code":8
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
+
 
 ## 12.1. Портфели
 
@@ -16,6 +165,8 @@ padding:5px 0px 5px 0px;
 При добавлении/удалении портфеля/доступа к портфелю будут высланы обновления
 
 В любой момент может быть выслан снапшот
+
+Обновления значений пользовательских полей `uf0, ..., uf19` содержат только те ключи каждого из пользовательских полей, чьи значения были изменены
 
 При отзыве доступа к портфелю, если вы подписаны на этот портфель, вы получите сообщение об отписке
 
@@ -477,6 +628,8 @@ Example:
 
 Если указан ключ *securities*, то в нем обязательно необходимо указать весь текущий список бумаг портфеля с их обязательными полями, а также можно указать поля, необходимые для изменения
 
+Значения пользовательских полей `uf0, ..., uf19` являются словарями, можно изменить значение как по одному из ключей, так и сразу по обоим ключам
+
 <details>
 <summary>Request</summary>
 
@@ -648,6 +801,45 @@ Example:
         }
     },
     "eid": "qwerty"
+}
+```
+
+```json
+{
+	"type":"portfolio.update",
+	"data":
+	{
+		"r_id":"9901",
+		"portfolio":
+		{
+			"name":"DerCry_view_only",
+			"uf0":
+			{
+				"v":123
+			}
+		},
+	}
+	"eid":"1146"
+}
+```
+
+```json
+{
+	"type":"portfolio.update",
+	"data":
+	{
+		"r_id":"9901",
+		"portfolio":
+		{
+			"name":"DerCry_view_only",
+			"uf2":
+			{
+				"v":1,
+				"c":"qwe"
+			}
+		},
+	}
+	"eid":"1146"
 }
 ```
 </details>    
@@ -12874,5 +13066,3 @@ Example:
 | tgr_notification | number | 1 — TGR_ORDER (ошибки выставления заявки с выключением торговли),<br> 2 — TGR_ERROR (это ошибки из логирования в формулах), <br> 4 — TGR_NOTIFICATION (уведомления из алгоритма) |
 | log_level | number | 0 — LEVEL_DEBUG, зеленый (обычно, запись пользовательских редактирований робота) <br> 1 — LEVEL_INFO, синий <br> 2 — LEVEL_WARNING, желтый <br> 3 — LEVEL_ERROR, красный (это ошибка выставления/снятия заявки, всегда пишется из алгоритма) <br> 4 — LEVEL_CRITICAL, красный (в робота пришли "кривые" JSON данные или операция недоступна или закончился ключ) <br> 5 — LEVEL_ORDER, красный (это ошибка выставления заявки с выключением торговли, ходит в телеграм) <br> 7 — LEVEL_NOTIFICATION, салатовый (уведомления из алгоритма, ходит в телеграм) <br> 10 — LEVEL_SHOW_OK, зеленый (всегда всплывает сообщение) <br> 11 — LEVEL_SHOW_ERR, красный (всегда всплывает сообщение) <br> 12 — LEVEL_SHOW_WARN, желтый (всегда всплывает сообщение) |
 | err_code | number | Integer value, enum: <br> 1 — Already authorized, <br> 2 — Authorization error or email not verified, <br> 3 — Not authorized, <br> 4 — Wrong message parameters, <br> 5 — There is no "{role}" in user roles, <br> 6 — Unexpected message type or bad message format, <br> 7 — Duplicate subscription eid, <br> 8 — User not found, <br> 9 — Robot "{r_id}" was not found, <br> 10 — Portfolio "{p_id}" was not found in robot "{r_id}", <br> 11 — Can not connect to robot "{r_id}", <br> 12 — Can not add portfolio, "{p_id}" already exists in robot "{r_id}", <br> 13 — Can not perform operation on disabled portfolio "{p_id}”, <br> 14 — Quantity should be positive, <br> 15 — Wrong command, <br> 16 — Not provided, <br> 17 — Service is overloaded, <br> 18 — Internal error, <br> 19 — Can not restart robot while it is disconnected or if it is trading <br> 20 — Robot "{r_id}" is not exist, <br> 21 — Wrong connection parameters, <br> 22 — Robot "{r_id}" already exists, <br> 23 — Robot "{r_id}" is locked, try again later, <br> 24 — Company "{c_id}" was not found, <br> 25 — Can not delete non empty company "{c_id}”, <br> 26 — Can not perform operation on connected robot "{r_id}”, <br> 555 — Permission denied, <br> 666 — Operation timeout, <br> 777 — Other error from robot | 
-
-## Rate limits
