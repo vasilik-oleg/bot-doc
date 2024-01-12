@@ -71,7 +71,8 @@ module.exports = {
             '08-c-api',
             '09-api-v1',
             '10-api-v2',
-            '11-faq'
+            '11-faq',
+            '12-api-v3'
           ]
         }
       ],

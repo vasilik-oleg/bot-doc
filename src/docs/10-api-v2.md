@@ -7,8 +7,21 @@
 _Подписка:_
 
 ```C
-{"type":"subscribe","clOrdId":"1","data":{"topic":"robots"}}
-{"type":"subscribe","clOrdId":"1","data":{"topic":"robots", "admin":true}}
+{
+    "type": "subscribe",
+    "clOrdId": "1",
+    "data": {
+        "topic": "robots"
+    }
+}
+{
+    "type": "subscribe",
+    "clOrdId": "1",
+    "data": {
+        "topic": "robots",
+        "admin": true
+    }
+}
 ```
 
 `clOrdId` - пользовательский идентификатор сообщения, он же придет во всех ответах;
