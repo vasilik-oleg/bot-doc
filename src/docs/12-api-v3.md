@@ -2270,6 +2270,7 @@ Payload:
 | >> sv | y | string |  | Server build robot version |
 | >> svd | y | number | epoch_sec | Server build robot version date (-1 means unknown) |
 | >> start | y | boolean |  | Robot should be started |
+| >> resp_users | y | array |  | List of responsible users emails as list of strings |
 | >> md_st | y | array |  |  |
 | >>> [] | y |  |  | Array of dictionaries of data-stream states with stream name as a key and value of type stream_status |
 | >> tr_st | y | array |  |  |
@@ -2318,6 +2319,7 @@ Example:
             "sv": "ec1d046",
             "svd": 1687175149,
             "start": true,
+            "resp_users": ["test@gmail.com"],
             "md_st": [
                 {
                     "sec_type": 1048576,
@@ -2424,6 +2426,7 @@ Payload:
 | >> sv | n | string |  | Server build robot version |
 | >> svd | n | number | epoch_sec | Server build robot version date (-1 means unknown) |
 | >> start | n | boolean |  | Robot should be started |
+| >> resp_users | y | array |  | List of responsible users emails as list of strings |
 | >> md_st | n | array |  |  |
 | >>> [] | n |  |  | Aray of dictionaries of data-stream states with stream name as a key and value of type stream_status |
 | >> tr_st | n | array |  |  |
@@ -2643,6 +2646,7 @@ Payload:
 | >> comp | y | string |  | Company name |
 | >> cmnt | y | string |  | Comment |
 | >> ips | y | array |  | List of ips as list of strings |
+| >> resp_users | y | array |  | List of responsible users emails as list of strings |
 | >> cmd | y | string |  | Command line params |
 | >> srv_runme | y | boolean |  | Use runme on server |
 | >> md_st | y | array |  |  |
@@ -2690,6 +2694,7 @@ Example:
             "sv": "ec1d046",
             "svd": 1687175149,
             "start": true,
+            "resp_users": ["test@gmail.com"],
             "md_st": [
                 {
                     "sec_type": 1048576,
@@ -2792,6 +2797,7 @@ Example:
             "ld": 5,
             "start": true,
             "bld": "vikingrobot.vrb_test",
+            "resp_users": ["test@gmail.com"],
             "ps": 2,
             "sv": "0bbb5ae",
             "svd": 1689597843,
@@ -2854,6 +2860,7 @@ Payload:
 | >> comp | n | string |  | Company name |
 | >> cmnt | n | string |  | Comment |
 | >> ips | n | array |  | List of ips as list of strings |
+| >> resp_users | n | array |  | List of responsible users emails as list of strings |
 | >> cmd | n | string |  | Command line params |
 | >> srv_runme | n | boolean |  | Use runme on server |
 | >> md_st | n | array |  |  |
@@ -12375,9 +12382,91 @@ Example:
 	"r":"e"
 }
 ```
-</details>   
+</details>
 
-### 12.11.12. Подписка на параметры пользователя
+### 12.11.12. Получить емейлы пользователей компании
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = users_in_companies.get_users | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > c_id | y | string |  | Company ID |
+
+Example:
+
+```json
+{
+	"type": "users_in_companies.get_users",
+	"data": {"c_id":"1"},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = users_in_companies.get_robots | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > usrs | array |  |  | Array of emails as strings |
+
+Example:
+
+```json
+{
+  "type": "users_in_companies.get_userss",
+  "data": { "usrs": ["test@gmail.com", "xxx@mail.ru"] },
+  "r": "p",
+  "eid": "q0",
+  "ts": 1693481809218424440
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = users_in_companies.get_users | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"users_in_companies.get_users",
+	"data":
+	{
+		"msg":"Internal error",
+		"code":18
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
+
+### 12.11.13. Подписка на параметры пользователя
 
 В любой момент может быть выслан снапшот
 
@@ -12496,7 +12585,7 @@ Example:
 ```
 </details>    
 
-### 12.11.13. Отписка от параметров пользователя
+### 12.11.14. Отписка от параметров пользователя
 
 <details>
 <summary>Request</summary>
@@ -12579,7 +12668,7 @@ Example:
 ```
 </details>    
 
-### 12.11.14. Изменить параметры пользователя
+### 12.11.15. Изменить параметры пользователя
 
 <details>
 <summary>Request</summary>
@@ -12671,7 +12760,7 @@ Example:
 ```
 </details>
 
-### 12.11.15. Получить отключенные настройки telegram уведомлений пользователя
+### 12.11.16. Получить отключенные настройки telegram уведомлений пользователя
 
 <details>
 <summary>Request</summary>
@@ -12756,7 +12845,7 @@ Example:
 ```
 </details>
 
-### 12.11.16.Отключить настройки telegram уведомлений пользователя
+### 12.11.17.Отключить настройки telegram уведомлений пользователя
 
 <details>
 <summary>Request</summary>
