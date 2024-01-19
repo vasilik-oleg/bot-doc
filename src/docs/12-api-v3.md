@@ -2203,6 +2203,104 @@ Example:
 ```
 </details>    
 
+### 12.1.16. Написать на почту "создателю" порфтеля [роль: admin]
+
+Написать сообщение на почту старшего трейдера и на почты "создателю" данного портфеля
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio.mail_to | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > to_head | y | boolean |  | Also mail to `head_of_traders` role |
+| > subj | y | string |  | Message subject, `${ROBOT_ID}` will be replaced with current robot's ID, `${PORTFOLIO_ID}` will be replaced with current portfolio name + robot's ID |
+| > msg | y | string |  | Message text, `${ROBOT_ID}` will be replaced with current robot's ID, `${PORTFOLIO_ID}` will be replaced with current portfolio name + robot's ID |
+
+Example:
+
+```json
+{
+	"type": "portfolio.mail_to",
+	"data": {
+                "to_head": true,
+		"r_id": "1",
+		"p_id": "test",
+		"subj":"Test ${PORTFOLIO_ID}",
+                "msg":"Test ${PORTFOLIO_ID}"
+	},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio.mail_to | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > emails | y | array |  |  |
+| >> [] | y | array |  | List of emails message was sent to |
+
+Example:
+
+```json
+{
+	"type":"portfolio.mail_to",
+	"data":
+	{
+		"emails": ["test@gmail.com"]
+	},
+	"r":"p",
+	"eid":"qwerty",
+	"ts":1669806718085368646
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio.mail_to | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r=e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"portfolio.mail_to",
+	"data":
+	{
+		"msg":"Internal error",
+		"code":18
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>  
+
 ## 12.2. Роботы
 
 ### 12.2.1. Подписка на робота
@@ -10461,7 +10559,94 @@ Example:
 ```
 </details>    
 
-### 12.10.6. Удалить робота [роль: admin]
+### 12.10.6. Написать на почту "ответственным" пользователям робота [роль: admin]
+
+Написать сообщение на почту старшего трейдера и на почты "ответственных" за данного робота трейдеров
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = adm_robot.mail_to | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > subj | y | string |  | Message subject, `${ROBOT_ID}` will be replaced with current robot's ID |
+| > msg | y | string |  | Message text, `${ROBOT_ID}` will be replaced with current robot's ID |
+
+Example:
+
+```json
+{
+	"type": "adm_robot.mail_to",
+	"data": {"r_id":"1", "subj":"Test ${ROBOT_ID}", "msg":"Test ${ROBOT_ID}"},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = adm_robot.mail_to | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > emails | y | array |  |  |
+| >> [] | y | array |  | List of emails message was sent to |
+
+Example:
+
+```json
+{
+	"type":"adm_robot.mail_to",
+	"data":{"emails":["test@gmail"]},
+	"r":"p",
+	"eid":"qwerty",
+	"ts":1669798613250710705
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = adm_robot.mail_to | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"adm_robot.mail_to",
+	"data":
+	{
+		"msg":"Internal error",
+		"code":18
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details> 
+
+### 12.10.7. Удалить робота [роль: admin]
 
 Удалить робота
 
@@ -10544,7 +10729,7 @@ Example:
 ```
 </details>    
 
-### 12.10.7. Подписка на сервера [роль: admin]
+### 12.10.8. Подписка на сервера [роль: admin]
 
 Подписаться на события по всем серверам
 
@@ -10787,7 +10972,7 @@ Example:
 ```
 </details>    
 
-### 12.10.8. Отписка от серверов [роль: admin]
+### 12.10.9. Отписка от серверов [роль: admin]
 
 Отписаться от событий по всем серверам
 
@@ -10872,7 +11057,7 @@ Example:
 ```
 </details>    
 
-### 12.10.9. Подписка на состояние модулей [роль: admin]
+### 12.10.10. Подписка на состояние модулей [роль: admin]
 
 <details>
 <summary>Request</summary>
@@ -10983,7 +11168,7 @@ Example:
 ```
 </details>    
 
-### 12.10.10. Отписка от состояния модулей [роль: admin]
+### 12.10.11. Отписка от состояния модулей [роль: admin]
 
 <details>
 <summary>Request</summary>
@@ -11066,7 +11251,7 @@ Example:
 ```
 </details>    
 
-### 12.10.11. Получить список компаний [роль: admin]
+### 12.10.12. Получить список компаний [роль: admin]
 
 <details>
 <summary>Request</summary>
@@ -11163,7 +11348,7 @@ Example:
 ```
 </details>    
 
-### 12.10.12. Получить свободный id робота [роль: admin]
+### 12.10.13. Получить свободный id робота [роль: admin]
 
 <details>
 <summary>Request</summary>
