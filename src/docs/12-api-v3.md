@@ -13315,8 +13315,223 @@ Example:
 	"r":"e"
 }
 ```
+</details>
+
+### 12.12.3. Подписка на неотправленные email-ы
+
+При обновлении сатуса отправки email-а, всегда приходят все данные по email-у
+
+Когда письмо отправится, придет поле __action=del
+
+<details>
+<summary>Subscription request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = emails.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | n | object |  |  |
+
+Example:
+
+```json
+{
+	"type": "emails.subscribe",
+	"data": {},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+
+<summary>Response on success (snapshot)</summary> 
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = emails.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = s | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > emails | y | array |  | Array of not sent emails |
+| >> [] | y |  |  | Array of objects |
+| >>> id | y | number |  | Unique email ID |
+| >>> status | y | number | email_status | Email sending status |
+| >>> dt | y | string | epoch_nsec | Moment email was added to sending queue |
+| >>> subj | y | string |  | Email subject |
+| >>> msg | y | string |  | Email text |
+| >>> to | y | array |  | Array of emails message was sent to |
+
+Example:
+
+```json
+{
+	"type":"emails.subscribe",
+	"data":
+	{
+		"emails":[{"id":23,"status":0,"dt":"1705921207989767057","subj":"Test 2","msg":"Test 2", "to":["test@mail.ru"]}]
+	},
+	"r":"s",
+	"eid":"qwerty",
+	"ts":1669793958010491759
+}
+```
+</details>    
+<details>
+<summary>Updates</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = emails.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = u | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > emails | y | array |  | Array of not sent emails |
+| >> [] | y |  |  | Array of objects |
+| >>> id | y | number |  | Unique email ID |
+| >>> status | n | number | email_status | Email sending status |
+| >>> dt | n | string | epoch_nsec | Moment email was added to sending queue |
+| >>> subj | n | string |  | Email subject |
+| >>> msg | n | string |  | Email text |
+| >>> to | n | array |  | Array of emails message was sent to |
+| >>> __action = del | n | string |  | Only on delete |
+
+Example:
+
+```json
+{
+	"type":"emails.subscribe",
+	"data":
+	{
+		"emails":[{"id":23,"status":1,"dt":"1705921207989767057","subj":"Test 2","msg":"Test 2", "to":["test@mail.ru"]}]
+	},
+	"r":"u",
+	"eid":"qwerty",
+	"ts":1669793958010491759
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = emails.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"emails.subscribe",
+	"data":
+	{
+		"msg":"Operation timeout",
+		"code":666
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
 </details>    
 
+### 12.12.4. Отписка от неотправленных email-ов
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = emails.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > sub_eid | y | string | string_36 | Subscription eid |
+
+Example:
+
+```json
+{
+	"type":"emails.unsubscribe",
+	"data":
+	{
+		"sub_eid":"qwerty"
+	},
+	"eid":"q"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = emails.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+
+Example:
+
+```json
+{
+	"type":"emails.unsubscribe",
+	"data":{},
+	"r":"p",
+	"eid":"q",
+	"ts":1669810178671387651
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = emails.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"emails.unsubscribe",
+	"data":
+	{
+		"msg":"Operation timeout",
+		"code":666
+	},
+	"ts":1657693572940145200,
+	"eid":"q",
+	"r":"e"
+}
+```
+</details>
 
 ## Типы данных
 
@@ -13334,6 +13549,7 @@ Example:
 | stream_status | number | Integer value, enum: 0 — disconnected, 1 — connecting, 2 — connected, 3 — unknown |
 | trading_status | number | Integer value, enum: 0 — not trading, 2 —trading, 3 — unknown |
 | process_status | number | Integer value, enum: 0 — not running, 2 —running, 3 — unknown |
+| email_status | number | Integer value, enum: 0 — pending, 1 — in progress, 2 — sent, 3 — send failed |
 | direction | number | Integer value, enum: 1 — buy, 2 — sell |
 | order_status | number | Integer value, enum: 1 — adding, 2 — running, 4 — deleting, 5 — first_deleting, 6 — sl_deleting, 7 — moving, 99 — add_error |
 | symbol_find_state | number | Integer value, enum: 0 — unknown, 1 — searching, 2 — found, 3 — expired, 4 — error |
