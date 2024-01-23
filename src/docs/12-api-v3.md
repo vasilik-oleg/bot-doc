@@ -13533,6 +13533,92 @@ Example:
 ```
 </details>
 
+### 12.12.5. Получить одноразовый ключ для логина от имени другого пользователя (для админа)
+
+Полученный ключ действителен в течение 5 секунд
+
+После успешного или не успешного логина, а также при очередном запросе, текущий одноразовый ключ будет удален
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = admins.get_user_one_off_key | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > u_id | y | string |  | User ID (email) |
+
+Example:
+
+```json
+{
+	"type": "admins.get_user_one_off_key",
+	"data": {"u_id":"test@gmail.com"},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = admins.get_user_one_off_key | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > one_off_key | y | string |  | One-off auth key |
+
+Example:
+
+```json
+{
+	"type":"admins.get_user_one_off_key",
+	"data":{"one_off_key":"XOQwKibHVevpLwvkgA02ZqpuNFzLUNhe8o3MMYWaYmv2ML4kaWLCTEM025K4QdOW3915lRWSIwvzV2JR"},
+	"r":"p",
+	"eid":"qwerty",
+	"ts":1669798613250710705
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = admins.get_user_one_off_key | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"admins.get_user_one_off_key",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
+
 ## Типы данных
 
 | Name | JSON type | Description |
