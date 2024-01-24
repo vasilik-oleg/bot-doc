@@ -181,6 +181,10 @@ ALORMOEX или ALORSPB
 
 Срочный рынок: 7500123
 
+Видео, наглядно объясняющее, как подключить Alor Open API
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5u4g8onxla0?si=HlqFBRebxi_fqTH7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 
 ### **5.1.5. Криптовалютные биржи**
 
