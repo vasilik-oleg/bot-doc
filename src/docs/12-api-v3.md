@@ -70,6 +70,7 @@ Payload:
 | > key | y | string |  | User API key (API usage should be enabled) |
 | > role | n | string |  | User role, default value is demo |
 | > group | n | boolean |  | Receive messages from server in groups, default value is false |
+| > compress | n | boolean |  | Compress large size messages by server, default value is true. *It is strongly recommended to turn off compression only for debugging purposes!* |
 
 Example:
 
@@ -81,7 +82,8 @@ Example:
 		"email":"qwd@gmail.com",
 		"key":"asdcccccccccccccccc",
 		"role":"demo",
-		"group":false
+		"group":false,
+		"compress":true
 	},
 	"eid":"qwe"
 }
@@ -12071,6 +12073,7 @@ Payload:
 | data | y | object |  |  |
 | > c_id | y | string |  | Company id |
 | > u_id | y | string |  | User ID (email) |
+| > add | n | boolean |  | Use this flag on adding new user to company, default value is false. If flag is set, you will receive an error message if user is already in company |
 | > roles | y | array |  | Array of roles as strings |
 | > rbts | y | array |  | Array of robot ids as strings |
 | > portfs | y | array |  | Array users’s portfolios |
