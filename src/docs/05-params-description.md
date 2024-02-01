@@ -421,7 +421,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 Хеджировать только если разница (в портфелях) между [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумагой и остальными инструментами портфеля больше или равна значению данного параметра (в штуках портфелей, то есть в той же размерности, что и [v_in_left/v_in_right](/docs/05-params-description.html#_5-2-11-2-v-in-left-v-in-right)).
 
-### **5.2.18. Lim_sell/Lim_buy** <PropTags :tags="['p.Lim_sell', 'p.Lim_buy']" />
+### **5.2.18. Lim_sell/Lim_buy** <PropTags :tags="['p.lim_sell', 'p.lim_buy']" />
 
 `Lim_Sell` – сигнальная цена на продажу, заявка по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге выставляется если `Sell ≥ Lim_Sell` вне зависимости от того включен или нет режим [Quote](/docs/05-params-description.html#_5-2-6-quote).
 
