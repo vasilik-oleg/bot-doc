@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name: 'PropTags',
   props: {
     tags: { type: Array, required: true, },
   },
@@ -17,7 +18,7 @@ $lineHeight = 1.15rem
 $padding = 1rem
 
 .prop-tags {
-     position: absolute;
+     position: relative;
      width: 100%;
      height: 100%;
      bottom: 0;
