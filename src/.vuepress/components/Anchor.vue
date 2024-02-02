@@ -1,14 +1,14 @@
 <template>
-  <div class="prop-tags">
-    <span v-for="(tag, index) in tags" :key="index" :id="tag" />
+  <div class="anchor-container">
+    <span v-for="(id, index) in ids" :key="index" :id="id" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'PropTags',
+  name: 'Anchor',
   props: {
-    tags: { type: Array, required: true, },
+    ids: { type: Array, required: true, },
   },
 };
 </script>
@@ -17,7 +17,7 @@ export default {
 $lineHeight = 1.15rem
 $padding = 1rem
 
-.prop-tags {
+.anchor-container {
      position: relative;
      width: 100%;
      height: 100%;

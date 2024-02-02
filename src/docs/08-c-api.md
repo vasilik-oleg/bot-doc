@@ -417,11 +417,11 @@ Meтоды `coin_item`:
 | MOVING         | int         | 7, запрос на изменение заявки отправлен на биржу |
 | ADD_ERROR      | int         | 99, ошибка выставления заявки                    |
 | TRADING_HALT   | int         | 0, выставления и снятие заявок запрещены         |
-| <PropTags :tags="['__TRADING_CAN_PLACE__']"/>TRADING_CAN_PLACE | int         | 1, разрешено выставления заявок               |
-| <PropTags :tags="['__TRADING_CAN_CANCEL__']"/>TRADING_CAN_CANCEL | int         | 2, разрешено снятие заявок                   |
+| <Anchor :ids="['__TRADING_CAN_PLACE__']"/>TRADING_CAN_PLACE | int         | 1, разрешено выставления заявок               |
+| <Anchor :ids="['__TRADING_CAN_CANCEL__']"/>TRADING_CAN_CANCEL | int         | 2, разрешено снятие заявок                   |
 | MARKET_DATA_OFFLINE   | int         | 0, маркет-дата подключение для данной бумаги оффлайн |
-| <PropTags :tags="['__MARKET_DATA_BESTS_ONLINE__']"/>MARKET_DATA_BESTS_ONLINE | int         | 1, для данной бумаги маркет-дата подключение с лучшими ценами на покупку/продажу онлайн|
-| <PropTags :tags="['__MARKET_DATA_OB_ONLINE__']"/>MARKET_DATA_OB_ONLINE | int         | 2, для данной бумаги маркет-дата подключение со стаканами онлайн |
+| <Anchor :ids="['__MARKET_DATA_BESTS_ONLINE__']"/>MARKET_DATA_BESTS_ONLINE | int         | 1, для данной бумаги маркет-дата подключение с лучшими ценами на покупку/продажу онлайн|
+| <Anchor :ids="['__MARKET_DATA_OB_ONLINE__']"/>MARKET_DATA_OB_ONLINE | int         | 2, для данной бумаги маркет-дата подключение со стаканами онлайн |
 | NAME           | std::string | имя текущего портфеля                            |
 
 ### **8.7.2. Функции**
@@ -571,7 +571,7 @@ long long pos = p.pos();
 
 ___
 
-<PropTags :tags="['__sec_status_check__']"/>Чтобы проверить, например, что в данный момент по инструменту можно выставлять заявки и в роботе есть активное подключение, получающее стаканы:
+<Anchor :ids="['__sec_status_check__']"/>Чтобы проверить, например, что в данный момент по инструменту можно выставлять заявки и в роботе есть активное подключение, получающее стаканы:
 
 ```C
 security s = get_security();
@@ -611,7 +611,7 @@ double p = p.data()["key"];
 
 ___
 
-<PropTags :tags="['__Example1__']"/>Чтобы получить, например, цену последней сделки для бумаги с СПб биржи (получение цены последней сделки по ключу возможно только для СПБ биржи):
+<Anchor :ids="['__Example1__']"/>Чтобы получить, например, цену последней сделки для бумаги с СПб биржи (получение цены последней сделки по ключу возможно только для СПБ биржи):
 
 ```C
 security s = get_security("SPB_AGGR_AAPL");
@@ -621,7 +621,7 @@ double p = c.price_last;
 
 ___
 
-<PropTags :tags="['__Example2__']"/>Чтобы, например, задать и потом получить значение "пользовательского поля#0":
+<Anchor :ids="['__Example2__']"/>Чтобы, например, задать и потом получить значение "пользовательского поля#0":
 
 ```C
 portfolio p = get_portfolio();
@@ -654,7 +654,7 @@ avg_bid = (sum2 != 0) ? (sum1 / sum2) : 0;
 
 ___
 
-<PropTags :tags="['__Example3__']"/>Чтобы пройти в цикле по всем бумагам портфеля и вывести имена бумаг в лог:
+<Anchor :ids="['__Example3__']"/>Чтобы пройти в цикле по всем бумагам портфеля и вывести имена бумаг в лог:
 
 ```C
 portfolio p = get_portfolio();
@@ -736,7 +736,7 @@ return CIV(s1.bid(), s2.strike(), s2.exp_date(), s2.bid());
 
 ___
 
-<PropTags :tags="['__Example4__']"/>Чтобы проверить, что текущее время меньше полудня:
+<Anchor :ids="['__Example4__']"/>Чтобы проверить, что текущее время меньше полудня:
 
 ```C
 day_time t = get_day_time();
