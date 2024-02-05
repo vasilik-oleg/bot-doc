@@ -19,7 +19,7 @@ padding:5px 0px 5px 0px;
 Если клиент не отправляет сообщения в течение 5-ти секунд, соединение будет закрыто сервером
 
 Для поддержания связи с сервером и для определения статуса соеденения с сервером в случае отсутствия исходящих сообщений от клиента в течение 5-ти секунд предполагается отправлять служебное сообщение в виде строки, состоящей из
-одного символа `7`, в ответ сервер пришлет ту же строку. Если сервер не пришлет данную строку в течение 3-ех секунд, клиент должен переподключиться. Вместо строки с символом `7` клиент может отпрвлять ping фрейм, тогда в ответ
+одного символа `7`, в ответ сервер пришлет ту же строку. Если сервер не пришлет данную строку в течение 3-ех секунд, клиент должен переподключиться. Вместо строки с символом `7` клиент может отправлять ping фрейм, тогда в ответ
 сервер ответит pong фреймом
 
 ### Размер входящих и исходящих сообщений, группировка и сжатие сообщений
@@ -35,16 +35,18 @@ padding:5px 0px 5px 0px;
 будут сложены в список и отправлены одним большим JSON сообщением. Клиент, получивший список от сервера, должен обработать каждое сообщение списка в отдельности. Возможность получения групп сообщений задается клиентом на
 этапе авторизации. Если сервер отправляет сообщения группой большого размера, то сервер сожмет всю группу, а не каждое отдельное сообщение в группе
 
-Клиент, так же как и сервер, может группировать свои исходящие сообщения в списки (кроме ping фрейма и `7`), список это всего лишь обертка, сервер обработает каждое сообщение из списка в отдельности. Группировка сообщение помогает
+Клиент, так же как и сервер, может группировать свои исходящие сообщения в списки (кроме ping фрейма и `7`), список это всего лишь обертка, сервер обработает каждое сообщение из списка в отдельности. Группировка сообщений помогает
 увеличить число отправлемых клиентом сообщений, чтобы не попасть на rate limit. Максимальный размер группы, которую может отправить клиент, состоит из 50-ти сообщений, при превышении данного значения соединение с клиентом будет закрыто.
 Если клиент отправляет сообщения группой большого размера, то рекомендуется эту группу сжать, сжимать нужно именно группу, а не каждое отдельное сообщение в группе
 
 ### Rate limits
 
-Rate limit считается для каждой вебсокет сессии в отдельности. Каждое сообщение имеет свой вес, вы можете отправить сообщения суммарным весом не более 10000 за последние 10 секунд. Суммарный доступный вес сообщений пересчитывается каждую
-секунду (отбрасывается суммарный набранный вес за самую старую секунду из десяти). Сообщения имеют разный вес, ping фрейм и `7` имеют вес 1, все остальные сообщения имеют вес 49, группа сообщений (т.е. сообщения упакованные в один список)
-имеет вес 49. Т.о. за 10 секунд клиент может отправить примерно $10000 \div 49 = 204$ сообщений, можно все сообщения отправить и за одну секунду, но тогда в следующие 9 секунд слать будет нечего и связь будет закрыта либо по таймауту (он был
-описан выше и равен 5 секунд), либо, если клиент таки отправит сообщение, то по rate limit-у. При превышении rate limit-а связь закрывается автоматически
+Rate limit считается для каждой вебсокет сессии в отдельности. Каждое сообщение имеет свой вес (в неких пунктах), вы можете отправить сообщения суммарным весом не более 10000 пунктов за последние 10 секунд. Суммарный доступный вес сообщений
+пересчитывается каждую секунду (отбрасывается суммарный набранный вес за самую старую секунду из десяти). Сообщения имеют разный вес, ping фрейм и `7` имеют вес 1 пункт, все остальные сообщения имеют вес 49 пунктов, группа сообщений (т.е.
+сообщения упакованные в один список) имеет вес 49 пунктов. Т.о. за 10 секунд клиент может отправить примерно $10000 \div 49 = 204$ сообщений, можно все сообщения отправить и за одну секунду, но тогда в следующие 9 секунд слать будет нечего и
+связь будет закрыта либо по таймауту (он был описан выше и равен 5 секунд), либо, если клиент таки отправит сообщение, то по rate limit-у. При превышении rate limit-а связь закрывается автоматически
+
+С одного ip-адреса разрешается не более 20-ти попыток подключения в течение минуты, при превышении данного значения соединение перестанет устанавливаться, в ответ будет отправлен код 429
 
 ### Прочее
 
@@ -70,6 +72,7 @@ Payload:
 | > key | y | string |  | User API key (API usage should be enabled) |
 | > role | n | string |  | User role, default value is demo |
 | > group | n | boolean |  | Receive messages from server in groups, default value is false |
+| > compress | n | boolean |  | Compress large size messages by server, default value is true. *It is strongly recommended to turn off compression only for debugging purposes!* |
 
 Example:
 
@@ -81,7 +84,8 @@ Example:
 		"email":"qwd@gmail.com",
 		"key":"asdcccccccccccccccc",
 		"role":"demo",
-		"group":false
+		"group":false,
+		"compress":true
 	},
 	"eid":"qwe"
 }
@@ -98,7 +102,7 @@ Payload:
 | type = authorization_key | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | ts | y | number | epoch_nsec | Response time in nano seconds |
-| r = r | y | string | request_result | Request result |
+| r = p | y | string | request_result | Request result |
 | data | y | object |  |  |
 | > e | y | string |  | User email |
 | > lang | y | string |  | User lang, always `en` |
@@ -118,7 +122,7 @@ Example:
 		"active_role":"trader",
 		"roles":["demo", "trader"]
 	},
-	"r":"r",
+	"r":"p",
 	"eid":"qwerty",
 	"ts":1669793958010491759
 }
@@ -2203,6 +2207,104 @@ Example:
 ```
 </details>    
 
+### 12.1.16. Написать на почту "создателю" порфтеля [роль: admin]
+
+Написать сообщение на почту старшего трейдера и на почты "создателю" данного портфеля
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio.mail_to | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > to_head | y | boolean |  | Also mail to `head_of_traders` role |
+| > subj | y | string |  | Message subject, `${ROBOT_ID}` will be replaced with current robot's ID, `${PORTFOLIO_ID}` will be replaced with current portfolio name + robot's ID |
+| > msg | y | string |  | Message text, `${ROBOT_ID}` will be replaced with current robot's ID, `${PORTFOLIO_ID}` will be replaced with current portfolio name + robot's ID |
+
+Example:
+
+```json
+{
+	"type": "portfolio.mail_to",
+	"data": {
+                "to_head": true,
+		"r_id": "1",
+		"p_id": "test",
+		"subj":"Test ${PORTFOLIO_ID}",
+                "msg":"Test ${PORTFOLIO_ID}"
+	},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio.mail_to | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > emails | y | array |  |  |
+| >> [] | y | array |  | List of emails message was sent to |
+
+Example:
+
+```json
+{
+	"type":"portfolio.mail_to",
+	"data":
+	{
+		"emails": ["test@gmail.com"]
+	},
+	"r":"p",
+	"eid":"qwerty",
+	"ts":1669806718085368646
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio.mail_to | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r=e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"portfolio.mail_to",
+	"data":
+	{
+		"msg":"Internal error",
+		"code":18
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>  
+
 ## 12.2. Роботы
 
 ### 12.2.1. Подписка на робота
@@ -2270,6 +2372,7 @@ Payload:
 | >> sv | y | string |  | Server build robot version |
 | >> svd | y | number | epoch_sec | Server build robot version date (-1 means unknown) |
 | >> start | y | boolean |  | Robot should be started |
+| >> resp_users | y | array |  | List of responsible users emails as list of strings |
 | >> md_st | y | array |  |  |
 | >>> [] | y |  |  | Array of dictionaries of data-stream states with stream name as a key and value of type stream_status |
 | >> tr_st | y | array |  |  |
@@ -2318,6 +2421,7 @@ Example:
             "sv": "ec1d046",
             "svd": 1687175149,
             "start": true,
+            "resp_users": ["test@gmail.com"],
             "md_st": [
                 {
                     "sec_type": 1048576,
@@ -2424,6 +2528,7 @@ Payload:
 | >> sv | n | string |  | Server build robot version |
 | >> svd | n | number | epoch_sec | Server build robot version date (-1 means unknown) |
 | >> start | n | boolean |  | Robot should be started |
+| >> resp_users | y | array |  | List of responsible users emails as list of strings |
 | >> md_st | n | array |  |  |
 | >>> [] | n |  |  | Aray of dictionaries of data-stream states with stream name as a key and value of type stream_status |
 | >> tr_st | n | array |  |  |
@@ -2643,6 +2748,7 @@ Payload:
 | >> comp | y | string |  | Company name |
 | >> cmnt | y | string |  | Comment |
 | >> ips | y | array |  | List of ips as list of strings |
+| >> resp_users | y | array |  | List of responsible users emails as list of strings |
 | >> cmd | y | string |  | Command line params |
 | >> srv_runme | y | boolean |  | Use runme on server |
 | >> md_st | y | array |  |  |
@@ -2690,6 +2796,7 @@ Example:
             "sv": "ec1d046",
             "svd": 1687175149,
             "start": true,
+            "resp_users": ["test@gmail.com"],
             "md_st": [
                 {
                     "sec_type": 1048576,
@@ -2792,6 +2899,7 @@ Example:
             "ld": 5,
             "start": true,
             "bld": "vikingrobot.vrb_test",
+            "resp_users": ["test@gmail.com"],
             "ps": 2,
             "sv": "0bbb5ae",
             "svd": 1689597843,
@@ -2854,6 +2962,7 @@ Payload:
 | >> comp | n | string |  | Company name |
 | >> cmnt | n | string |  | Comment |
 | >> ips | n | array |  | List of ips as list of strings |
+| >> resp_users | n | array |  | List of responsible users emails as list of strings |
 | >> cmd | n | string |  | Command line params |
 | >> srv_runme | n | boolean |  | Use runme on server |
 | >> md_st | n | array |  |  |
@@ -10454,7 +10563,94 @@ Example:
 ```
 </details>    
 
-### 12.10.6. Удалить робота [роль: admin]
+### 12.10.6. Написать на почту "ответственным" пользователям робота [роль: admin]
+
+Написать сообщение на почту старшего трейдера и на почты "ответственных" за данного робота трейдеров
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = adm_robot.mail_to | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > subj | y | string |  | Message subject, `${ROBOT_ID}` will be replaced with current robot's ID |
+| > msg | y | string |  | Message text, `${ROBOT_ID}` will be replaced with current robot's ID |
+
+Example:
+
+```json
+{
+	"type": "adm_robot.mail_to",
+	"data": {"r_id":"1", "subj":"Test ${ROBOT_ID}", "msg":"Test ${ROBOT_ID}"},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = adm_robot.mail_to | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > emails | y | array |  |  |
+| >> [] | y | array |  | List of emails message was sent to |
+
+Example:
+
+```json
+{
+	"type":"adm_robot.mail_to",
+	"data":{"emails":["test@gmail"]},
+	"r":"p",
+	"eid":"qwerty",
+	"ts":1669798613250710705
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = adm_robot.mail_to | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"adm_robot.mail_to",
+	"data":
+	{
+		"msg":"Internal error",
+		"code":18
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details> 
+
+### 12.10.7. Удалить робота [роль: admin]
 
 Удалить робота
 
@@ -10537,7 +10733,7 @@ Example:
 ```
 </details>    
 
-### 12.10.7. Подписка на сервера [роль: admin]
+### 12.10.8. Подписка на сервера [роль: admin]
 
 Подписаться на события по всем серверам
 
@@ -10780,7 +10976,7 @@ Example:
 ```
 </details>    
 
-### 12.10.8. Отписка от серверов [роль: admin]
+### 12.10.9. Отписка от серверов [роль: admin]
 
 Отписаться от событий по всем серверам
 
@@ -10865,7 +11061,7 @@ Example:
 ```
 </details>    
 
-### 12.10.9. Подписка на состояние модулей [роль: admin]
+### 12.10.10. Подписка на состояние модулей [роль: admin]
 
 <details>
 <summary>Request</summary>
@@ -10976,7 +11172,7 @@ Example:
 ```
 </details>    
 
-### 12.10.10. Отписка от состояния модулей [роль: admin]
+### 12.10.11. Отписка от состояния модулей [роль: admin]
 
 <details>
 <summary>Request</summary>
@@ -11059,7 +11255,7 @@ Example:
 ```
 </details>    
 
-### 12.10.11. Получить список компаний [роль: admin]
+### 12.10.12. Получить список компаний [роль: admin]
 
 <details>
 <summary>Request</summary>
@@ -11156,7 +11352,7 @@ Example:
 ```
 </details>    
 
-### 12.10.12. Получить свободный id робота [роль: admin]
+### 12.10.13. Получить свободный id робота [роль: admin]
 
 <details>
 <summary>Request</summary>
@@ -11879,6 +12075,7 @@ Payload:
 | data | y | object |  |  |
 | > c_id | y | string |  | Company id |
 | > u_id | y | string |  | User ID (email) |
+| > add | n | boolean |  | Use this flag on adding new user to company, default value is false. If flag is set, you will receive an error message if user is already in company |
 | > roles | y | array |  | Array of roles as strings |
 | > rbts | y | array |  | Array of robot ids as strings |
 | > portfs | y | array |  | Array users’s portfolios |
@@ -12375,9 +12572,91 @@ Example:
 	"r":"e"
 }
 ```
-</details>   
+</details>
 
-### 12.11.12. Подписка на параметры пользователя
+### 12.11.12. Получить емейлы пользователей компании
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = users_in_companies.get_users | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > c_id | y | string |  | Company ID |
+
+Example:
+
+```json
+{
+	"type": "users_in_companies.get_users",
+	"data": {"c_id":"1"},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = users_in_companies.get_robots | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > usrs | array |  |  | Array of emails as strings |
+
+Example:
+
+```json
+{
+  "type": "users_in_companies.get_userss",
+  "data": { "usrs": ["test@gmail.com", "xxx@mail.ru"] },
+  "r": "p",
+  "eid": "q0",
+  "ts": 1693481809218424440
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = users_in_companies.get_users | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"users_in_companies.get_users",
+	"data":
+	{
+		"msg":"Internal error",
+		"code":18
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
+
+### 12.11.13. Подписка на параметры пользователя
 
 В любой момент может быть выслан снапшот
 
@@ -12496,7 +12775,7 @@ Example:
 ```
 </details>    
 
-### 12.11.13. Отписка от параметров пользователя
+### 12.11.14. Отписка от параметров пользователя
 
 <details>
 <summary>Request</summary>
@@ -12579,7 +12858,7 @@ Example:
 ```
 </details>    
 
-### 12.11.14. Изменить параметры пользователя
+### 12.11.15. Изменить параметры пользователя
 
 <details>
 <summary>Request</summary>
@@ -12671,7 +12950,7 @@ Example:
 ```
 </details>
 
-### 12.11.15. Получить отключенные настройки telegram уведомлений пользователя
+### 12.11.16. Получить отключенные настройки telegram уведомлений пользователя
 
 <details>
 <summary>Request</summary>
@@ -12756,7 +13035,7 @@ Example:
 ```
 </details>
 
-### 12.11.16.Отключить настройки telegram уведомлений пользователя
+### 12.11.17.Отключить настройки telegram уведомлений пользователя
 
 <details>
 <summary>Request</summary>
@@ -13041,8 +13320,309 @@ Example:
 	"r":"e"
 }
 ```
+</details>
+
+### 12.12.3. Подписка на неотправленные email-ы
+
+При обновлении сатуса отправки email-а, всегда приходят все данные по email-у
+
+Когда письмо отправится, придет поле __action=del
+
+<details>
+<summary>Subscription request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = emails.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | n | object |  |  |
+
+Example:
+
+```json
+{
+	"type": "emails.subscribe",
+	"data": {},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+
+<summary>Response on success (snapshot)</summary> 
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = emails.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = s | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > emails | y | array |  | Array of not sent emails |
+| >> [] | y |  |  | Array of objects |
+| >>> id | y | number |  | Unique email ID |
+| >>> status | y | number | email_status | Email sending status |
+| >>> dt | y | string | epoch_nsec | Moment email was added to sending queue |
+| >>> subj | y | string |  | Email subject |
+| >>> msg | y | string |  | Email text |
+| >>> to | y | array |  | Array of emails message was sent to |
+
+Example:
+
+```json
+{
+	"type":"emails.subscribe",
+	"data":
+	{
+		"emails":[{"id":23,"status":0,"dt":"1705921207989767057","subj":"Test 2","msg":"Test 2", "to":["test@mail.ru"]}]
+	},
+	"r":"s",
+	"eid":"qwerty",
+	"ts":1669793958010491759
+}
+```
+</details>    
+<details>
+<summary>Updates</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = emails.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = u | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > emails | y | array |  | Array of not sent emails |
+| >> [] | y |  |  | Array of objects |
+| >>> id | y | number |  | Unique email ID |
+| >>> status | n | number | email_status | Email sending status |
+| >>> dt | n | string | epoch_nsec | Moment email was added to sending queue |
+| >>> subj | n | string |  | Email subject |
+| >>> msg | n | string |  | Email text |
+| >>> to | n | array |  | Array of emails message was sent to |
+| >>> __action = del | n | string |  | Only on delete |
+
+Example:
+
+```json
+{
+	"type":"emails.subscribe",
+	"data":
+	{
+		"emails":[{"id":23,"status":1,"dt":"1705921207989767057","subj":"Test 2","msg":"Test 2", "to":["test@mail.ru"]}]
+	},
+	"r":"u",
+	"eid":"qwerty",
+	"ts":1669793958010491759
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = emails.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"emails.subscribe",
+	"data":
+	{
+		"msg":"Operation timeout",
+		"code":666
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
 </details>    
 
+### 12.12.4. Отписка от неотправленных email-ов
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = emails.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > sub_eid | y | string | string_36 | Subscription eid |
+
+Example:
+
+```json
+{
+	"type":"emails.unsubscribe",
+	"data":
+	{
+		"sub_eid":"qwerty"
+	},
+	"eid":"q"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = emails.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+
+Example:
+
+```json
+{
+	"type":"emails.unsubscribe",
+	"data":{},
+	"r":"p",
+	"eid":"q",
+	"ts":1669810178671387651
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = emails.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"emails.unsubscribe",
+	"data":
+	{
+		"msg":"Operation timeout",
+		"code":666
+	},
+	"ts":1657693572940145200,
+	"eid":"q",
+	"r":"e"
+}
+```
+</details>
+
+### 12.12.5. Получить одноразовый ключ для логина от имени другого пользователя (для админа)
+
+Полученный ключ действителен в течение 5 секунд
+
+После успешного или не успешного логина, а также при очередном запросе, текущий одноразовый ключ будет удален
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = admins.get_user_one_off_key | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > u_id | y | string |  | User ID (email) |
+
+Example:
+
+```json
+{
+	"type": "admins.get_user_one_off_key",
+	"data": {"u_id":"test@gmail.com"},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = admins.get_user_one_off_key | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > one_off_key | y | string |  | One-off auth key |
+
+Example:
+
+```json
+{
+	"type":"admins.get_user_one_off_key",
+	"data":{"one_off_key":"XOQwKibHVevpLwvkgA02ZqpuNFzLUNhe8o3MMYWaYmv2ML4kaWLCTEM025K4QdOW3915lRWSIwvzV2JR"},
+	"r":"p",
+	"eid":"qwerty",
+	"ts":1669798613250710705
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = admins.get_user_one_off_key | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"admins.get_user_one_off_key",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
 
 ## Типы данных
 
@@ -13060,6 +13640,7 @@ Example:
 | stream_status | number | Integer value, enum: 0 — disconnected, 1 — connecting, 2 — connected, 3 — unknown |
 | trading_status | number | Integer value, enum: 0 — not trading, 2 —trading, 3 — unknown |
 | process_status | number | Integer value, enum: 0 — not running, 2 —running, 3 — unknown |
+| email_status | number | Integer value, enum: 0 — pending, 1 — in progress, 2 — sent, 3 — send failed |
 | direction | number | Integer value, enum: 1 — buy, 2 — sell |
 | order_status | number | Integer value, enum: 1 — adding, 2 — running, 4 — deleting, 5 — first_deleting, 6 — sl_deleting, 7 — moving, 99 — add_error |
 | symbol_find_state | number | Integer value, enum: 0 — unknown, 1 — searching, 2 — found, 3 — expired, 4 — error |
