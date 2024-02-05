@@ -23,7 +23,7 @@
 
 ## **6.3. Правила перемещения Lim_Sell и Lim_Buy**
 
-Сигнальные цены [Lim_Sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) и [Lim_Buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) перемещаются только при прохождении сделок по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту портфеля.
+Сигнальные цены [Lim_Sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) и [Lim_Buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) перемещаются только при прохождении сделок по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту портфеля кроме случаем использования [Always timer](/docs/05-params-description.html#_5-2-22-always-timer).
 
 Правила перемещения сигнальных цен можно разделить на две части: произошла продажа по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге и произошла покупка по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге. Внутри каждой из этих частей алгоритм делится еще на две части: позиция портфеля до прохождения данной сделки была равна нулю и была не равна нулю.
 
@@ -86,7 +86,7 @@ $Lim\_Sell_1=Lim\_Buy_0+TP,$
 	
 $Lim\_Buy_1=Lim\_Buy_0-\frac{|{diffpos}|}{V}\times K.$
 
-Также перемещение сигнальных цен происходит когда заявка не может быть выставлена из-за ограничений по [v_min](/docs/05-params-description.html#_5-2-11-1-v-min-v-max), [v_max](/docs/05-params-description.html#_5-2-11-1-v-min-v-max), [To0](/docs/05-params-description.html#_5-2-26-to0). Если робот не может купить из-за ограничений по [v_max](/docs/05-params-description.html#_5-2-11-1-v-min-v-max), то в соответствии с параметрами портфеля [Limits timer](/docs/05-params-description.html#_5-2-20-limits-timer) и [Percent](/docs/05-params-description.html#_5-2-21-percent) цены [Lim_Sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) и [Lim_Buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) уменьшаются на величину параметра портфеля [K](/docs/05-params-description.html#_5-2-19-1-k), если же робот не может продать из-за ограничений по [v_min](/docs/05-params-description.html#_5-2-11-1-v-min-v-max), то в соответствии с параметрами портфеля [Limits timer](/docs/05-params-description.html#_5-2-20-limits-timer) и [Percent](/docs/05-params-description.html#_5-2-21-percent) цены [Lim_Sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) и [Lim_Buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) увеличиваются на величину параметра портфеля [K](/docs/05-params-description.html#_5-2-19-1-k).
+Также перемещение сигнальных цен происходит когда заявка не может быть выставлена из-за ограничений по [v_min](/docs/05-params-description.html#_5-2-11-1-v-min-v-max), [v_max](/docs/05-params-description.html#_5-2-11-1-v-min-v-max), [To0](/docs/05-params-description.html#_5-2-26-to0). Если робот не может купить из-за ограничений по [v_max](/docs/05-params-description.html#_5-2-11-1-v-min-v-max), то в соответствии с параметрами портфеля [Limits timer](/docs/05-params-description.html#_5-2-20-limits-timer) и [Percent](/docs/05-params-description.html#_5-2-21-percent) цены [Lim_Sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) и [Lim_Buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) уменьшаются на величину параметра портфеля [K](/docs/05-params-description.html#_5-2-19-1-k), если же робот не может продать из-за ограничений по [v_min](/docs/05-params-description.html#_5-2-11-1-v-min-v-max), то в соответствии с параметрами портфеля [Limits timer](/docs/05-params-description.html#_5-2-20-limits-timer) и [Percent](/docs/05-params-description.html#_5-2-21-percent) значения [Lim_Sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) и [Lim_Buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) увеличиваются на величину параметра портфеля [K](/docs/05-params-description.html#_5-2-19-1-k).
 
 ## **6.4. Особенности поведения заявок, переставленных по SL или Timer**
 
@@ -102,7 +102,7 @@ $Lim\_Buy_1=Lim\_Buy_0-\frac{|{diffpos}|}{V}\times K.$
 
 ## **6.6. О ценах выставления заявок второй ноги**
 
-В момент выставлении заявки по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту запоминаются текущие цены по остальным бумагам. Таким образом в момент совершении сделки по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту все остальные бумаги в портфеле выставятся по ценам, которые робот запомнил во время выставления заявки по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту.
+В момент выставлении заявки по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту запоминаются текущие цены по остальным бумагам. Таким образом в момент совершении сделки по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту все остальные бумаги в портфеле выставятся по ценам, которые робот запомнил во время выставления заявки по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту. Исключение составляет использование параметра [Equal price](/docs/05-params-description.html#_5-2-10-equal-price)
 
 ## **6.7. Об объёмах выставления заявок**
 
@@ -114,8 +114,6 @@ $Lim\_Buy_1=Lim\_Buy_0-\frac{|{diffpos}|}{V}\times K.$
 
 ## **6.9. Алгоритм робота в синтетических стаканах**
 
-При торгах Московская биржа применяет синтетические стаканы: https://www.moex.com/ru/spreads/ , цены и объёмы которых видит пользователь в своем терминале. Однако, робот работает только с реальными ценами и объемами того стакана, который указан в инструментах портфеля. Поэтому синтетические цены он не видит.
-Это происходит из-за того, что робот получает маркет дату по самому быстрому подключению Orderlog с биржи, а терминал брокера использует другие данные для построения стакана.
-Таким образом получается, что в стакане робота по календарным спредам отображаются только те заявки, которые были выставлены непосредственно по инструменту календарный спред. В Quik кроме этого будут синтетические котировки, сформированные из стаканов ближнего и дальнего фьючерсов.
+При торгах Московская биржа применяет синтетические стаканы: https://www.moex.com/ru/spreads/ , цены и объёмы которых видит пользователь в своем терминале брокера. Однако, робот работает только с реальными ценами и объемами того стакана, который указан в инструментах портфеля. Поэтому синтетические цены он не видит. Это происходит из-за того, что робот получает маркет дату по самому быстрому подключению Orderlog с биржи, а терминал брокера использует другие данные для построения стакана. Таким образом получается, что в стакане робота по календарным спредам отображаются только те заявки, которые были выставлены непосредственно по инструменту календарный спред. В Quik кроме этого будут синтетические котировки, сформированные из стаканов ближнего и дальнего фьючерсов.
 
 
