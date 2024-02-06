@@ -401,7 +401,7 @@ Payload:
 | data | y | object |  |  |
 | > r_id | y | string |  | Robot ID |
 | > portfolio | y | object |  | Portfolio |
-| >> name | y | string |  | Robot ID |
+| >> name | y | string |  | Portfolio name |
 | >> * | n | * |  | Other portfolio fields from template |
 | >> securities | y | object |  | Securities |
 | >>> SEC_KEY | y | string: object |  | Security object key |
@@ -646,7 +646,7 @@ Payload:
 | data | y | object |  |  |
 | > r_id | y | string |  | Robot ID |
 | > portfolio | y | object |  | Portfolio |
-| >> name | y | string |  | Robot ID |
+| >> name | y | string |  | Portfolio name |
 | >> * | n | * |  | Other portfolio fields from template |
 | >> securities | n | object |  | Securities |
 | >>> SEC_KEY | n | string: object |  | Security object key |
@@ -1056,7 +1056,7 @@ Payload:
 | > r_id | y | string |  | Robot ID |
 | > p_id | y | string |  | Portfolio name |
 | > value | y | object |  | Portfolio snapshot |
-| >> name | y | string |  | Robot ID |
+| >> name | y | string |  | Portfolio name |
 | >> * | y | * |  | Other portfolio fields from template |
 | >> securities | y | object |  | Securities |
 | >>> SEC_KEY | y | string: object |  | Security object key |
@@ -1271,7 +1271,7 @@ Payload:
 | > r_id | y | string |  | Robot ID |
 | > p_id | y | string |  | Portfolio name |
 | > value | y | object |  | Portfolio update |
-| >> name | y | string |  | Robot ID |
+| >> name | y | string |  | Portfolio name |
 | >> __action = del | n | string |  | Only on delete |
 | >> * | n | * |  | Other portfolio fields from template |
 | >> securities | n | object |  | Securities |
