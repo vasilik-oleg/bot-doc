@@ -356,27 +356,27 @@ ratio_2$$
 
 Группа параметров отвечающих за объем выставляемых заявок. Группу можно разделить на две пары параметров: [v_in_left/v_in_right](/docs/05-params-description.html#_5-2-11-2-v-in-left-v-in-right) и [v_out_left/v_out_right](/docs/05-params-description.html#_5-2-11-3-v-out-left-v-out-right), а так же параметры [Virt_0_pos](/docs/05-params-description.html#_5-2-11-4-virt-0-pos) и [n_perc_fill](/docs/05-params-description.html#_5-2-11-5-n-perc-fill).
 
-#### **5.2.11.1. v_min/v_max**
+#### **5.2.11.1. v_min/v_max** <Anchor :ids="['p.v_min', 'p.v_max']" />
 
 Минимальная/максимальная разрешенная позиция для главного инструмента портфеля. Измеряется в лотах [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструмента.
 
-#### **5.2.11.2. v_in_left/v_in_right**
+#### **5.2.11.2. v_in_left/v_in_right** <Anchor :ids="['p.v_in_l', 'p.v_in_r']" />
 
 Отвечает за минимальный/максимальный разрешенный объем для однократного входа в позицию (в штуках портфелей);  
 Если тип определения цены [Type price](/docs/05-params-description.html#_5-2-5-type-price) выбран `Orderbook` или `Orderbook+filter` то в качестве объема для однократного входа в позицию `v_in_right` не используется.
 
-#### **5.2.11.3. v_out_left/v_out_right**
+#### **5.2.11.3. v_out_left/v_out_right** <Anchor :ids="['p.v_out_l', 'p.v_out_r']" />
 
 Отвечает за минимальный/максимальный разрешенный объем для однократного выхода из позиции (в штуках портфелей);  
 Если тип определения цены [Type price](/docs/05-params-description.html#_5-2-5-type-price) выбран `Orderbook` или `Orderbook+filter` то в качестве объема для однократного выхода из позиции `v_out_right` не используется.
 
-#### **5.2.11.4. Virt 0 pos**
+#### **5.2.11.4. Virt 0 pos** <Anchor :ids="['p.virtual_0_pos']" />
 
 Параметр позволяет [Is first](/docs/05-params-description.html#_5-3-11-is-first) заявке, выставленной по алгоритму, по бумаге с направлением в сторону закрытия позиции не только сводить позицию к нулю, но и сразу открывать новую позицию с противоположным направлением, кроме того объем заявки никогда не может быть меньше [v_in_left](/docs/05-params-description.html#_5-2-11-2-v-in-left-v-in-right) и [v_out_left](/docs/05-params-description.html#_5-2-11-3-v-out-left-v-out-right).
 
 **Важно:** если установлен флаг [To0](/docs/05-params-description.html#_5-2-26-to0), то можно получить такое поведение робота, что позиция никогда не попадает ровно в 0, а все время переворачивается то в одну, то в другую сторону. При включенном параметре Virt 0 pos робот может не дойти до позиций [v_min/v_max](/docs/05-params-description.html#_5-2-11-1-v-min-v-max), т.к. “упираемся” в [v_in_left/v_in_right](/docs/05-params-description.html#_5-2-11-2-v-in-left-v-in-right) и [v_out_left/v_out_right](/docs/05-params-description.html#_5-2-11-3-v-out-left-v-out-right) (робот не ставит меньше этих значений).
 
-#### **5.2.11.5. n_perc_fill**
+#### **5.2.11.5. n_perc_fill** <Anchor :ids="['p.n_perc_fill']" />
 
 Параметр отвечает за связь позиции по главной бумаге и позиции по портфелю. Исходя из этого параметра осуществляется округление отношения позиции ([Curpos](/docs/05-params-description.html#_5-3-6-curpos)) по главному инструменту к параметру [Count](/docs/05-params-description.html#_5-3-8-count) того же инструмента. Значение `n_perc_fill` равное нулю отключает механизм округления, в результате позиция всегда округляется по модулю вниз. Во всех остальных случаях работают следующие правила:
 
@@ -386,14 +386,14 @@ ratio_2$$
 
 - если при уменьшении позиции целая часть от деления нацело [Curpos](/docs/05-params-description.html#_5-3-6-curpos) на [Count](/docs/05-params-description.html#_5-3-8-count) уменьшилась, а модуль остатка от деления нацело [Curpos](/docs/05-params-description.html#_5-3-6-curpos) на [Count](/docs/05-params-description.html#_5-3-8-count) меньше или равен `(100 - n_perc_fill)` процентов от [Count](/docs/05-params-description.html#_5-3-8-count), то позицию по портфелю округляем по модулю вниз, иначе вверх.
 
-### **5.2.12. Delta**
+### **5.2.12. Delta** <Anchor :ids="['p.delta']" />
 
 Минимальное отклонение [Price_s](/docs/05-params-description.html#_5-2-40-price-s-price-b) и `[Price_b](/docs/05-params-description.html#_5-2-40-price-s-price-b) от цены выставленной заявки на продажу или покупку, соответственно, при превышении которого робот может переставить котируемую заявку, то есть заявку по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту (используется только при включенном режиме [Quote](/docs/05-params-description.html#_5-2-6-quote));
 
 _Пример_:  
 Delta = 10, выставлена котирующая заявка на продажу по цене 95 (т.е на момент выставления этой заявки Price_s = 95). Как только Price_s станет меньше 85 или больше 105, заявка переставится по новой цене
 
-### **5.2.13. First delta**
+### **5.2.13. First delta** <Anchor :ids="['p.first_delta']" />
 
 Задается в процентах (%), это один из параметров, который ведет к перевыставлению заявки с новым объемом если ее текущий не исполненный объем стал меньше, чем `First delta` процентов от первоначального выставленного объема (используется только при включенном режиме [Quote](/docs/05-params-description.html#_5-2-6-quote)). Таким образом можно поддерживать максимально необходимый объем в котируемой заявке.
 
@@ -401,27 +401,27 @@ Delta = 10, выставлена котирующая заявка на прод
 _Пример_:  
 First delta = 20. Вы котируете на продажу объёмом 100 и вашу заявку начинают выкупать по частям. Заявка висит до тех пор, пока её неисполненный объём больше или равен 20. Как только он становится меньше 20, заявка снимается и, если может, выставляется новая по цене `Price_s` в полном объёме.
 
-### **5.2.14. Market volume**
+### **5.2.14. Market volume** <Anchor :ids="['p.mkt_volume']" />
 
 Данный параметр ограничивает выставление заявки по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту в случаях, 
 если в очереди в стакане перед предполагаемой ценой выставления уже есть объем больший чем указан в `Market volume`.
 
 Пример:
 
-### **5.2.15. Price check**
+### **5.2.15. Price check** <Anchor :ids="['p.price_check']" />
 
 Если предполагаемая цена выставления заявки по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге попадает в стакан глубже, чем на `Price check` пунктов, то заявка не выставляется.
 То есть, если `offer + Price check < Price_s`, где `offer` – лучшая цена на продажу [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструмента, то заявка выставлена не будет.
 Для покупки аналогично.
 
-### **5.2.16. Max not hedged**
+### **5.2.16. Max not hedged** <Anchor :ids="['p.max_not_hedged']" />
 
 Значение равное сумме допустимых незахеджированных открытий по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту (т.е. когда по любому из не [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструментов "висит" в рынке не менее, чем `Max not hedged` активных заявок) и ошибок выставления (все ошибки, кроме кроссов), после которой торговля по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту будет остановлена до тех пор пока хотя бы одна из незахеджированных позиций не захеджируется или не сбросится счетчик ошибок.
 
 **Важно:** необходимо использовать параметр `Max not hedged` в связке с [Hedge (sec)](/docs/05-params-description.html#_5-2-8-hedge-sec), так как иначе при накоплении определенного количества ошибок произойдет остановка торговли.
 Используя в портфеле инструменты некоторых площадок с типами инструментов "купить/закрыть покупку", "продать/закрыть продажу" Max not hedged может иметь значение только "1".
 
-### **5.2.17. Overlay**
+### **5.2.17. Overlay** <Anchor :ids="['p.overlay']" />
 
 Хеджировать только если разница (в портфелях) между [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумагой и остальными инструментами портфеля больше или равна значению данного параметра (в штуках портфелей, то есть в той же размерности, что и [v_in_left/v_in_right](/docs/05-params-description.html#_5-2-11-2-v-in-left-v-in-right)).
 
@@ -435,11 +435,11 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 <iframe width="735" height="415" src="https://www.youtube.com/embed/DxLdFeUU_bM" title="Описание параметра Lim-sell и Lim-buy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-### **5.2.19. Trading signal shift**
+### **5.2.19. Trading signal shift** <Anchor :ids="['p._limits_shift']" />
 
 Группа параметров, отвечающих за создание арбитражного канала.
 
-#### **5.2.19.1. K**
+#### **5.2.19.1. K** <Anchor :ids="['p.k']" />
 
 Коэффициент сдвига заявки, что улучшает цену для каждого последующего входа.  
 На параметр `К` будут сдвинуты заявки [Lim_sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) в случае продажи или [Lim_buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) в случае покупки при наборе позиции. Другими словами, на сколько улучшится положение заявки после удара на вход (ударом считается сделка объемом не меньше [v_in_left](/docs/05-params-description.html#_5-2-11-2-v-in-left-v-in-right)).
@@ -448,7 +448,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 <iframe width="735" height="415" src="https://www.youtube.com/embed/2qUPvspTQq4" title="Описание параметра K" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-#### **5.2.19.2. ТР**
+#### **5.2.19.2. ТР** <Anchor :ids="['p.tp']" />
 
 Уровень противоположной заявки после удара. С помощью параметра `ТР` вы указываете где будет выставлена противоположная заявка после удара (работает только после первого удара).
 Если нас ударили по [Lim_sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) = 150, то при 'ТР' = 50, [Lim_buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) будет выставлен на 150 – 50 = 100.
@@ -457,7 +457,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 <iframe width="735" height="415" src="https://www.youtube.com/embed/R2nuoUpGq9c" title="Описание параметра TP" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-#### **5.2.19.3. K1**
+#### **5.2.19.3. K1** <Anchor :ids="['p.k1']" />
 
 Коэффициент указывает на сколько будет сдвинута противоположная заявка после второго удара.
 [Lim_buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) = 100 из предыдущего примера, при `К1` = 5, будет установлена на 100 + 5 = 105, после второго удара по [Lim_sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy), , после того как пройдет еще одна сделка, [Lim_buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) будет увеличен еще на 5 и прмиет значение 110, после очередной сделки по [Lim_sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy), [Lim_buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) примет значение 115 и т.д.
@@ -466,7 +466,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 <iframe width="735" height="415" src="https://www.youtube.com/embed/nYSPQR2LFhE" title="Описание параметра K1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-#### **5.2.19.4. K2**
+#### **5.2.19.4. K2** <Anchor :ids="['p.k2']" />
 
 Коэффициент сдвига заявки, что улучшает цену заявки каждого последующего выхода.
 На параметр `К2` будут сдвинуты заявки [Lim_sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) или [Lim_buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) в случае продажи или покупки, соответственно, при выходе из позиции. Другими словами, на сколько улучшится положение следующей заявки на выход после предыдущего удара (ударом считается сделка объемом не меньше [v_out_left/](/docs/05-params-description.html#_5-2-11-3-v-out-left-v-out-right)).
@@ -476,24 +476,24 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 <iframe width="735" height="415" src="https://www.youtube.com/embed/9RbN893_eD0" title="Описание параметра K2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-### **5.2.20. Limits timer**
+### **5.2.20. Limits timer** <Anchor :ids="['p.timer']" />
 
 Время таймера (задается в секундах) по истечению которого происходит сдвиг обоих параметров [Lim_sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) и [Lim_buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) на значение K. Таймер включается если торговля включена и проходит сигнал на покупку или продажу, но торговля запрещена из-за того, что робот уже набрал максимальную позицию (по [v_min/v_max](/docs/05-params-description.html#_5-2-11-1-v-min-v-max)). Таймер выключается при значении [Percent](/docs/05-params-description.html#_5-2-21-percent) > 100%.
 
 Пример: значения `Limits timer` = 10 сек, `Percent` = 60. Возьмем временное окно 10 сек: допустим, сигнал был 2 сек, потом на 3 сек пропал, потом 4 сек был и снова на 1 сек пропал. За 10 сек сигнал был суммарно 6 сек, что больше или равно 60% от 10 сек, следовательно условие выполнено, сдвиг выполняется.
 
 
-### **5.2.21. Percent**
+### **5.2.21. Percent** <Anchor :ids="['p.percent']" />
 
 Процент от [Limits timer](/docs/05-params-description.html#_5-2-20-limits-timer) после которого происходит сдвиг. Если сигнал на торговлю продержался указанный процент времени от значения [Limits timer](/docs/05-params-description.html#_5-2-20-limits-timer), то [Lim_sell/Lim_buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy)) передвигаются на [K](/docs/05-params-description.html#_5-2-19-1-k), не смотря на отсутствие сделок по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге.
 
 
-### **5.2.22. Always timer**
+### **5.2.22. Always timer** <Anchor :ids="['p.always_limits_timer']" />
 
 Включенный `Always timer` позволяет всегда использовать [Limits timer](/docs/05-params-description.html#_5-2-20-limits-timer), даже когда позиция портфеля не достигла значений `v_min` или `v_max`. При выключенном `Always timer` смещение уровней [Lim_sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) и/или [Lim_buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy) происходит только когда происходят сделки или когда позиция портфеля достигла значений `v_min` или `v_max`. Включение этого параметра позволяет двигать уровни, даже если сделка не совершилась, но робот только попытался выставить заявку.
 
 
-### **5.2.23. Pos**
+### **5.2.23. Pos** <Anchor :ids="['p.pos']" />
 
 Текущая позиция портфеля (в штуках портфелей), вычисляется по формуле:
 
@@ -501,7 +501,7 @@ $Pos=[\frac{Curpos_{first}}{Count_{first}}],$
 
 где Curpos<sub>first</sub> и Count<sub>first</sub> - это параметры [Curpos](/docs/05-params-description.html#_5-3-6-curpos) и [Count](/docs/05-params-description.html#_5-3-8-count) для инструмента портфеля с взведенным флагом [Is first](/docs/05-params-description.html#_5-3-11-is-first), и округляется вверх или вниз в зависимости от значения параметра [n_perc_fill](/docs/05-params-description.html#_5-2-11-5-n-perc-fill). Изменяется роботом, но может быть отредактирована пользователем вручную.
 
-### **5.2.24. Timetable**
+### **5.2.24. Timetable** <Anchor :ids="['p.use_tt']" />
 
 Использовать торговлю по расписанию. Расписание представляет собой список торговых периодов для каждого из которых создаются свои параметры:
 
@@ -516,17 +516,17 @@ $Pos=[\frac{Curpos_{first}}{Count_{first}}],$
 **Важно:** текущее время определяется временем на сервере, где находится робот. Следовательно, необходимо ориентироваться на UTC +3 (МСК).
 
 
-### **5.2.25. Timetable only stop**
+### **5.2.25. Timetable only stop** <Anchor :ids="['p.tt_only_stop']" />
 
 Автоматически выключать торговлю, если текущее время не попадает в периоды расписания, но при этом автоматически не включать торговлю если время попадает в один из периодов расписания. Таким образом данный параметр повозоляет использовать только один раз настроенное расписание, после остановки торгов роботом по расписанию с данным параметром, торговля автоматически возобновлена не будет.
 
-### **5.2.26. To0**
+### **5.2.26. To0** <Anchor :ids="['p.to0']" />
 
 Использование данного параметра позволяет вести торговлю только в сторону закрытия позиции. Когда позиция портфеля достигнет нуля, торговля остановится. 
 
 **Важно:** если установлен флаг [Virt_0_pos](/docs/05-params-description.html#_5-2-11-4-virt-0-pos), то можно получить такое поведение робота, что позиция никогда не попадает ровно в 0, а все время переворачивается то в одну, то в другую сторону.
 
-### **5.2.27. Opened**
+### **5.2.27. Opened** <Anchor :ids="['p.opened']" />
 
 Параметр, используемый для подсчета финансового результата, вычисляется по формуле:
 
@@ -539,54 +539,54 @@ bought - список сделок на покупку;
 sold - список сделок на продажу;  
 Mult<sub>i</sub> - Fin res multiplier инструмента портфеля.
 
-### **5.2.28. Commision sum**
+### **5.2.28. Commision sum** <Anchor :ids="['p.opened_comission']" />
 
 Сумма комиссии по всем сделкам портфеля, используется для подсчёта финансового результата.
 
-### **5.2.29. Decimals**
+### **5.2.29. Decimals** <Anchor :ids="['p.decimals']" />
 
 Параметр, определяющий сколько знаков после десятичной точки отображается в параметрах, значение которых является дробным числом.
 
-### **5.2.31. Custom trade**
+### **5.2.31. Custom trade** <Anchor :ids="['p.custom_trade']" />
 
 Позволяет использовать `Trade formula` для подсчета раздвижки в таблице с финансовыми результатами.
 
-### **5.2.32. Trade formula**
+### **5.2.32. Trade formula** <Anchor :ids="['p.trade_formula']" />
 
 Формула на языке программирования [C++](/docs/08-c-api.html#_8-c) для подсчета раздвижки в таблице с финансовыми результатами, вы пишете только тело функции и должны вернуть значение типа `double`. Функция вызывается в момент когда получены все необходимые сделки для подсчета раздвижки и добавления
 ее в таблицу (при этом сделки могут быть НЕ по всем бумагам портфеля). На каждый финансовый инструмент портфеля будет доступно не больше одной сделки, если по какой-либо бумаге прошло несколько сделок, относящихся к данной раздвижке, то будет доступна только одна сделка, но с суммарным количеством
 и со средней ценой.
 
-### **5.2.33. Extra formulas**
+### **5.2.33. Extra formulas** <Anchor :ids="['p.ext_formulas']" />
 
 Флаг, включает расчёт `Extra field#1` и `Extra field#2`.
 
-### **5.2.34. Extra field#1 и Extra field#2**
+### **5.2.34. Extra field#1 и Extra field#2** <Anchor :ids="['p.ext_field1_', 'p.ext_field2_']" />
 
 Поля для дополнительных формул на языке программирования [C++](/docs/08-c-api.html#_8-c), вы пишете только тело функции и должны вернуть значение типа `double`.
 
-### **5.2.35. Disabled**
+### **5.2.35. Disabled** <Anchor :ids="['p.disabled']" />
 
 Полностью выключить портфель из всех расчетов и торговли, не удаляя его.
 
 **Важно:** при снятии этой галки и восстановлении работы портфеля возможно переоткрытие торговых стаканов и, как следствие, приостановка торговли во всех портфелях, использующих то же дата подключение, на время переоткрытия стаканов.
 
-### **5.2.36. Sell/Buy clicker**
+### **5.2.36. Sell/Buy clicker** <Anchor :ids="['p.sell_portfolio', 'p.buy_portfolio']" />
 
 "Кликер", выставить заявку на продажу/покупку заданного количества портфелей. Заявки выставляются сразу по всем инструментам портфеля. Ручной способ совершения сделок всем портфелем сразу не дожидаясь срабатывания сигналов `Sell`>=`Lim_sell` и `Buy`<=`Lim_buy`.
 
-### **5.2.37. To market**
+### **5.2.37. To market** <Anchor :ids="['p.to_market']" />
 
 "Кликер" позволяет принудительно захеджировать позиции, не дожидаясь срабатывания автохеджа и др параметров. Происходит снятие всех заявок, кроме заявок первой ноги, выставленных по алгоритму и обратное выставление их по рыночным ценам (с учетом параметра [k_sl](/docs/05-params-description.html#_5-3-13-k-sl)) (по каждому инструменту второй ноги ставится не более одной выравнивающей заявки).
 
-### **5.2.38. Place order**
+### **5.2.38. Place order** <Anchor :ids="['p.order_security']" />
 
 Позволяет выставить заявку по одному из инструментов портфеля, не дожидаясь срабатывания настроенных условий портфеля, в т.ч. при выключенной торговле портфеля. Для того, чтобы воспользоваться этой опцией необходимо сделать двойной клик по специальному символу и выбрать необходимые параметры заявки, далее нажать на кнопку `Place order`.  
 При включенной торговле выставленная таким образом заявка может привести к срабатыванию параметров:  
 `** Hedge (sec)`, `SLE`, `TE`.  
 Для удаления выставленной таким способом заявки потребуется биржевой терминал, где вручную снимается заявка или это можно сделать в роботе с помощью кнопки **Hard stop (2.4)
 
-### **5.2.39. Sell/Buy**
+### **5.2.39. Sell/Buy** <Anchor :ids="['p.sell', 'p.buy']" />
 
 `Sell` – расчетная цена на продажу. Нередактируемый параметр.  
 `Buy` – расчетная цена на покупку. Нередактируемый параметр.  
@@ -622,7 +622,7 @@ $$Sell=\sum_{i}
 
 <iframe width="735" height="415" src="https://www.youtube.com/embed/p69X-3l-VLc" title="Описание параметра Sell Buy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-### **5.2.40. Price_s/Price_b**
+### **5.2.40. Price_s/Price_b** <Anchor :ids="['p.price_s', 'p.price_b']" />
 
 `Price_s` – цена выставления заявки на продажу по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге, вычисляется как обратная функция для [Sell](/docs/05-params-description.html#_5-2-39-sell-buy), где цена [Sell](/docs/05-params-description.html#_5-2-39-sell-buy) заменяется на [Lim_Sell](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy). Нередактируемый параметр.  
 `Price_b` – цена выставления заявки на покупку по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге, вычисляется как обратная функция для [Buy](/docs/05-params-description.html#_5-2-39-sell-buy), где цена [Buy](/docs/05-params-description.html#_5-2-39-sell-buy) заменяется на [Lim_Buy](/docs/05-params-description.html#_5-2-18-lim-sell-lim-buy). В общем случае это та цена, по которой робот "хочет" купить и продать по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту.
@@ -668,7 +668,7 @@ $$Price\_b=\left(Lim\_buy_i-\sum_{i \neq isfirst}Buy_i\right)
 
 <iframe width="735" height="415" src="https://www.youtube.com/embed/PKGbweKJbNE" title="Описание параметра Prices" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-### **5.2.41. Sell/Buy status**
+### **5.2.41. Sell/Buy status** <Anchor :ids="['p.sell_status', 'p.buy_status']" />
 
 Статус заявки на продажу/покупку по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту. Существуют следующие статусы:
 
@@ -678,11 +678,11 @@ free - (описание)
 
 Для того чтобы освободить "зависшую" заявку, необходимо сделать двойной клик на ячейке таблицы. Ручная смена статуса может привести к потере заявки роботом, данную операцию рекомендуется делать только в крайних случаях.
 
-### **5.2.42. Return first**
+### **5.2.42. Return first** <Anchor :ids="['p.return_first']" />
 
 Оборот по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге, вычисляется с момента старта серверной части робота как сумма модулей количества лотов в сделках по [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструменту. Можно установить ноль двойным кликом.
 
-### **5.2.43. Fin res**
+### **5.2.43. Fin res** <Anchor :ids="['p.fin_res']" />
 
 Предполагаемый финансовый результат портфеля, вычисляется по формуле:
 
@@ -698,7 +698,7 @@ Curpos<sub>i</sub> - текущая позиция инструмента пор
 Mult - [Fin res multiplier](/docs/05-params-description.html#_5-3-21-fin-res-multiplier) инструмента портфеля;  
 secs - список инструментов портфеля.
 
-### **5.2.44. Fin res wo C**
+### **5.2.44. Fin res wo C** <Anchor :ids="['p.fin_res_wo_c']" />
 
 `Fin res` без учета комиссии. Вычисляется по формуле:
 
@@ -714,15 +714,15 @@ Curpos<sub>i</sub> - текущая позиция инструмента пор
 Mult - [Fin res multiplier](/docs/05-params-description.html#_5-3-21-fin-res-multiplier) инструмента портфеля;  
 secs - список инструментов портфеля.
 
-### **5.2.45. Comment** 
+### **5.2.45. Comment** <Anchor :ids="['p.comment']" />
 
 При необходимости к каждому порфтелю можно добавить свой комментарий. Максимально допустимое число символов для комментария 100.
 
-### **5.2.46. Color**
+### **5.2.46. Color** <Anchor :ids="['p.color']" />
 
 При небходимости можно выделить портфель цветом в поле `color`.
 
-## **5.3. Параметры инструментов портфеля**
+## **5.3. Параметры инструментов портфеля** 
 
 Далее дано описание параметров инструментов портфеля. Все параметры являются редактируемыми, если прямо не указано иное.
 
