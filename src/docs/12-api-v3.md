@@ -12,7 +12,7 @@ padding:5px 0px 5px 0px;
 
 ### Куда подключаться
 
-Адрес подключения к API `wss://alfabot.fkviking.com/ws`
+Адрес подключения к API `wss://bot.fkviking.com/ws`
 
 ### Механизм поддержания связи с сервером
 
