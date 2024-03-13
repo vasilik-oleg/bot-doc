@@ -2,10 +2,10 @@
 
 ## **8.1 Редактор формул**
 
-Редактировать формулы на C++ вы можете во вкладке `Formulas`, которая находится в дереве по пути:
+Редактировать формулы на C++ вы можете во вкладке `Formulas`:
 
-1. Portfolios -> "Название портфеля" -> Formulas;
-2. Portfolios -> "Название портфеля" -> "Название инструмента" -> Formulas.
+1. Portfolios table -> Settings портфеля -> Вкладка Formulas;
+2. Portfolios table -> Settings портфеля -> Вкладка Formulas -> Инструмент;
 
 В первом случае будут отображены поля [Trade formula](/docs/05-params-description.html#_5-2-32-trade-formula), [Extra field#1](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2) и [Extra field#2](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2).
 Во втором [Count formula](/docs/05-params-description.html#_5-3-9-count-formula), [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula), [Ratio sell formula](/docs/05-params-description.html#_5-3-29-ratio-sell-formula).
@@ -60,7 +60,6 @@
 | const spb_commons& spb_common() | структура с полями, описанными ниже              |
 | order_book orderbook()          | структура с методами, описанными ниже            |
 
-Поля `spb_commons` (названия и описания взяты из документации [СПб биржи](https://ftp.spbexchange.ru/TS/DOCS/MDbinary.pdf)):
 
 | Название                 | Тип       | Описание                                              |
 |--------------------------|-----------|-------------------------------------------------------|
