@@ -9,7 +9,7 @@
 <iframe width="735" height="415" src="https://www.youtube.com/embed/s412pbSalGo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
-Для активации маркет-дата подключений необходимо выбрать виджет `Data Connections`, отметить галочками необходимые потоки маркет-даты, нажать значок шестеренка, выбрать робота, для которого добавляется подключение и выбрать действие `Enable`.
+Для активации маркет-дата подключений необходимо выбрать виджет `Data Connections`, отметить галочками необходимые потоки маркет-даты, нажать значок шестеренка ![](./00-img/qemu16.png), выбрать робота, для которого добавляется подключение и выбрать действие `Enable`.
 
 ![Alt text](./00-img/3.1_1_2.jpg)
 
