@@ -69,10 +69,8 @@ module.exports = {
             '06-algorithm-comments',
             '07-order-error',
             '08-c-api',
-            '09-api-v1',
-            '10-api-v2',
-            '11-faq',
-            '12-api-v3'
+            '09-faq',
+            '10-api'
           ]
         }
       ],

@@ -14,5 +14,5 @@ features:
 - title: WebSocket API
   details: Описание методов API для управления портфелями и роботами
 
-footer: ФК Викинг | Copyright © 2010-2023
+footer: ФК Викинг | Copyright © 2010-2024
 ---
