@@ -342,8 +342,8 @@ $$Price=\pm\left(Lim\_sell-Price\_s
 \begin{cases}+,& Ratio\_sign_1=+\\
         \times,& Ratio\_sign_1=\times\end{cases}
 ratio_1\right)
-\begin{cases}+,& Ratio\_sign_2=+\\
-        \times,& Ratio\_sign_2=\times\end{cases}
+\begin{cases}-,& Ratio\_sign_2=+\\
+        /,& Ratio\_sign_2=\times\end{cases}
 ratio_2$$
 
 для продажи:
@@ -352,8 +352,8 @@ $$Price=\pm\left(Lim\_buy-Price\_b
 \begin{cases}+,& Ratio\_sign_1=+\\
         \times,& Ratio\_sign_1=\times\end{cases}
 ratio_1\right)
-\begin{cases}+,& Ratio\_sign_2=+\\
-        \times,& Ratio\_sign_2=\times\end{cases}
+\begin{cases}-,& Ratio\_sign_2=+\\
+        /,& Ratio\_sign_2=\times\end{cases}
 ratio_2$$
 
 Знак ± - зависит от того, какое выставлено значение параметра [On_buy](/docs/05-params-description.html#_5-3-10-On-buy) на 2-й ноге (если  Buy, то "+", если  Sell, то "-").
@@ -613,16 +613,14 @@ $$Buy=\sum_{i}
                      offer_i,& On\enspace buy_i=Buy\end{cases} 
         \begin{cases}+,& Ratio\_sign_i=+\\
                 \times,& Ratio\_sign_i=\times\end{cases} 
-        \begin{cases}ratio\_b_{isfirst}\\
-                     ratio\_s_{isfirst}\end{cases}$$
+        ratio_i$$
 
 $$Sell=\sum_{i} 
         \begin{cases}bid_i,& On\enspace buy_i=Buy\\
                   -offer_i,& On\enspace buy_i=Sell\end{cases} 
         \begin{cases}+,& Ratio\_sign_i=+\\
                 \times,& Ratio\_sign_i=\times\end{cases} 
-	\begin{cases}ratio\_b_{isfirst}\\
-                     ratio\_s_{isfirst}\end{cases}$$
+	ratio_i$$
 
 Наглядно продемонстрирована работа данных параметров в этом видео:
 
@@ -636,17 +634,21 @@ $$Sell=\sum_{i}
 
 Формулы расчета `Price_s` и `Price_b` для двух бумаг:
 
-$$Price\_s=\left(Lim\_sell+offer_2Ratio\_sign_2ratio_2\right)
-               \binom
-	        {-,Ratio\_sign_1=+}
-	        {/,Ratio\_sign_1=\times}
-	          ratio_1$$
+$$Price\_s=\left(Lim\_sell+offer_2
+\begin{cases}+,& Ratio\_sign_2=+\\
+        \times,& Ratio\_sign_2=\times\end{cases}
+ratio_2\right)
+\begin{cases}-,& Ratio\_sign_1=+\\
+        /,& Ratio\_sign_1=\times\end{cases}
+ratio_1 - k_1$$
 
-$$Price\_b=\left(Lim\_buy+bid_2Ratio\_sign_2ratio_2\right)
-               \binom
-	        {-,Ratio\_sign_1=+}
-	        {/,Ratio\_sign_1=\times}
-	          ratio_1$$
+$$Price\_b=\left(Lim\_buy+bid_2
+\begin{cases}+,& Ratio\_sign_2=+\\
+        \times,& Ratio\_sign_2=\times\end{cases}
+ratio_2\right)
+\begin{cases}-,& Ratio\_sign_1=+\\
+        /,& Ratio\_sign_1=\times\end{cases}
+ratio_1 + k_1$$
 
 Формулы расчета `Price_s` и `Price_b` для любого количества ног:
    
@@ -655,20 +657,14 @@ $$Price\_s=\left(Lim\_sell_i-\sum_{i \neq isfirst}Sell_i\right)
 	          -,& Ratio\_sign=+\\
                   /,& Ratio\_sign=\times 
 	       \end{cases} 
-	       \begin{cases}
-	         ratio\_b_{isfirst}\\
-                 ratio\_s_{isfirst} 
-		\end{cases}$$
+                 ratio\_s_{isfirst} - k_{isfirst}$$
 
 $$Price\_b=\left(Lim\_buy_i-\sum_{i \neq isfirst}Buy_i\right) 
              \begin{cases}
 	       -,& Ratio\_sign=+\\
                /,& Ratio\_sign=\times 
 	     \end{cases} 
-             \begin{cases}
-	        ratio\_b_{isfirst}\\
-                ratio\_s_{isfirst}
-	     \end{cases}$$
+                ratio\_s_{isfirst} + k_{isfirst}$$
 
 Видео, наглядно объясняющее работу параметров `Price_s/Price_b`:
 
