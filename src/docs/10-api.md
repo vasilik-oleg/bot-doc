@@ -209,7 +209,7 @@ Payload:
 | r = s | y | string | request_result | Request result |
 | data | y | object |  |  |
 | > portfolios_add | y | array |  | Array of available portfolios |
-| >> [] | y | [string, string] | portfolio_id | Portfolio ID (robot ID and portfolio name) |
+| >> [] | y | [string, string, string] | portfolio_id | Portfolio ID (robot ID and portfolio name) and portfolio owner (creator)|
 |  |  |  |  |  |
 
 Example:
@@ -221,10 +221,10 @@ Example:
 	{
 		"portfolios_add":
 		[
-			["1","test"],
-			["1","test1"],
-			["1","test2"],
-			["1","test3"]
+			["1","test","test@mail.ru"],
+			["1","test1","test@mail.ru"],
+			["1","test2","test@mail.ru"],
+			["1","test3","test@mail.ru"]
 		]
 	},
 	"r":"s",
@@ -246,9 +246,9 @@ Payload:
 | r = u | y | string | request_result | Request result |
 | data | y | object |  |  |
 | > portfolios_add | n | array |  | Array of newly available portfolios |
-| >> [] |  | [string, string] | portfolio_id | Portfolio ID (robot ID and portfolio name) |
+| >> [] |  | [string, string, string] | portfolio_id | Portfolio ID (robot ID and portfolio name) and portfolio owner (creator)|
 | > portfolios_del | n | array |  | Array of portfolios with revoked access |
-| >> [] |  | [string, string] | portfolio_id | Portfolio ID (robot ID and portfolio name) |
+| >> [] |  | [string, string, string] | portfolio_id | Portfolio ID (robot ID and portfolio name) and portfolio owner (creator)|
 
 Example:
 
@@ -259,7 +259,7 @@ Example:
 	{
 		"portfolios_del":
 		[
-			["1","test"],
+			["1","test","test@mail.ru"]
 		]
 	},
 	"r":"u",
