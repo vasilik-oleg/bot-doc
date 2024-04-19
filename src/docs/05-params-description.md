@@ -634,7 +634,7 @@ $$Sell=\sum_{i}
 
 Формулы расчета `Price_s` и `Price_b` для двух бумаг:
 
-$$Price\_s=\left(Lim\_sell+offer_2
+$$Price\_s=\left(Lim\_sell-offer_2
 \begin{cases}+,& Ratio\_sign_2=+\\
         \times,& Ratio\_sign_2=\times\end{cases}
 ratio_2\right)
@@ -652,14 +652,26 @@ ratio_1 + k_1$$
 
 Формулы расчета `Price_s` и `Price_b` для любого количества ног:
    
-$$Price\_s=\left(Lim\_sell_i-\sum_{i \neq isfirst}Sell_i\right) 
+$$Price\_s=\left(Lim\_sell_i-\sum_{i \neq isfirst}
+\begin{cases}bid_i,& On\enspace buy_i=Buy\\
+                  -offer_i,& On\enspace buy_i=Sell\end{cases} 
+        \begin{cases}+,& Ratio\_sign_i=+\\
+                \times,& Ratio\_sign_i=\times\end{cases} 
+	ratio_i
+\right) 
                \begin{cases}
 	          -,& Ratio\_sign=+\\
                   /,& Ratio\_sign=\times 
 	       \end{cases} 
                  ratio\_s_{isfirst} - k_{isfirst}$$
 
-$$Price\_b=\left(Lim\_buy_i-\sum_{i \neq isfirst}Buy_i\right) 
+$$Price\_b=\left(Lim\_buy_i-\sum_{i \neq isfirst}
+\begin{cases}-bid_i,& On\enspace buy_i=Sell\\
+                     offer_i,& On\enspace buy_i=Buy\end{cases} 
+        \begin{cases}+,& Ratio\_sign_i=+\\
+                \times,& Ratio\_sign_i=\times\end{cases} 
+        ratio_i
+\right) 
              \begin{cases}
 	       -,& Ratio\_sign=+\\
                /,& Ratio\_sign=\times 
