@@ -676,7 +676,7 @@ $$Price\_b=\left(Lim\_buy_i-\sum_{i \neq isfirst}
 	       -,& Ratio\_sign=+\\
                /,& Ratio\_sign=\times 
 	     \end{cases} 
-                ratio\_s_{isfirst} + k_{isfirst}$$
+                ratio\_b_{isfirst} + k_{isfirst}$$
 
 Видео, наглядно объясняющее работу параметров `Price_s/Price_b`:
 
