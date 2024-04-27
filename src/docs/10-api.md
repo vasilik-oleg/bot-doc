@@ -4643,6 +4643,7 @@ Payload:
 | >>> sec | y | string |  | Security unique key |
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
+| >>> curpos | y | number |  | Integer portfolio security position |
 
 Example:
 
@@ -4665,6 +4666,7 @@ Example:
                 "id": -7788782202760318740,
                 "t": 1670932198000080090,
                 "dt": 1670932198001653551,
+		"curpos": 1,
                 "r_id": "1"
             },
             {
@@ -4679,6 +4681,7 @@ Example:
                 "id": -3752825875325269453,
                 "t": 1670932199000047295,
                 "dt": 1670932199001713057,
+		"curpos": 1,
                 "r_id": "1"
             },
             {
@@ -4693,6 +4696,7 @@ Example:
                 "id": -3688175048979008805,
                 "t": 1670932200000058955,
                 "dt": 1670932200001680729,
+		"curpos": 1,
                 "r_id": "1"
             },
             {
@@ -4707,6 +4711,7 @@ Example:
                 "id": 3502271702100740780,
                 "t": 1670932201000080655,
                 "dt": 1670932201001754776,
+		"curpos": 1,
                 "r_id": "1"
             }
         ],
@@ -4744,6 +4749,7 @@ Payload:
 | >>> sec | y | string |  | Security unique key |
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
+| >>> curpos | y | number |  | Integer portfolio security position |
 
 Example:
 
@@ -4764,6 +4770,7 @@ Example:
                 "cn": "virtual",
                 "id": -3735218779281737327,
                 "t": 1670932204000081702,
+		"curpos": 1,
                 "dt": 1670932204001796726
             }
         ]
@@ -4954,6 +4961,7 @@ Payload:
 | >>> sec | y | string |  | Security unique key |
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
+| >>> curpos | y | number |  | Integer portfolio security position |
 
 Example:
 
@@ -4973,6 +4981,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+		"curpos": 1,
                 "decimals": 4
             },
             {
@@ -4986,6 +4995,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+		"curpos": 1,
                 "decimals": 4
             },
             {
@@ -4999,6 +5009,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+		"curpos": 1,
                 "decimals": 4
             },
             {
@@ -5012,6 +5023,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+		"curpos": 1,
                 "decimals": 4
             },
             {
@@ -5025,6 +5037,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+		"curpos": 1,
                 "decimals": 4
             }
         ]
@@ -5233,6 +5246,7 @@ Payload:
 | >>> sec | y | string |  | Security unique key |
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
+| >>> curpos | y | number |  | Integer portfolio security position |
 
 Example:
 
@@ -5252,6 +5266,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+		"curpos": 1,
                 "decimals": 4
             },
             {
@@ -5265,6 +5280,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+		"curpos": 1,
                 "decimals": 4
             },
             {
@@ -5278,6 +5294,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+		"curpos": 1,
                 "decimals": 4
             },
             {
@@ -5291,6 +5308,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+		"curpos": 1,
                 "decimals": 4
             },
             {
@@ -5304,6 +5322,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+		"curpos": 1,
                 "decimals": 4
             }
         ]
