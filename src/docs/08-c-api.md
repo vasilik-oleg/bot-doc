@@ -431,6 +431,7 @@ Meтоды `coin_item`:
 | void log_info(const std::string& msg)  | отправить сообщение с уровнем INFO в лог      |
 | void log_warn(const std::string& msg)  | отправить сообщение с уровнем WARNING в лог   |
 | void log_error(const std::string& msg) | отправить сообщение с уровнем ERROR в лог     |
+| <Anchor :ids="['__TGR_NOTIFY__']"/>bool tgr_notify(int slot, const std::string& msg, int timeout) | отправить сообщение с уровнем NOTIFICATION в лог и уведомление в telegram, отправлять не чаще, чем `timeout` секунд (число из отрезка `[10, 2000000000]`), `slot` - идентификатор слота уведомления (число из отрезка `[0, 4]`), для которого будет отсчитываться `timeout` |
 
 ### **8.7.3. Структуры**
 
