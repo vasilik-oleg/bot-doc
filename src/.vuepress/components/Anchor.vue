@@ -1,5 +1,5 @@
 <template>
-  <div class="anchor-container">
+  <div ref="anchorRef" class="anchor-container">
     <span v-for="(id, index) in ids" :key="index" :id="id" />
   </div>
 </template>
@@ -7,9 +7,60 @@
 <script>
 export default {
   name: 'Anchor',
+
   props: {
-    ids: { type: Array, required: true, },
+    ids: { type: Array, required: true },
   },
+
+  data() {
+    return {
+      observer: null,
+    };
+  },
+
+  computed: {
+    hash() {
+      return this.$route.hash.replace('#', '');
+    },
+
+    anchorRef() {
+      return this.$refs?.anchorRef ? this.$refs.anchorRef?.firstChild : null;
+    },
+  },
+
+  methods: {
+    scrollIntoView() {
+      this.anchorRef?.scrollIntoView?.();
+    },
+
+    intersectionCallback(entries) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+          this.scrollIntoView();
+          this.observer.disconnect();
+        }
+      });
+    },
+  },
+
+  mounted() {
+    if (!this.anchorRef || !this.ids.includes(this.hash)) return;
+
+    this.scrollIntoView();
+
+    this.observer = new IntersectionObserver(this.intersectionCallback, {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5,
+    });
+
+    this.observer.observe(this.anchorRef);
+  },
+
+  destroyed() {
+    this.observer?.disconnect?.()
+    this.observer = null
+  }
 };
 </script>
 
@@ -32,5 +83,4 @@ $padding = 1rem
          left: 0;
     }
 }
-
 </style>
