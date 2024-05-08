@@ -12,55 +12,36 @@ export default {
     ids: { type: Array, required: true },
   },
 
-  data() {
-    return {
-      observer: null,
-    };
-  },
-
   computed: {
-    hash() {
-      return this.$route.hash.replace('#', '');
-    },
-
     anchorRef() {
       return this.$refs?.anchorRef ? this.$refs.anchorRef?.firstChild : null;
     },
   },
 
   methods: {
+    formatHash(hash) {
+      return hash.replace('#', '');
+    },
+
     scrollIntoView() {
       this.anchorRef?.scrollIntoView?.();
     },
+  },
 
-    intersectionCallback(entries) {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-          this.scrollIntoView();
-          this.observer.disconnect();
-        }
-      });
-    },
+  watch: {
+    $route(route){
+      if (!this.anchorRef || !this.ids.includes(this.formatHash(route.hash))) return;
+
+      this.scrollIntoView()
+    }
   },
 
   mounted() {
-    if (!this.anchorRef || !this.ids.includes(this.hash)) return;
+    if (!this.anchorRef || !this.ids.includes(this.formatHash(this.$route.hash))) return;
+
 
     this.scrollIntoView();
-
-    this.observer = new IntersectionObserver(this.intersectionCallback, {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.5,
-    });
-
-    this.observer.observe(this.anchorRef);
   },
-
-  destroyed() {
-    this.observer?.disconnect?.()
-    this.observer = null
-  }
 };
 </script>
 
