@@ -7,7 +7,7 @@
 1. Portfolios table -> Settings портфеля -> Вкладка Formulas;
 2. Portfolios table -> Settings портфеля -> Вкладка Formulas -> Инструмент;
 
-В первом случае будут отображены поля [Trade formula](/docs/05-params-description.html#_5-2-32-trade-formula), [Extra field#1](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2) и [Extra field#2](/docs/05-params-description.html#_5-2-34-extra-field-1-%D0%B8-extra-field-2).
+В первом случае будут отображены поля [Trade formula](/docs/05-params-description.html#p.trade_formula), [Extra field#1](/docs/05-params-description.html#p.ext_field1_) и [Extra field#2](/docs/05-params-description.html#p.ext_field2_).
 Во втором [Count formula](/docs/05-params-description.html#_5-3-9-count-formula), [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula), [Ratio sell formula](/docs/05-params-description.html#_5-3-29-ratio-sell-formula).
 
 В редакторе формул существует возможность тестового выполнения выбранной формулы (кнопка `Test`, при этом в строку компиляции добавляется флаг `-DDEBUG`), при этом на момент вычисления формулы создаётся временная копия портфеля, НО если вы в формуле изменяете значения полей портфеля, и у вас существует портфель с тем же именем, то изменения применятся к этому портфелю.
@@ -698,7 +698,7 @@ ___
 
 ## **8.9. Примеры использования функций**
 
-Пусть имеется портфель с именем "test" и в этом портфеле есть два инструмента: фьючерс на индекс РТС "RIH6" и его опцион `call` на страйк 70000 "RI70000BB6", позиция по обоим бумагам в портфеле равна 1, а направление торговли у обоих [On_by](/docs/05-params-description.html#_5-3-10-on-buy) = [Buy](/docs/05-params-description.html#_5-2-39-sell-buy).
+Пусть имеется портфель с именем "test" и в этом портфеле есть два инструмента: фьючерс на индекс РТС "RIH6" и его опцион `call` на страйк 70000 "RI70000BB6", позиция по обоим бумагам в портфеле равна 1, а направление торговли у обоих [On_by](/docs/05-params-description.html#_5-3-10-on-buy) = [Buy](/docs/05-params-description.html#p.buy).
 
 Рассчитаем дельту одного из инструментов портфеля, например, "RIH6". Для этого воспользуемся функцией delta из модуля options. Дельта для фьючерса всегда равна 1, проверим, для этого надо написать:
 
@@ -750,7 +750,7 @@ ___
 
 Для того, чтобы использовать поле [Ratio sell/buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula) необходимо для выбранного инструмента портфеля выбрать [Ratio type](/docs/05-params-description.html#_5-3-27-ratio-type) = `Ratio formula`. После этого двойным кликом войти в редактор и написать необходимое значение.
 
-Пусть имеется портфель с именем "si" и в этом портфеле есть один инструмент - фьючерс на доллар "SiH6", направление торговли этого инструмента [On by](/docs/05-params-description.html#_5-3-10-on-buy) = [Buy](/docs/05-params-description.html#_5-2-39-sell-buy).
+Пусть имеется портфель с именем "si" и в этом портфеле есть один инструмент - фьючерс на доллар "SiH6", направление торговли этого инструмента [On by](/docs/05-params-description.html#_5-3-10-on-buy) = [Buy](/docs/05-params-description.html#p.buy).
 
 Если [Ratio sign](/docs/05-params-description.html#_5-3-19-ratio-sign) = "×", то ничего особо интересного с формулами не придумаешь, разве что какой-то хитрый множитель (и для покупки и для продажи), например, такой:
 
@@ -759,7 +759,7 @@ security s = get_security("SiH6");
 return sqrt(s.bid());
 ```
 
-в таком случае для расчета [Buy](/docs/05-params-description.html#_5-2-39-sell-buy) и [Sell](/docs/05-params-description.html#_5-2-39-sell-buy) будет использован один и тот же множитель, если же вы хотите использовать разные множители надо вписать разные значения в [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula) и [Ratio sell formula](/docs/05-params-description.html#_5-3-29-ratio-buy-formula), например, так:
+в таком случае для расчета [Buy](/docs/05-params-description.html#p.buy) и [Sell](/docs/05-params-description.html#p.sell) будет использован один и тот же множитель, если же вы хотите использовать разные множители надо вписать разные значения в [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula) и [Ratio sell formula](/docs/05-params-description.html#_5-3-29-ratio-buy-formula), например, так:
 
 ```C
 security s = get_security("SiH6");
@@ -773,9 +773,9 @@ return sqrt(s.offer());
 
 для покупки и продажи, соответственно.
 
-В таком случае для расчета [Buy](/docs/05-params-description.html#_5-2-39-sell-buy) будет использован квадратный корень из бида, а для расчета [Sell](/docs/05-params-description.html#_5-2-39-sell-buy) будет использован квадратный корень из оффера.
+В таком случае для расчета [Buy](/docs/05-params-description.html#p.buy) будет использован квадратный корень из бида, а для расчета [Sell](/docs/05-params-description.html#p.sell) будет использован квадратный корень из оффера.
 
-Если же [Ratio sign](/docs/05-params-description.html#_5-3-19-ratio-sign) = "+", то вы можете полностью изменить формулу расчета [Buy](/docs/05-params-description.html#_5-2-39-sell-buy) и [Sell](/docs/05-params-description.html#_5-2-39-sell-buy), для этого надо для начала вычесть те значения, которые используются в данный момент, тем самым обнулив [Buy](/docs/05-params-description.html#_5-2-39-sell-buy) и [Sell](/docs/05-params-description.html#_5-2-39-sell-buy):
+Если же [Ratio sign](/docs/05-params-description.html#_5-3-19-ratio-sign) = "+", то вы можете полностью изменить формулу расчета [Buy](/docs/05-params-description.html#p.buy) и [Sell](/docs/05-params-description.html#p.sell), для этого надо для начала вычесть те значения, которые используются в данный момент, тем самым обнулив [Buy](/docs/05-params-description.html#p.buy) и [Sell](/docs/05-params-description.html#p.sell):
 
 ```C
 security s = get_security("SiH6");
@@ -787,7 +787,7 @@ security s = get_security("SiH6");
 return -s.offer();
 ```
 
-для покупки и продажи, соответственно, а после этого прибавить к [Buy](/docs/05-params-description.html#_5-2-39-sell-buy) и [Sell](/docs/05-params-description.html#_5-2-39-sell-buy) новое значение, например, так:
+для покупки и продажи, соответственно, а после этого прибавить к [Buy](/docs/05-params-description.html#p.buy) и [Sell](/docs/05-params-description.html#p.sell) новое значение, например, так:
 
 ```C
 security s = get_security("SiH6");
@@ -803,10 +803,10 @@ double price = s.bid() * 3 + 5;
 return -s.bid() + price;
 ```
 
-теперь значения переменной `price` при расчете каждого из параметров будут новыми значениями для [Buy](/docs/05-params-description.html#_5-2-39-sell-buy) и [Sell](/docs/05-params-description.html#_5-2-39-sell-buy). Хочется отметить, что без использования `Ratio formula` такое "хитрое" значение получить бы не удалось.
+теперь значения переменной `price` при расчете каждого из параметров будут новыми значениями для [Buy](/docs/05-params-description.html#p.buy) и [Sell](/docs/05-params-description.html#p.sell). Хочется отметить, что без использования `Ratio formula` такое "хитрое" значение получить бы не удалось.
 ___
 
-Рассмотрим еще один пример. Пусть имеется портфель с именем "test" и в этом портфеле есть два инструмента: фьючерс на доллар "SiH6", направление торговли этого инструмента [On_by](/docs/05-params-description.html#_5-3-10-on-buy) = [Buy](/docs/05-params-description.html#_5-2-39-sell-buy) и он является [Is first](/docs/05-params-description.html#_5-3-11-is-first) и фьючерс на индекс РТС "RIH6", направление торговли этого инструмента тоже [On_by](/docs/05-params-description.html#_5-3-10-on-buy) = [Buy](/docs/05-params-description.html#_5-2-39-sell-buy) (для примера направление не [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструмента значения не имеет). Для того чтобы использовать эти два инструмента в одном портфеле нужно привести их цены в пунктах к одной размерности, как известно, доллар торгуется в рублях (1 : pt = 1 rub), а вот индекс торгуется не в рублях, для него 1 pt = 0.02 * `$`<sub>price</sub> rub (где `$`<sub>price</sub> - это курс доллара в рублях, но это не константа, а динамически изменяющаяся величина). Есть два варианта решения поставленной задачи, оба реализуемы только с использованием `Ratio formula` и оба приводят к абсолютно одинаковому результату. Вот они:
+Рассмотрим еще один пример. Пусть имеется портфель с именем "test" и в этом портфеле есть два инструмента: фьючерс на доллар "SiH6", направление торговли этого инструмента [On_by](/docs/05-params-description.html#_5-3-10-on-buy) = [Buy](/docs/05-params-description.html#p.buy) и он является [Is first](/docs/05-params-description.html#_5-3-11-is-first) и фьючерс на индекс РТС "RIH6", направление торговли этого инструмента тоже [On_by](/docs/05-params-description.html#_5-3-10-on-buy) = [Buy](/docs/05-params-description.html#p.buy) (для примера направление не [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструмента значения не имеет). Для того чтобы использовать эти два инструмента в одном портфеле нужно привести их цены в пунктах к одной размерности, как известно, доллар торгуется в рублях (1 : pt = 1 rub), а вот индекс торгуется не в рублях, для него 1 pt = 0.02 * `$`<sub>price</sub> rub (где `$`<sub>price</sub> - это курс доллара в рублях, но это не константа, а динамически изменяющаяся величина). Есть два варианта решения поставленной задачи, оба реализуемы только с использованием `Ratio formula` и оба приводят к абсолютно одинаковому результату. Вот они:
 
 1. Для доллара просто зададим [Ratio](/docs/05-params-description.html#_5-3-20-ratio) = 1, а вот для индекса РТС выберем [Ratio sign](/docs/05-params-description.html#_5-3-19-ratio-sign) = "×", а в [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula) напишем следующее:
 
@@ -822,7 +822,7 @@ ___
     return (0.02 * s.bid() * 0.001);
     ```
 
-    таким образом при расчете [Buy](/docs/05-params-description.html#_5-2-39-sell-buy) мы будем использовать бид доллара, а при расчете [Sell](/docs/05-params-description.html#_5-2-39-sell-buy) - его оффер, и величину получим в рублях.
+    таким образом при расчете [Buy](/docs/05-params-description.html#p.buy) мы будем использовать бид доллара, а при расчете [Sell](/docs/05-params-description.html#p.sell) - его оффер, и величину получим в рублях.
 
 2. Для доллара просто зададим [Ratio](/docs/05-params-description.html#_5-3-20-ratio) = 1, а вот для индекса РТС выберем [Ratio sign](/docs/05-params-description.html#_5-3-19-ratio-sign) = "+", а в [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula) напишем следующее (вначале обнулим значение, как в предыдущем примере, а затем зададим новое):
 
@@ -842,4 +842,4 @@ ___
     return -s2.bid() + price;
     ```
 
-    теперь значения переменной price и будут новыми значениями (так сказать, со стороны индекса РТС), используемыми для расчета [Buy](/docs/05-params-description.html#_5-2-39-sell-buy) и [Sell](/docs/05-params-description.html#_5-2-39-sell-buy), соответственно.
+    теперь значения переменной price и будут новыми значениями (так сказать, со стороны индекса РТС), используемыми для расчета [Buy](/docs/05-params-description.html#p.buy) и [Sell](/docs/05-params-description.html#p.sell), соответственно.

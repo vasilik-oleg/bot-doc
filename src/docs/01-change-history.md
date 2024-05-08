@@ -1,5 +1,12 @@
 # **1. История изменений**
 
+## **2024-05-13:**
+
+- В парметры портфеля добавлен параметр [Threshold](/docs/05-params-description.html#p.threshold);
+- Параметр [Only maker](/docs/05-params-description.html#p.maker) теперь является параметром портфеля, а не параметром бумаги портфеля;
+- Некоторые параметры портфеля/бумаги, непосредственно влияющие на выставление [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаги портфеля и/или доступные только для [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаги портфеля
+перемещены в отдельную группу настроек портфеля `FIRST LEG SETTINGS`.
+
 ## **2024-05-02:**
 
 - В C++ интерфейс добавлена функция [tgr_notify()](/docs/08-c-api.html#__TGR_NOTIFY__) для отправки уведомлений в telegram.
