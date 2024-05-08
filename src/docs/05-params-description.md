@@ -449,7 +449,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 ### **5.2.20. Threshold** <Anchor :ids="['p.threshold']" />
 
-Если `Sell ≥ Lim_Sell + Threshold` или `Buy ≤ Lim_Buy - Threshold`, то при при рассчете цен [Price_s](/docs/05-params-description.html#p.price_s), [Price_b](/docs/05-params-description.html#p.price_b), соответственно, отключить [Simply first](/docs/05-params-description.html#p.simply_first),
+Параметр будет использоваться в алгоритме, только если `Threshold > 0`. Если `Sell ≥ Lim_Sell + Threshold` или `Buy ≤ Lim_Buy - Threshold`, то при при рассчете цен [Price_s](/docs/05-params-description.html#p.price_s), [Price_b](/docs/05-params-description.html#p.price_b), соответственно, отключить [Simply first](/docs/05-params-description.html#p.simply_first),
 а при выставлении заявки по [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаге отключить [Only maker](/docs/05-params-description.html#p.maker). Под "отключить" имеется в виду "не использовать", видимые пользователю настройки портфеля не будут изменены.
 
 **Важно:** нельзя переставить заявку на бирже, изменяя флаг [Only maker](/docs/05-params-description.html#p.maker) заявки, уже стоящей на этой бирже, поэтому при выполнении условий на `Threshold`, переставление всегда заменяется на отдельные снятие и выставление завки.
