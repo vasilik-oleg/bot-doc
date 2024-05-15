@@ -386,7 +386,7 @@ ratio_2$$
 
 Параметр позволяет [Is first](/docs/05-params-description.html#_5-3-11-is-first) заявке, выставленной по алгоритму, по бумаге с направлением в сторону закрытия позиции не только сводить позицию к нулю, но и сразу открывать новую позицию с противоположным направлением, кроме того объем заявки никогда не может быть меньше [v_in_left](/docs/05-params-description.html#p.v_in_l) и [v_out_left](/docs/05-params-description.html#p.v_out_l).
 
-**Важно:** если установлен флаг [To0](/docs/05-params-description.html#p.to0), то можно получить такое поведение робота, что позиция никогда не попадает ровно в 0, а все время переворачивается то в одну, то в другую сторону. При включенном параметре Virt 0 pos робот может не дойти до позиций [v_min/v_max](/docs/05-params-description.html#p.v_min), т.к. “упираемся” в [v_in_left/v_in_right](/docs/05-params-description.html#p.v_in_l) и [v_out_left/v_out_right](/docs/05-params-description.html#p.v_out_l) (робот не ставит меньше этих значений).
+**Важно:** если установлен флаг [To0](/docs/05-params-description.html#p.to0), то можно получить такое поведение робота, что позиция никогда не попадает ровно в 0, а все время переворачивается то в одну, то в другую сторону. При включенном параметре `Virt 0 pos` робот может не дойти до позиций [v_min/v_max](/docs/05-params-description.html#p.v_min), т.к. “упираемся” в [v_in_left/v_in_right](/docs/05-params-description.html#p.v_in_l) и [v_out_left/v_out_right](/docs/05-params-description.html#p.v_out_l) (робот не ставит меньше этих значений).
 
 #### **5.2.12.5. n_perc_fill** <Anchor :ids="['p.n_perc_fill']" />
 
@@ -783,9 +783,9 @@ secs - список инструментов портфеля.
 
 **Важно:** для многих криптовалютных бирж данный параметр указывается "как бы в сатошах", т.е. чтобы купить/продать 1 лот на бирже необходимо указать количество 100 000 000 (соответственно, 0.1 лота сооветствует значение 10 000 000 и т.д.). При добавлении бумаги в портфель обращайте внимание на столбец `Price to lot mult`.
 
-**Важно:** если изменяете Count [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаги, не забудьте задать правильные значения для [v_min/v_max](/docs/05-params-description.html#p.v_min).
+**Важно:** если изменяете `Count` [Is first](/docs/05-params-description.html#_5-3-11-is-first) бумаги, не забудьте задать правильные значения для [v_min/v_max](/docs/05-params-description.html#p.v_min).
 
-**Важно:** `Count` это минимальный объем по соответствующему инструменту, которым робот торгует.
+**Важно:** при включенном [Virt 0 pos](/docs/05-params-description.html#p.virtual_0_pos) `Count` – это минимальное количество, которым торгует робот по соответствующему инструменту, в противном случае может быть выставлена заявка в количестве меньшем чем `Count` (в случае закрытия позиции и чтобы "попасть" в [v_min/v_max](/docs/05-params-description.html#p.v_min)).
 
 ### **5.3.8. Count formula** <Anchor :ids="['s.count_formula']" />
 
