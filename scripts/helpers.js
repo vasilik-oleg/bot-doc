@@ -1,3 +1,20 @@
+function removeNumberingFromHeaders(content) {
+	let cleanedContent = '';
+	const lines = content.split('\n');
+
+	lines.forEach(line => {
+		const headerMatch = line.match(/^(#{1,6})\s+(?:\*\*)?\d+(\.\d+)*\.\s+(.*?)(?:\*\*)?$/);
+
+		if (headerMatch) {
+			cleanedContent += `${headerMatch[1]} ${headerMatch[3]}\n`;
+		} else {
+			cleanedContent += `${line}\n`;
+		}
+	});
+
+	return cleanedContent.trim();
+}
+
 function addNumberingToHeaders(content, initialSectionNumber = 0) {
 	const sectionNumbers = [initialSectionNumber];
 
@@ -24,29 +41,36 @@ function addNumberingToHeaders(content, initialSectionNumber = 0) {
 
 		sectionNumbers[level - 1]++;
 		const sectionNumber = sectionNumbers.join('.');
+		const sectionHashes = headerMatch[1];
+		const sectionTextWithAnchor = addAnchorToHeader(headerMatch[2])
 
-		resultContent += `${headerMatch[1]} ${sectionNumber}. ${headerMatch[2]}\n`;
+
+		resultContent += `${sectionHashes} ${sectionNumber}. ${sectionTextWithAnchor}\n`;
 	})
 
 
 	return resultContent.trim();
 }
 
-function removeNumberingFromHeaders(content) {
-	let cleanedContent = '';
-	const lines = content.split('\n');
 
-	lines.forEach(line => {
-		const headerMatch = line.match(/^(#{1,6})\s+(?:\*\*)?\d+(\.\d+)*\.\s+(.*?)(?:\*\*)?$/);
+function slugify(s) {
+	return String(s).trim().toLowerCase().replace(/\s+/g, '-')
+}
 
-		if (headerMatch) {
-			cleanedContent += `${headerMatch[1]} ${headerMatch[3]}\n`;
-		} else {
-			cleanedContent += `${line}\n`;
-		}
-	});
 
-	return cleanedContent.trim();
+function addAnchorToHeader(line) {
+	const slug = slugify(line.replace(/<Anchor.*$/, '').trim());
+
+	const anchorMatch = line.match(/<Anchor\s*:ids="\[([^\]]*)\]"\s*\/>/);
+	if (!anchorMatch) return `${line} <Anchor :ids="['${slug}']" />`;
+
+	const existingIds = anchorMatch[1].split(',').map(id => id.trim().replace(/^'(.*)'$/, '$1'));
+	if (existingIds.includes(slug)) return line;
+
+	existingIds.push(slug);
+	const newIds = existingIds.map(id => `'${id}'`).join(', ');
+
+	return line.replace(anchorMatch[0], `<Anchor :ids="[${newIds}]" />`);
 }
 
 
