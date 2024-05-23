@@ -35,7 +35,6 @@ export default {
       this.scrollIntoView()
     }
   },
-
   mounted() {
     if (!this.anchorRef || !this.ids.includes(this.formatHash(this.$route.hash))) return;
 
@@ -62,6 +61,7 @@ $padding = 1rem
          width: 100%;
          bottom: 0;
          left: 0;
+         z-index: -1;
     }
 }
 </style>
