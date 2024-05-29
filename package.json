@@ -9,8 +9,10 @@
   },
   "repository": "bot-doc/bot-doc",
   "scripts": {
-    "dev": "vuepress dev src",
-    "build": "vuepress build src"
+    "pre-process": "node scripts/generate-docs.js",
+    "reset-assets": "node scripts/reset-assets.js",
+    "dev": "npm run pre-process & vuepress dev src",
+    "build": "npm run pre-process & vuepress build src"
   },
   "license": "MIT",
   "devDependencies": {
@@ -21,6 +23,9 @@
   },
   "dependencies": {
     "@vuepress/theme-default": "^1.9.8",
+    "gray-matter": "^4.0.3",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.0.1",
     "markdown-it-attrs": "^4.1.6",
     "markdown-it-katex": "^2.0.3"
   }

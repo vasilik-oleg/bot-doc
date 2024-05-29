@@ -1,18 +1,31 @@
-# 8. **C++**
+---
+title: 8. C++
+section: 8
+---
 
-## **8.1 Редактор формул**
+[//]: # (====== AUTO-GENERATED FILE ======)
+[//]: # (THIS FILE WAS AUTOMATICALLY GENERATED. ANY DIRECT MODIFICATIONS MAY BE OVERWRITTEN.)
+[//]: # (DO NOT MODIFY THIS FILE DIRECTLY.)
+[//]: # (TO UPDATE THE DOCUMENTATION, NAVIGATE TO THE 'ASSETS' FOLDER.)
+
+
+
+# 8. C++ <Anchor :ids="['c++']" />
+
+
+## 8.1. Редактор формул <Anchor :ids="['редактор-формул']" />
 
 Редактировать формулы на C++ вы можете во вкладке `Formulas`:
 
 1. Portfolios table -> Settings портфеля -> Вкладка Formulas;
 2. Portfolios table -> Settings портфеля -> Вкладка Formulas -> Инструмент;
 
-В первом случае будут отображены поля [Trade formula](/docs/05-params-description.html#p.trade_formula), [Extra field#1](/docs/05-params-description.html#p.ext_field1_) и [Extra field#2](/docs/05-params-description.html#p.ext_field2_).
-Во втором [Count formula](/docs/05-params-description.html#_5-3-9-count-formula), [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula), [Ratio sell formula](/docs/05-params-description.html#_5-3-29-ratio-sell-formula).
+В первом случае будут отображены поля [Trade formula](05-params-description.md#p.trade_formula), [Extra field#1](05-params-description.md#p.ext_field1_) и [Extra field#2](05-params-description.md#p.ext_field2_).
+Во втором [Count formula](05-params-description.md#_5-3-9-count-formula), [Ratio buy formula](05-params-description.md#_5-3-28-ratio-buy-formula), [Ratio sell formula](05-params-description.md#_5-3-29-ratio-sell-formula).
 
 В редакторе формул существует возможность тестового выполнения выбранной формулы (кнопка `Test`, при этом в строку компиляции добавляется флаг `-DDEBUG`), при этом на момент вычисления формулы создаётся временная копия портфеля, НО если вы в формуле изменяете значения полей портфеля, и у вас существует портфель с тем же именем, то изменения применятся к этому портфелю.
 
-## **8.2 Важно**
+## 8.2. Важно <Anchor :ids="['важно']" />
 
 При написании формул на языке программирования C++ на код накладываются некоторые ограничения:
 
@@ -25,14 +38,14 @@
 
 **Важно:** если значение поля какой-либо бумаги еще не было получено с биржи или для бумаги с данной биржи нельзя получить значение этого поля, то вы получите 0. Нужно понимать что, например, на пустом стакане вы можете получить 0 в качестве цены бида или оффера, поэтому всегда проверяйте значения на равенство нулю в тех ситуациях, где это критично (например, при делении или при нахождении среднего арифметического бида и оффера).
 
-## **8.3. Доступ к биржевым данным по финансовым инструментам**
+## 8.3. Доступ к биржевым данным по финансовым инструментам <Anchor :ids="['Доступ-к-биржевым-данным-по-финансовым-инструментам', 'доступ-к-биржевым-данным-по-финансовым-инструментам']" />
 
-| Функция                                                 | Описание                                                                                                                    |
-|---------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| struct security get_security(const std::string& s)      | получить инструмент по его [SecKey](/docs/05-params-description.html#_5-3-1-seckey) s |
-| struct security get_security(const char* s)             | получить инструмент по его [SecKey](/docs/05-params-description.html#_5-3-1-seckey) s |
-| struct security get_security()                          | получить инструмент, соответствующий главной бумаге текущего портфеля                                                       |
-| struct security get_security(const security_fields& sf) | получить инструмент, соответствующий заданной бумаге портфеля                                                               |
+| Функция                                                 | Описание                                                                      |
+|---------------------------------------------------------|-------------------------------------------------------------------------------|
+| struct security get_security(const std::string& s)      | получить инструмент по его [SecKey](05-params-description.md#_5-3-1-seckey) s |
+| struct security get_security(const char* s)             | получить инструмент по его [SecKey](05-params-description.md#_5-3-1-seckey) s |
+| struct security get_security()                          | получить инструмент, соответствующий главной бумаге текущего портфеля         |
+| struct security get_security(const security_fields& sf) | получить инструмент, соответствующий заданной бумаге портфеля                 |
 
 Методы `security`:
 
@@ -93,15 +106,15 @@
 
 По своей сути `order_book` является итератором сразу для двух списков: бидов и офферов, оба списка проходятся в порядке от лучшей цены в сторону худших. Вы можете получить только следующую цену в списке, если нужно вернуться к предыдущей - сохраняйте ее или получите `order_book` заново.
 
-[_Пример:_](https://fkviking.github.io/bot-doc/docs/08-c-api.html#_8-8-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%B0-%D0%BA-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%B0%D0%BC-%D0%BF%D0%BE%D1%80%D1%82%D1%84%D0%B5%D0%BB%D1%8F-%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0-%D1%81%D0%B4%D0%B5%D0%BB%D0%BA%D0%B8-%D0%BF%D0%BE%D0%B7%D0%B8%D1%86%D0%B8%D0%B8) использования методов структуры `order_book`.
+[_Пример:_](https://fkviking.github.io/bot-doc08-c-api.md#_8-8-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%B0-%D0%BA-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%B0%D0%BC-%D0%BF%D0%BE%D1%80%D1%82%D1%84%D0%B5%D0%BB%D1%8F-%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0-%D1%81%D0%B4%D0%B5%D0%BB%D0%BA%D0%B8-%D0%BF%D0%BE%D0%B7%D0%B8%D1%86%D0%B8%D0%B8) использования методов структуры `order_book`.
 
-## **8.4. Доступ и изменение полей инструмента портфеля**
+## 8.4. Доступ и изменение полей инструмента портфеля <Anchor :ids="['доступ-и-изменение-полей-инструмента-портфеля']" />
 
-| Функция                                                                                | Описание                                                  |
-|----------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| struct security_fields get_security_fields(const std::string& p, const std::string& s) | получить бумагу портфеля с именем p с [SecKey](/docs/05-params-description.html#_5-3-1-seckey) s |
-| struct security_fields get_security_fields()                                           | получить главную бумагу текущего портфеля                 |
-| struct security_fields get_security_fields(const std::string& s)                       | получить бумагу текущего портфеля с [SecKey](/docs/05-params-description.html#_5-3-1-seckey) s   |
+| Функция                                                                                | Описание                                                                                 |
+|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| struct security_fields get_security_fields(const std::string& p, const std::string& s) | получить бумагу портфеля с именем p с [SecKey](05-params-description.md#_5-3-1-seckey) s |
+| struct security_fields get_security_fields()                                           | получить главную бумагу текущего портфеля                                                |
+| struct security_fields get_security_fields(const std::string& s)                       | получить бумагу текущего портфеля с [SecKey](05-params-description.md#_5-3-1-seckey) s   |
 
 Методы `security_fields`:
 
@@ -204,9 +217,9 @@
 
 `order_item` является заявкой робота, возможные значения полей `dir` и `status` описаны в константах.
 
-[_Пример:_](https://fkviking.github.io/bot-doc/docs/08-c-api.html#_8-8-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%B0-%D0%BA-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%B0%D0%BC-%D0%BF%D0%BE%D1%80%D1%82%D1%84%D0%B5%D0%BB%D1%8F-%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0-%D1%81%D0%B4%D0%B5%D0%BB%D0%BA%D0%B8-%D0%BF%D0%BE%D0%B7%D0%B8%D1%86%D0%B8%D0%B8) использования структур `order_pool` и `order_item`
+[_Пример:_](https://fkviking.github.io/bot-doc08-c-api.md#_8-8-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%B0-%D0%BA-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%B0%D0%BC-%D0%BF%D0%BE%D1%80%D1%82%D1%84%D0%B5%D0%BB%D1%8F-%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0-%D1%81%D0%B4%D0%B5%D0%BB%D0%BA%D0%B8-%D0%BF%D0%BE%D0%B7%D0%B8%D1%86%D0%B8%D0%B8) использования структур `order_pool` и `order_item`
 
-## **8.5. Доступ и изменение полей портфеля**
+## 8.5. Доступ и изменение полей портфеля <Anchor :ids="['доступ-и-изменение-полей-портфеля']" />
 
 | Функция                                              | Описание                     |
 |------------------------------------------------------|------------------------------|
@@ -355,7 +368,7 @@
 
 [_Пример 2:_](#__Example2__) Пример использования структуры `user_value`.
 
-## **8.6. Доступ и изменение позиций транзакционного подключения**
+## 8.6. Доступ и изменение позиций транзакционного подключения <Anchor :ids="['доступ-и-изменение-позиций-транзакционного-подключения']" />
 
 | Функция                                                | Описание                        |
 |--------------------------------------------------------|---------------------------------|
@@ -397,9 +410,9 @@ Meтоды `coin_item`:
 | void set_pos_eq(bool v)    | изменить поле "Check equality" валюты    |
 | void set_tgr(bool v)       | изменить поле "Tgr notify" валюты        |
 
-## **8.7. Дополнительные функции и константы**
+## 8.7. Дополнительные функции и константы <Anchor :ids="['дополнительные-функции-и-константы']" />
 
-### **8.7.1. Константы**
+### 8.7.1. Константы <Anchor :ids="['константы']" />
 
 | Название       | Тип         | Значение/описание                                |
 |----------------|-------------|--------------------------------------------------|
@@ -421,19 +434,19 @@ Meтоды `coin_item`:
 | <Anchor :ids="['__MARKET_DATA_OB_ONLINE__']"/>MARKET_DATA_OB_ONLINE | int         | 2, для данной бумаги маркет-дата подключение со стаканами онлайн |
 | NAME           | std::string | имя текущего портфеля                            |
 
-### **8.7.2. Функции**
+### 8.7.2. Функции <Anchor :ids="['функции']" />
 
-| Функция                                | Описание                                      |
-|----------------------------------------|-----------------------------------------------|
-| long long nanosec_date_time()          | получить текущее время в epoch в наносекундах |
-| struct tm global_tm()                  | получить текущее время                        |
-| day_time get_day_time()                | получить текущее время дня                    |
-| void log_info(const std::string& msg)  | отправить сообщение с уровнем INFO в лог      |
-| void log_warn(const std::string& msg)  | отправить сообщение с уровнем WARNING в лог   |
-| void log_error(const std::string& msg) | отправить сообщение с уровнем ERROR в лог     |
-| <Anchor :ids="['__TGR_NOTIFY__']"/>bool tgr_notify(int slot, const std::string& msg, int timeout) | отправить сообщение с уровнем NOTIFICATION в лог и уведомление в telegram, отправлять не чаще, чем `timeout` секунд (число из отрезка `[10, 2000000000]`), `slot` - идентификатор слота уведомления (число из отрезка `[0, 4]`), для которого будет отсчитываться `timeout` |
+| Функция                                                                                            | Описание                                      |
+|----------------------------------------------------------------------------------------------------|-----------------------------------------------|
+| long long nanosec_date_time()                                                                      | получить текущее время в epoch в наносекундах |
+| struct tm global_tm()                                                                              | получить текущее время                        |
+| day_time get_day_time()                                                                            | получить текущее время дня                    |
+| void log_info(const std::string& msg)                                                              | отправить сообщение с уровнем INFO в лог      |
+| void log_warn(const std::string& msg)                                                              | отправить сообщение с уровнем WARNING в лог   |
+| void log_error(const std::string& msg)                                                             | отправить сообщение с уровнем ERROR в лог     |
+| <Anchor :ids="['__TGR_NOTIFY__']"/> bool tgr_notify(int slot, const std::string& msg, int timeout) | отправить сообщение с уровнем NOTIFICATION в лог и уведомление в telegram, отправлять не чаще, чем `timeout` секунд (число из отрезка `[10, 2000000000]`), `slot` - идентификатор слота уведомления (число из отрезка `[0, 4]`), для которого будет отсчитываться `timeout` |
 
-### **8.7.3. Структуры**
+### 8.7.3. Структуры <Anchor :ids="['структуры']" />
 
 Структура `day_time` (время дня в часах, минутах, секундах):
 
@@ -461,7 +474,7 @@ Meтоды `coin_item`:
 
 [_Пример 4:_](#__Example4__) Пример использования структуры `day_time`.
 
-### **8.7.4. Функции для работы с опционами**
+### 8.7.4. Функции для работы с опционами <Anchor :ids="['функции-для-работы-с-опционами']" />
 
 | delta()  | gamma()  | vega()   |
 |----------|----------|----------|
@@ -547,7 +560,7 @@ Meтоды `coin_item`:
 | call/put | цена опциона                            |
 | rate     | ставка рефинансирования в процентах     |
 
-## **8.8. Примеры доступа к параметрам портфеля, инструмента, сделки, позиций**
+## 8.8. Примеры доступа к параметрам портфеля, инструмента, сделки, позиций <Anchor :ids="['примеры-доступа-к-параметрам-портфеля,-инструмента,-сделки,-позиций']" />
 
 Пусть имеется портфель с именем "si" и в этом портфеле есть один инструмент - фьючерс на доллар "SiH6". Для того, чтобы получить, например, бид и объем бида по бумаге портфеля и сложить эти значения в переменные, надо написать следующий код:
 
@@ -696,9 +709,9 @@ long long sec_pos = si.pos();
 
 ___
 
-## **8.9. Примеры использования функций**
+## 8.9. Примеры использования функций <Anchor :ids="['примеры-использования-функций']" />
 
-Пусть имеется портфель с именем "test" и в этом портфеле есть два инструмента: фьючерс на индекс РТС "RIH6" и его опцион `call` на страйк 70000 "RI70000BB6", позиция по обоим бумагам в портфеле равна 1, а направление торговли у обоих [On_by](/docs/05-params-description.html#_5-3-10-on-buy) = [Buy](/docs/05-params-description.html#p.buy).
+Пусть имеется портфель с именем "test" и в этом портфеле есть два инструмента: фьючерс на индекс РТС "RIH6" и его опцион `call` на страйк 70000 "RI70000BB6", позиция по обоим бумагам в портфеле равна 1, а направление торговли у обоих [On_by](05-params-description.md#_5-3-10-on-buy) = [Buy](05-params-description.md#p.buy).
 
 Рассчитаем дельту одного из инструментов портфеля, например, "RIH6". Для этого воспользуемся функцией delta из модуля options. Дельта для фьючерса всегда равна 1, проверим, для этого надо написать:
 
@@ -744,22 +757,22 @@ return t < t1;
 
 ___
 
-## **8.10. Примеры написания Ratio buy/sell formula**
+## 8.10. Примеры написания Ratio buy/sell formula <Anchor :ids="['примеры-написания-ratio-buy/sell-formula']" />
 
 При написании формул можно использовать все те инструменты, которые используются в любом из портфелей, также можно использовать доступные значения других портфелей , например, их позиции по бумагам.
 
-Для того, чтобы использовать поле [Ratio sell/buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula) необходимо для выбранного инструмента портфеля выбрать [Ratio type](/docs/05-params-description.html#_5-3-27-ratio-type) = `Ratio formula`. После этого двойным кликом войти в редактор и написать необходимое значение.
+Для того, чтобы использовать поле [Ratio sell/buy formula](05-params-description.md#_5-3-28-ratio-buy-formula) необходимо для выбранного инструмента портфеля выбрать [Ratio type](05-params-description.md#_5-3-27-ratio-type) = `Ratio formula`. После этого двойным кликом войти в редактор и написать необходимое значение.
 
-Пусть имеется портфель с именем "si" и в этом портфеле есть один инструмент - фьючерс на доллар "SiH6", направление торговли этого инструмента [On by](/docs/05-params-description.html#_5-3-10-on-buy) = [Buy](/docs/05-params-description.html#p.buy).
+Пусть имеется портфель с именем "si" и в этом портфеле есть один инструмент - фьючерс на доллар "SiH6", направление торговли этого инструмента [On by](05-params-description.md#_5-3-10-on-buy) = [Buy](05-params-description.md#p.buy).
 
-Если [Ratio sign](/docs/05-params-description.html#_5-3-19-ratio-sign) = "×", то ничего особо интересного с формулами не придумаешь, разве что какой-то хитрый множитель (и для покупки и для продажи), например, такой:
+Если [Ratio sign](05-params-description.md#_5-3-19-ratio-sign) = "×", то ничего особо интересного с формулами не придумаешь, разве что какой-то хитрый множитель (и для покупки и для продажи), например, такой:
 
 ```C
 security s = get_security("SiH6");
 return sqrt(s.bid());
 ```
 
-в таком случае для расчета [Buy](/docs/05-params-description.html#p.buy) и [Sell](/docs/05-params-description.html#p.sell) будет использован один и тот же множитель, если же вы хотите использовать разные множители надо вписать разные значения в [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula) и [Ratio sell formula](/docs/05-params-description.html#_5-3-29-ratio-buy-formula), например, так:
+в таком случае для расчета [Buy](05-params-description.md#p.buy) и [Sell](05-params-description.md#p.sell) будет использован один и тот же множитель, если же вы хотите использовать разные множители надо вписать разные значения в [Ratio buy formula](05-params-description.md#_5-3-28-ratio-buy-formula) и [Ratio sell formula](05-params-description.md#_5-3-29-ratio-buy-formula), например, так:
 
 ```C
 security s = get_security("SiH6");
@@ -773,9 +786,9 @@ return sqrt(s.offer());
 
 для покупки и продажи, соответственно.
 
-В таком случае для расчета [Buy](/docs/05-params-description.html#p.buy) будет использован квадратный корень из бида, а для расчета [Sell](/docs/05-params-description.html#p.sell) будет использован квадратный корень из оффера.
+В таком случае для расчета [Buy](05-params-description.md#p.buy) будет использован квадратный корень из бида, а для расчета [Sell](05-params-description.md#p.sell) будет использован квадратный корень из оффера.
 
-Если же [Ratio sign](/docs/05-params-description.html#_5-3-19-ratio-sign) = "+", то вы можете полностью изменить формулу расчета [Buy](/docs/05-params-description.html#p.buy) и [Sell](/docs/05-params-description.html#p.sell), для этого надо для начала вычесть те значения, которые используются в данный момент, тем самым обнулив [Buy](/docs/05-params-description.html#p.buy) и [Sell](/docs/05-params-description.html#p.sell):
+Если же [Ratio sign](05-params-description.md#_5-3-19-ratio-sign) = "+", то вы можете полностью изменить формулу расчета [Buy](05-params-description.md#p.buy) и [Sell](05-params-description.md#p.sell), для этого надо для начала вычесть те значения, которые используются в данный момент, тем самым обнулив [Buy](05-params-description.md#p.buy) и [Sell](05-params-description.md#p.sell):
 
 ```C
 security s = get_security("SiH6");
@@ -787,7 +800,7 @@ security s = get_security("SiH6");
 return -s.offer();
 ```
 
-для покупки и продажи, соответственно, а после этого прибавить к [Buy](/docs/05-params-description.html#p.buy) и [Sell](/docs/05-params-description.html#p.sell) новое значение, например, так:
+для покупки и продажи, соответственно, а после этого прибавить к [Buy](05-params-description.md#p.buy) и [Sell](05-params-description.md#p.sell) новое значение, например, так:
 
 ```C
 security s = get_security("SiH6");
@@ -803,12 +816,12 @@ double price = s.bid() * 3 + 5;
 return -s.bid() + price;
 ```
 
-теперь значения переменной `price` при расчете каждого из параметров будут новыми значениями для [Buy](/docs/05-params-description.html#p.buy) и [Sell](/docs/05-params-description.html#p.sell). Хочется отметить, что без использования `Ratio formula` такое "хитрое" значение получить бы не удалось.
+теперь значения переменной `price` при расчете каждого из параметров будут новыми значениями для [Buy](05-params-description.md#p.buy) и [Sell](05-params-description.md#p.sell). Хочется отметить, что без использования `Ratio formula` такое "хитрое" значение получить бы не удалось.
 ___
 
-Рассмотрим еще один пример. Пусть имеется портфель с именем "test" и в этом портфеле есть два инструмента: фьючерс на доллар "SiH6", направление торговли этого инструмента [On_by](/docs/05-params-description.html#_5-3-10-on-buy) = [Buy](/docs/05-params-description.html#p.buy) и он является [Is first](/docs/05-params-description.html#_5-3-11-is-first) и фьючерс на индекс РТС "RIH6", направление торговли этого инструмента тоже [On_by](/docs/05-params-description.html#_5-3-10-on-buy) = [Buy](/docs/05-params-description.html#p.buy) (для примера направление не [Is first](/docs/05-params-description.html#_5-3-11-is-first) инструмента значения не имеет). Для того чтобы использовать эти два инструмента в одном портфеле нужно привести их цены в пунктах к одной размерности, как известно, доллар торгуется в рублях (1 : pt = 1 rub), а вот индекс торгуется не в рублях, для него 1 pt = 0.02 * `$`<sub>price</sub> rub (где `$`<sub>price</sub> - это курс доллара в рублях, но это не константа, а динамически изменяющаяся величина). Есть два варианта решения поставленной задачи, оба реализуемы только с использованием `Ratio formula` и оба приводят к абсолютно одинаковому результату. Вот они:
+Рассмотрим еще один пример. Пусть имеется портфель с именем "test" и в этом портфеле есть два инструмента: фьючерс на доллар "SiH6", направление торговли этого инструмента [On_by](05-params-description.md#_5-3-10-on-buy) = [Buy](05-params-description.md#p.buy) и он является [Is first](05-params-description.md#_5-3-11-is-first) и фьючерс на индекс РТС "RIH6", направление торговли этого инструмента тоже [On_by](05-params-description.md#_5-3-10-on-buy) = [Buy](05-params-description.md#p.buy) (для примера направление не [Is first](05-params-description.md#_5-3-11-is-first) инструмента значения не имеет). Для того чтобы использовать эти два инструмента в одном портфеле нужно привести их цены в пунктах к одной размерности, как известно, доллар торгуется в рублях (1 : pt = 1 rub), а вот индекс торгуется не в рублях, для него 1 pt = 0.02 * `$`<sub>price</sub> rub (где `$`<sub>price</sub> - это курс доллара в рублях, но это не константа, а динамически изменяющаяся величина). Есть два варианта решения поставленной задачи, оба реализуемы только с использованием `Ratio formula` и оба приводят к абсолютно одинаковому результату. Вот они:
 
-1. Для доллара просто зададим [Ratio](/docs/05-params-description.html#_5-3-20-ratio) = 1, а вот для индекса РТС выберем [Ratio sign](/docs/05-params-description.html#_5-3-19-ratio-sign) = "×", а в [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula) напишем следующее:
+1. Для доллара просто зададим [Ratio](05-params-description.md#_5-3-20-ratio) = 1, а вот для индекса РТС выберем [Ratio sign](05-params-description.md#_5-3-19-ratio-sign) = "×", а в [Ratio buy formula](05-params-description.md#_5-3-28-ratio-buy-formula) напишем следующее:
 
     ```C
     security s = get_security("SiH6");
@@ -822,9 +835,9 @@ ___
     return (0.02 * s.bid() * 0.001);
     ```
 
-    таким образом при расчете [Buy](/docs/05-params-description.html#p.buy) мы будем использовать бид доллара, а при расчете [Sell](/docs/05-params-description.html#p.sell) - его оффер, и величину получим в рублях.
+    таким образом при расчете [Buy](05-params-description.md#p.buy) мы будем использовать бид доллара, а при расчете [Sell](05-params-description.md#p.sell) - его оффер, и величину получим в рублях.
 
-2. Для доллара просто зададим [Ratio](/docs/05-params-description.html#_5-3-20-ratio) = 1, а вот для индекса РТС выберем [Ratio sign](/docs/05-params-description.html#_5-3-19-ratio-sign) = "+", а в [Ratio buy formula](/docs/05-params-description.html#_5-3-28-ratio-buy-formula) напишем следующее (вначале обнулим значение, как в предыдущем примере, а затем зададим новое):
+2. Для доллара просто зададим [Ratio](05-params-description.md#_5-3-20-ratio) = 1, а вот для индекса РТС выберем [Ratio sign](05-params-description.md#_5-3-19-ratio-sign) = "+", а в [Ratio buy formula](05-params-description.md#_5-3-28-ratio-buy-formula) напишем следующее (вначале обнулим значение, как в предыдущем примере, а затем зададим новое):
 
     ```C
     security s1 = get_security("SiH6");
@@ -833,7 +846,7 @@ ___
     return -s2.offer() + price;
     ```
 
-    в [Ratio sell formula](/docs/05-params-description.html#_5-3-29-ratio-buy-formula) напишем следующее:
+    в [Ratio sell formula](05-params-description.md#_5-3-29-ratio-buy-formula) напишем следующее:
 
     ```C
     security s1 = get_security("SiH6");
@@ -842,4 +855,4 @@ ___
     return -s2.bid() + price;
     ```
 
-    теперь значения переменной price и будут новыми значениями (так сказать, со стороны индекса РТС), используемыми для расчета [Buy](/docs/05-params-description.html#p.buy) и [Sell](/docs/05-params-description.html#p.sell), соответственно.
+    теперь значения переменной price и будут новыми значениями (так сказать, со стороны индекса РТС), используемыми для расчета [Buy](05-params-description.md#p.buy) и [Sell](05-params-description.md#p.sell), соответственно.

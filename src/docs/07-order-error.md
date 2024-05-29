@@ -1,6 +1,19 @@
-# 7. Ошибки заявок
+---
+title: 7. Ошибки заявок
+section: 7
+---
 
-## **7.1. Группировка ошибок**
+[//]: # (====== AUTO-GENERATED FILE ======)
+[//]: # (THIS FILE WAS AUTOMATICALLY GENERATED. ANY DIRECT MODIFICATIONS MAY BE OVERWRITTEN.)
+[//]: # (DO NOT MODIFY THIS FILE DIRECTLY.)
+[//]: # (TO UPDATE THE DOCUMENTATION, NAVIGATE TO THE 'ASSETS' FOLDER.)
+
+
+
+# 7. Ошибки заявок <Anchor :ids="['ошибки-заявок']" />
+
+
+## 7.1. Группировка ошибок <Anchor :ids="['группировка-ошибок']" />
 
 Во время работы робота могут возникать ошибки при выставлении, перемещении и снятии заявок. Такие ошибки сами по себе не являются показателем неправильной работы робота. Это штатное поведение. Все ошибки, получаемые с биржи, классифицируются на несколько групп для удобства их обработки (например, на Московской бирже есть более десяти различных кодов ошибок, суть которых сводится к тому, что у клиента не хватает денег для выставления заявки). Ошибки снятия заявки чаще всего возникают тогда, когда после отправления приказа на снятие заявки и до обработки этого приказа биржей, заявка успевает пройти в сделку. Далее будут рассмотрены ошибки выставления и переставления заявок.
 
@@ -36,9 +49,9 @@
 
 **Что делать:** Сообщение означает, что наша заявка, которая до сих пор была реальной заявкой, теперь просто не находится на бирже и мы не знаем ее судьбу, поэтому рекомендуется выключить торговлю, сбросить статусы заявок, сверить позы с биржей, после чего можно снова включать торговлю.
 
-## **7.2. Коды ошибок**
+## 7.2. Коды ошибок <Anchor :ids="['коды-ошибок']" />
 
-### **7.2.1. MOEX FORTS**
+### 7.2.1. MOEX FORTS <Anchor :ids="['moex-forts']" />
 
 **MOEX SPECTRA ERRORS**  
 -1 Error performing operation.  
@@ -701,7 +714,7 @@
 11826 Matchref must not be specified for this type of counter party  
 11827 Allowed only trades with the same bank account for this period  
 
-### **7.2.2. MOEX spot and currencies**
+### 7.2.2. MOEX spot and currencies <Anchor :ids="['moex-spot-and-currencies']" />
 
 **MOEX ASTS ERRORS**
 (001) Message #%d sent  
@@ -1371,4 +1384,4 @@
 (1159) Early settlement is not allowed for REPO  
 (1161) Offers for the conclusion of OTC trades are available only for the Clearing Member  
 (1162) OfferringQty cannot be set to a value  
-(1163) Offers for the conclusion of OTC trades are not available for the Clearing Member with this clearing mode  
+(1163) Offers for the conclusion of OTC trades are not available for the Clearing Member with this clearing mode

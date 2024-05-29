@@ -56,7 +56,7 @@ module.exports = {
         link: '/docs/'
       }
     ],
-    sidebar: {
+     sidebar: {
       '/docs/': [
         {
           collapsable: false,
@@ -78,10 +78,12 @@ module.exports = {
     }
   },
   markdown: {
+    extractHeaders: [ 'h2', 'h3', 'h4', 'h5','h6' ],
     extendMarkdown: md => {
-      // use more markdown-it plugins!
-      md.use(require('markdown-it-attrs')),
-        md.use(require('markdown-it-katex'))
+      md.use(require('markdown-it'))
+      .use(require('markdown-it-attrs'))
+      .use(require('markdown-it-katex'))
+      .use(require('markdown-it-anchor'))
     }
   },
   /**
@@ -94,7 +96,7 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '@images': path.resolve(__dirname, '../00-img'),
+        '@images': path.resolve(__dirname, '..', 'docs', '00-img'),
       }
     }
   }
