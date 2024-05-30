@@ -2755,6 +2755,9 @@ Payload:
 | >> ips | y | array |  | List of ips as list of strings |
 | >> resp_users | y | array |  | List of responsible users emails as list of strings |
 | >> cmd | y | string |  | Command line params |
+| >> phl | y | number |  | Portfolios history limit |
+| >> fin_res_lim | y | number |  | Fin res history limit |
+| >> deals_lim | y | number |  | Deals history limit |
 | >> srv_runme | y | boolean |  | Use runme on server |
 | >> md_st | y | array |  |  |
 | >>> [] | y |  |  | Aray of dictionaries of data-stream states with stream name as a key and value of type stream_status |
@@ -2969,6 +2972,9 @@ Payload:
 | >> ips | n | array |  | List of ips as list of strings |
 | >> resp_users | n | array |  | List of responsible users emails as list of strings |
 | >> cmd | n | string |  | Command line params |
+| >> phl | n | number |  | Portfolios history limit |
+| >> fin_res_lim | n | number |  | Fin res history limit |
+| >> deals_lim | n | number |  | Deals history limit |
 | >> srv_runme | n | boolean |  | Use runme on server |
 | >> md_st | n | array |  |  |
 | >>> [] | n |  |  | Aray of dictionaries of data-stream states with stream name as a key and value of type stream_status |
