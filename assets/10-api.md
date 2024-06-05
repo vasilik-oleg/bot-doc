@@ -2214,7 +2214,7 @@ Example:
 ```
 </details>    
 
-### Написать на почту "создателю" порфтеля [роль: admin]
+### Написать на почту “создателю” портфеля [роль: admin]
 
 Написать сообщение на почту старшего трейдера и на почты "создателю" данного портфеля
 
@@ -2310,7 +2310,252 @@ Example:
 	"r":"e"
 }
 ```
-</details>  
+</details>
+
+## История изменений полей портфеля
+
+### Подписка на отдельные поля портфеля
+
+Подписаться на изменения конкретного поля портфеля
+
+При удалении портфеля вы НЕ будете автоматически отписаны от его полей
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
+| > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.subscribe",
+	"data":
+	{
+		"r_id":"1",
+		"p_id":"b1",
+		"key":"sell",
+		"aggr":"raw"
+	},
+	"eid":"12"
+}
+```
+</details>    
+<details>
+
+<summary>Response on success (snapshot)</summary> 
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = s | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > mt | y | number | epoch_msec | Max time, written in data base |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
+| > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
+| > values | y | object |  | Portfolio snapshot |
+| >> [] | y | array |  | List of financial results |
+| >>> dt | y | number | epoch_msec | Field value time |
+| >>> v | y | number |  | Field value |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.subscribe",
+	"data":
+	{
+		"r_id":"1",
+		"p_id":"b1",
+		"key":"sell",
+		"aggr":"raw",
+		"values":
+		[
+			{"dt":1717592977733,"v":67249.73}
+		],
+		"mt":1717592977733
+	},
+	"r":"s",
+	"eid":"2745",
+	"ts":1717592980360842097
+}
+```
+</details>    
+<details>
+<summary>Updates</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = u | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
+| > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
+| > values | y | object |  | Portfolio snapshot |
+| >> [] | y | array |  | List of financial results |
+| >>> dt | y | number | epoch_msec | Field value time |
+| >>> v | y | number |  | Field value |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.subscribe",
+	"data":
+	{
+		"r_id":"1",
+		"p_id":"b1",
+		"key":"sell",
+		"aggr":"raw",
+		"values":
+		[
+			{"dt":1717592977743,"v":67249.74}
+		]
+	},
+	"r":"u",
+	"eid":"2745",
+	"ts":1717592980360845097
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.subscribe",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>    
+
+### Отписка от поля портфеля
+
+Отписаться от обновление по полю портфеля
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > sub_eid | y | string | string_36 | Subscription eid |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.unsubscribe",
+	"data":
+	{
+		"sub_eid":"qwerty"
+	},
+	"eid":"q"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.unsubscribe",
+	"data":{},
+	"r":"p",
+	"eid":"q",
+	"ts":1669810178671387651
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.unsubscribe",
+	"data":
+	{
+		"msg":"Operation timeout",
+		"code":666
+	},
+	"ts":1657693572940145200,
+	"eid":"q",
+	"r":"e"
+}
+```
+</details> 
 
 ## Роботы
 
