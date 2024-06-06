@@ -517,7 +517,7 @@ Meтоды `coin_item`:
 **double PDELTA(double futPrice, double strike, double expDate, double iv, double rate=0)**
 вычисляет дельту опциона `put`
 
-**double CGAMMMA(double futPrice, double strike, double expDate, double iv, double rate=0)**  
+**double CGAMMA(double futPrice, double strike, double expDate, double iv, double rate=0)**  
 вычисляет гамму опциона `call`
 
 **double PGAMMA(double futPrice, double strike, double expDate, double iv, double rate=0)**  
