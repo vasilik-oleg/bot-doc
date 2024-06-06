@@ -2555,7 +2555,235 @@ Example:
 	"r":"e"
 }
 ```
-</details> 
+</details>
+
+### Запрос истории изменений поля портфеля
+
+Получить “небольшую” историю старше заданной даты
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.get_previous | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
+| > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
+| > mt | y | number | epoch_msec | Receive rows “older” than this value |
+| > lim | n | number |  | Number of rows to receive in range [1, 100], default value is 100 |
+
+Example:
+
+```json
+{
+	"type": "portfolio_history.get_previous",
+	"data": {
+		"r_id": "1",
+		"p_id": "test2",
+		"key":"sell",
+		"aggr":"raw",
+		"mt": "2000000000000000000",
+		"lim": 100
+	},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.get_previous | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
+| > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
+| > values | y | object |  | Portfolio snapshot |
+| >> [] | y | array |  | List of financial results |
+| >>> dt | y | number | epoch_msec | Field value time |
+| >>> v | y | number |  | Field value |
+
+Example:
+
+```json
+{
+    "type": "portfolio_history.get_previous",
+    "data": {
+	"r_id":"1",
+	"p_id":"b1",
+	"key":"sell",
+	"aggr":"raw",
+        "values":
+		[
+			{"dt":1717592977733,"v":67249.73},
+			{"dt":1717592977933,"v":67249.75}
+		],
+    },
+    "r": "p",
+    "eid": "q0",
+    "ts": 1676366845413318695
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.get_previous | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.get_previous",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>    
+
+### Запрос истории изменений поля портфеля 2
+
+Получить историю от даты до даты
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.get_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
+| > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
+| > mint | y | number | epoch_msec | Receive rows “newer” or equal than this value |
+| > maxt | y | number | epoch_msec | Receive rows “older” or equal than this value |
+| > lim | n | number |  | Number of rows to receive in range [1, 100000], default value is 100000 |
+
+Example:
+
+```json
+{
+	"type": "portfolio_history.get_history",
+	"data": {
+		"r_id":"1",
+		"p_id":"b1",
+		"key":"sell",
+		"aggr":"raw",
+		"maxt": "2000000000000",
+		"mint": "1",
+		"lim": 100
+	},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.get_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
+| > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
+| > values | y | object |  | Portfolio snapshot |
+| >> [] | y | array |  | List of financial results |
+| >>> dt | y | number | epoch_msec | Field value time |
+| >>> v | y | number |  | Field value |
+
+Example:
+
+```json
+{
+    "type": "portfolio_history.get_history",
+    "data": {
+	"r_id":"1",
+	"p_id":"b1",
+	"key":"sell",
+	"aggr":"raw",
+        "values":
+		[
+			{"dt":1717592977733,"v":67249.73},
+			{"dt":1717592977933,"v":67249.75}
+		],
+    },
+    "r": "p",
+    "eid": "q0",
+    "ts": 1676366845413318695
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.get_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.get_history",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
 
 ## Роботы
 
