@@ -2364,7 +2364,7 @@ Payload:
 | ts | y | number | epoch_nsec | Response time in nano seconds |
 | r = s | y | string | request_result | Request result |
 | data | y | object |  |  |
-| > mt | y | number | epoch_msec | Max time, written in data base |
+| > mt | y | number | epoch_msec | Max time, written in data base (can be null) |
 | > r_id | y | string |  | Robot ID |
 | > p_id | y | string |  | Portfolio name |
 | > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
