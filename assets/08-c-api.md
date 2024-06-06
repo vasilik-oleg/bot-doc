@@ -469,73 +469,71 @@ Meтоды `coin_item`:
 
 ### Функции для работы с опционами
 
-| delta()  | gamma()  | vega()   |
-|----------|----------|----------|
-| theta()  | iv()     | price()  |
-| c()      | p()      | cdelta() |
-| pdelta() | cgamma() | pgamma() |
-| cvega()  | pvega()  | ctheta() |
-| ptheta() | civ()    | piv()    |
+#### _“Умные” функции_
 
-**double S_delta(const std::string& s, double rate = 0) double P_delta(const std::string& p, double rate = 0)**  
+**double S_delta(const std::string& s, double rate = 0)**\
+**double P_delta(const std::string& p, double rate = 0)**  
 вычисляет дельту финансового инструмента или портфеля со ставкой рефинансирования `rate` (указывается в процентах)
 
-**double S_gamma(const std::string& s, double rate = 0) double P_gamma(const std::string& p, double rate = 0)**  
+**double S_gamma(const std::string& s, double rate = 0)**\
+**double P_gamma(const std::string& p, double rate = 0)**  
 вычисляет гамму финансового инструмента или портфеля со ставкой рефинансирования `rate` (указывается в процентах)
 
-**double S_vega(const std::string& s, double rate = 0) double P_vega(const std::string& p, double rate = 0)**  
+**double S_vega(const std::string& s, double rate = 0)**\
+**double P_vega(const std::string& p, double rate = 0)**  
 вычисляет вегу финансового инструмента или портфеля со ставкой рефинансирования `rate` (указывается в процентах)
 
-**double S_theta(const std::string& s, double rate = 0) double P_theta(const std::string& p, double rate = 0)**  
+**double S_theta(const std::string& s, double rate = 0)**\
+**double P_theta(const std::string& p, double rate = 0)**  
 вычисляет тету финансового инструмента или портфеля со ставкой рефинансирования `rate` (указывается в процентах)
 
-**double S_iv(const std::string& key, double rate = 0) double P_iv(const std::string& p, double rate = 0)**  
+**double S_iv(const std::string& s, double rate = 0)**\
+**double P_iv(const std::string& p, double rate = 0)**  
 вычисляет ожидаемую волатильность опциона или портфеля со ставкой рефинансирования `rate` (указывается в процентах)
 
 **double S_price(const std::string& s, double rate = 0)**  
 вычисляет справедливую цену опциона со ставкой рефинансирования `rate` (указывается в процентах)
 
-**double C(double futPrice, double strike, double expDate, double iv, double rate=0)**  
-вычисляет справедливую цену опциона `call`
-
-Аргументы:
+Аргументы для функций выше:
 
 | Название | Описание                                |
 |----------|-----------------------------------------|
 | s        | ключ инструмента SecKey                 |
 | p        | имя портфеля                            |
-| futPrice | цена базового актива                    |
-| strike   | цена страйк опциона                     |
-| expData  | дата экспирации опциона в формате epoch |
-| iv       | ожидаемая волатильность                 |
 | rate     | ставка рефинансирования в процентах     |
 
+
+#### _“Простые” функции_
+
+**double C(double futPrice, double strike, double expDate, double iv, double rate=0)**  
+вычисляет справедливую цену опциона `call`
+
 **double P(double futPrice, double strike, double expDate, double iv, double rate=0)**  
-вычисляет справедливую цену опциона `put`, аргументы такие же, как для C()
+вычисляет справедливую цену опциона `put`
 
 **double CDELTA(double futPrice, double strike, double expDate, double iv, double rate=0)**  
-вычисляет дельту опциона `call`, аргументы такие же, как для C()
+вычисляет дельту опциона `call`
 
 **double PDELTA(double futPrice, double strike, double expDate, double iv, double rate=0)**
-вычисляет дельту опциона `put`, аргументы такие же, как для C()
+вычисляет дельту опциона `put`
 
 **double CGAMMMA(double futPrice, double strike, double expDate, double iv, double rate=0)**  
-вычисляет гамму опциона `call`, аргументы такие же, как для C()
+вычисляет гамму опциона `call`
 
 **double PGAMMA(double futPrice, double strike, double expDate, double iv, double rate=0)**  
-вычисляет гамму опциона `put`, аргументы такие же, как для C()
+вычисляет гамму опциона `put`
 
 **double CVEGA(double futPrice, double strike, double expDate, double iv, double rate=0)**  
-вычисляет вегу опциона `call`, аргументы такие же, как для C()
+вычисляет вегу опциона `call`
 
 **double PVEGA(double futPrice, double strike, double expDate, double iv, double rate=0)**  
-вычисляет вегу опциона `put`, аргументы такие же, как для C()
+вычисляет вегу опциона `put`
 
 **double CTHETA(double futPrice, double strike, double expDate, double iv, double rate=0)**  
-вычисляет тету опциона `call`, аргументы такие же, как для C()
+вычисляет тету опциона `call`
 
 **double PTHETA(double futPrice, double strike, double expDate, double iv, double rate=0)**  
-вычисляет тету опциона `put`, аргументы такие же, как для C()
+вычисляет тету опциона `put`
 
 **double CIV(double futPrice, double strike, double expDate, double call, double rate=0)**  
 вычисляет implied volatility опциона `call`
@@ -543,13 +541,14 @@ Meтоды `coin_item`:
 **double PIV(double futPrice, double strike, double expDate, double put, double rate=0)**  
 вычисляет implied volatility опциона `put`
 
-Аргументы:
+Аргументы для функций выше:
 
 | Название | Описание                                |
 |----------|-----------------------------------------|
 | futPrice | цена базового актива                    |
 | strike   | цена страйк опциона                     |
 | expData  | дата экспирации опциона в формате epoch |
+| iv       | ожидаемая волатильность                 |
 | call/put | цена опциона                            |
 | rate     | ставка рефинансирования в процентах     |
 
