@@ -2562,6 +2562,8 @@ Example:
 
 Получить “небольшую” историю старше заданной даты
 
+Т.к. запрашивается история аггрегатов, то `lim` относится именно к числу аггрегатов, реальное получаемое количество точек при этом может быть больше (аж в 3 раза). Чтобы узнать к какому именно аггрегату относится точка необходимо время точки разделить на длину аггрегата, взять целую часть и полученное значение умножить на длину аггрегата
+
 <details>
 <summary>Request</summary>
 
@@ -2577,7 +2579,7 @@ Payload:
 | > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
 | > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
 | > mt | y | number | epoch_msec | Receive rows “older” than this value. This value is recommended to be multiple of aggregation period in milliseconds |
-| > lim | n | number |  | Number of rows to receive in range [1, 100], default value is 100 |
+| > lim | n | number |  | Number of rows to receive in range [1, 1000], default value is 1000 |
 
 Example:
 
@@ -2674,6 +2676,8 @@ Example:
 ### Запрос истории изменений поля портфеля 2
 
 Получить историю от даты до даты
+
+Т.к. запрашивается история аггрегатов, то `lim` относится именно к числу аггрегатов, реальное получаемое количество точек при этом может быть больше (аж в 3 раза). Чтобы узнать к какому именно аггрегату относится точка необходимо время точки разделить на длину аггрегата, взять целую часть и полученное значение умножить на длину аггрегата
 
 <details>
 <summary>Request</summary>
