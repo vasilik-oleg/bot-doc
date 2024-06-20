@@ -6,6 +6,10 @@ ignore-section-number: true
 
 # История изменений
 
+## 2024-06-20
+
+- Изменена и расширена логика работы параметра портфеля [Timetable](05-params-description.md#p.use_tt).
+
 ## 2024-05-13
 
 - В параметры портфеля добавлен параметр [Threshold](05-params-description.md#p.threshold);
