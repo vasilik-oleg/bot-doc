@@ -31,7 +31,7 @@ padding:5px 0px 5px 0px;
 
 ### Размер входящих и исходящих сообщений, группировка и сжатие сообщений
 
-Максимальный размер сообщения, отправляемого клиентом, должен быть меньше 262144 байт
+Максимальный размер сообщения, отправляемого клиентом, должен быть меньше 1048576 байт
 
 Размер сообщений, отправляемых сервером, до их сжатия не превосходит 200 КБ. Если размер сообщения, отправлемого сервером, до его сжатия превышает 100 КБ, сообщение будет заархивировано и отправлено не как текстовое, а
 уже как бинарное сообщение. Сжатие сообщений производится при помощи библиотеки `zlib` c параметром `wbits = 15`
@@ -2233,6 +2233,7 @@ Payload:
 | > to_head | y | boolean |  | Also mail to `head_of_traders` role |
 | > subj | y | string |  | Message subject, `${ROBOT_ID}` will be replaced with current robot's ID, `${PORTFOLIO_ID}` will be replaced with current portfolio name + robot's ID |
 | > msg | y | string |  | Message text, `${ROBOT_ID}` will be replaced with current robot's ID, `${PORTFOLIO_ID}` will be replaced with current portfolio name + robot's ID |
+| > html | n | boolean |  | Send message as HTML, default value is false |
 
 Example:
 
@@ -11090,6 +11091,7 @@ Payload:
 | > r_id | y | string |  | Robot ID |
 | > subj | y | string |  | Message subject, `${ROBOT_ID}` will be replaced with current robot's ID |
 | > msg | y | string |  | Message text, `${ROBOT_ID}` will be replaced with current robot's ID |
+| > html | n | boolean |  | Send message as HTML, default value is false |
 
 Example:
 
