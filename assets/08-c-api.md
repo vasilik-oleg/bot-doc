@@ -235,7 +235,6 @@ section: 8
 | const user_value& uf19()                                    | получить "пользовательское поле" под номером 19 (пользовательские значения никак НЕ используются в штатном алгоритме робота)|
 | std::string name()                                          | получить "Name" портфеля                                                                                 |
 | int decimals()                                              | получить "Decimals" портфеля                                                                             |
-| bool tt_only_stop()                                         | получить "Timetable only stop" портфеля                                                                  |
 | std::string comment()                                       | получить "Comment" портфеля                                                                              |
 | bool re_sell()                                              | получить "re_sell" портфеля                                                                              |
 | bool re_buy()                                               | получить "re_buy" портфеля                                                                               |
@@ -287,7 +286,6 @@ section: 8
 | ...                                                         | ...                                                                                                      |
 | void set_uf19(const user_value& v)                          | изменить "пользовательское поле" под номером 19 (пользовательские значения никак НЕ используются в штатном алгоритме робота)|
 | void set_decimals(int v)                                    | изменить "Decimals" портфеля на значение v                                                               |
-| void set_tt_only_stop(bool v)                               | изменить "Timetable only stop" портфеля на значение v                                                    |
 | void set_comment(std::string v)                             | изменить "Comment" портфеля на значение v                                                                |
 | void set_re_sell(bool v)                                    | изменить "re_sell" портфеля на значение v                                                                |
 | void set_re_buy(bool v)                                     | изменить "re_buy" портфеля на значение v                                                                 |

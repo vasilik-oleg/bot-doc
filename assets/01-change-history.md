@@ -6,6 +6,10 @@ ignore-section-number: true
 
 # История изменений
 
+## 2024-06-26
+
+- Удален параметр портфеля `Timetable only stop`.
+
 ## 2024-06-20
 
 - Изменена и расширена логика работы параметра портфеля [Timetable](05-params-description.md#p.use_tt).

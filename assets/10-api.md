@@ -549,7 +549,6 @@ Example:
             "equal_prices": false,
             "ext_formulas": false,
             "simply_first": false,
-            "tt_only_stop": false,
             "_fin_res_stop": false,
             "_fin_res_time": 60,
             "cur_day_month": 7,
@@ -794,7 +793,6 @@ Example:
             "equal_prices": false,
             "ext_formulas": false,
             "simply_first": false,
-            "tt_only_stop": false,
             "_fin_res_stop": false,
             "_fin_res_time": 60,
             "cur_day_month": 7,
@@ -1232,7 +1230,6 @@ Example:
             "re_sell": false,
             "simply_first": false,
             "to0": false,
-            "tt_only_stop": false,
             "use_tt": false,
             "virtual_0_pos": false,
             "timetable": [
