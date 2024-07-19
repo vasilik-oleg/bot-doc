@@ -445,7 +445,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 `Lim_Sell` – сигнальная цена на продажу, заявка по [Is first](05-params-description.md#s.is_first) бумаге выставляется если `Sell ≥ Lim_Sell` вне зависимости от того включен или нет режим [Quote](05-params-description.md#p.quote).
 
-`Lim_Buy` – сигнальная цена на покупку, заявка по [Is first](05-params-description.md#s.is_first) бумаге выставляется если `Buy ≤ Lim_Buy` вне зависимости от того включен или нет режим [Is first](05-params-description.md#s.is_first).
+`Lim_Buy` – сигнальная цена на покупку, заявка по [Is first](05-params-description.md#s.is_first) бумаге выставляется если `Buy ≤ Lim_Buy` вне зависимости от того включен или нет режим  [Quote](05-params-description.md#p.quote).
 
 Работа данных параметров наглядно продемонстрирована в этом видео:
 
