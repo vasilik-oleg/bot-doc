@@ -11938,6 +11938,635 @@ Example:
 ```
 </details>    
 
+## Нескрываемые сообщения
+
+### Подписка на сообщения
+
+Подписаться на сообщения, при успешной подписке приходит снапшот из 20-ти сообщений
+
+В обновлениях приходят только ключ сообщения и обновленный статус
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+
+Example:
+
+```json
+{
+	"type": "messages.subscribe",
+	"data": {},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+
+<summary>Response on success (snapshot)</summary> 
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = s | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > values | y | object |  | Unread messages snapshot |
+| >> [] | y | array |  | List of messages |
+| >>> eid | y | string | string_36 | Message unique ID |
+| >>> st | y | number |  | Message state (0 - unread, 1 - read) |
+| >>> dt | y | number | epoch_msec | Message time |
+| >>> msg | y | string |  | Message text |
+| > mt | y | number | epoch_msec | Max time, written in data base (can be null) |
+| > count | y | number |  | Number of messages with st=1 in data base|
+
+Example:
+
+```json
+{
+	"type": "messages.subscribe",
+	"data": {
+	"values": [
+		{
+			"eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
+			"st": 0,
+			"dt": 1722258395158,
+			"msg": "Test msg 1"
+		},
+		{
+			"eid": "f67349a5-ccc9-4f74-82ff-fd197cd950e3",
+			"st": 0,
+			"dt": 1722258376516,
+			"msg": "Test msg 2"
+		}
+	],
+	"mt": 1721984718924,
+	"count": 2
+	},
+	"ts":1657693572940145200,
+  	"eid":"qwerty",
+  	"r":"s"
+}
+```
+</details>    
+<details>
+<summary>Updates</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = u | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > values | y | object |  | Unread messages snapshot |
+| >> [] | y | array |  | List of messages |
+| >>> eid | y | string | string_36 | Message unique ID |
+| >>> st | y | number |  | Message state (0 - unread, 1 - read) |
+
+Example:
+
+```json
+{
+  "type": "messages.subscribe",
+  "data": {
+    "values": [
+      {
+        "eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
+        "st": 1
+      }
+    ]
+  },
+  "ts":1657693572940145200,
+  "eid":"qwerty",
+  "r":"u"
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"messages.subscribe",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>  
+
+### Отписка от сообщений
+
+Отписаться от сообщений
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > sub_eid | y | string | string_36 | Subscription eid |
+
+Example:
+
+```json
+{
+	"type":"messages.unsubscribe",
+	"data":
+	{
+		"sub_eid":"qwerty"
+	},
+	"eid":"q"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+
+Example:
+
+```json
+{
+	"type":"messages.unsubscribe",
+	"data":{},
+	"r":"p",
+	"eid":"q",
+	"ts":1669810178671387651
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"messages.unsubscribe",
+	"data":
+	{
+		"msg":"Operation timeout",
+		"code":666
+	},
+	"ts":1657693572940145200,
+	"eid":"q",
+	"r":"e"
+}
+```
+</details>
+
+### Запрос истории сообщений
+
+Получить “небольшую” историю старше заданной даты
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.get_previous | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > read | n | boolean |  | Show already read messages, default value is false |
+| > mt | y | number | epoch_msec | Receive messages “older” than this value |
+| > lim | n | number |  | Number of messages to receive in range [1, 100], default value is 100 |
+
+Example:
+
+```json
+{
+	"type": "messages.get_previous",
+	"data": {
+		"mt": "2000000000000",
+		"lim": 100
+	},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.get_previous | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > values | y | object |  | Unread messages snapshot |
+| >> [] | y | array |  | List of messages |
+| >>> eid | y | string | string_36 | Message unique ID |
+| >>> st | y | number |  | Message state (0 - unread, 1 - read) |
+| >>> dt | y | number | epoch_msec | Message time |
+| >>> msg | y | string |  | Message text |
+
+Example:
+
+```json
+{
+	"type": "messages.get_previous",
+	"data": {
+	"values": [
+		{
+			"eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
+			"st": 0,
+			"dt": 1722258395158,
+			"msg": "Test msg 1"
+		},
+		{
+			"eid": "f67349a5-ccc9-4f74-82ff-fd197cd950e3",
+			"st": 0,
+			"dt": 1722258376516,
+			"msg": "Test msg 2"
+		}
+	]
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"p"
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.get_previous | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"messages.get_previous",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
+
+### Запрос истории сообщений 2
+
+Получить историю от даты до даты
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.get_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > read | n | boolean |  | Show already read messages, default value is false |
+| > mint | y | number | epoch_msec | Receive messages “newer” or equal than this value |
+| > maxt | y | number | epoch_msec | Receive messages “older” or equal than this value |
+| > lim | n | number |  | Number of messages to receive in range [1, 100], default value is 100 |
+
+Example:
+
+```json
+{
+	"type": "messages.get_history",
+	"data": {
+		"mt": "2000000000000",
+		"lim": 100
+	},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.get_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > values | y | object |  | Unread messages snapshot |
+| >> [] | y | array |  | List of messages |
+| >>> eid | y | string | string_36 | Message unique ID |
+| >>> st | y | number |  | Message state (0 - unread, 1 - read) |
+| >>> dt | y | number | epoch_msec | Message time |
+| >>> msg | y | string |  | Message text |
+
+Example:
+
+```json
+{
+	"type": "messages.get_history",
+	"data": {
+	"values": [
+		{
+			"eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
+			"st": 0,
+			"dt": 1722258395158,
+			"msg": "Test msg 1"
+		},
+		{
+			"eid": "f67349a5-ccc9-4f74-82ff-fd197cd950e3",
+			"st": 0,
+			"dt": 1722258376516,
+			"msg": "Test msg 2"
+		}
+	]
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"p"
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.get_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"messages.get_history",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
+
+### Добавить сообщение [роль: admin]
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.add | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > to | y | string |  | User to send message to |
+| > msg | y | string |  | Message text |
+
+Example:
+
+```json
+{
+	"type": "messages.add",
+	"data": {
+		"to": "test@gmail.com",
+		"msg": "Hello world!"
+	},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.add | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > eid | y | string | string_36 | Message unique ID |
+| > dt | y | number | epoch_msec | Message time |
+
+Example:
+
+```json
+{
+	"type": "messages.add",
+	"data": {
+		"eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
+		"dt": 1722258395158
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"p"
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.add | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"messages.add",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
+
+### Отметить сообщение как прочитанное
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.mark_as_read | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > eid | y | string | string_36 | Message unique ID |
+
+Example:
+
+```json
+{
+	"type": "messages.mark_as_read",
+	"data": {
+		"eid": "e7114511-bed2-425b-b602-29d6d723a5e1"
+	},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.mark_as_read | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > eid | y | string | string_36 | Message unique ID |
+| > st | y | number |  | Message state (0 - unread, 1 - read) |
+
+Example:
+
+```json
+{
+	"type": "messages.mark_as_read",
+	"data": {
+		"eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
+		"st": 1
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"p"
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.mark_as_read | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"messages.mark_as_read",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
+
 ## Компании и пользователи
 
 ### Подписка на компании [роль: admin]
