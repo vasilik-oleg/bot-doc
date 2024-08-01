@@ -730,6 +730,8 @@ Curpos<sub>i</sub> - текущая позиция инструмента пор
 Mult - [Fin res multiplier](05-params-description.md#s.fin_res_mult) инструмента портфеля;  
 secs - список инструментов портфеля.
 
+Инструкцию по расчету и настройке вывода финансового результата можно посмотреть здесь [Fin res manual](https://instructions.fkviking.com/fin_result_guide.pdf))
+
 ### Fin res wo C <Anchor :ids="['p.fin_res_wo_c']" />
 
 `Fin res` без учета комиссии. Вычисляется по формуле:
