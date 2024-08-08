@@ -392,6 +392,99 @@ Example:
 ```
 </details>    
 
+### Получить список доступных портфелей с включенной записью истории <Anchor :ids="['get-portfolios-history']" />
+
+<details>
+<summary>Subscription</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = available_portfolio_list.get_with_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | n | object |  |  |
+
+Example:
+
+```json
+{
+	"type": "available_portfolio_list.get_with_history",
+	"data": {},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+
+<summary>Response on success</summary> 
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = available_portfolio_list.get_with_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > portfolios | y | array |  | Array of available portfolios |
+| >> [] | y | [string, string, string] | portfolio_id | Portfolio ID (robot ID and portfolio name) and portfolio owner (creator)|
+|  |  |  |  |  |
+
+Example:
+
+```json
+{
+	"type":"available_portfolio_list.get_with_history",
+	"data":
+	{
+		"portfolios":
+		[
+			["1","test","test@mail.ru"],
+			["1","test1","test@mail.ru"],
+			["1","test2","test@mail.ru"],
+			["1","test3","test@mail.ru"]
+		]
+	},
+	"r":"p",
+	"eid":"qwerty",
+	"ts":1669793958010491759
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = available_portfolio_list.get_with_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"available_portfolio_list.get_with_history",
+	"data":
+	{
+		"msg":"Operation timeout",
+		"code":666
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>   
+
 ### Добавить портфель
 
 Добавить портфель в робота
