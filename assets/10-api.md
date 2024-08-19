@@ -12122,6 +12122,7 @@ Payload:
 | ts | y | number | epoch_nsec | Response time in nano seconds |
 | r = u | y | string | request_result | Request result |
 | data | y | object |  |  |
+| > count | y | number |  | Number of messages with st=1 in data base|
 | > values | y | object |  | Unread messages snapshot |
 | >> [] | y | array |  | List of messages |
 | >>> eid | y | string | string_36 | Message unique ID |
@@ -12306,6 +12307,7 @@ Payload:
 | ts | y | number | epoch_nsec | Response time in nano seconds |
 | r = p | y | string | request_result | Request result |
 | data | y | object |  |  |
+| > count | y | number |  | Number of messages with st=1 or st=0 (depending on filter) in data base|
 | > values | y | object |  | Unread messages snapshot |
 | >> [] | y | array |  | List of messages |
 | >>> eid | y | string | string_36 | Message unique ID |
@@ -12416,6 +12418,7 @@ Payload:
 | ts | y | number | epoch_nsec | Response time in nano seconds |
 | r = p | y | string | request_result | Request result |
 | data | y | object |  |  |
+| > count | y | number |  | Number of messages with st=1 or st=0 (depending on filter) in data base|
 | > values | y | object |  | Unread messages snapshot |
 | >> [] | y | array |  | List of messages |
 | >>> eid | y | string | string_36 | Message unique ID |

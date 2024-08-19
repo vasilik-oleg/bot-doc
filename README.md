@@ -59,3 +59,8 @@ ignore-section-number: true
 ## Параметры транзакционных подключений <-- 05-params-description.md#параметры-транзакционных-подключений
 #### Conn type                          <-- 05-params-description.md#conn-type
 ```
+
+### Для запуска на локальной машине
+```
+NODE_OPTIONS=--openssl-legacy-provider yarn run dev
+```
