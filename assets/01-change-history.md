@@ -8,7 +8,7 @@ ignore-section-number: true
 
 ## 2024-09-16
 
-- В настройки расписания портфеля добавлен параметр [Timetable trading days](05-params-description.md#p.trading_days);
+- В настройки расписания портфеля добавлен параметр [TradingDays](05-params-description.md#p.trading_days);
 - В C++ интерфейс добавлен метод [mid_price()](08-c-api.md#доступ-к-биржевым-данным-по-финансовым-инструментам) для объекта финансового инструмента;
 - В C++ интерфейс добавлены [объекты для расчета различных индикаторов](08-c-api.md#indicators-docs).
 
