@@ -2970,6 +2970,9 @@ Payload:
 | >>>> d | y | number |  | Deletes count |
 | >>>> m | y | number |  | Moves count |
 | >>>> ra | y | number |  | Add rejects count |
+| >> p_a | y | number |  | All portfolios |
+| >> p_d | y | number |  | Disabled portfolios |
+| >> p_e | y | number |  | Expired portfolios |
 
 
 Example:
@@ -3126,6 +3129,9 @@ Payload:
 | >>>> d | y | number |  | Deletes count |
 | >>>> m | y | number |  | Moves count |
 | >>>> ra | y | number |  | Add rejects count |
+| >> p_a | n | number |  | All portfolios |
+| >> p_d | n | number |  | Disabled portfolios |
+| >> p_e | n | number |  | Expired portfolios |
 
 Example:
 
