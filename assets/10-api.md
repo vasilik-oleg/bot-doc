@@ -116,6 +116,7 @@ Payload:
 | > active_role | y | string |  | current user role |
 | > roles | y | array |  | Array of available user roles |
 | >> [] | y | string |  | Available user role |
+| > can_hide_notifs | y | boolean |  | User can hide notifications "gnerated" by another user |
 
 Example:
 
@@ -13935,6 +13936,7 @@ Payload:
 | > api_key | y | string |  | API key |
 | > enable_api | y | boolean |  | Enable API flag |
 | > tgr | y | number |  | Telegram ID |
+| > hide_not_my_notifs | y | boolean |  | Hide notifications "generated" by another user |
 
 Example:
 
@@ -13964,6 +13966,7 @@ Payload:
 | > api_key | n | string |  | API key |
 | > enable_api | n | boolean |  | Enable API flag |
 | > tgr | n | number |  | Telegram ID |
+| > hide_not_my_notifs | n | boolean |  | Hide notifications "generated" by another user |
 
 Example:
 
@@ -14108,6 +14111,7 @@ Payload:
 | > api_key | n | string |  | API key |
 | > enable_api | n | boolean |  | Enable API flag |
 | > tgr | n | number |  | Telegram ID |
+| > hide_not_my_notifs | n | boolean |  | Hide notifications "generated" by another user |
 
 Example:
 
@@ -14135,6 +14139,7 @@ Payload:
 | > api_key | n | string |  | API key |
 | > enable_api | n | boolean |  | Enable API flag |
 | > tgr | n | number |  | Telegram ID |
+| > hide_not_my_notifs | n | boolean |  | Hide notifications "generated" by another user |
 
 Example:
 

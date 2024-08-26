@@ -28,6 +28,8 @@ padding:5px 0px 5px 0px;
 
 ### 10.1.2. Механизм поддержания связи с сервером <Anchor :ids="['механизм-поддержания-связи-с-сервером']" />
 
+Клиентская сессия длится не более 12-ти часов, любое клиентское соединение будет закрыто не позже, чем через 12 часов после того, как было установлено. Для продолжения работы соединение необходимо установить заново
+
 Если клиент не отправляет сообщения в течение 5-ти секунд, соединение будет закрыто сервером
 
 Для поддержания связи с сервером и для определения статуса соеденения с сервером в случае отсутствия исходящих сообщений от клиента в течение 5-ти секунд предполагается отправлять служебное сообщение в виде строки, состоящей из
@@ -36,7 +38,7 @@ padding:5px 0px 5px 0px;
 
 ### 10.1.3. Размер входящих и исходящих сообщений, группировка и сжатие сообщений <Anchor :ids="['размер-входящих-и-исходящих-сообщений,-группировка-и-сжатие-сообщений']" />
 
-Максимальный размер сообщения, отправляемого клиентом, должен быть меньше 262144 байт
+Максимальный размер сообщения, отправляемого клиентом, должен быть меньше 1048576 байт
 
 Размер сообщений, отправляемых сервером, до их сжатия не превосходит 200 КБ. Если размер сообщения, отправлемого сервером, до его сжатия превышает 100 КБ, сообщение будет заархивировано и отправлено не как текстовое, а
 уже как бинарное сообщение. Сжатие сообщений производится при помощи библиотеки `zlib` c параметром `wbits = 15`
@@ -397,7 +399,100 @@ Example:
 ```
 </details>    
 
-### 10.3.3. Добавить портфель <Anchor :ids="['добавить-портфель']" />
+### 10.3.3. Получить список доступных портфелей с включенной записью истории <Anchor :ids="['get-portfolios-history', 'получить-список-доступных-портфелей-с-включенной-записью-истории']" />
+
+<details>
+<summary>Subscription</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = available_portfolio_list.get_with_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | n | object |  |  |
+
+Example:
+
+```json
+{
+	"type": "available_portfolio_list.get_with_history",
+	"data": {},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+
+<summary>Response on success</summary> 
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = available_portfolio_list.get_with_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > portfolios | y | array |  | Array of available portfolios |
+| >> [] | y | [string, string, string] | portfolio_id | Portfolio ID (robot ID and portfolio name) and portfolio owner (creator)|
+|  |  |  |  |  |
+
+Example:
+
+```json
+{
+	"type":"available_portfolio_list.get_with_history",
+	"data":
+	{
+		"portfolios":
+		[
+			["1","test","test@mail.ru"],
+			["1","test1","test@mail.ru"],
+			["1","test2","test@mail.ru"],
+			["1","test3","test@mail.ru"]
+		]
+	},
+	"r":"p",
+	"eid":"qwerty",
+	"ts":1669793958010491759
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = available_portfolio_list.get_with_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"available_portfolio_list.get_with_history",
+	"data":
+	{
+		"msg":"Operation timeout",
+		"code":666
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>   
+
+### 10.3.4. Добавить портфель <Anchor :ids="['добавить-портфель']" />
 
 Добавить портфель в робота
 
@@ -554,7 +649,6 @@ Example:
             "equal_prices": false,
             "ext_formulas": false,
             "simply_first": false,
-            "tt_only_stop": false,
             "_fin_res_stop": false,
             "_fin_res_time": 60,
             "cur_day_month": 7,
@@ -638,7 +732,7 @@ Example:
 ```
 </details>    
 
-### 10.3.4. Изменить портфель <Anchor :ids="['изменить-портфель']" />
+### 10.3.5. Изменить портфель <Anchor :ids="['изменить-портфель']" />
 
 Изменить значение/значения полей портфеля/бумаг портфеля
 
@@ -799,7 +893,6 @@ Example:
             "equal_prices": false,
             "ext_formulas": false,
             "simply_first": false,
-            "tt_only_stop": false,
             "_fin_res_stop": false,
             "_fin_res_time": 60,
             "cur_day_month": 7,
@@ -922,7 +1015,7 @@ Example:
 ```
 </details>    
 
-### 10.3.5. Удалить портфель <Anchor :ids="['удалить-портфель']" />
+### 10.3.6. Удалить портфель <Anchor :ids="['удалить-портфель']" />
 
 Удалить портфель из робота
 
@@ -1014,7 +1107,7 @@ Example:
 ```
 </details>    
 
-### 10.3.6. Подписка на портфель <Anchor :ids="['подписка-на-портфель']" />
+### 10.3.7. Подписка на портфель <Anchor :ids="['подписка-на-портфель']" />
 
 Подписаться на события изменения/удаления полей портфеля/бумаг портфеля
 
@@ -1237,7 +1330,6 @@ Example:
             "re_sell": false,
             "simply_first": false,
             "to0": false,
-            "tt_only_stop": false,
             "use_tt": false,
             "virtual_0_pos": false,
             "timetable": [
@@ -1366,7 +1458,7 @@ Example:
 ```
 </details>    
 
-### 10.3.7. Отписка от портфеля <Anchor :ids="['отписка-от-портфеля']" />
+### 10.3.8. Отписка от портфеля <Anchor :ids="['отписка-от-портфеля']" />
 
 Отписаться от событий по портфелю
 
@@ -1451,7 +1543,7 @@ Example:
 ```
 </details>    
 
-### 10.3.8. “Сбросить” статусы заявок портфеля <Anchor :ids="['“сбросить”-статусы-заявок-портфеля']" />
+### 10.3.9. “Сбросить” статусы заявок портфеля <Anchor :ids="['“сбросить”-статусы-заявок-портфеля']" />
 
 “Сбросить” статусы всех заявок всех инструментов выбранного портфеля
 
@@ -1544,7 +1636,7 @@ Example:
 ```
 </details>    
 
-### 10.3.9. Остановить торговлю и снять заявки портфеля <Anchor :ids="['остановить-торговлю-и-снять-заявки-портфеля']" />
+### 10.3.10. Остановить торговлю и снять заявки портфеля <Anchor :ids="['остановить-торговлю-и-снять-заявки-портфеля']" />
 
 Остановить торговлю и снять все заявки выбранного портфеля
 
@@ -1637,7 +1729,7 @@ Example:
 ```
 </details>    
 
-### 10.3.10. Выключить все формулы портфеля <Anchor :ids="['выключить-все-формулы-портфеля']" />
+### 10.3.11. Выключить все формулы портфеля <Anchor :ids="['выключить-все-формулы-портфеля']" />
 
 Остановить торговлю и отключить все формулы выбранного портфеля
 
@@ -1730,7 +1822,7 @@ Example:
 ```
 </details>    
 
-### 10.3.11. “Скинуть” портфель “в рынок” <Anchor :ids="['“скинуть”-портфель-“в-рынок”']" />
+### 10.3.12. “Скинуть” портфель “в рынок” <Anchor :ids="['“скинуть”-портфель-“в-рынок”']" />
 
 Скинуть портфель в рынок
 
@@ -1823,7 +1915,7 @@ Example:
 ```
 </details>    
 
-### 10.3.12. Купить портфель <Anchor :ids="['купить-портфель']" />
+### 10.3.13. Купить портфель <Anchor :ids="['купить-портфель']" />
 
 Купить выбранный портфель в заданном количестве
 
@@ -1918,7 +2010,7 @@ Example:
 ```
 </details>    
 
-### 10.3.13. Продать портфель <Anchor :ids="['продать-портфель']" />
+### 10.3.14. Продать портфель <Anchor :ids="['продать-портфель']" />
 
 Продать выбранный портфель в заданном количестве
 
@@ -2013,7 +2105,7 @@ Example:
 ```
 </details>    
 
-### 10.3.14. Выставить заявку по бумаге портфеля <Anchor :ids="['выставить-заявку-по-бумаге-портфеля']" />
+### 10.3.15. Выставить заявку по бумаге портфеля <Anchor :ids="['выставить-заявку-по-бумаге-портфеля']" />
 
 Выставить заявку на покупку/продажу выбранной бумаги выбранного портфеля в заданном количестве по заданной цене
 
@@ -2114,7 +2206,7 @@ Example:
 ```
 </details>    
 
-### 10.3.15. Протестировать формулу портфеля <Anchor :ids="['протестировать-формулу-портфеля']" />
+### 10.3.16. Протестировать формулу портфеля <Anchor :ids="['протестировать-формулу-портфеля']" />
 
 Протестировать формулу портфеля.
 
@@ -2219,7 +2311,7 @@ Example:
 ```
 </details>    
 
-### 10.3.16. Написать на почту "создателю" порфтеля [роль: admin] <Anchor :ids="['написать-на-почту-"создателю"-порфтеля-[роль:-admin]']" />
+### 10.3.17. Написать на почту “создателю” портфеля [роль: admin] <Anchor :ids="['написать-на-почту-“создателю”-портфеля-[роль:-admin]']" />
 
 Написать сообщение на почту старшего трейдера и на почты "создателю" данного портфеля
 
@@ -2238,6 +2330,7 @@ Payload:
 | > to_head | y | boolean |  | Also mail to `head_of_traders` role |
 | > subj | y | string |  | Message subject, `${ROBOT_ID}` will be replaced with current robot's ID, `${PORTFOLIO_ID}` will be replaced with current portfolio name + robot's ID |
 | > msg | y | string |  | Message text, `${ROBOT_ID}` will be replaced with current robot's ID, `${PORTFOLIO_ID}` will be replaced with current portfolio name + robot's ID |
+| > html | n | boolean |  | Send message as HTML, default value is false |
 
 Example:
 
@@ -2315,11 +2408,489 @@ Example:
 	"r":"e"
 }
 ```
-</details>  
+</details>
 
-## 10.4. Роботы <Anchor :ids="['роботы']" />
+## 10.4. История изменений полей портфеля <Anchor :ids="['история-изменений-полей-портфеля']" />
 
-### 10.4.1. Подписка на робота <Anchor :ids="['подписка-на-робота']" />
+### 10.4.1. Подписка на отдельные поля портфеля <Anchor :ids="['подписка-на-отдельные-поля-портфеля']" />
+
+Подписаться на изменения конкретного поля портфеля
+
+При удалении портфеля вы НЕ будете автоматически отписаны от его полей
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
+| > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
+| > mt | n | epoch_msec |  | Minumum date/time to include in snapshot, set null to get last values (maximum number of returned values is 10000) |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.subscribe",
+	"data":
+	{
+		"r_id":"1",
+		"p_id":"b1",
+		"key":"sell",
+		"aggr":"raw"
+	},
+	"eid":"12"
+}
+```
+</details>    
+<details>
+
+<summary>Response on success (snapshot)</summary> 
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = s | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > mt | y | number | epoch_msec | Max time, written in data base (can be null) |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
+| > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
+| > values | y | object |  | Field values snapshot |
+| >> [] | y | array |  | List of field values |
+| >>> dt | y | number | epoch_msec | Field value time |
+| >>> v | y | number |  | Field value |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.subscribe",
+	"data":
+	{
+		"r_id":"1",
+		"p_id":"b1",
+		"key":"sell",
+		"aggr":"raw",
+		"values":
+		[
+			{"dt":1717592977733,"v":67249.73}
+		],
+		"mt":1717592977733
+	},
+	"r":"s",
+	"eid":"2745",
+	"ts":1717592980360842097
+}
+```
+</details>    
+<details>
+<summary>Updates</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = u | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
+| > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
+| > values | y | object |  | Field values snapshot |
+| >> [] | y | array |  | List of field values |
+| >>> dt | y | number | epoch_msec | Field value time |
+| >>> v | y | number |  | Field value |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.subscribe",
+	"data":
+	{
+		"r_id":"1",
+		"p_id":"b1",
+		"key":"sell",
+		"aggr":"raw",
+		"values":
+		[
+			{"dt":1717592977743,"v":67249.74}
+		]
+	},
+	"r":"u",
+	"eid":"2745",
+	"ts":1717592980360845097
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.subscribe",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>    
+
+### 10.4.2. Отписка от поля портфеля <Anchor :ids="['отписка-от-поля-портфеля']" />
+
+Отписаться от обновление по полю портфеля
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > sub_eid | y | string | string_36 | Subscription eid |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.unsubscribe",
+	"data":
+	{
+		"sub_eid":"qwerty"
+	},
+	"eid":"q"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.unsubscribe",
+	"data":{},
+	"r":"p",
+	"eid":"q",
+	"ts":1669810178671387651
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.unsubscribe",
+	"data":
+	{
+		"msg":"Operation timeout",
+		"code":666
+	},
+	"ts":1657693572940145200,
+	"eid":"q",
+	"r":"e"
+}
+```
+</details>
+
+### 10.4.3. Запрос истории изменений поля портфеля <Anchor :ids="['запрос-истории-изменений-поля-портфеля']" />
+
+Получить “небольшую” историю старше заданной даты
+
+Т.к. запрашивается история аггрегатов, то `lim` относится именно к числу аггрегатов, реальное получаемое количество точек при этом может быть больше (аж в 3 раза). Чтобы узнать к какому именно аггрегату относится точка необходимо время точки разделить на длину аггрегата, взять целую часть и полученное значение умножить на длину аггрегата
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.get_previous | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
+| > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
+| > mt | y | number | epoch_msec | Receive rows “older” than this value. This value is recommended to be multiple of aggregation period in milliseconds |
+| > lim | n | number |  | Number of rows to receive in range [1, 1000], default value is 1000 |
+
+Example:
+
+```json
+{
+	"type": "portfolio_history.get_previous",
+	"data": {
+		"r_id": "1",
+		"p_id": "test2",
+		"key":"sell",
+		"aggr":"raw",
+		"mt": "2000000000000000000",
+		"lim": 100
+	},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.get_previous | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
+| > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
+| > values | y | object |  | Field values snapshot |
+| >> [] | y | array |  | List of field values |
+| >>> dt | y | number | epoch_msec | Field value time |
+| >>> v | y | number |  | Field value |
+
+Example:
+
+```json
+{
+    "type": "portfolio_history.get_previous",
+    "data": {
+	"r_id":"1",
+	"p_id":"b1",
+	"key":"sell",
+	"aggr":"raw",
+        "values":
+		[
+			{"dt":1717592977733,"v":67249.73},
+			{"dt":1717592977933,"v":67249.75}
+		],
+    },
+    "r": "p",
+    "eid": "q0",
+    "ts": 1676366845413318695
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.get_previous | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.get_previous",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>    
+
+### 10.4.4. Запрос истории изменений поля портфеля 2 <Anchor :ids="['запрос-истории-изменений-поля-портфеля-2']" />
+
+Получить историю от даты до даты
+
+Т.к. запрашивается история аггрегатов, то `lim` относится именно к числу аггрегатов, реальное получаемое количество точек при этом может быть больше (аж в 3 раза). Чтобы узнать к какому именно аггрегату относится точка необходимо время точки разделить на длину аггрегата, взять целую часть и полученное значение умножить на длину аггрегата
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.get_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
+| > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
+| > mint | y | number | epoch_msec | Receive rows “newer” or equal than this value. This value is recommended to be multiple of aggregation period in milliseconds |
+| > maxt | y | number | epoch_msec | Receive rows “older” or equal than this value. This value is recommended to be multiple of aggregation period in milliseconds |
+| > lim | n | number |  | Number of rows to receive in range [1, 100000], default value is 100000 |
+
+Example:
+
+```json
+{
+	"type": "portfolio_history.get_history",
+	"data": {
+		"r_id":"1",
+		"p_id":"b1",
+		"key":"sell",
+		"aggr":"raw",
+		"maxt": "2000000000000",
+		"mint": "1",
+		"lim": 100
+	},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.get_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > r_id | y | string |  | Robot ID |
+| > p_id | y | string |  | Portfolio name |
+| > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
+| > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
+| > values | y | object |  | Field values snapshot |
+| >> [] | y | array |  | List of field values |
+| >>> dt | y | number | epoch_msec | Field value time |
+| >>> v | y | number |  | Field value |
+
+Example:
+
+```json
+{
+    "type": "portfolio_history.get_history",
+    "data": {
+	"r_id":"1",
+	"p_id":"b1",
+	"key":"sell",
+	"aggr":"raw",
+        "values":
+		[
+			{"dt":1717592977733,"v":67249.73},
+			{"dt":1717592977933,"v":67249.75}
+		],
+    },
+    "r": "p",
+    "eid": "q0",
+    "ts": 1676366845413318695
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = portfolio_history.get_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"portfolio_history.get_history",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
+
+## 10.5. Роботы <Anchor :ids="['роботы']" />
+
+### 10.5.1. Подписка на робота <Anchor :ids="['подписка-на-робота']" />
 
 Подписаться на события изменения полей робота
 
@@ -2601,7 +3172,7 @@ Example:
 ```
 </details>    
 
-### 10.4.2. Отписка от робота <Anchor :ids="['отписка-от-робота']" />
+### 10.5.2. Отписка от робота <Anchor :ids="['отписка-от-робота']" />
 
 Отписаться от событий по роботу
 
@@ -2686,7 +3257,7 @@ Example:
 ```
 </details>    
 
-### 10.4.3. Подписка на робота (для админа) <Anchor :ids="['подписка-на-робота-(для-админа)']" />
+### 10.5.3. Подписка на робота (для админа) <Anchor :ids="['подписка-на-робота-(для-админа)']" />
 
 Подписаться на события изменения полей робота
 
@@ -2762,6 +3333,9 @@ Payload:
 | >> ips | y | array |  | List of ips as list of strings |
 | >> resp_users | y | array |  | List of responsible users emails as list of strings |
 | >> cmd | y | string |  | Command line params |
+| >> phl | y | number |  | Portfolios history limit |
+| >> fin_res_lim | y | number |  | Fin res history limit |
+| >> deals_lim | y | number |  | Deals history limit |
 | >> srv_runme | y | boolean |  | Use runme on server |
 | >> md_st | y | array |  |  |
 | >>> [] | y |  |  | Aray of dictionaries of data-stream states with stream name as a key and value of type stream_status |
@@ -2976,6 +3550,9 @@ Payload:
 | >> ips | n | array |  | List of ips as list of strings |
 | >> resp_users | n | array |  | List of responsible users emails as list of strings |
 | >> cmd | n | string |  | Command line params |
+| >> phl | n | number |  | Portfolios history limit |
+| >> fin_res_lim | n | number |  | Fin res history limit |
+| >> deals_lim | n | number |  | Deals history limit |
 | >> srv_runme | n | boolean |  | Use runme on server |
 | >> md_st | n | array |  |  |
 | >>> [] | n |  |  | Aray of dictionaries of data-stream states with stream name as a key and value of type stream_status |
@@ -3047,7 +3624,7 @@ Example:
 ```
 </details>    
 
-### 10.4.4. Отписка от робота (для админа) <Anchor :ids="['отписка-от-робота-(для-админа)']" />
+### 10.5.4. Отписка от робота (для админа) <Anchor :ids="['отписка-от-робота-(для-админа)']" />
 
 Отписаться от событий по роботу
 
@@ -3132,7 +3709,7 @@ Example:
 ```
 </details>    
 
-### 10.4.5. Подписка на список доступных роботов <Anchor :ids="['подписка-на-список-доступных-роботов']" />
+### 10.5.5. Подписка на список доступных роботов <Anchor :ids="['подписка-на-список-доступных-роботов']" />
 
 При добавлении/удалении робота/доступа к роботу будут высланы обновления
 
@@ -3263,7 +3840,7 @@ Example:
 ```
 </details>    
 
-### 10.4.6. Отписка от списка доступных роботов <Anchor :ids="['отписка-от-списка-доступных-роботов']" />
+### 10.5.6. Отписка от списка доступных роботов <Anchor :ids="['отписка-от-списка-доступных-роботов']" />
 
 Отписаться от событий по списку доступных роботов
 
@@ -3348,7 +3925,7 @@ Example:
 ```
 </details>    
 
-### 10.4.7. Перезапустить робота <Anchor :ids="['перезапустить-робота']" />
+### 10.5.7. Перезапустить робота <Anchor :ids="['перезапустить-робота']" />
 
 Перезапустить не торгующего робота
 
@@ -3431,7 +4008,7 @@ Example:
 ```
 </details>    
 
-### 10.4.8. Изменить робота <Anchor :ids="['изменить-робота']" />
+### 10.5.8. Изменить робота <Anchor :ids="['изменить-робота']" />
 
 <details>
 <summary>Request</summary>
@@ -3510,7 +4087,7 @@ Example:
 ```
 </details>    
 
-### 10.4.9. Подписка на активные заявки робота <Anchor :ids="['подписка-на-активные-заявки-робота']" />
+### 10.5.9. Подписка на активные заявки робота <Anchor :ids="['подписка-на-активные-заявки-робота']" />
 
 Подписаться на активные заявки робота
 
@@ -3721,7 +4298,7 @@ Example:
 ```
 </details>    
 
-### 10.4.10. Отписка от активных заявок робота <Anchor :ids="['отписка-от-активных-заявок-робота']" />
+### 10.5.10. Отписка от активных заявок робота <Anchor :ids="['отписка-от-активных-заявок-робота']" />
 
 <details>
 <summary>Request</summary>
@@ -3804,9 +4381,9 @@ Example:
 ```
 </details>    
 
-## 10.5. 10.3 Финрез <Anchor :ids="['10.3-финрез']" />
+## 10.6. Финрез <Anchor :ids="['финрез']" />
 
-### 10.5.1. Подписка на таблицу финансовых результатов портфеля <Anchor :ids="['подписка-на-таблицу-финансовых-результатов-портфеля']" />
+### 10.6.1. Подписка на таблицу финансовых результатов портфеля <Anchor :ids="['подписка-на-таблицу-финансовых-результатов-портфеля']" />
 
 Подписаться на новые записи в таблицу финансовых результатов портфеля
 
@@ -3999,7 +4576,7 @@ Example:
 ```
 </details>    
 
-### 10.5.2. Отписка от таблицы финансовых результатов портфеля <Anchor :ids="['отписка-от-таблицы-финансовых-результатов-портфеля']" />
+### 10.6.2. Отписка от таблицы финансовых результатов портфеля <Anchor :ids="['отписка-от-таблицы-финансовых-результатов-портфеля']" />
 
 Отписаться от таблицы финансовых результатов портфеля
 
@@ -4084,7 +4661,7 @@ Example:
 ```
 </details>    
 
-### 10.5.3. Запрос истории финансовых результатов портфеля <Anchor :ids="['запрос-истории-финансовых-результатов-портфеля']" />
+### 10.6.3. Запрос истории финансовых результатов портфеля <Anchor :ids="['запрос-истории-финансовых-результатов-портфеля']" />
 
 Получить “небольшую” историю старше заданной даты
 
@@ -4262,7 +4839,7 @@ Example:
 ```
 </details>    
 
-### 10.5.4. Запрос истории финансовых результатов портфеля 2 <Anchor :ids="['запрос-истории-финансовых-результатов-портфеля-2']" />
+### 10.6.4. Запрос истории финансовых результатов портфеля 2 <Anchor :ids="['запрос-истории-финансовых-результатов-портфеля-2']" />
 
 Получить историю от даты до даты
 
@@ -4442,7 +5019,7 @@ Example:
 ```
 </details>    
 
-### 10.5.5. Подсчет средних финансовых результатов портфеля за период <Anchor :ids="['подсчет-средних-финансовых-результатов-портфеля-за-период']" />
+### 10.6.5. Подсчет средних финансовых результатов портфеля за период <Anchor :ids="['подсчет-средних-финансовых-результатов-портфеля-за-период']" />
 
 <details>
 <summary>Request</summary>
@@ -4591,9 +5168,9 @@ Example:
 ```
 </details>    
 
-## 10.6. Сделки <Anchor :ids="['сделки']" />
+## 10.7. Сделки <Anchor :ids="['сделки']" />
 
-### 10.6.1. Подписка на сделки портфеля <Anchor :ids="['подписка-на-сделки-портфеля']" />
+### 10.7.1. Подписка на сделки портфеля <Anchor :ids="['подписка-на-сделки-портфеля']" />
 
 Подписаться на новые записи в таблицу сделок портфеля
 
@@ -4825,7 +5402,7 @@ Example:
 ```
 </details>    
 
-### 10.6.2. Отписка от сделок портфеля <Anchor :ids="['отписка-от-сделок-портфеля']" />
+### 10.7.2. Отписка от сделок портфеля <Anchor :ids="['отписка-от-сделок-портфеля']" />
 
 Отписаться от таблицы сделок портфеля
 
@@ -4910,7 +5487,7 @@ Example:
 ```
 </details>    
 
-### 10.6.3. Запрос истории сделок портфеля <Anchor :ids="['запрос-истории-сделок-портфеля']" />
+### 10.7.3. Запрос истории сделок портфеля <Anchor :ids="['запрос-истории-сделок-портфеля']" />
 
 Получить “небольшую” историю старше заданной даты
 
@@ -5092,9 +5669,9 @@ Example:
 ```
 </details>    
 
-### 10.6.4. Запрос списка уникальных бумаг из истории сделок портфеля <Anchor :ids="['запрос-списка-уникальных-бумаг-из-истории-сделок-портфеля']" />
+### 10.7.4. Запрос списка уникальных бумаг из истории сделок портфеля <Anchor :ids="['запрос-списка-уникальных-бумаг-из-истории-сделок-портфеля']" />
 
-Получить бумаги из истории от даты до даты
+Получить уникальные бумаги из истории сделок по портфелям
 
 <details>
 <summary>Request</summary>
@@ -5108,9 +5685,6 @@ Payload:
 | data | y | object |  |  |
 | > r_id | y | string |  | Robot ID |
 | > p_id | y | string |  | Portfolio name |
-| > mint | y | string | epoch_nsec | Receive rows “newer” or equal than this value |
-| > maxt | y | string | epoch_nsec | Receive rows “older” or equal than this value |
-| > lim | n | number |  | Number of rows to receive in range [1, 100000], default value is 100000 |
 
 Example:
 
@@ -5119,10 +5693,7 @@ Example:
 	"type": "portfolio_deals.get_sec_keys",
 	"data": {
 		"r_id": "1",
-		"p_id": "test2",
-		"maxt": "2000000000000000000",
-		"mint": "1",
-		"lim": 100
+		"p_id": "test2"
 	},
 	"eid": "qwerty"
 }
@@ -5193,7 +5764,7 @@ Example:
 ```
 </details>    
 
-### 10.6.5. Запрос истории сделок портфеля 2 <Anchor :ids="['запрос-истории-сделок-портфеля-2']" />
+### 10.7.5. Запрос истории сделок портфеля 2 <Anchor :ids="['запрос-истории-сделок-портфеля-2']" />
 
 Получить историю от даты до даты
 
@@ -5377,9 +5948,9 @@ Example:
 ```
 </details>    
 
-## 10.7. Логи <Anchor :ids="['логи']" />
+## 10.8. Логи <Anchor :ids="['логи']" />
 
-### 10.7.1. Подписка на логи портфеля <Anchor :ids="['подписка-на-логи-портфеля']" />
+### 10.8.1. Подписка на логи портфеля <Anchor :ids="['подписка-на-логи-портфеля']" />
 
 Подписаться на новые записи в таблицу логов портфеля
 
@@ -5562,7 +6133,7 @@ Example:
 ```
 </details>    
 
-### 10.7.2. Отписка от логов портфеля <Anchor :ids="['отписка-от-логов-портфеля']" />
+### 10.8.2. Отписка от логов портфеля <Anchor :ids="['отписка-от-логов-портфеля']" />
 
 Отписаться от логов портфеля
 
@@ -5647,7 +6218,7 @@ Example:
 ```
 </details>    
 
-### 10.7.3. Подписка на логи робота <Anchor :ids="['подписка-на-логи-робота']" />
+### 10.8.3. Подписка на логи робота <Anchor :ids="['подписка-на-логи-робота']" />
 
 Подписаться на новые записи в таблицу логов робота
 
@@ -5895,7 +6466,7 @@ Example:
 ```
 </details>    
 
-### 10.7.4. Отписка от логов робота <Anchor :ids="['отписка-от-логов-робота']" />
+### 10.8.4. Отписка от логов робота <Anchor :ids="['отписка-от-логов-робота']" />
 
 Отписаться от логов робота
 
@@ -5980,7 +6551,7 @@ Example:
 ```
 </details>    
 
-### 10.7.5. Запрос истории логов робота <Anchor :ids="['запрос-истории-логов-робота']" />
+### 10.8.5. Запрос истории логов робота <Anchor :ids="['запрос-истории-логов-робота']" />
 
 Получить историю от даты до даты
 
@@ -6125,9 +6696,9 @@ Example:
 ```
 </details>    
 
-## 10.8. Инструменты <Anchor :ids="['инструменты']" />
+## 10.9. Инструменты <Anchor :ids="['инструменты']" />
 
-### 10.8.1. Запрос списка финансовых инструментов <Anchor :ids="['запрос-списка-финансовых-инструментов']" />
+### 10.9.1. Запрос списка финансовых инструментов <Anchor :ids="['запрос-списка-финансовых-инструментов']" />
 
 Получить список финансовых инструментов, доступных в данном робота
 
@@ -6273,7 +6844,7 @@ Example:
 ```
 </details>    
 
-### 10.8.2. Запрос списка клиентских кодов <Anchor :ids="['запрос-списка-клиентских-кодов']" />
+### 10.9.2. Запрос списка клиентских кодов <Anchor :ids="['запрос-списка-клиентских-кодов']" />
 
 Получить список клиентских кодов, доступных в данном роботе
 
@@ -6373,7 +6944,7 @@ Example:
 
 
 
-### 10.8.3. Найти финансовый инструмент в роботе/портфеле <Anchor :ids="['найти-финансовый-инструмент-в-роботе/портфеле']" />
+### 10.9.3. Найти финансовый инструмент в роботе/портфеле <Anchor :ids="['найти-финансовый-инструмент-в-роботе/портфеле']" />
 
 Найти заданный финансовый инструмент в портфеле или роботе или всех доступных роботах
 
@@ -6522,7 +7093,7 @@ Example:
 ```
 </details>    
 
-### 10.8.4. Заменить финансовый инструмент в портфелях робота <Anchor :ids="['заменить-финансовый-инструмент-в-портфелях-робота']" />
+### 10.9.4. Заменить финансовый инструмент в портфелях робота <Anchor :ids="['заменить-финансовый-инструмент-в-портфелях-робота']" />
 
 Заменить заданный финансовый инструмент в заданных портфелях данного робота
 
@@ -6630,9 +7201,9 @@ Example:
 ```
 </details>    
 
-## 10.9. Маркет-дата <Anchor :ids="['маркет-дата']" />
+## 10.10. Маркет-дата <Anchor :ids="['маркет-дата']" />
 
-### 10.9.1. Подписка на маркет-дата подключения робота <Anchor :ids="['подписка-на-маркет-дата-подключения-робота']" />
+### 10.10.1. Подписка на маркет-дата подключения робота <Anchor :ids="['подписка-на-маркет-дата-подключения-робота']" />
 
 Подписаться на обновления статусов маркет-дата подключений робота
 
@@ -6939,7 +7510,7 @@ Example:
 ```
 </details>    
 
-### 10.9.2. Получить список маркет-дата подключений робота <Anchor :ids="['получить-список-маркет-дата-подключений-робота']" />
+### 10.10.2. Получить список маркет-дата подключений робота <Anchor :ids="['получить-список-маркет-дата-подключений-робота']" />
 
 Получить список маркет-дата подключений робота
 
@@ -7174,7 +7745,7 @@ Example:
 ```
 </details>    
 
-### 10.9.3. Отписка от маркет-дата подключений робота <Anchor :ids="['отписка-от-маркет-дата-подключений-робота']" />
+### 10.10.3. Отписка от маркет-дата подключений робота <Anchor :ids="['отписка-от-маркет-дата-подключений-робота']" />
 
 Отписаться от обновлений статусов маркет-дата подключений робота
 
@@ -7259,7 +7830,7 @@ Example:
 ```
 </details>    
 
-### 10.9.4. Операции с маркет-дата подключениями <Anchor :ids="['операции-с-маркет-дата-подключениями']" />
+### 10.10.4. Операции с маркет-дата подключениями <Anchor :ids="['операции-с-маркет-дата-подключениями']" />
 
 Disable/enable/переподключить маркет-дата подключение
 
@@ -7370,7 +7941,7 @@ Example:
 ```
 </details>
 
-### 10.9.5. Добавить/удалить бумагу в менеджер бумаг <Anchor :ids="['добавить/удалить-бумагу-в-менеджер-бумаг']" />
+### 10.10.5. Добавить/удалить бумагу в менеджер бумаг <Anchor :ids="['добавить/удалить-бумагу-в-менеджер-бумаг']" />
 
 Добавить/удалить бумагу в менеджер бумаг
 
@@ -7461,7 +8032,7 @@ Example:
 ```
 </details>  
 
-### 10.9.6. Найти бумагу для менеджера бумаг <Anchor :ids="['найти-бумагу-для-менеджера-бумаг']" />
+### 10.10.6. Найти бумагу для менеджера бумаг <Anchor :ids="['найти-бумагу-для-менеджера-бумаг']" />
 
 Найти бумагу для менеджера бумаг
 
@@ -7555,9 +8126,9 @@ Example:
 ```
 </details>
 
-## 10.10. Транзакционные подключения <Anchor :ids="['транзакционные-подключения']" />
+## 10.11. Транзакционные подключения <Anchor :ids="['транзакционные-подключения']" />
 
-### 10.10.1. Добавить транзакционное подключение <Anchor :ids="['добавить-транзакционное-подключение']" />
+### 10.11.1. Добавить транзакционное подключение <Anchor :ids="['добавить-транзакционное-подключение']" />
 
 <details>
 <summary>Request</summary>
@@ -7662,7 +8233,7 @@ Example:
 ```
 </details>    
 
-### 10.10.2. Изменить транзакционное подключение <Anchor :ids="['изменить-транзакционное-подключение']" />
+### 10.11.2. Изменить транзакционное подключение <Anchor :ids="['изменить-транзакционное-подключение']" />
 
 <details>
 <summary>Request</summary>
@@ -7767,7 +8338,7 @@ Example:
 ```
 </details>    
 
-### 10.10.3. Удалить транзакционное подключение <Anchor :ids="['удалить-транзакционное-подключение']" />
+### 10.11.3. Удалить транзакционное подключение <Anchor :ids="['удалить-транзакционное-подключение']" />
 
 <details>
 <summary>Request</summary>
@@ -7864,7 +8435,7 @@ Example:
 ```
 </details>    
 
-### 10.10.4. Получить параметры транзакционного подключения <Anchor :ids="['получить-параметры-транзакционного-подключения']" />
+### 10.11.4. Получить параметры транзакционного подключения <Anchor :ids="['получить-параметры-транзакционного-подключения']" />
 
 <details>
 <summary>Request</summary>
@@ -7972,7 +8543,7 @@ Example:
 ```
 </details>    
 
-### 10.10.5. Получить бумаги, торгуемые через транзакционное подключение <Anchor :ids="['получить-бумаги,-торгуемые-через-транзакционное-подключение']" />
+### 10.11.5. Получить бумаги, торгуемые через транзакционное подключение <Anchor :ids="['получить-бумаги,-торгуемые-через-транзакционное-подключение']" />
 
 Получить бумаги, которые есть в портфелях робота и у которых client code относится именно в данному подключению
 
@@ -8087,7 +8658,7 @@ Example:
 ```
 </details>    
 
-### 10.10.6. Подписка на транзакционные подключения робота <Anchor :ids="['подписка-на-транзакционные-подключения-робота']" />
+### 10.11.6. Подписка на транзакционные подключения робота <Anchor :ids="['подписка-на-транзакционные-подключения-робота']" />
 
 Подписаться на обновления статусов транзакционных подключений робота
 
@@ -8306,7 +8877,7 @@ Example:
 ```
 </details>    
 
-### 10.10.7. Получить список транзакционных подключений робота <Anchor :ids="['получить-список-транзакционных-подключений-робота']" />
+### 10.11.7. Получить список транзакционных подключений робота <Anchor :ids="['получить-список-транзакционных-подключений-робота']" />
 
 Получить список транзакционных подключений робота
 
@@ -8467,7 +9038,7 @@ Example:
 ```
 </details>    
 
-### 10.10.8. Отписка от транзакционных подключений робота <Anchor :ids="['отписка-от-транзакционных-подключений-робота']" />
+### 10.11.8. Отписка от транзакционных подключений робота <Anchor :ids="['отписка-от-транзакционных-подключений-робота']" />
 
 Отписаться от обновлений статусов транзакционных подключений робота
 
@@ -8552,7 +9123,7 @@ Example:
 ```
 </details>    
 
-### 10.10.9. Подписка на активные заявки транзакционного подключения робота <Anchor :ids="['подписка-на-активные-заявки-транзакционного-подключения-робота']" />
+### 10.11.9. Подписка на активные заявки транзакционного подключения робота <Anchor :ids="['подписка-на-активные-заявки-транзакционного-подключения-робота']" />
 
 Подписаться на активные заявки транзакционного подключения робота
 
@@ -8761,7 +9332,7 @@ Example:
 ```
 </details>    
 
-### 10.10.10. Отписка от активных заявок транзакционного подключения робота <Anchor :ids="['отписка-от-активных-заявок-транзакционного-подключения-робота']" />
+### 10.11.10. Отписка от активных заявок транзакционного подключения робота <Anchor :ids="['отписка-от-активных-заявок-транзакционного-подключения-робота']" />
 
 Отписаться от активные заявки транзакционного подключения робота
 
@@ -8846,7 +9417,7 @@ Example:
 ```
 </details>    
 
-### 10.10.11. Снять активную заявку на транзакционном подключении робота <Anchor :ids="['снять-активную-заявку-на-транзакционном-подключении-робота']" />
+### 10.11.11. Снять активную заявку на транзакционном подключении робота <Anchor :ids="['снять-активную-заявку-на-транзакционном-подключении-робота']" />
 
 Снять активную заявку на транзакционном подключении робота. Успешный ответ означает только то, что данное сообщение успешно получено роботом, но это не означает, что заявка успешно снята и т.п. Сообщения об успешности или не успешности снятия заявки ходят в логе
 
@@ -8966,7 +9537,7 @@ Example:
 ```
 </details>    
 
-### 10.10.12. Подписка на позиции транзакционного подключения робота <Anchor :ids="['подписка-на-позиции-транзакционного-подключения-робота']" />
+### 10.11.12. Подписка на позиции транзакционного подключения робота <Anchor :ids="['подписка-на-позиции-транзакционного-подключения-робота']" />
 
 Подписаться на позиции транзакционного подключения робота
 
@@ -9208,7 +9779,7 @@ Example:
 ```
 </details>    
 
-### 10.10.13. Отписка от позиций транзакционного подключения робота <Anchor :ids="['отписка-от-позиций-транзакционного-подключения-робота']" />
+### 10.11.13. Отписка от позиций транзакционного подключения робота <Anchor :ids="['отписка-от-позиций-транзакционного-подключения-робота']" />
 
 Отписаться от позиций транзакционного подключения робота
 
@@ -9293,7 +9864,7 @@ Example:
 ```
 </details>    
 
-### 10.10.14. Изменить параметры позиций транзакционного подключения робота <Anchor :ids="['изменить-параметры-позиций-транзакционного-подключения-робота']" />
+### 10.11.14. Изменить параметры позиций транзакционного подключения робота <Anchor :ids="['изменить-параметры-позиций-транзакционного-подключения-робота']" />
 
 Успешный ответ означает что запрос дошел до робота и изменяемые параметры имеют допустимые значения, новые значения полей придут в обновлении позиций (если вы на них подписаны)
 
@@ -9410,7 +9981,7 @@ Example:
 ```
 </details>    
 
-### 10.10.15. Выравнять позицию по бумаге/валюте на транзакционном подключении <Anchor :ids="['выравнять-позицию-по-бумаге/валюте-на-транзакционном-подключении']" />
+### 10.11.15. Выравнять позицию по бумаге/валюте на транзакционном подключении <Anchor :ids="['выравнять-позицию-по-бумаге/валюте-на-транзакционном-подключении']" />
 
 Успешный ответ означает только то, что данное сообщение успешно получено роботом, но это не означает, что заявка успешно выставлена. Сообщения об успешности или не успешности выставления заявки ходят в логе
 
@@ -9518,7 +10089,7 @@ Example:
 ```
 </details>    
 
-### 10.10.16. Операции с транзакционными подключениями <Anchor :ids="['операции-с-транзакционными-подключениями']" />
+### 10.11.16. Операции с транзакционными подключениями <Anchor :ids="['операции-с-транзакционными-подключениями']" />
 
 Disable/enable/переподключить транзакционное подключение
 
@@ -9629,7 +10200,7 @@ Example:
 ```
 </details>    
 
-### 10.10.17. Выслать вторые части ключей транзакционных подключений <Anchor :ids="['выслать-вторые-части-ключей-транзакционных-подключений']" />
+### 10.11.17. Выслать вторые части ключей транзакционных подключений <Anchor :ids="['выслать-вторые-части-ключей-транзакционных-подключений']" />
 
 При подключении/переподключении робота к бекенду на фронтенд будет отправлено сообщение (сообщения отправляются только в те сессии, которые подписаны на данного робота) о том, что фронтенду необходимо прислать части зашифрованных параметров подключений для данного робота. В ответ фронтенд должен выслать то, что от него просят
 
@@ -9750,9 +10321,9 @@ Example:
 ```
 </details>    
 
-## 10.11. Фронт <Anchor :ids="['фронт']" />
+## 10.12. Фронт <Anchor :ids="['фронт']" />
 
-### 10.11.1. Запрос идентификатора шаблона объекта <Anchor :ids="['запрос-идентификатора-шаблона-объекта']" />
+### 10.12.1. Запрос идентификатора шаблона объекта <Anchor :ids="['запрос-идентификатора-шаблона-объекта']" />
 
 Получить идентификатор шаблона для заданного объекта
 
@@ -9848,7 +10419,7 @@ Example:
 ```
 </details>    
 
-### 10.11.2. Запрос шаблона по его идентификатору <Anchor :ids="['запрос-шаблона-по-его-идентификатору']" />
+### 10.12.2. Запрос шаблона по его идентификатору <Anchor :ids="['запрос-шаблона-по-его-идентификатору']" />
 
 Получить шаблон для заданного объекта
 
@@ -9950,7 +10521,7 @@ Example:
 ```
 </details>    
 
-### 10.11.3. Запрос шаблона нового портфеля <Anchor :ids="['запрос-шаблона-нового-портфеля']" />
+### 10.12.3. Запрос шаблона нового портфеля <Anchor :ids="['запрос-шаблона-нового-портфеля']" />
 
 Получить шаблон для нового портфеля
 
@@ -10054,7 +10625,7 @@ Example:
 ```
 </details>    
 
-### 10.11.4. Запрос доступных sec_type <Anchor :ids="['запрос-доступных-sec_type']" />
+### 10.12.4. Запрос доступных sec_type <Anchor :ids="['запрос-доступных-sec_type']" />
 
 Получить список доступных sec_type
 
@@ -10146,9 +10717,9 @@ Example:
 ```
 </details>    
 
-## 10.12. Управление роботом <Anchor :ids="['управление-роботом']" />
+## 10.13. Управление роботом <Anchor :ids="['управление-роботом']" />
 
-### 10.12.1. Включить робота [роль: admin] <Anchor :ids="['включить-робота-[роль:-admin]']" />
+### 10.13.1. Включить робота [роль: admin] <Anchor :ids="['включить-робота-[роль:-admin]']" />
 
 Включить робота
 
@@ -10231,7 +10802,7 @@ Example:
 ```
 </details>    
 
-### 10.12.2. Выключить робота [роль: admin] <Anchor :ids="['выключить-робота-[роль:-admin]']" />
+### 10.13.2. Выключить робота [роль: admin] <Anchor :ids="['выключить-робота-[роль:-admin]']" />
 
 Выключить робота
 
@@ -10315,7 +10886,7 @@ Example:
 </details>    
 
 
-### 10.12.3. Перезапустить робота [роль: admin] <Anchor :ids="['перезапустить-робота-[роль:-admin]']" />
+### 10.13.3. Перезапустить робота [роль: admin] <Anchor :ids="['перезапустить-робота-[роль:-admin]']" />
 
 Перезапустить не торгующего робота
 
@@ -10398,7 +10969,7 @@ Example:
 ```
 </details>    
 
-### 10.12.4. Создать робота на сервере [роль: admin] <Anchor :ids="['создать-робота-на-сервере-[роль:-admin]']" />
+### 10.13.4. Создать робота на сервере [роль: admin] <Anchor :ids="['создать-робота-на-сервере-[роль:-admin]']" />
 
 Создать робота
 
@@ -10502,7 +11073,7 @@ Example:
 </details>    
 
 
-### 10.12.5. Изменить робота [роль: admin] <Anchor :ids="['изменить-робота-[роль:-admin]']" />
+### 10.13.5. Изменить робота [роль: admin] <Anchor :ids="['изменить-робота-[роль:-admin]']" />
 
 Поля робота поделены на группы, нельзя одновременно менять поля, относящиеся к разным группам
 
@@ -10594,7 +11165,7 @@ Example:
 ```
 </details>    
 
-### 10.12.6. Написать на почту "ответственным" пользователям робота [роль: admin] <Anchor :ids="['написать-на-почту-"ответственным"-пользователям-робота-[роль:-admin]']" />
+### 10.13.6. Написать на почту “ответственным” пользователям робота [роль: admin] <Anchor :ids="['написать-на-почту-“ответственным”-пользователям-робота-[роль:-admin]']" />
 
 Написать сообщение на почту старшего трейдера и на почты "ответственных" за данного робота трейдеров
 
@@ -10611,6 +11182,7 @@ Payload:
 | > r_id | y | string |  | Robot ID |
 | > subj | y | string |  | Message subject, `${ROBOT_ID}` will be replaced with current robot's ID |
 | > msg | y | string |  | Message text, `${ROBOT_ID}` will be replaced with current robot's ID |
+| > html | n | boolean |  | Send message as HTML, default value is false |
 
 Example:
 
@@ -10681,7 +11253,7 @@ Example:
 ```
 </details> 
 
-### 10.12.7. Удалить робота [роль: admin] <Anchor :ids="['удалить-робота-[роль:-admin]']" />
+### 10.13.7. Удалить робота [роль: admin] <Anchor :ids="['удалить-робота-[роль:-admin]']" />
 
 Удалить робота
 
@@ -10764,7 +11336,7 @@ Example:
 ```
 </details>    
 
-### 10.12.8. Подписка на сервера [роль: admin] <Anchor :ids="['подписка-на-сервера-[роль:-admin]']" />
+### 10.13.8. Подписка на сервера [роль: admin] <Anchor :ids="['подписка-на-сервера-[роль:-admin]']" />
 
 Подписаться на события по всем серверам
 
@@ -11007,7 +11579,7 @@ Example:
 ```
 </details>    
 
-### 10.12.9. Отписка от серверов [роль: admin] <Anchor :ids="['отписка-от-серверов-[роль:-admin]']" />
+### 10.13.9. Отписка от серверов [роль: admin] <Anchor :ids="['отписка-от-серверов-[роль:-admin]']" />
 
 Отписаться от событий по всем серверам
 
@@ -11092,7 +11664,7 @@ Example:
 ```
 </details>    
 
-### 10.12.10. Подписка на состояние модулей [роль: admin] <Anchor :ids="['подписка-на-состояние-модулей-[роль:-admin]']" />
+### 10.13.10. Подписка на состояние модулей [роль: admin] <Anchor :ids="['подписка-на-состояние-модулей-[роль:-admin]']" />
 
 <details>
 <summary>Request</summary>
@@ -11203,7 +11775,7 @@ Example:
 ```
 </details>    
 
-### 10.12.11. Отписка от состояния модулей [роль: admin] <Anchor :ids="['отписка-от-состояния-модулей-[роль:-admin]']" />
+### 10.13.11. Отписка от состояния модулей [роль: admin] <Anchor :ids="['отписка-от-состояния-модулей-[роль:-admin]']" />
 
 <details>
 <summary>Request</summary>
@@ -11286,7 +11858,7 @@ Example:
 ```
 </details>    
 
-### 10.12.12. Получить список компаний [роль: admin] <Anchor :ids="['получить-список-компаний-[роль:-admin]']" />
+### 10.13.12. Получить список компаний [роль: admin] <Anchor :ids="['получить-список-компаний-[роль:-admin]']" />
 
 <details>
 <summary>Request</summary>
@@ -11383,7 +11955,7 @@ Example:
 ```
 </details>    
 
-### 10.12.13. Получить свободный id робота [роль: admin] <Anchor :ids="['получить-свободный-id-робота-[роль:-admin]']" />
+### 10.13.13. Получить свободный id робота [роль: admin] <Anchor :ids="['получить-свободный-id-робота-[роль:-admin]']" />
 
 <details>
 <summary>Request</summary>
@@ -11466,9 +12038,641 @@ Example:
 ```
 </details>    
 
-## 10.13. Компании и пользователи <Anchor :ids="['компании-и-пользователи']" />
+## 10.14. Нескрываемые сообщения <Anchor :ids="['нескрываемые-сообщения']" />
 
-### 10.13.1. Подписка на компании [роль: admin] <Anchor :ids="['подписка-на-компании-[роль:-admin]']" />
+### 10.14.1. Подписка на сообщения <Anchor :ids="['подписка-на-сообщения']" />
+
+Подписаться на сообщения, при успешной подписке приходит снапшот из 20-ти сообщений
+
+В обновлениях приходят только ключ сообщения и обновленный статус
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+
+Example:
+
+```json
+{
+	"type": "messages.subscribe",
+	"data": {},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+
+<summary>Response on success (snapshot)</summary> 
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = s | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > values | y | object |  | Unread messages snapshot |
+| >> [] | y | array |  | List of messages |
+| >>> eid | y | string | string_36 | Message unique ID |
+| >>> st | y | number |  | Message state (0 - unread, 1 - read) |
+| >>> dt | y | number | epoch_msec | Message time |
+| >>> msg | y | string |  | Message text |
+| > mt | y | number | epoch_msec | Max time, written in data base (can be null) |
+| > count | y | number |  | Number of messages with st=1 in data base|
+
+Example:
+
+```json
+{
+	"type": "messages.subscribe",
+	"data": {
+	"values": [
+		{
+			"eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
+			"st": 0,
+			"dt": 1722258395158,
+			"msg": "Test msg 1"
+		},
+		{
+			"eid": "f67349a5-ccc9-4f74-82ff-fd197cd950e3",
+			"st": 0,
+			"dt": 1722258376516,
+			"msg": "Test msg 2"
+		}
+	],
+	"mt": 1721984718924,
+	"count": 2
+	},
+	"ts":1657693572940145200,
+  	"eid":"qwerty",
+  	"r":"s"
+}
+```
+</details>    
+<details>
+<summary>Updates</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = u | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > count | y | number |  | Number of messages with st=1 in data base|
+| > values | y | object |  | Unread messages snapshot |
+| >> [] | y | array |  | List of messages |
+| >>> eid | y | string | string_36 | Message unique ID |
+| >>> st | y | number |  | Message state (0 - unread, 1 - read) |
+
+Example:
+
+```json
+{
+  "type": "messages.subscribe",
+  "data": {
+    "values": [
+      {
+        "eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
+        "st": 1
+      }
+    ]
+  },
+  "ts":1657693572940145200,
+  "eid":"qwerty",
+  "r":"u"
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.subscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"messages.subscribe",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>  
+
+### 10.14.2. Отписка от сообщений <Anchor :ids="['отписка-от-сообщений']" />
+
+Отписаться от сообщений
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > sub_eid | y | string | string_36 | Subscription eid |
+
+Example:
+
+```json
+{
+	"type":"messages.unsubscribe",
+	"data":
+	{
+		"sub_eid":"qwerty"
+	},
+	"eid":"q"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+
+Example:
+
+```json
+{
+	"type":"messages.unsubscribe",
+	"data":{},
+	"r":"p",
+	"eid":"q",
+	"ts":1669810178671387651
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.unsubscribe | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"messages.unsubscribe",
+	"data":
+	{
+		"msg":"Operation timeout",
+		"code":666
+	},
+	"ts":1657693572940145200,
+	"eid":"q",
+	"r":"e"
+}
+```
+</details>
+
+### 10.14.3. Запрос истории сообщений <Anchor :ids="['запрос-истории-сообщений']" />
+
+Получить “небольшую” историю старше заданной даты
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.get_previous | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > read | n | boolean |  | Show already read messages, default value is false |
+| > mt | y | number | epoch_msec | Receive messages “older” than this value |
+| > lim | n | number |  | Number of messages to receive in range [1, 100], default value is 100 |
+
+Example:
+
+```json
+{
+	"type": "messages.get_previous",
+	"data": {
+		"mt": "2000000000000",
+		"lim": 100
+	},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.get_previous | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > count | y | number |  | Number of messages with st=1 or st=0 (depending on filter) in data base|
+| > values | y | object |  | Unread messages snapshot |
+| >> [] | y | array |  | List of messages |
+| >>> eid | y | string | string_36 | Message unique ID |
+| >>> st | y | number |  | Message state (0 - unread, 1 - read) |
+| >>> dt | y | number | epoch_msec | Message time |
+| >>> msg | y | string |  | Message text |
+
+Example:
+
+```json
+{
+	"type": "messages.get_previous",
+	"data": {
+	"values": [
+		{
+			"eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
+			"st": 0,
+			"dt": 1722258395158,
+			"msg": "Test msg 1"
+		},
+		{
+			"eid": "f67349a5-ccc9-4f74-82ff-fd197cd950e3",
+			"st": 0,
+			"dt": 1722258376516,
+			"msg": "Test msg 2"
+		}
+	]
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"p"
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.get_previous | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"messages.get_previous",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
+
+### 10.14.4. Запрос истории сообщений 2 <Anchor :ids="['запрос-истории-сообщений-2']" />
+
+Получить историю от даты до даты
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.get_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > read | n | boolean |  | Show already read messages, default value is false |
+| > mint | y | number | epoch_msec | Receive messages “newer” or equal than this value |
+| > maxt | y | number | epoch_msec | Receive messages “older” or equal than this value |
+| > lim | n | number |  | Number of messages to receive in range [1, 100], default value is 100 |
+
+Example:
+
+```json
+{
+	"type": "messages.get_history",
+	"data": {
+		"mt": "2000000000000",
+		"lim": 100
+	},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.get_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > count | y | number |  | Number of messages with st=1 or st=0 (depending on filter) in data base|
+| > values | y | object |  | Unread messages snapshot |
+| >> [] | y | array |  | List of messages |
+| >>> eid | y | string | string_36 | Message unique ID |
+| >>> st | y | number |  | Message state (0 - unread, 1 - read) |
+| >>> dt | y | number | epoch_msec | Message time |
+| >>> msg | y | string |  | Message text |
+
+Example:
+
+```json
+{
+	"type": "messages.get_history",
+	"data": {
+	"values": [
+		{
+			"eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
+			"st": 0,
+			"dt": 1722258395158,
+			"msg": "Test msg 1"
+		},
+		{
+			"eid": "f67349a5-ccc9-4f74-82ff-fd197cd950e3",
+			"st": 0,
+			"dt": 1722258376516,
+			"msg": "Test msg 2"
+		}
+	]
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"p"
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.get_history | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"messages.get_history",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
+
+### 10.14.5. Добавить сообщение [роль: admin] <Anchor :ids="['добавить-сообщение-[роль:-admin]']" />
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.add | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > to | y | string |  | User to send message to |
+| > msg | y | string |  | Message text |
+
+Example:
+
+```json
+{
+	"type": "messages.add",
+	"data": {
+		"to": "test@gmail.com",
+		"msg": "Hello world!"
+	},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.add | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > eid | y | string | string_36 | Message unique ID |
+| > dt | y | number | epoch_msec | Message time |
+
+Example:
+
+```json
+{
+	"type": "messages.add",
+	"data": {
+		"eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
+		"dt": 1722258395158
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"p"
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.add | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"messages.add",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
+
+### 10.14.6. Отметить сообщение как прочитанное <Anchor :ids="['отметить-сообщение-как-прочитанное']" />
+
+<details>
+<summary>Request</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.mark_as_read | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| data | y | object |  |  |
+| > eid | y | string | string_36 | Message unique ID |
+
+Example:
+
+```json
+{
+	"type": "messages.mark_as_read",
+	"data": {
+		"eid": "e7114511-bed2-425b-b602-29d6d723a5e1"
+	},
+	"eid": "qwerty"
+}
+```
+</details>    
+<details>
+<summary>Response on success</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.mark_as_read | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = p | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > eid | y | string | string_36 | Message unique ID |
+| > st | y | number |  | Message state (0 - unread, 1 - read) |
+
+Example:
+
+```json
+{
+	"type": "messages.mark_as_read",
+	"data": {
+		"eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
+		"st": 1
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"p"
+}
+```
+</details>    
+<details>
+<summary>Response on error</summary>
+
+Payload:
+
+| Key[=value] | Required | JSON type | Internal type | Description |
+| --- | --- | --- | --- | --- |
+| type = messages.mark_as_read | y | string |  | Operation type |
+| eid | y | string | string_36 | External user id that will be received in response |
+| ts | y | number | epoch_nsec | Response time in nano seconds |
+| r = e | y | string | request_result | Request result |
+| data | y | object |  |  |
+| > msg | y | string |  | Error message |
+| > code | y | number | err_code | Error code |
+
+Example:
+
+```json
+{
+	"type":"messages.mark_as_read",
+	"data":
+	{
+		"msg":"Permission denied",
+		"code":555
+	},
+	"ts":1657693572940145200,
+	"eid":"qwerty",
+	"r":"e"
+}
+```
+</details>
+
+## 10.15. Компании и пользователи <Anchor :ids="['компании-и-пользователи']" />
+
+### 10.15.1. Подписка на компании [роль: admin] <Anchor :ids="['подписка-на-компании-[роль:-admin]']" />
 
 В любой момент может быть выслан снапшот
 
@@ -11606,7 +12810,7 @@ Example:
 ```
 </details>    
 
-### 10.13.2. Отписка от компаний [роль: admin] <Anchor :ids="['отписка-от-компаний-[роль:-admin]']" />
+### 10.15.2. Отписка от компаний [роль: admin] <Anchor :ids="['отписка-от-компаний-[роль:-admin]']" />
 
 <details>
 <summary>Request</summary>
@@ -11689,7 +12893,7 @@ Example:
 ```
 </details>    
 
-### 10.13.3. Создать компанию [роль: admin] <Anchor :ids="['создать-компанию-[роль:-admin]']" />
+### 10.15.3. Создать компанию [роль: admin] <Anchor :ids="['создать-компанию-[роль:-admin]']" />
 
 <details>
 <summary>Request</summary>
@@ -11772,7 +12976,7 @@ Example:
 </details>    
 
 
-### 10.13.4. Изменить компанию [роль: admin] <Anchor :ids="['изменить-компанию-[роль:-admin]']" />
+### 10.15.4. Изменить компанию [роль: admin] <Anchor :ids="['изменить-компанию-[роль:-admin]']" />
 
 <details>
 <summary>Request</summary>
@@ -11855,7 +13059,7 @@ Example:
 ```
 </details>    
 
-### 10.13.5. Удалить компанию [роль: admin] <Anchor :ids="['удалить-компанию-[роль:-admin]']" />
+### 10.15.5. Удалить компанию [роль: admin] <Anchor :ids="['удалить-компанию-[роль:-admin]']" />
 
 <details>
 <summary>Request</summary>
@@ -11938,7 +13142,7 @@ Example:
 </details>    
 
 
-### 10.13.6. Получить/подписка список пользователей в компаниях <Anchor :ids="['получить/подписка-список-пользователей-в-компаниях']" />
+### 10.15.6. Получить/подписка список пользователей в компаниях <Anchor :ids="['получить/подписка-список-пользователей-в-компаниях']" />
 
 Ключ — c_id + u_id
 
@@ -12086,7 +13290,7 @@ Example:
 ```
 </details>    
 
-### 10.13.7. Добавить/изменить/удалить пользователя в компании <Anchor :ids="['добавить/изменить/удалить-пользователя-в-компании']" />
+### 10.15.7. Добавить/изменить/удалить пользователя в компании <Anchor :ids="['добавить/изменить/удалить-пользователя-в-компании']" />
 
 Одна команда для добавления/изменения/удаления
 
@@ -12246,7 +13450,7 @@ Example:
 ```
 </details>    
 
-### 10.13.8. Получить компании доступные пользователю <Anchor :ids="['получить-компании-доступные-пользователю']" />
+### 10.15.8. Получить компании доступные пользователю <Anchor :ids="['получить-компании-доступные-пользователю']" />
 
 <details>
 <summary>Request</summary>
@@ -12339,7 +13543,7 @@ Example:
 ```
 </details>    
 
-### 10.13.9. Получить роботов компании <Anchor :ids="['получить-роботов-компании']" />
+### 10.15.9. Получить роботов компании <Anchor :ids="['получить-роботов-компании']" />
 
 <details>
 <summary>Request</summary>
@@ -12421,7 +13625,7 @@ Example:
 ```
 </details>    
 
-### 10.13.10. Получить портфели компании <Anchor :ids="['получить-портфели-компании']" />
+### 10.15.10. Получить портфели компании <Anchor :ids="['получить-портфели-компании']" />
 
 <details>
 <summary>Request</summary>
@@ -12513,7 +13717,7 @@ Example:
 ```
 </details>    
 
-### 10.13.11. Получить портфели пользователя в компании <Anchor :ids="['получить-портфели-пользователя-в-компании']" />
+### 10.15.11. Получить портфели пользователя в компании <Anchor :ids="['получить-портфели-пользователя-в-компании']" />
 
 <details>
 <summary>Request</summary>
@@ -12605,7 +13809,7 @@ Example:
 ```
 </details>
 
-### 10.13.12. Получить емейлы пользователей компании <Anchor :ids="['получить-емейлы-пользователей-компании']" />
+### 10.15.12. Получить емейлы пользователей компании <Anchor :ids="['получить-емейлы-пользователей-компании']" />
 
 <details>
 <summary>Request</summary>
@@ -12687,7 +13891,7 @@ Example:
 ```
 </details>
 
-### 10.13.13. Подписка на параметры пользователя <Anchor :ids="['подписка-на-параметры-пользователя']" />
+### 10.15.13. Подписка на параметры пользователя <Anchor :ids="['подписка-на-параметры-пользователя']" />
 
 В любой момент может быть выслан снапшот
 
@@ -12806,7 +14010,7 @@ Example:
 ```
 </details>    
 
-### 10.13.14. Отписка от параметров пользователя <Anchor :ids="['отписка-от-параметров-пользователя']" />
+### 10.15.14. Отписка от параметров пользователя <Anchor :ids="['отписка-от-параметров-пользователя']" />
 
 <details>
 <summary>Request</summary>
@@ -12889,7 +14093,7 @@ Example:
 ```
 </details>    
 
-### 10.13.15. Изменить параметры пользователя <Anchor :ids="['изменить-параметры-пользователя']" />
+### 10.15.15. Изменить параметры пользователя <Anchor :ids="['изменить-параметры-пользователя']" />
 
 <details>
 <summary>Request</summary>
@@ -12981,7 +14185,7 @@ Example:
 ```
 </details>
 
-### 10.13.16. Получить отключенные настройки telegram уведомлений пользователя <Anchor :ids="['получить-отключенные-настройки-telegram-уведомлений-пользователя']" />
+### 10.15.16. Получить отключенные настройки telegram уведомлений пользователя <Anchor :ids="['получить-отключенные-настройки-telegram-уведомлений-пользователя']" />
 
 <details>
 <summary>Request</summary>
@@ -13066,7 +14270,7 @@ Example:
 ```
 </details>
 
-### 10.13.17. 10.11.17.Отключить настройки telegram уведомлений пользователя <Anchor :ids="['10.11.17.отключить-настройки-telegram-уведомлений-пользователя']" />
+### 10.15.17. Отключить настройки telegram уведомлений пользователя <Anchor :ids="['отключить-настройки-telegram-уведомлений-пользователя']" />
 
 <details>
 <summary>Request</summary>
@@ -13153,9 +14357,9 @@ Example:
 </details> 
 
 
-## 10.14. Операции админа <Anchor :ids="['операции-админа']" />
+## 10.16. Операции админа <Anchor :ids="['операции-админа']" />
 
-### 10.14.1. Множественные операции над портфелями/подключениями робота (для админа) <Anchor :ids="['множественные-операции-над-портфелями/подключениями-робота-(для-админа)']" />
+### 10.16.1. Множественные операции над портфелями/подключениями робота (для админа) <Anchor :ids="['множественные-операции-над-портфелями/подключениями-робота-(для-админа)']" />
 
 *stop_trading* — выключить торговлю по всем портфелям
 
@@ -13250,7 +14454,7 @@ Example:
 ```
 </details>    
 
-### 10.14.2. Операции над портфелями/подключениями робота в базе данных (для админа) <Anchor :ids="['операции-над-портфелями/подключениями-робота-в-базе-данных-(для-админа)']" />
+### 10.16.2. Операции над портфелями/подключениями робота в базе данных (для админа) <Anchor :ids="['операции-над-портфелями/подключениями-робота-в-базе-данных-(для-админа)']" />
 
 *del_portfolio_db* — удалить портфель сразу из базы данных на отключенном роботе 
 
@@ -13353,7 +14557,7 @@ Example:
 ```
 </details>
 
-### 10.14.3. Подписка на неотправленные email-ы <Anchor :ids="['подписка-на-неотправленные-email-ы']" />
+### 10.16.3. Подписка на неотправленные email-ы <Anchor :ids="['подписка-на-неотправленные-email-ы']" />
 
 При обновлении сатуса отправки email-а, всегда приходят все данные по email-у
 
@@ -13486,7 +14690,7 @@ Example:
 ```
 </details>    
 
-### 10.14.4. Отписка от неотправленных email-ов <Anchor :ids="['отписка-от-неотправленных-email-ов']" />
+### 10.16.4. Отписка от неотправленных email-ов <Anchor :ids="['отписка-от-неотправленных-email-ов']" />
 
 <details>
 <summary>Request</summary>
@@ -13569,7 +14773,7 @@ Example:
 ```
 </details>
 
-### 10.14.5. Получить одноразовый ключ для логина от имени другого пользователя (для админа) <Anchor :ids="['получить-одноразовый-ключ-для-логина-от-имени-другого-пользователя-(для-админа)']" />
+### 10.16.5. Получить одноразовый ключ для логина от имени другого пользователя (для админа) <Anchor :ids="['получить-одноразовый-ключ-для-логина-от-имени-другого-пользователя-(для-админа)']" />
 
 Полученный ключ действителен в течение 5 секунд
 
@@ -13655,7 +14859,7 @@ Example:
 ```
 </details>
 
-## 10.15. Типы данных <Anchor :ids="['типы-данных']" />
+## 10.17. Типы данных <Anchor :ids="['типы-данных']" />
 
 | Name | JSON type | Description |
 | --- | --- | --- |
