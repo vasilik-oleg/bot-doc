@@ -1184,7 +1184,7 @@ return sma.value();// get current SMA value
 Пример расчета `EMA` с использованием расписания (`TradingDays` берутся из портфеля, тайм-фрейм 1 секунда и 10 значений для усреднения):
 ```C
 security s = get_security();// get main security
-static indicators::EMA ema({{{12, 0}, {17, 0}}, {{17, 5}, {18, 0}}});// initialize EMA with trading schedule: 12:00-17:00, 17:05-18:00
+static indicators::EMA ema({{{7, 0}, {18, 45}}, {{19, 0}, {23, 50}}});// initialize EMA with trading schedule: 7:00-18:45, 19:00-23:50
 ema.update(s.mid_price());// try to update EMA value, by adding new price
 return ema.value();// get current EMA value
 ```
@@ -1198,7 +1198,7 @@ user_value len = p.uf1();// get length value from user field 1
 user_value tf = p.uf2();// get timeframe value from user field 2
 security s = get_security();// get main security
 
-static indicators::Var v({{{12, 0}, {17, 0}}});// initialize Var with trading schedule: 12:00-17:00
+static indicators::Var v({{{7, 0}, {23, 0}}});// initialize Var with trading schedule: 7:00-23:00
 v.set_timeframe(tf.value());// set timeframe value from user field 2
 v.set_length(len.value());// set length value from user field 1
 v.set_trading_days(td.value());// set TradingDays value from user field 0
