@@ -6,6 +6,10 @@ ignore-section-number: true
 
 # История изменений
 
+## 2024-09-24
+
+- [v_min/v_max](05-params-description.md#p.v_min) портфеля теперь измеряются в штуках портфелей.
+
 ## 2024-09-16
 
 - В настройки расписания портфеля добавлен параметр [TradingDays](05-params-description.md#p.trading_days);
