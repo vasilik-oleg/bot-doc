@@ -318,8 +318,6 @@ section: 8
 | void set_virtual_0_pos(bool v)                              | изменить "Virt 0 pos" портфеля на значение v                                                             |
 | void set_opened(double v)                                   | изменить "Opened" портфеля на значение v                                                                 |
 | void set_opened_comission(double v)                         | изменить "Commission sum" портфеля на значение v                                                         |
-| void set_fin_res_wo_c(double v)                             | изменить "Fin res wo C" портфеля на значение v                                                           |
-| void set_fin_res(double v)                                  | изменить "Fin res" портфеля на значение v                                                                |
 | void set_n_perc_fill(int v)                                 | изменить "n_perc_fill" портфеля на значение v                                                            |
 | void set_max_not_hedged(int v)                              | изменить "Max not hedged" портфеля на значение v                                                         |
 | void set_return_first(double v)                             | изменить "Return first" портфеля на значение v                                                           |
