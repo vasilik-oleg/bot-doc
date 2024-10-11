@@ -12087,10 +12087,9 @@ Payload:
 | data | y | object |  |  |
 | > values | y | object |  | Unread messages snapshot |
 | >> [] | y | array |  | List of messages |
-| >>> eid | y | string | string_36 | Message unique ID |
 | >>> st | y | number |  | Message state (0 - unread, 1 - read) |
 | >>> dt | y | number | epoch_msec | Message time |
-| >>> msg | y | string |  | Message text |
+| >>> msg | y | string |  | Message text (also used as unique id) |
 | > mt | y | number | epoch_msec | Max time, written in data base (can be null) |
 | > count | y | number |  | Number of messages with st=1 in data base|
 
@@ -12102,13 +12101,11 @@ Example:
 	"data": {
 	"values": [
 		{
-			"eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
 			"st": 0,
 			"dt": 1722258395158,
 			"msg": "Test msg 1"
 		},
 		{
-			"eid": "f67349a5-ccc9-4f74-82ff-fd197cd950e3",
 			"st": 0,
 			"dt": 1722258376516,
 			"msg": "Test msg 2"
@@ -12138,8 +12135,9 @@ Payload:
 | > count | y | number |  | Number of messages with st=1 in data base|
 | > values | y | object |  | Unread messages snapshot |
 | >> [] | y | array |  | List of messages |
-| >>> eid | y | string | string_36 | Message unique ID |
-| >>> st | y | number |  | Message state (0 - unread, 1 - read) |
+| >>> msg | y | string |  | Message text (also used as unique id) |
+| >>> st | n | number |  | Message state (0 - unread, 1 - read) |
+| >>> dt | n | number | epoch_msec | Message time |
 
 Example:
 
@@ -12149,7 +12147,7 @@ Example:
   "data": {
     "values": [
       {
-        "eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
+        "msg": "Test msg 1",
         "st": 1
       }
     ]
@@ -12323,10 +12321,9 @@ Payload:
 | > count | y | number |  | Number of messages with st=1 or st=0 (depending on filter) in data base|
 | > values | y | object |  | Unread messages snapshot |
 | >> [] | y | array |  | List of messages |
-| >>> eid | y | string | string_36 | Message unique ID |
 | >>> st | y | number |  | Message state (0 - unread, 1 - read) |
 | >>> dt | y | number | epoch_msec | Message time |
-| >>> msg | y | string |  | Message text |
+| >>> msg | y | string |  | Message text (also used as unique id) |
 
 Example:
 
@@ -12336,13 +12333,11 @@ Example:
 	"data": {
 	"values": [
 		{
-			"eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
 			"st": 0,
 			"dt": 1722258395158,
 			"msg": "Test msg 1"
 		},
 		{
-			"eid": "f67349a5-ccc9-4f74-82ff-fd197cd950e3",
 			"st": 0,
 			"dt": 1722258376516,
 			"msg": "Test msg 2"
@@ -12434,10 +12429,9 @@ Payload:
 | > count | y | number |  | Number of messages with st=1 or st=0 (depending on filter) in data base|
 | > values | y | object |  | Unread messages snapshot |
 | >> [] | y | array |  | List of messages |
-| >>> eid | y | string | string_36 | Message unique ID |
 | >>> st | y | number |  | Message state (0 - unread, 1 - read) |
 | >>> dt | y | number | epoch_msec | Message time |
-| >>> msg | y | string |  | Message text |
+| >>> msg | y | string |  | Message text (also used as unique id) |
 
 Example:
 
@@ -12447,13 +12441,11 @@ Example:
 	"data": {
 	"values": [
 		{
-			"eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
 			"st": 0,
 			"dt": 1722258395158,
 			"msg": "Test msg 1"
 		},
 		{
-			"eid": "f67349a5-ccc9-4f74-82ff-fd197cd950e3",
 			"st": 0,
 			"dt": 1722258376516,
 			"msg": "Test msg 2"
@@ -12547,7 +12539,6 @@ Example:
 {
 	"type": "messages.add",
 	"data": {
-		"eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
 		"dt": 1722258395158
 	},
 	"ts":1657693572940145200,
@@ -12600,7 +12591,7 @@ Payload:
 | type = messages.mark_as_read | y | string |  | Operation type |
 | eid | y | string | string_36 | External user id that will be received in response |
 | data | y | object |  |  |
-| > eid | y | string | string_36 | Message unique ID |
+| > msg | y | string |  | Message text (also used as unique id) |
 
 Example:
 
@@ -12608,7 +12599,7 @@ Example:
 {
 	"type": "messages.mark_as_read",
 	"data": {
-		"eid": "e7114511-bed2-425b-b602-29d6d723a5e1"
+		"msg": "Test msg 1"
 	},
 	"eid": "qwerty"
 }
@@ -12626,8 +12617,7 @@ Payload:
 | ts | y | number | epoch_nsec | Response time in nano seconds |
 | r = p | y | string | request_result | Request result |
 | data | y | object |  |  |
-| > eid | y | string | string_36 | Message unique ID |
-| > st | y | number |  | Message state (0 - unread, 1 - read) |
+| > msg | y | string |  | Message text (also used as unique id) |
 
 Example:
 
@@ -12635,8 +12625,7 @@ Example:
 {
 	"type": "messages.mark_as_read",
 	"data": {
-		"eid": "e7114511-bed2-425b-b602-29d6d723a5e1",
-		"st": 1
+		"msg": "Test msg 1"
 	},
 	"ts":1657693572940145200,
 	"eid":"qwerty",
