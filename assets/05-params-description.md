@@ -420,7 +420,7 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 ### Threshold <Anchor :ids="['p.threshold']" />
 
-Параметр будет использоваться в алгоритме, только если `Threshold > 0`. Если `Sell ≥ Lim_Sell + Threshold` или `Buy ≤ Lim_Buy - Threshold`, то при сильном движении раздвижки на размер `Threshold` при рассчете цен [Price_s](05-params-description.md#p.price_s), [Price_b](05-params-description.md#p.price_b), соответственно, параметр отключает [Simply first](05-params-description.md#p.simply_first), а при выставлении заявки по [Is first](05-params-description.md#s.is_first) бумаге отключает [Only maker](05-params-description.md#p.maker). Под "отключает" имеется в виду "не использует". Видимые пользователю настройки портфеля не будут изменены.
+Параметр будет использоваться в алгоритме, только если `Threshold > 0`. Если `Sell ≥ Lim_Sell + Threshold` или `Buy ≤ Lim_Buy - Threshold`, то при сильном движении раздвижки на размер `Threshold` при расчете цен [Price_s](05-params-description.md#p.price_s), [Price_b](05-params-description.md#p.price_b), соответственно, параметр отключает [Simply first](05-params-description.md#p.simply_first), а при выставлении заявки по [Is first](05-params-description.md#s.is_first) бумаге отключает [Only maker](05-params-description.md#p.maker). Под "отключает" имеется в виду "не использует". Видимые пользователю настройки портфеля не будут изменены.
 
 **Важно:** нельзя переставить заявку на бирже, изменяя флаг [Only maker](05-params-description.md#p.maker) заявки, уже стоящей на этой бирже, поэтому при выполнении условий на `Threshold`, переставление всегда заменяется на отдельные снятие и выставление завки.
 
