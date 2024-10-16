@@ -1123,4 +1123,4 @@ $|pos-robot\_pos|>pos\_lag$$
 
 20) [Type price](05-params-description.md#p.price_type)
 
-21) [](05-params-description.md#p.)
+21) [Type](05-params-description.md#p.type)
