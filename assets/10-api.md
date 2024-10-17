@@ -121,7 +121,6 @@ Payload:
 | > roles | y | array |  | Array of available user roles |
 | >> [] | y | string |  | Available user role |
 | > can_hide_notifs | y | boolean |  | User can hide notifications "gnerated" by another user |
-| > has_new_msgs | y | boolean |  | User has new unread messages |
 
 Example:
 
@@ -133,8 +132,7 @@ Example:
 		"e":"test@test.com",
 		"lang":"en",
 		"active_role":"trader",
-		"roles":["demo", "trader"],
-		"has_new_msgs":false
+		"roles":["demo", "trader"]
 	},
 	"r":"p",
 	"eid":"qwerty",
