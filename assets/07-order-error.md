@@ -55,6 +55,8 @@ section: 7
 
 ### MOEX FORTS
 
+Актуальный справочник кодов ошибок для Срочного рынка находится в открытом доступе на ftp Московской биржи. Ознакомиться можно по [ссылке](http://ftp.moex.ru/pub/TWIME/Spectra/prod/doc/spectra_twime_ru.pdf)
+
 **MOEX SPECTRA ERRORS**  
 -1 Error performing operation.  
 0 Operation successful.  
@@ -717,6 +719,8 @@ section: 7
 11827 Allowed only trades with the same bank account for this period  
 
 ### MOEX spot and currencies
+
+Актуальный справочник кодов ошибок для Фондового и Валютного рынков находится в открытом доступе на ftp Московской биржи. Ознакомиться можно по [ссылке](https://ftp.moex.com/pub/ClientsAPI/ASTS/docs/asts_order_cancel_messages.csv)
 
 **MOEX ASTS ERRORS**
 (001) Message #%d sent  
