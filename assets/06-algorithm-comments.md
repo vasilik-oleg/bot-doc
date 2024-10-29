@@ -39,20 +39,20 @@ section: 6
 $k3=\left(\|{Lim\_Sell_0- Lim\_Buy_0}|-TP-K\right)\times\frac{V}{curpos},$ 
 
 $$k4=
-  \begin{cases}k3+K2, &\text{if }Lim\_Sell_0-Lim\_Buy_0\geq 0\\
-              -k3+K2, &\text{if }Lim\_Sell_0-Lim\_Buy_0<0 
+  \begin{cases}k3+K2, &\text{if}\enspace Lim\_Sell_0-Lim\_Buy_0\geq 0\\
+              -k3+K2, &\text{if}\enspace Lim\_Sell_0-Lim\_Buy_0<0 
   \end{cases},$$ 
 
 $$Lim\_Buy_1= Lim\_Buy_0+\frac{|{diffpos}|}{V}\times 
     \begin{cases} 
-       k4, &\text{if }curpos>0\\ 
-       K1, &\text{if }curpos<0 
+       k4, &\text{if}\enspace curpos>0\\ 
+       K1, &\text{if}\enspace curpos<0 
     \end{cases},$$
 
 $$Lim\_Sell_1=Lim\_Sell_0+\frac{|{diffpos}|}{V}\times
    \begin{cases} 
-     K2, &\text{if }curpos>0\\ 
-      K, &\text{if }curpos<0 
+     K2, &\text{if}\enspace curpos>0\\ 
+      K, &\text{if}\enspace curpos<0 
    \end{cases} ,$$
 
 $curpos=0$
@@ -69,20 +69,20 @@ $k3=\left(|Lim\_Sell_0-Lim\_Buy_0|-TP-K\right)\times\frac{V}{curpos},$
 
 $$k4=
   \begin{cases} 
-    -k3+K2, &\text{if }Lim\_Sell_0-Lim\_Buy_0\geq 0\\
-     k3+K2, &\text{if }Lim\_Sell_0-Lim\_Buy_0<0
+    -k3+K2, &\text{if}\enspace Lim\_Sell_0-Lim\_Buy_0\geq 0\\
+     k3+K2, &\text{if}\enspace Lim\_Sell_0-Lim\_Buy_0<0
   \end{cases},$$ 
 	
 $$Lim\_Sell_1=Lim\_Sell_0-\frac{|{diffpos}|}{V}\times 
    \begin{cases} 
-     k4, &\text{if }curpos<0\\
-     K1, &\text{if }curpos>0 
+     k4, &\text{if}\enspace curpos<0\\
+     K1, &\text{if}\enspace curpos>0 
    \end{cases},$$
    	
 $$Lim\_Buy_1=Lim\_Buy_0-\frac{|{diffpos}|}{V}\times 
    \begin{cases} 
-     K2, &\text{if }curpos<0\\
-      K, &\text{if }curpos>0 
+     K2, &\text{if}\enspace curpos<0\\
+      K, &\text{if}\enspace curpos>0 
    \end{cases} ,$$ 
 	
 $curpos=0$
