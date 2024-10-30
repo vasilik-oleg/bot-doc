@@ -147,6 +147,8 @@ section: 8
 | int timer()                            | получить "Timer" инструмента портфеля                             |
 | int ratio_sign()                       | получить "Ratio sign" инструмента портфеля                        |
 | int ratio_type()                       | получить "Ratio type" инструмента портфеля                        |
+| double ratio_b()                       | получить "Ratio" для расчета покупки инструмента портфеля         |
+| double ratio_s()                       | получить "Ratio" для расчета продажи инструмента портфеля         |
 | double percent_of_quantity()           | получить "Percent of quantity" инструмента портфеля               |
 | double fin_res_mult()                  | получить "Fin res multiplier" инструмента портфеля                |
 | int comission_sign()                   | получить "Commission type" инструмента портфеля                   |
