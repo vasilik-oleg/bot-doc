@@ -236,6 +236,7 @@ section: 8
 | bool has_next_sec()                                         | есть ли еще бумаги в списке бумаг портфеля                                                               |
 | security_fields next_sec()                                  | получить следующую бумагу портфеля ([ пример итерации ](#__Example3__))                                  |
 | deal_item deal(const std::string& s)                        | получить сделку по бумаге c SecKey s (доступно только в Trade formula, т.е. на момент совершения сделки), если сделки по указанной бумаге в реальности не было, то `amount` и `price` будут равны нулю |
+| deal_item deal(const security_fields& sf)                   | получить сделку по бумаге sf (доступно только в Trade formula, т.е. на момент совершения сделки), если сделки по указанной бумаге в реальности не было, то `amount` и `price` будут равны нулю |
 | struct security_fields security_field(const std::string& s) | получить бумагу данного портфеля с SecKey s                                                              |
 | struct security_fields security_field()                     | получить главную бумагу текущего портфеля                                                                |
 | std::map<std::string, double>& data()                       | словарь для сохранения пользовательских значений, НЕ будет сохранен при выключении робота                |
