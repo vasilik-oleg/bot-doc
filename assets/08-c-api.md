@@ -92,7 +92,7 @@ section: 8
 | time_last                | long long | время последней сделки                                |
 | price_prev_period_close  | double    | цена последней сделки предыдущего дня                 |
 
-[_Пример 1:_](#__Example1__) Пример доступа к полям структуры `spb_commons`.
+[_Пример:_](#__Example1__) Пример доступа к полям структуры `spb_commons`.
 
 Методы `order_book`:
 
@@ -335,6 +335,23 @@ section: 8
 | void set_hedge_after(int v)                                 | изменить "Hedge (sec)" портфеля на значение v                                                            |
 | void set_overlay(long long v)                               | изменить "Overlay" портфеля на значение v                                                                |
 
+Для того чтобы иметь возможность обращаться по индексу к "пользовательским полям" есть массивы:<Anchor :ids="['user-fields']"/>
+```C
+typedef const user_value& (portfolio::*gUF)() const;
+static const gUF uf[] = {&portfolio::uf0, &portfolio::uf1, &portfolio::uf2, &portfolio::uf3, &portfolio::uf4,
+                         &portfolio::uf5, &portfolio::uf6, &portfolio::uf7, &portfolio::uf8, &portfolio::uf9,
+                         &portfolio::uf10, &portfolio::uf11, &portfolio::uf12, &portfolio::uf13, &portfolio::uf14,
+                         &portfolio::uf15, &portfolio::uf16, &portfolio::uf17, &portfolio::uf18, &portfolio::uf19};
+
+typedef void (portfolio::*sUF)(const user_value&);
+static const sUF set_uf[] = {&portfolio::set_uf0, &portfolio::set_uf1, &portfolio::set_uf2, &portfolio::set_uf3, &portfolio::set_uf4,
+                             &portfolio::set_uf5, &portfolio::set_uf6, &portfolio::set_uf7, &portfolio::set_uf8, &portfolio::set_uf9,
+                             &portfolio::set_uf10, &portfolio::set_uf11, &portfolio::set_uf12, &portfolio::set_uf13, &portfolio::set_uf14,
+                             &portfolio::set_uf15, &portfolio::set_uf16, &portfolio::set_uf17, &portfolio::set_uf18, &portfolio::set_uf19};
+```
+
+[_Пример:_](#__Example6__) Пример доступа и редактирования "пользовательских полей" по индексу.
+
 Поля `deal_item`:
 
 | Название | Тип       | Описание                                     |
@@ -365,7 +382,7 @@ section: 8
 | bool has_caption() const                     | проверить задана ли подпись                                               |
 | user_value& operator=(const user_value& v)   | оператор копирования, только НЕ "пустые" значения будут скопированы         |
 
-[_Пример 2:_](#__Example2__) Пример использования структуры `user_value`.
+[_Пример:_](#__Example2__) Пример использования структуры `user_value`.
 
 ## Доступ и изменение позиций транзакционного подключения
 
@@ -471,7 +488,7 @@ Meтоды `coin_item`:
 | bool operator==(const day_time& a, const day_time& b) | оператор `==` |
 | bool operator!=(const day_time& a, const day_time& b) | оператор `!=` |
 
-[_Пример 4:_](#__Example4__) Пример использования структуры `day_time`.
+[_Пример:_](#__Example4__) Пример использования структуры `day_time`.
 
 ### Классы
 
@@ -499,7 +516,7 @@ Meтоды `coin_item`:
 |-----------------------------------------------------|---------------------------------------------------------------------------|
 | bool tick()                    | Если изменился день и текущее время больше или равно заданному, то вернет истину и обновит сохраненный день |
 
-[_Пример 5:_](#__Example5__) Примеры использования классов `timer` и `day_timer`.
+[_Пример:_](#__Example7__) Примеры использования классов `timer` и `day_timer`.
 
 ### Функции для работы с опционами
 
@@ -1189,7 +1206,7 @@ return t < t1;
 
 ___
 
-<Anchor :ids="['__Example5__']"/>Пример тaймера на каждые 10 секунд:
+<Anchor :ids="['__Example7__']"/>Пример тaймера на каждые 10 секунд:
 
 ```C
 static timers::timer t(10000000000LL);
@@ -1209,6 +1226,20 @@ if (t.tick())
 {
     // do some operation
 }
+```
+
+___
+
+Пример получения и изменения "пользовательских полей" (увеличить значение `i`-го поля на `i`):<Anchor :ids="['__Example6__']"/>
+
+```C
+portfolio p = get_portfolio();
+for (int i = 0; i < 20; i++)
+{
+    double v = std::invoke(uf[i], p).value();// get value
+    std::invoke(set_uf[i], p, user_value(v + i));// set value
+}
+return 0;
 ```
 
 ___
