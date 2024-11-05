@@ -65,6 +65,7 @@ section: 8
 | int conn_online()               | стауст активности маркет-дата подключения в роботе (битовая маска, возможные взведенные биты [MARKET_DATA_BESTS_ONLINE](#__MARKET_DATA_BESTS_ONLINE__) и [MARKET_DATA_OB_ONLINE](#__MARKET_DATA_OB_ONLINE__), [пример](#__sec_status_check__)) |
 | double min_step()               | минимальный шаг цены                             |
 | double lot_round()              | количество ценных бумаг в одном стандартном лоте |
+| double lot_size()               | множитель для конвертации дробных объемов в целые |
 | double funding_rate()           | ставка фондирования                              |
 | long long funding_time()        | время следующего фондирования в формате epoch    |
 | const spb_commons& spb_common() | структура с полями, описанными ниже              |
@@ -124,6 +125,7 @@ section: 8
 | long long sec_type()                   | получить "Exchange" инструмента портфеля                          |
 | std::string sec_key()                  | получить "SecKey" инструмента портфеля                            |
 | int put()                              | получить "Put" инструмента портфеля                               |
+| double lot_size()                      | получить множитель для конвертации дробных объемов в целые инструмента портфеля |
 | long long pos()                        | получить "Curpos" инструмента портфеля                            |
 | long long count()                      | получить "Count" инструмента портфеля                             |
 | int depth_ob()                         | получить "Depth OB" инструмента портфеля                          |
