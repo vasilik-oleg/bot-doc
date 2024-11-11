@@ -58,6 +58,12 @@ Rate limit считается для каждой вебсокет сессии 
 
 С одного ip-адреса разрешается не более 20-ти попыток подключения в течение минуты, при превышении данного значения соединение перестанет устанавливаться, в ответ будет отправлен код 429
 
+### Дробные количества и позиции
+
+Везде в роботе количества в заявках/сделках и в позициях - это целые числа, сделано это для того, чтобы не иметь проблем с операциями над вещественными числами. В API количества и позиции тоже целые числа, по той же причине. Для красивого отображения количеств и
+позиций в той же размерности, в которой они отображаются на сайтах бирж (для тех бирж где возможны дробные значения в данных полях), в тех объектах, которых касается описанная выше проблема, есть поле `lot_size` или `ls`. При отображении количества и
+позиции необходимо полученное с API значение умножить на `lot_size`. Если же необходимо отправить дробное количество или позицию в робота, то перед отправкой отправляемое значение нужно разделить на `lot_size`
+
 ### Прочее
 
 Во всех подписках в рамках одной вебсокет сессии в рамках одного и того же `type` требуется уникальный `eid` для текущих подписок (можно отписаться и снова подписаться с тем же `eid`, но одновременно нельзя иметь две и более подписок
@@ -4454,6 +4460,7 @@ Payload:
 | >>>> d | y | number | direction | Direction |
 | >>>> ono | y | string |  | Order numebr |
 | >>>> t | y | string |  | Time in format HH:MM:SS |
+| >>>> ls | y | number | | Lot size |
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
 
@@ -4518,6 +4525,7 @@ Payload:
 | >>>> d | y | number | direction | Direction |
 | >>>> ono | y | string |  | Order numebr |
 | >>>> t | y | string |  | Time in format HH:MM:SS |
+| >>>> ls | y | number | | Lot size |
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
 
@@ -4730,6 +4738,7 @@ Payload:
 | >>>> d | y | number | direction | Direction |
 | >>>> ono | y | string |  | Order numebr |
 | >>>> t | y | string |  | Time in format HH:MM:SS |
+| >>>> ls | y | number |  | Lot size |
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
 
@@ -4910,6 +4919,7 @@ Payload:
 | >>>> d | y | number | direction | Direction |
 | >>>> ono | y | string |  | Order numebr |
 | >>>> t | y | string |  | Time in format HH:MM:SS |
+| >>>> ls | y | number |  | Lot size |
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
 
@@ -5082,6 +5092,7 @@ Payload:
 | >>>> p | y | number |  | Price |
 | >>>> dec | y | number |  | Decimals |
 | >>>> q | y | number |  | Quantity |
+| >>>> ls | y | number |  | Lot size |
 | >> sell | y | array |  | Sell deals |
 | >>> [] |  |  |  |  |
 | >>>> d | y | number | direction | Direction |
@@ -5089,6 +5100,7 @@ Payload:
 | >>>> p | y | number |  | Price |
 | >>>> dec | y | number |  | Decimals |
 | >>>> q | y | number |  | Quantity |
+| >>>> ls | y | number |  | Lot size |
 
 Example:
 
@@ -5239,6 +5251,7 @@ Payload:
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
 | >>> curpos | y | number |  | Integer portfolio security position |
+| >>> lot_size | y | number |  | Lot size |
 
 Example:
 
@@ -5261,6 +5274,7 @@ Example:
                 "id": -7788782202760318740,
                 "t": 1670932198000080090,
                 "dt": 1670932198001653551,
+                "lot_size": 1e-8,
 		"curpos": 1,
                 "r_id": "1"
             },
@@ -5276,6 +5290,7 @@ Example:
                 "id": -3752825875325269453,
                 "t": 1670932199000047295,
                 "dt": 1670932199001713057,
+                "lot_size": 1e-8,
 		"curpos": 1,
                 "r_id": "1"
             },
@@ -5291,6 +5306,7 @@ Example:
                 "id": -3688175048979008805,
                 "t": 1670932200000058955,
                 "dt": 1670932200001680729,
+                "lot_size": 1e-8,
 		"curpos": 1,
                 "r_id": "1"
             },
@@ -5306,6 +5322,7 @@ Example:
                 "id": 3502271702100740780,
                 "t": 1670932201000080655,
                 "dt": 1670932201001754776,
+                "lot_size": 1e-8,
 		"curpos": 1,
                 "r_id": "1"
             }
@@ -5345,6 +5362,7 @@ Payload:
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
 | >>> curpos | y | number |  | Integer portfolio security position |
+| >>> lot_size | y | number |  | Lot size |
 
 Example:
 
@@ -5365,6 +5383,7 @@ Example:
                 "cn": "virtual",
                 "id": -3735218779281737327,
                 "t": 1670932204000081702,
+                "lot_size": 1e-8,
 		"curpos": 1,
                 "dt": 1670932204001796726
             }
@@ -5557,6 +5576,7 @@ Payload:
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
 | >>> curpos | y | number |  | Integer portfolio security position |
+| >>> lot_size | y | number |  | Lot size |
 
 Example:
 
@@ -5576,6 +5596,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+                "lot_size": 1e-8,
 		"curpos": 1,
                 "decimals": 4
             },
@@ -5590,6 +5611,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+                "lot_size": 1e-8,
 		"curpos": 1,
                 "decimals": 4
             },
@@ -5604,6 +5626,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+                "lot_size": 1e-8,
 		"curpos": 1,
                 "decimals": 4
             },
@@ -5618,6 +5641,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+                "lot_size": 1e-8,
 		"curpos": 1,
                 "decimals": 4
             },
@@ -5632,6 +5656,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+                "lot_size": 1e-8,
 		"curpos": 1,
                 "decimals": 4
             }
@@ -5836,6 +5861,7 @@ Payload:
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
 | >>> curpos | y | number |  | Integer portfolio security position |
+| >>> lot_size | y | number |  | Lot size |
 
 Example:
 
@@ -5855,6 +5881,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+                "lot_size": 1e-8,
 		"curpos": 1,
                 "decimals": 4
             },
@@ -5869,6 +5896,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+                "lot_size": 1e-8,
 		"curpos": 1,
                 "decimals": 4
             },
@@ -5883,6 +5911,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+                "lot_size": 1e-8,
 		"curpos": 1,
                 "decimals": 4
             },
@@ -5897,6 +5926,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+                "lot_size": 1e-8,
 		"curpos": 1,
                 "decimals": 4
             },
@@ -5911,6 +5941,7 @@ Example:
                 "buy_sell": 1,
                 "quantity": 1,
                 "cn": "virtual",
+                "lot_size": 1e-8,
 		"curpos": 1,
                 "decimals": 4
             }
