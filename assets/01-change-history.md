@@ -6,6 +6,11 @@ ignore-section-number: true
 
 # История изменений
 
+## 2024-11-21
+
+- Добавлена соответствующая пометка для параметров, которые отображаются с учетом `lot_size` (это [Curpos](05-params-description.md#s.pos), [Count](05-params-description.md#s.count), [Market volume](05-params-description.md#p.mkt_volume), [Return first](05-params-description.md#p.return_first)).
+- В формулы для расчета [Opened](05-params-description.md#p.opened), [Commision sum](05-params-description.md#p.opened_comission), [Fin res](05-params-description.md#p.fin_res), [Fin res wo C](05-params-description.md#p.fin_res_wo_c) добавлен `lot_size` соответствующего финансового инструмента.
+
 ## 2024-11-01
 
 - В C++ интерфейс добавлены [массивы указателей на методы](08-c-api.md#user-fields) для доступа и редактирования "пользовательских полей".

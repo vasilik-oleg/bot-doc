@@ -391,6 +391,8 @@ First delta = 20. Вы котируете на продажу объёмом 100
 
 Пример:
 
+**Важно:** для отображения на сайте используется `lot_size`.
+
 ### Price check <Anchor :ids="['p.price_check']" />
 
 Если предполагаемая цена выставления заявки по [Is first](05-params-description.md#s.is_first) бумаге попадает в стакан глубже, чем на `Price check` пунктов, то заявка не выставляется.
@@ -522,14 +524,15 @@ $Pos=[\frac{Curpos_{first}}{Count_{first}}],$
 
 Параметр, используемый для подсчета финансового результата, вычисляется по формуле:
 
-$$Opened = -\left(\sum_{i\in bought}tradePrice_i\times tradeAmount_i\times Mult_i\right)+
-            \left(\sum_{i\in sold}tradePrice_i\times tradeAmount_i\times Mult_i\right),$$
+$$Opened = -\left(\sum_{i\in bought}tradePrice_i\times tradeAmount_i\times lotSize_i\times Mult_i\right)+
+            \left(\sum_{i\in sold}tradePrice_i\times tradeAmount_i\times lotSize_i\times Mult_i\right),$$
 
 где tradePrice<sub>i</sub> - цена сделки;  
 tradeAmount<sub>i</sub> - количество лотов в сделке;  
+lotSize<sub>i</sub> - множитель для перевода целых объемов в дробные;  
 bought - список сделок на покупку;  
 sold - список сделок на продажу;  
-Mult<sub>i</sub> - Fin res multiplier инструмента портфеля.
+Mult<sub>i</sub> - [Fin res multiplier](05-params-description.md#s.fin_res_mult) инструмента портфеля.
 
 ### Commision sum <Anchor :ids="['p.opened_comission']" />
 
@@ -683,11 +686,13 @@ free - (описание)
 
 Оборот по [Is first](05-params-description.md#s.is_first) бумаге, вычисляется с момента старта серверной части робота как сумма модулей количества лотов в сделках по [Is first](05-params-description.md#s.is_first) инструменту. Можно установить ноль двойным кликом.
 
+**Важно:** для отображения на сайте используется `lot_size`.
+
 ### Fin res <Anchor :ids="['p.fin_res']" />
 
 Предполагаемый финансовый результат портфеля, вычисляется по формуле:
 
-$$Fin\enspace res=Opened+Commission\enspace sum+\sum_{i\in secs}Curpos_i \times Mult_i \times
+$$Fin\enspace res=Opened+Commission\enspace sum+\sum_{i\in secs}Curpos_i \times lotSize_i \times Mult_i \times
    \begin{cases} 
      secBid_i, &\text{if } Curpos_i>0\\ 
    secOffer_i, &\text{if } Curpos_i<0 
@@ -695,6 +700,7 @@ $$Fin\enspace res=Opened+Commission\enspace sum+\sum_{i\in secs}Curpos_i \times 
 
 где secBid<sub>i</sub> - лучшая цена на покупку инструмента портфеля;  
 secOffer<sub>i</sub> - лучшая цена на продажу инструмента портфеля;  
+lotSize<sub>i</sub> - множитель для перевода целых объемов в дробные;  
 Curpos<sub>i</sub> - текущая позиция инструмента портфеля;  
 Mult - [Fin res multiplier](05-params-description.md#s.fin_res_mult) инструмента портфеля;  
 secs - список инструментов портфеля.
@@ -705,7 +711,7 @@ secs - список инструментов портфеля.
 
 `Fin res` без учета комиссии. Вычисляется по формуле:
 
-$$Fin\enspace res=Opened+\sum_{i\in secs}Curpos_i \times Mult_i \times 
+$$Fin\enspace res=Opened+\sum_{i\in secs}Curpos_i \times lotSize_i \times Mult_i \times 
    \begin{cases} 
      secBid_i, &\text{if } Curpos_i> 0\\ 
    secOffer_i, &\text{if } Curpos_i< 0 
@@ -713,8 +719,9 @@ $$Fin\enspace res=Opened+\sum_{i\in secs}Curpos_i \times Mult_i \times
 
 где secBid<sub>i</sub> - лучшая цена на покупку инструмента портфеля;  
 secOffer<sub>i</sub> - лучшая цена на продажу инструмента портфеля;  
+lotSize<sub>i</sub> - множитель для перевода целых объемов в дробные;  
 Curpos<sub>i</sub> - текущая позиция инструмента портфеля;  
-Mult - [Fin res multiplier](05-params-description.md#s.fin_res_mult) инструмента портфеля;  
+Mult<sub>i</sub> - [Fin res multiplier](05-params-description.md#s.fin_res_mult) инструмента портфеля;  
 secs - список инструментов портфеля.
 
 ### Comment <Anchor :ids="['p.comment']" />
@@ -747,7 +754,9 @@ secs - список инструментов портфеля.
 
 ### Curpos <Anchor :ids="['s.pos']" />
 
-Текущая позиция робота по данному инструменту в лотах.  
+Текущая позиция робота по данному инструменту в лотах.
+
+**Важно:** для отображения на сайте используется `lot_size`.
 
 ### Count type <Anchor :ids="['s.count_type']" />
 
@@ -756,6 +765,8 @@ secs - список инструментов портфеля.
 ### Count <Anchor :ids="['s.count']" />
 
 Количество лотов инструмента в одном портфеле.
+
+**Важно:** для отображения на сайте используется `lot_size`.
 
 **Важно:** для многих криптовалютных бирж данный параметр указывается "как бы в сатошах", т.е. чтобы купить/продать 1 лот на бирже необходимо указать количество 100 000 000 (соответственно, 0.1 лота сооветствует значение 10 000 000 и т.д.). При добавлении бумаги в портфель обращайте внимание на столбец `Price to lot mult`.
 
