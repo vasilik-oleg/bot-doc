@@ -878,7 +878,7 @@ secs - список инструментов портфеля.
 
 ### FUT move limits <Anchor :ids="['s.move_limits']" />
 
-Флаг, если взведен, то при каждой смене дня будет осуществляться автоматическая подвижка лимитов по формулам:
+Флаг, если взведен, то при каждой смене дня, а именно в 00:00 МСК, будет осуществляться автоматическая подвижка лимитов по формулам:
 
 $$Lim\_Sell_1=Lim\_Sell_0- \frac{\left(Lim\_Sell_0+Lim\_Buy_0 \right) \times days\_to\_expiry\_{SPOT}}
                                 {2\times days\_to\_expiry},$$
@@ -890,6 +890,8 @@ $$Lim\_Buy_1=Lim\_Buy_0- \frac{\left(Lim\_Sell_0+Lim\_Buy_0 \right)\times days\_
 days_to_expirySPOT - целое количество дней до экспирации бумаги, отмеченной флагом `SPOT move limits` или 1, если такая бумага не указана;  
 нижний индекс 0 означает текущее значение параметра;  
 нижний индекс 1 означает новое значение параметра.
+
+Отметим, что при взведенном флаге `FUT move limits`, автосдвиг при каждой смене дня сработает в том числе при выключенных [Lim_sell](05-params-description.md#p.lim_s), [Lim_buy](05-params-description.md#p.lim_b).
 
 ### SPOT move limits <Anchor :ids="['s.move_limits1']" />
 
