@@ -9224,6 +9224,7 @@ Payload:
 | >> active_orders | y | string:object |  | Dictionary of active orders |
 | >>> ORDER_ID | y | string |  | Unique order ID |
 | >>>> sk | y | string |  | Security key |
+| >>>> ls | y | number |  | Lot size |
 | >>>> cc | y | string |  | Order’s client code |
 | >>>> subscr | y | string |  | Security subscription key |
 | >>>> ono | y | string |  | Unique order ID |
@@ -9251,6 +9252,7 @@ Example:
       "active_orders": {
         "1de6bd60-688c-4777-bd17-aef921888290": {
           "sk": "BM_XBTUSD",
+          "ls": 1,
           "cc": "",
           "subscr": "XBTUSD",
           "ono": "1de6bd60-688c-4777-bd17-aef921888290",
@@ -9301,6 +9303,7 @@ Payload:
 | >> active_orders | n | string:object |  | Dictionary of active orders |
 | >>> ORDER_ID | n | string |  | Unique order ID |
 | >>>> sk | n | string |  | Security key |
+| >>>> ls | y | number |  | Lot size |
 | >>>> cc | n | string |  | Order’s client code |
 | >>>> subscr | n | string |  | Security subscription key |
 | >>>> ono | n | string |  | Unique order ID |
