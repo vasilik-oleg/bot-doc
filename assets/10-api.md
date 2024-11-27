@@ -9646,6 +9646,7 @@ Payload:
 | >>>> robot_pos | n | number |  | Robot position |
 | >>>> mark_price | n | number |  | Marker price |
 | >>>> liq_price | n | number |  | Liquidation price |
+| >>>> lot_size | n | number |  | Lot size |
 | >> coin_pos | y | string:object |  | Dictionary of security positions |
 | >>> COIN_KEY | n | string |  | Unique coin key |
 | >>>> symbol | n | string |  | Coin name |
@@ -9656,6 +9657,7 @@ Payload:
 | >>>> robot_pos | n | number |  | Robot position |
 | >>>> mark_price | n | number |  | Marker price |
 | >>>> liq_price | n | number |  | Liquidation price |
+| >>>> lot_size | n | number |  | Lot size |
 
 Example:
 
@@ -9679,7 +9681,8 @@ Example:
                     "tgr": false,
                     "robot_pos": 0,
                     "mark_price": -1,
-                    "liq_price": -1
+                    "liq_price": -1,
+                    "lot_size": 1
                 }
             },
             "coin_pos": {
@@ -9687,13 +9690,15 @@ Example:
                     "pos": 1000,
                     "pos_lag": 999999999,
                     "pos_eq": false,
-                    "tgr": false
+                    "tgr": false,
+                    "lot_size": 1e-8
                 },
                 "XBT": {
                     "pos": 0.10791494,
                     "pos_lag": 999999999,
                     "pos_eq": false,
-                    "tgr": false
+                    "tgr": false,
+                    "lot_size": 1e-8
                 }
             },
             "stream_state": {
@@ -9741,6 +9746,7 @@ Payload:
 | >>>> robot_pos | n | number |  | Robot position |
 | >>>> mark_price | n | number |  | Marker price |
 | >>>> liq_price | n | number |  | Liquidation price |
+| >>>> lot_size | n | number |  | Lot size |
 | >>>> __action = del | n | string |  | Only on delete |
 | >> coin_pos | n | string:object |  | Dictionary of security positions |
 | >>> COIN_KEY | n | string |  | Unique coin key |
@@ -9752,6 +9758,7 @@ Payload:
 | >>>> robot_pos | n | number |  | Robot position |
 | >>>> mark_price | n | number |  | Marker price |
 | >>>> liq_price | n | number |  | Liquidation price |
+| >>>> lot_size | n | number |  | Lot size |
 | >>>> __action = del | n | string |  | Only on delete |
 
 Example:
@@ -9774,7 +9781,8 @@ Example:
                     "tgr": false,
                     "robot_pos": 0,
                     "mark_price": 21129.9,
-                    "liq_price": -1
+                    "liq_price": -1,
+                    "lot_size": 1
                 }
             }
         }
