@@ -8638,6 +8638,7 @@ Payload:
 | >>> bid | y | number |  | Bid price |
 | >>> offer | y | number |  | Offer price |
 | >>> decimals | y | number |  | Decimal digits in price |
+| >>> lot_size | n | number |  | Lot size |
 
 Example:
 
@@ -8654,7 +8655,8 @@ Example:
                 "coin": "",
                 "bid": 35000,
                 "offer": 36000,
-                "decimals": 1
+                "decimals": 1,
+                "lot_size": 1e-8
             }
         },
         "r": "p",
@@ -9660,7 +9662,6 @@ Payload:
 | >>>> robot_pos | n | number |  | Robot position |
 | >>>> mark_price | n | number |  | Marker price |
 | >>>> liq_price | n | number |  | Liquidation price |
-| >>>> lot_size | n | number |  | Lot size |
 
 Example:
 
@@ -9693,15 +9694,13 @@ Example:
                     "pos": 1000,
                     "pos_lag": 999999999,
                     "pos_eq": false,
-                    "tgr": false,
-                    "lot_size": 1e-8
+                    "tgr": false
                 },
                 "XBT": {
                     "pos": 0.10791494,
                     "pos_lag": 999999999,
                     "pos_eq": false,
-                    "tgr": false,
-                    "lot_size": 1e-8
+                    "tgr": false
                 }
             },
             "stream_state": {
@@ -9761,7 +9760,6 @@ Payload:
 | >>>> robot_pos | n | number |  | Robot position |
 | >>>> mark_price | n | number |  | Marker price |
 | >>>> liq_price | n | number |  | Liquidation price |
-| >>>> lot_size | n | number |  | Lot size |
 | >>>> __action = del | n | string |  | Only on delete |
 
 Example:
