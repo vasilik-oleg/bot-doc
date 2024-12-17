@@ -2425,6 +2425,8 @@ Example:
 
 При удалении портфеля вы НЕ будете автоматически отписаны от его полей
 
+Чтобы получать обновления, по данному портфелю необходимо включить запись истории
+
 <details>
 <summary>Request</summary>
 
@@ -2475,7 +2477,7 @@ Payload:
 | > p_id | y | string |  | Portfolio name |
 | > key | y | string |  | Portfolio field key, one of: 'sell', 'buy', 'lim_s', 'lim_b', 'pos', 'fin_res', 'uf0', ..., 'uf19'|
 | > aggr | y | string |  | Aggregation period, one of: 'raw', '10s', '1m', '10m', '1h', '6h', '24h' |
-| > values | y | object |  | Field values snapshot |
+| > values | y | object |  | Field values snapshot (can be empty) |
 | >> [] | y | array |  | List of field values |
 | >>> dt | y | number | epoch_msec | Field value time |
 | >>> v | y | number |  | Field value |
@@ -2669,6 +2671,8 @@ Example:
 
 Т.к. запрашивается история аггрегатов, то `lim` относится именно к числу аггрегатов, реальное получаемое количество точек при этом может быть больше (аж в 3 раза). Чтобы узнать к какому именно аггрегату относится точка необходимо время точки разделить на длину аггрегата, взять целую часть и полученное значение умножить на длину аггрегата
 
+Чтобы история содержала значения, по данному портфелю необходимо включить запись истории
+
 <details>
 <summary>Request</summary>
 
@@ -2783,6 +2787,8 @@ Example:
 Получить историю от даты до даты
 
 Т.к. запрашивается история аггрегатов, то `lim` относится именно к числу аггрегатов, реальное получаемое количество точек при этом может быть больше (аж в 3 раза). Чтобы узнать к какому именно аггрегату относится точка необходимо время точки разделить на длину аггрегата, взять целую часть и полученное значение умножить на длину аггрегата
+
+Чтобы история содержала значения, по данному портфелю необходимо включить запись истории
 
 <details>
 <summary>Request</summary>
@@ -8638,6 +8644,7 @@ Payload:
 | >>> bid | y | number |  | Bid price |
 | >>> offer | y | number |  | Offer price |
 | >>> decimals | y | number |  | Decimal digits in price |
+| >>> lot_size | n | number |  | Lot size |
 
 Example:
 
@@ -8654,7 +8661,8 @@ Example:
                 "coin": "",
                 "bid": 35000,
                 "offer": 36000,
-                "decimals": 1
+                "decimals": 1,
+                "lot_size": 1e-8
             }
         },
         "r": "p",
@@ -9224,6 +9232,7 @@ Payload:
 | >> active_orders | y | string:object |  | Dictionary of active orders |
 | >>> ORDER_ID | y | string |  | Unique order ID |
 | >>>> sk | y | string |  | Security key |
+| >>>> lot_size | y | number |  | Lot size |
 | >>>> cc | y | string |  | Order’s client code |
 | >>>> subscr | y | string |  | Security subscription key |
 | >>>> ono | y | string |  | Unique order ID |
@@ -9251,6 +9260,7 @@ Example:
       "active_orders": {
         "1de6bd60-688c-4777-bd17-aef921888290": {
           "sk": "BM_XBTUSD",
+          "lot_size": 1,
           "cc": "",
           "subscr": "XBTUSD",
           "ono": "1de6bd60-688c-4777-bd17-aef921888290",
@@ -9301,6 +9311,7 @@ Payload:
 | >> active_orders | n | string:object |  | Dictionary of active orders |
 | >>> ORDER_ID | n | string |  | Unique order ID |
 | >>>> sk | n | string |  | Security key |
+| >>>> lot_size | y | number |  | Lot size |
 | >>>> cc | n | string |  | Order’s client code |
 | >>>> subscr | n | string |  | Security subscription key |
 | >>>> ono | n | string |  | Unique order ID |
@@ -9646,6 +9657,7 @@ Payload:
 | >>>> robot_pos | n | number |  | Robot position |
 | >>>> mark_price | n | number |  | Marker price |
 | >>>> liq_price | n | number |  | Liquidation price |
+| >>>> lot_size | n | number |  | Lot size |
 | >> coin_pos | y | string:object |  | Dictionary of security positions |
 | >>> COIN_KEY | n | string |  | Unique coin key |
 | >>>> symbol | n | string |  | Coin name |
@@ -9679,7 +9691,8 @@ Example:
                     "tgr": false,
                     "robot_pos": 0,
                     "mark_price": -1,
-                    "liq_price": -1
+                    "liq_price": -1,
+                    "lot_size": 1
                 }
             },
             "coin_pos": {
@@ -9741,6 +9754,7 @@ Payload:
 | >>>> robot_pos | n | number |  | Robot position |
 | >>>> mark_price | n | number |  | Marker price |
 | >>>> liq_price | n | number |  | Liquidation price |
+| >>>> lot_size | n | number |  | Lot size |
 | >>>> __action = del | n | string |  | Only on delete |
 | >> coin_pos | n | string:object |  | Dictionary of security positions |
 | >>> COIN_KEY | n | string |  | Unique coin key |
@@ -9774,7 +9788,8 @@ Example:
                     "tgr": false,
                     "robot_pos": 0,
                     "mark_price": 21129.9,
-                    "liq_price": -1
+                    "liq_price": -1,
+                    "lot_size": 1
                 }
             }
         }
