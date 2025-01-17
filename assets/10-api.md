@@ -130,6 +130,7 @@ Payload:
 | > roles | y | array |  | Array of available user roles |
 | >> [] | y | string |  | Available user role |
 | > can_hide_notifs | y | boolean |  | User can hide notifications "gnerated" by another user |
+| > just_registered | n | boolean |  | User was just registered |
 
 Example:
 
