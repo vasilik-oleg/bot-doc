@@ -4469,6 +4469,7 @@ Payload:
 | >>>> ono | y | string |  | Order numebr |
 | >>>> t | y | string |  | Time in format HH:MM:SS |
 | >>>> ls | y | number | | Lot size |
+| >>>> dec | y | number |  | Integer number of decimal points in p field |
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
 
@@ -4534,6 +4535,7 @@ Payload:
 | >>>> ono | y | string |  | Order numebr |
 | >>>> t | y | string |  | Time in format HH:MM:SS |
 | >>>> ls | y | number | | Lot size |
+| >>>> dec | y | number |  | Integer number of decimal points in p field |
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
 
@@ -4747,6 +4749,7 @@ Payload:
 | >>>> ono | y | string |  | Order numebr |
 | >>>> t | y | string |  | Time in format HH:MM:SS |
 | >>>> ls | y | number |  | Lot size |
+| >>>> dec | y | number |  | Integer number of decimal points in p field |
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
 
@@ -4928,6 +4931,7 @@ Payload:
 | >>>> ono | y | string |  | Order numebr |
 | >>>> t | y | string |  | Time in format HH:MM:SS |
 | >>>> ls | y | number |  | Lot size |
+| >>>> dec | y | number |  | Integer number of decimal points in p field |
 | >>> decimals | y | number |  | Integer number of decimal points in price field |
 | >>> dt | y | string | epoch_nsec | Time in robot |
 
