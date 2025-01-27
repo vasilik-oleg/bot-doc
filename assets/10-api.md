@@ -13982,6 +13982,7 @@ Payload:
 | > u_id | y | string |  | User ID (email) |
 | > api_key | y | string |  | API key |
 | > enable_api | y | boolean |  | Enable API flag |
+| > enable_2fa | y | boolean |  | Enable 2FA flag |
 | > tgr | y | number |  | Telegram ID |
 | > hide_not_my_notifs | y | boolean |  | Hide notifications "generated" by another user |
 
@@ -13990,7 +13991,7 @@ Example:
 ```json
 {
   "type": "user.subscribe",
-  "data": { "tgr": 214020169, "enable_api": true, "api_key": "******" },
+  "data": { "tgr": 214020169, "enable_api": true, "api_key": "******", "enable_2fa": false },
   "r": "s",
   "eid": "q0",
   "ts": 1694072105955648388
@@ -14012,6 +14013,7 @@ Payload:
 | > u_id | y | string |  | User ID (email) |
 | > api_key | n | string |  | API key |
 | > enable_api | n | boolean |  | Enable API flag |
+| > enable_2fa | n | boolean |  | Enable 2FA flag |
 | > tgr | n | number |  | Telegram ID |
 | > hide_not_my_notifs | n | boolean |  | Hide notifications "generated" by another user |
 
