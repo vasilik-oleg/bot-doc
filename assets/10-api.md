@@ -14161,6 +14161,7 @@ Payload:
 | > enable_api | n | boolean |  | Enable API flag |
 | > tgr | n | number |  | Telegram ID |
 | > hide_not_my_notifs | n | boolean |  | Hide notifications "generated" by another user |
+| > 2fa | n | string_6 |  | 2FA token for API key operations confirmation |
 
 Example:
 
@@ -14916,6 +14917,7 @@ Example:
 
 | Name | JSON type | Description |
 | --- | --- | --- |
+| string_6 | string | String with maximum length of 6 symbols |
 | string_36 | string | String with maximum length of 36 symbols |
 | user_role | string | Enum: “demo” — demo user |
 | epoch_nsec | string | Epoch time in nanoseconds integer representation. Example: 1584629107000000000 |
