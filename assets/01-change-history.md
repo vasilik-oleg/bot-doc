@@ -6,6 +6,10 @@ ignore-section-number: true
 
 # История изменений
 
+## 2025-02-06
+
+- Уменьшен [Rate limit подключений](10-api.md#conn_rate_limit).
+
 ## 2024-11-21
 
 - Добавлена соответствующая пометка для параметров, которые отображаются с учетом `lot_size` (это [Curpos](05-params-description.md#s.pos), [Count](05-params-description.md#s.count), [Market volume](05-params-description.md#p.mkt_volume), [Return first](05-params-description.md#p.return_first)).
