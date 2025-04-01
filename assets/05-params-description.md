@@ -918,7 +918,7 @@ $$Lim\_Sell_1=Lim\_Sell_0- \frac{\left(Lim\_Sell_0+Lim\_Buy_0 \right) \times day
 $$Lim\_Buy_1=Lim\_Buy_0- \frac{\left(Lim\_Sell_0+Lim\_Buy_0 \right)\times days\_to\_expiry\_{SPOT}}
 	                      {2\times days\_to\_expiry},$$
 
-где days_to_expiry - целое количество дней до экспирации данной бумаги;
+где days_to_expiry - целое количество дней до экспирации данной бумаги;  
 days_to_expirySPOT - целое количество дней до экспирации бумаги, отмеченной флагом `SPOT move limits` или 1, если такая бумага не указана;  
 нижний индекс 0 означает текущее значение параметра;  
 нижний индекс 1 означает новое значение параметра.
